@@ -5,7 +5,7 @@ use App\Http\Controllers\AdminViews;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::post('/logoutuser', function () {
@@ -28,10 +28,17 @@ Route::middleware([
 //Admin Panel Views Routes
 Route::controller(AdminViews::class)->group(function() {
     Route::get('userregister', 'userregister')->name('userregister');
+    Route::get('alluserslist', 'alluserslist')->name('alluserslist');
 });
 
 
 //Admin Panel Store Routes
 Route::controller(AdminStores::class)->group(function() {
     Route::post('insertregisterusers', 'insertregisterusers')->name('insertregisterusers');
+    Route::get('deleteregisteruser/{id}', 'deleteregisteruser')->name('deleteregisteruser');
+    Route::post('/updateaccountstatus', 'updateaccountstatus')->name('updateaccountstatus');
+
 });
+
+
+

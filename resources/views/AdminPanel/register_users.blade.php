@@ -24,54 +24,55 @@
                     </div>
                     <div class="card-body">
                         <div class="live-preview">
-                            <form action="#" method="POST">
+                            <form action="{{ route('insertregisterusers') }}" method="POST">
                                 @csrf
                                 <div class="row gy-4">
                                     <div class="col-xxl-3 col-md-6">
                                         <div>
-                                            <label for="placeholderInput" class="form-label">User ID</label>
-                                            <input type="text" class="form-control" id="placeholderInput"
+                                            <label class="form-label">User ID</label>
+                                            <input type="number" name="userid" class="form-control"
                                                 placeholder="Enter User ID">
                                         </div>
                                     </div>
                                     <div class="col-xxl-3 col-md-6">
                                         <div>
-                                            <label for="placeholderInput" class="form-label">Password</label>
-                                            <input type="text" class="form-control" id="placeholderInput"
+                                            <label class="form-label">Password</label>
+                                            <input type="password" name="password" class="form-control"
                                                 placeholder="Enter Password">
                                         </div>
                                     </div>
                                     <div class="col-xxl-3 col-md-6">
                                         <div>
-                                            <label for="placeholderInput" class="form-label">Mobile Number</label>
-                                            <input type="text" class="form-control" id="placeholderInput"
+                                            <label class="form-label">Mobile Number</label>
+                                            <input type="text" name="mobilenumber" class="form-control"
                                                 placeholder="Enter Mobile Number">
                                         </div>
                                     </div>
                                     <div class="col-xxl-3 col-md-6">
                                         <div>
-                                            <label for="placeholderInput" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="placeholderInput"
+                                            <label class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-control"
                                                 placeholder="Enter Email">
                                         </div>
                                     </div>
                                     <div class="col-xxl-3 col-md-6">
                                         <div>
-                                            <label for="placeholderInput" class="form-label">Expire Date</label>
-                                            <input type="date" class="form-control" id="placeholderInput"
+                                            <label class="form-label">Expire Date</label>
+                                            <input type="date" name="expiredate" class="form-control"
                                                 placeholder="Enter User ID">
                                         </div>
                                     </div>
                                     <div class="col-xxl-3 col-md-6">
                                         <div>
-                                            <label for="placeholderInput" class="form-label">Created Date</label>
-                                            <input type="date" class="form-control" id="placeholderInput"
+                                            <label class="form-label">Created Date</label>
+                                            <input type="date" name="createddate" class="form-control"
                                                 placeholder="Enter User ID">
                                         </div>
                                     </div>
                                     <div class="col-xxl-3 col-md-6 d-flex align-items-end">
                                         <div class="">
-                                            <button type="submit" class="btn btn-success waves-effect waves-light">Add</button>
+                                            <button type="submit"
+                                                class="btn btn-success waves-effect waves-light">Add</button>
                                         </div>
                                     </div>
                                 </div>
@@ -83,3 +84,31 @@
         </div>
     </div>
 </x-app-layout>
+@if (session('success'))
+<script>
+    // Display SweetAlert for success message
+    Swal.fire({
+        title: "Success!",
+        text: "{{ session('success') }}",
+        icon: "success",
+        confirmButtonClass: "btn btn-primary w-xs me-2 mt-2",
+        buttonsStyling: true,
+        showCancelButton: true,
+        showCloseButton: true,
+    });
+</script>
+@endif
+
+@if (session('error'))
+<script>
+    // Display SweetAlert for error message
+    Swal.fire({
+        title: "Error!",
+        text: "{{ session('error') }}",
+        icon: "error",
+        confirmButtonClass: "btn btn-primary w-xs me-2 mt-2",
+        buttonsStyling: true,
+        showCloseButton: true,
+    });
+</script>
+@endif

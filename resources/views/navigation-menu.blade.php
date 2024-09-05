@@ -50,6 +50,11 @@
                                     Registration
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('alluserslist') }}" class="nav-link" data-key="t-one-page">
+                                   All Users
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

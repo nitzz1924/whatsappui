@@ -28,7 +28,8 @@
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.2/dist/sweetalert2.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -111,8 +112,8 @@
                             <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
-                                    <img class="rounded-circle header-profile-user"
-                                        src="{{asset("assets/images/defaultuser.png")}}" alt="Header Avatar" />
+                                    <img class="rounded-circle header-profile-user" src="{{asset("
+                                        assets/images/defaultuser.png")}}" alt="Header Avatar" />
                                     <span class="text-start ms-xl-2">
                                         @if (Auth::user())
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
@@ -130,12 +131,12 @@
                                 <a class="dropdown-item" href="pages-profile.html"><i
                                         class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
                                     <span class="align-middle">Profile</span></a>
-                                    <form method="POST" action="{{route('logoutuser')}}" x-data>
-                                        @csrf
-                                        <button type="submit" class="dropdown-item" href="auth-lockscreen-basic.html"><i
-                                                class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
-                                            <span class="align-middle">{{ __('Log Out') }}</span></button>
-                                    </form>
+                                <form method="POST" action="{{route('logoutuser')}}" x-data>
+                                    @csrf
+                                    <button type="submit" class="dropdown-item" href="auth-lockscreen-basic.html"><i
+                                            class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                                        <span class="align-middle">{{ __('Log Out') }}</span></button>
+                                </form>
 
                             </div>
                         </div>
@@ -179,6 +180,7 @@
         <div class="vertical-overlay"></div>
         @include('navigation-menu')
         @stack('title')
+
         <div class="main-content">
             <div class="page-content">
                 {{ $slot }}
@@ -203,7 +205,6 @@
         </div>
     </div>
 
-
     <!-- JAVASCRIPT -->
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
@@ -227,10 +228,35 @@
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    <!-- Sweet Alerts js -->
-    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-    <!-- Sweet alert init js-->
-    <script src="{{ asset('assets/js/pages/sweetalerts.init.js') }}"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.13.2/dist/sweetalert2.all.min.js"></script>
+        @if (session('success'))
+        <script>
+            // Display SweetAlert for success message
+            Swal.fire({
+                title: "Success!",
+                text: "{{ session('success') }}",
+                icon: "success",
+                confirmButtonClass: "btn btn-primary w-xs me-2 mt-2",
+                buttonsStyling: true,
+                showCancelButton: true,
+                showCloseButton: true,
+            });
+        </script>
+        @endif
+
+        @if (session('error'))
+        <script>
+            // Display SweetAlert for error message
+            Swal.fire({
+                title: "Error!",
+                text: "{{ session('error') }}",
+                icon: "error",
+                confirmButtonClass: "btn btn-primary w-xs me-2 mt-2",
+                buttonsStyling: true,
+                showCloseButton: true,
+            });
+        </script>
+        @endif
 </body>
 
 </html>
