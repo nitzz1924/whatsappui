@@ -2,6 +2,8 @@
 #“मंज़िल उन्हीं को मिलती है जिनके सपनों में जान होती है, पंख से कुछ नहीं होता हौसलों से उड़ान होती है।”
 use App\Http\Controllers\AdminStores;
 use App\Http\Controllers\AdminViews;
+use App\Http\Controllers\UserStores;
+use App\Http\Controllers\UserViews;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,20 +27,32 @@ Route::middleware([
 
 
 
-//Admin Panel Views Routes
+//Admin Panel Routes
 Route::controller(AdminViews::class)->group(function() {
     Route::get('userregister', 'userregister')->name('userregister');
     Route::get('alluserslist', 'alluserslist')->name('alluserslist');
 });
 
-
-//Admin Panel Store Routes
 Route::controller(AdminStores::class)->group(function() {
     Route::post('insertregisterusers', 'insertregisterusers')->name('insertregisterusers');
     Route::get('deleteregisteruser/{id}', 'deleteregisteruser')->name('deleteregisteruser');
     Route::post('/updateaccountstatus', 'updateaccountstatus')->name('updateaccountstatus');
-
+    Route::post('/updateuser', 'updateuser')->name('updateuser');
 });
 
+
+//User Panel Routes
+Route::controller(UserViews::class)->group(function() {
+    Route::get('user/login', 'userloginpage')->name('userloginpage');
+    Route::get('userdashboard', 'userdashboard')->name('userdashboard');
+    Route::get('logoutuserpanel', 'logoutuserpanel')->name('logoutuserpanel');
+    Route::get('indexchat', 'indexchat')->name('indexchat');
+    Route::get('campaignspage', 'campaignspage')->name('campaignspage');
+});
+
+Route::controller(UserStores::class)->group(function() {
+    Route::post('/signup_user_otp', 'signup_user_otp')->name('signup_user_otp');
+    Route::post('verifyotp', 'verifyotp')->name('verifyotp');
+});
 
 

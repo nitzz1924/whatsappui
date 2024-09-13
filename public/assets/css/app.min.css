@@ -489,7 +489,7 @@
 .navbar-menu {
   width: var(--vz-vertical-menu-width);
   z-index: 1002;
-  background: var(--vz-vertical-menu-bg);
+  background: #1a4848;
   border-right: 1px solid var(--vz-vertical-menu-border);
   bottom: 0;
   margin-top: 0;
@@ -2574,10 +2574,10 @@
   }
 } /*!
  * Waves v0.7.6
- * http://fian.my.id/Waves 
- * 
- * Copyright 2014-2018 Alfiana E. Sibuea and other contributors 
- * Released under the MIT license 
+ * http://fian.my.id/Waves
+ *
+ * Copyright 2014-2018 Alfiana E. Sibuea and other contributors
+ * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE */
 .waves-effect {
   position: relative;
@@ -12558,10 +12558,11 @@ span.flatpickr-weekday {
   }
 }
 .auth-one-bg {
-  background-image: url(../images/auth-one-bg.jpg);
-  background-position: center;
-  background-size: cover;
-}
+    background-image: linear-gradient(to bottom, #116464, #6e6e6e);
+    background-position: center;
+    background-size: cover;
+    border: 1px solid green;
+  }
 .auth-one-bg .bg-overlay {
   background: -webkit-gradient(
     linear,
@@ -12613,7 +12614,7 @@ span.flatpickr-weekday {
   padding: 2px 16px;
 }
 .auth-bg-cover {
-  background: linear-gradient(-45deg, #6691e7 50%, #13c56b);
+    background-image: url('/assets/images/whatsacppback.jpg');
 }
 .auth-bg-cover > .bg-overlay {
   background-image: url(../images/cover-pattern.png);
@@ -14474,9 +14475,9 @@ span.flatpickr-weekday {
 }
 @media (min-width: 992px) {
   .chat-leftsidebar {
-    min-width: 300px;
-    max-width: 300px;
-    height: calc(100vh - 70px - 60px - 8px);
+    min-width: 400px;
+    max-width: 400px;
+    height: calc(100vh - 70px - 60px - -3px);
   }
 }
 .chat-list {
@@ -14575,7 +14576,7 @@ span.flatpickr-weekday {
   background-color: var(--vz-light);
 }
 .user-chat {
-  background: url(../images/chat-bg-pattern.png);
+  background: url('/assets/images/chat-bg-pattern.png');
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
   position: relative;
@@ -14751,7 +14752,7 @@ span.flatpickr-weekday {
 }
 .chat-conversation .conversation-list .ctext-wrap-content {
   padding: 12px 20px;
-  background-color: var(--vz-light);
+  background-color: white;
   position: relative;
   border-radius: 3px;
   -webkit-box-shadow: 0 5px 10px rgba(30, 32, 37, 0.12);
@@ -14865,8 +14866,8 @@ span.flatpickr-weekday {
   -webkit-box-ordinal-group: 3;
   -ms-flex-order: 2;
   order: 2;
-  background-color: rgba(var(--vz-primary-rgb), 0.15);
-  color: var(--vz-primary);
+  background-color: #1a4848;
+  color: whitesmoke;
   text-align: right;
   -webkit-box-shadow: none;
   box-shadow: none;

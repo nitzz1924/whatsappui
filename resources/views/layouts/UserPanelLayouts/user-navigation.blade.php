@@ -31,13 +31,18 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('dashboard')}}">
-                        <i class="bx bxs-dashboard"></i>
-                        <span data-key="t-widgets">Dashboard</span>
+                    <a class="nav-link menu-link" href="{{ route('indexchat') }}" role="button" aria-expanded="false"
+                        aria-controls="sidebarDashboards">
+                        <i class="bx bxs-chat"></i><span>Index</span>
                     </a>
                 </li>
-
                 <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('campaignspage') }}" role="button" aria-expanded="false"
+                        aria-controls="sidebarDashboards">
+                        <i class=" bx bxs-megaphone"></i><span>Campaigns</span>
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarLanding">
                         <i class="bx bx-user"></i>
@@ -46,18 +51,18 @@
                     <div class="collapse menu-dropdown" id="sidebarLanding">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('userregister') }}" class="nav-link" data-key="t-one-page">
+                                <a href="#" class="nav-link" data-key="t-one-page">
                                     Registration
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('alluserslist') }}" class="nav-link" data-key="t-one-page">
+                                <a href="#" class="nav-link" data-key="t-one-page">
                                    All Users
                                 </a>
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

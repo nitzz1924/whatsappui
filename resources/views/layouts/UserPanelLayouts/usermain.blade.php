@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar-size="lg" data-sidebar="dark"
+<html lang="en" data-layout="vertical" data-topbar="    " data-sidebar-size="lg" data-sidebar="dark"
     data-sidebar-image="none" data-preloader="disable">
 
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -28,6 +26,8 @@
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{asset('assets/libs/glightbox/css/glightbox.min.css')}}">
+
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.2/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
@@ -113,15 +113,9 @@
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user" src="{{asset('assets/images/defaultuser.png')}}" alt="Header Avatar" />
                                     <span class="text-start ms-xl-2">
-                                        @if (Auth::user())
-                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                                            {{ Auth::user()->name }}
-                                        </span>
-                                        @else
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
                                             Guest User
                                         </span>
-                                        @endif
                                     </span>
                                 </span>
                             </button>
@@ -129,11 +123,11 @@
                                 <a class="dropdown-item" href="pages-profile.html"><i
                                         class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
                                     <span class="align-middle">Profile</span></a>
-                                <form method="POST" action="{{route('logoutuser')}}" x-data>
+                                <form method="GET" action="{{route('logoutuserpanel')}}" x-data>
                                     @csrf
                                     <button type="submit" class="dropdown-item" href="auth-lockscreen-basic.html"><i
                                             class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
-                                        <span class="align-middle">{{ __('Log Out') }}</span></button>
+                                        <span class="align-middle">Log Out</span></button>
                                 </form>
 
                             </div>
@@ -176,12 +170,12 @@
             <!-- /.modal-dialog -->
         </div>
         <div class="vertical-overlay"></div>
-        @include('navigation-menu')
+        @include('layouts.UserPanelLayouts.user-navigation')
         @stack('title')
 
         <div class="main-content">
             <div class="page-content">
-                {{ $slot }}
+                @yield('content')
             </div>
             <footer class="footer">
                 <div class="container-fluid">
@@ -210,7 +204,9 @@
     <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
-
+    <script src="{{asset('assets/libs/glightbox/js/glightbox.min.js')}}"></script>
+    <script src="{{asset('assets/libs/fg-emoji-picker/fgEmojiPicker.js')}}"></script>
+    <script src="{{asset('assets/js/pages/chat.init.js')}}"></script>
     <!-- apexcharts -->
     <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
@@ -220,7 +216,7 @@
 
     <!--Swiper slider js-->
     <script src="{{ asset('assets/libs/swiper/swiper-bundle.min.js') }}"></script>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- Dashboard init -->
     <script src="{{ asset('assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
 

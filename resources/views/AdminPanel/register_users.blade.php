@@ -31,14 +31,14 @@
                                         <div>
                                             <label class="form-label">User ID</label>
                                             <input type="number" name="userid" class="form-control"
-                                                placeholder="Enter User ID">
+                                                placeholder="Enter User ID" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-xxl-3 col-md-6">
                                         <div>
                                             <label class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control"
-                                                placeholder="Enter Password">
+                                            <input type="text" name="password" class="form-control"
+                                                placeholder="Enter Password" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-xxl-3 col-md-6">

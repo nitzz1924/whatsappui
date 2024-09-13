@@ -20,7 +20,7 @@ class AdminStores extends Controller
             ]);
             $data = new RegisterUser();
             $data->userid = $req->userid;
-            $data->password = bcrypt($req->password);
+            $data->password = $req->password;
             $data->mobilenumber = $req->mobilenumber;
             $data->email = $req->email;
             $data->expiredate = $req->expiredate;
@@ -48,5 +48,21 @@ class AdminStores extends Controller
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false], 404);
+    }
+
+    public function updateuser(Request $request){
+        try {
+            $leads = RegisterUser::where('id', $request->userid)->update([
+                'password' => $request->password,
+                'mobilenumber' => $request->mobilenumber,
+                'email' => $request->email,
+                'expiredate' => $request->expiredate,
+                'createddate' => $request->createddate,
+            ]);
+            return back()->with('success', "Updated..!!!");
+        } catch (Exception $e) {
+            //return back()->with('error', $e->getMessage());
+            return back()->with('error', 'Not Updated..Try Again.....');
+        }
     }
 }

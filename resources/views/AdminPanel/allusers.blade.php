@@ -1,3 +1,4 @@
+
 {{--#“मंज़िल उन्हीं को मिलती है जिनके सपनों में जान होती है, पंख से कुछ नहीं होता हौसलों से उड़ान होती है।”--}}
 @section('title', 'All Users')
 <x-app-layout>
@@ -60,10 +61,11 @@
                                         </td>
                                         <td>
                                             <div class="hstack gap-3 flex-wrap">
-                                                <a href="javascript:void(0);" class="fs-15"><i
-                                                        class="ri-eye-line"></i></a>
-                                                <a href="javascript:void(0);" class="link-success fs-15"><i
-                                                        class="ri-edit-2-line"></i></a>
+                                                <a href="#" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                                data-record="{{ json_encode($data) }}" class="link-success editbtnmodal fs-15"><i
+                                                        class="ri-edit-2-line"  data-bs-toggle="tooltip"
+                                                        data-bs-placement="top" data-bs-title="Edit"></i></a>
                                                 <a href="#" onclick="confirmDelete('{{ $data->id }}')"
                                                     class="link-danger fs-15"><i class="ri-delete-bin-line"></i></a>
                                             </div>
@@ -75,6 +77,26 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal flip" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit User Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('updateuser') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body" id="modalbody">
+                        {{-- Modal Body Appends here --}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -101,6 +123,7 @@
         });
     }
 </script>
+<!--Account Status-->
 <script>
     $(document).ready(function() {
         var leadid;
@@ -143,3 +166,65 @@
         });
     });
 </script>
+<!--Edit Functionality-->
+<script>
+    $('#table-body').on('click', '.editbtnmodal', function() {
+        var userdata = $(this).data('record');
+        console.log(userdata);
+        $('#modalbody').empty();
+
+        var modalbody = `
+            <div class="card-body">
+                <div class="live-preview">
+                        <div class="row gy-4">
+                            <div class="col-xxl-4 col-md-6">
+                                <div>
+                                    <label class="form-label">User ID</label>
+                                    <input type="number" name="userid" class="form-control"
+                                        placeholder="Enter User ID" disabled value="${userdata.userid}">
+                                        <input type="hidden" name="userid" value="${userdata.id}" id="">
+                                </div>
+                            </div>
+                            <div class="col-xxl-4 col-md-6">
+                                <div>
+                                    <label class="form-label">Password</label>
+                                    <input type="text" name="password" class="form-control"
+                                        placeholder="Enter New Password" autocomplete="off" value="${userdata.password}">
+                                </div>
+                            </div>
+                            <div class="col-xxl-4 col-md-6">
+                                <div>
+                                    <label class="form-label">Mobile Number</label>
+                                    <input type="text" name="mobilenumber" class="form-control"
+                                        placeholder="Enter Mobile Number"  value="${userdata.mobilenumber}">
+                                </div>
+                            </div>
+                            <div class="col-xxl-4 col-md-6">
+                                <div>
+                                    <label class="form-label">Email</label>
+                                    <input type="email" name="email" class="form-control"
+                                        placeholder="Enter Email" value="${userdata.email}">
+                                </div>
+                            </div>
+                            <div class="col-xxl-4 col-md-6">
+                                <div>
+                                    <label class="form-label">Expire Date</label>
+                                    <input type="date" name="expiredate" class="form-control"
+                                        placeholder="Enter User ID" value="${userdata.expiredate}">
+                                </div>
+                            </div>
+                            <div class="col-xxl-4 col-md-6">
+                                <div>
+                                    <label class="form-label">Created Date</label>
+                                    <input type="date" name="createddate" class="form-control"
+                                        placeholder="Enter User ID" value="${userdata.createddate}">
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        `;
+        $('#modalbody').append(modalbody);
+    });
+</script>
+
