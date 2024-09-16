@@ -42,6 +42,12 @@
                         <i class=" bx bxs-megaphone"></i><span>Campaigns</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('automationpage') }}" role="button" aria-expanded="false"
+                        aria-controls="sidebarDashboards">
+                        <i class="ri-settings-3-fill"></i><span>Automations</span>
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarLanding">

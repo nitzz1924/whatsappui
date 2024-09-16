@@ -1,3 +1,4 @@
+{{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 @extends('auth.UserPanel.Layouts.main')
 @section('main-section')
 <div class="auth-page-content overflow-hidden pt-lg-5">

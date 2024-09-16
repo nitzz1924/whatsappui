@@ -1,5 +1,5 @@
 <?php
-#{{--#“मंज़िल उन्हीं को मिलती है जिनके सपनों में जान होती है, पंख से कुछ नहीं होता हौसलों से उड़ान होती है।”--}}
+#{{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -26,5 +26,14 @@ class UserViews extends Controller
     }
     public function campaignspage(){
         return view('UserPanel.campaigns');
+    }
+    public function addnewcampaign(){
+        return view('UserPanel.addnewcampaign');
+    }
+    public function automationpage(){
+        return view('UserPanel.automations');
+    }
+    public function addnewautomation(){
+        return view('UserPanel.addnewautomation');
     }
 }

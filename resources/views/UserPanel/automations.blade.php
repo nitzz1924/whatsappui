@@ -1,7 +1,7 @@
 {{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 @extends('layouts.UserPanelLayouts.usermain')
 @push('title')
-<title>All Campaigns</title>
+<title>All Automations</title>
 @endpush
 @section('content')
 <div class="container-fluid">
@@ -11,7 +11,7 @@
                 <div class="card-header rounded-5">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="px-2">
-                            <h4 class="mb-sm-0">Campaigns</h4>
+                            <h4 class="mb-sm-0">Automations</h4>
                         </div>
                         <div class="d-flex justify-content-end ">
                             <div class="px-2"> <select class="form-select accountstatus"
@@ -26,9 +26,10 @@
                                     <option selected>A</option>
                                     <option selected>B</option>
                                 </select></div>
-                            <div class="px-2"> <a href="{{ route('addnewcampaign') }}"
+                            <div class="px-2">
+                                <a href="{{ route('addnewautomation') }}"
                                     class="btn text-white rounded-5 waves-effect waves-light"
-                                    style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>New Campaign</a>
+                                    style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>New Automation</a>
                             </div>
                         </div>
                     </div>
@@ -45,8 +46,9 @@
                             <thead>
                                 <tr>
                                     <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No</th>
-                                    <th style="background-color:#1164642b;">Campaign</th>
-                                    <th style="background-color:#1164642b;">Scheduled/Send at</th>
+                                    <th style="background-color:#1164642b;">Name</th>
+                                    <th style="background-color:#1164642b;">No. of Messages</th>
+                                    <th style="background-color:#1164642b;">People in Automation</th>
                                     <th style="background-color:#1164642b;">Status</th>
                                     <th style="background-color:#1164642b;">Analytics</th>
                                     <th style="background-color:#1164642b; border-radius: 0px 10px 10px 0px;">Action
@@ -57,56 +59,6 @@
                                 <tr class="border-bottom-1">
                                     <th>1</th>
                                     <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>
-                                        <div class="hstack gap-3 flex-wrap">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-record="" class="link-success editbtnmodal fs-15"><i
-                                                    class="ri-edit-2-line" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="" class="link-danger fs-15"><i
-                                                    class="ri-delete-bin-line"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="border-bottom-1">
-                                    <th>1</th>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>
-                                        <div class="hstack gap-3 flex-wrap">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-record="" class="link-success editbtnmodal fs-15"><i
-                                                    class="ri-edit-2-line" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="" class="link-danger fs-15"><i
-                                                    class="ri-delete-bin-line"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="border-bottom-1">
-                                    <th>1</th>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>
-                                        <div class="hstack gap-3 flex-wrap">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-record="" class="link-success editbtnmodal fs-15"><i
-                                                    class="ri-edit-2-line" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="" class="link-danger fs-15"><i
-                                                    class="ri-delete-bin-line"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="border-bottom-1">
-                                    <th>1</th>
                                     <td>A</td>
                                     <td>A</td>
                                     <td>A</td>

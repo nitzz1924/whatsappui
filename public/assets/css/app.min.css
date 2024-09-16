@@ -35,6 +35,9 @@
   src: local("hkgrotesk bold"), url(../fonts/hkgrotesk-bold.woff) format("woff");
   font-weight: 700;
 }
+body{
+    background-image: url('/assets/images/chat-bg-pattern.png');
+}
 #page-topbar {
   position: fixed;
   top: 0;
@@ -6497,10 +6500,11 @@ button {
   gap: 16px;
 }
 .vertical-navs-step .nav .nav-link {
-  text-align: left;
-  background-color: rgba(var(--vz-light-rgb), 0.4);
-  border: 1px solid var(--vz-border-color);
-  color: var(--vz-body-color);
+    text-align: left;
+    background-color: rgba(var(--vz-light-rgb), 0.4);
+    border: 1px solid #116464;
+    color: var(--vz-body-color);
+    border-radius: 2rem;
 }
 .vertical-navs-step .nav .nav-link .step-title {
   font-weight: 500;
@@ -6520,7 +6524,7 @@ button {
   content: "\eb80";
 }
 .vertical-navs-step .nav .nav-link.active {
-  border-color: #6691e7;
+  border-color: #116464;
 }
 .vertical-navs-step .nav .nav-link.done {
   border-color: #13c56b;
@@ -16156,3 +16160,6 @@ span.flatpickr-weekday {
   right: -35px;
 }
 /*# sourceMappingURL=app.min.css.map */
+.mycustomcanvas{
+    width: 600px !important;
+}

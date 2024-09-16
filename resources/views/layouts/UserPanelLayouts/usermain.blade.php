@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{asset('assets/libs/glightbox/css/glightbox.min.css')}}">
 
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.2/dist/sweetalert2.min.css" rel="stylesheet">
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/libs/multi.js/multi.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/libs/%40tarekraafat/autocomplete.js/css/autoComplete.css')}}"> --}}
 </head>
 
 <body>
@@ -207,6 +209,11 @@
     <script src="{{asset('assets/libs/glightbox/js/glightbox.min.js')}}"></script>
     <script src="{{asset('assets/libs/fg-emoji-picker/fgEmojiPicker.js')}}"></script>
     <script src="{{asset('assets/js/pages/chat.init.js')}}"></script>
+
+    <script src="{{asset('assets/libs/multi.js/multi.min.js')}}"></script>
+    <script src="{{asset('assets/libs/%40tarekraafat/autocomplete.js/autoComplete.min.js')}}"></script>
+    <script src="{{asset('assets/js/pages/form-advanced.init.js')}}"></script>
+    <script src="{{asset('assets/js/pages/flag-input.init.js')}}"></script>
     <!-- apexcharts -->
     <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 

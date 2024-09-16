@@ -1,6 +1,8 @@
+
+{{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 @extends('layouts.UserPanelLayouts.usermain')
 @push('title')
-    <title>User Dashboard</title>
+<title>User Dashboard</title>
 @endpush
 @section('content')
 <div class="container-fluid">
@@ -275,8 +277,8 @@
                             <div class="card-body p-0 pb-2">
                                 <div class="w-100">
                                     <div id="customer_impression_charts"
-                                        data-colors='["--vz-success", "--vz-info", "--vz-danger"]'
-                                        class="apex-charts" dir="ltr"></div>
+                                        data-colors='["--vz-success", "--vz-info", "--vz-danger"]' class="apex-charts"
+                                        dir="ltr"></div>
                                 </div>
                             </div>
                             <!-- end card body -->
@@ -303,8 +305,8 @@
                             <!-- card body -->
                             <div class="card-body">
                                 <div id="sales-by-locations"
-                                    data-colors='["--vz-light", "--vz-success", "--vz-primary"]'
-                                    style="height: 269px" dir="ltr"></div>
+                                    data-colors='["--vz-light", "--vz-success", "--vz-primary"]' style="height: 269px"
+                                    dir="ltr"></div>
 
                                 <div class="px-2 py-2 mt-1">
                                     <p class="mb-1">
@@ -312,8 +314,8 @@
                                     </p>
                                     <div class="progress mt-2" style="height: 6px">
                                         <div class="progress-bar progress-bar-striped bg-primary" role="progressbar"
-                                            style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                            aria-valuemax="75"></div>
+                                            style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="75">
+                                        </div>
                                     </div>
 
                                     <p class="mt-3 mb-1">
@@ -321,8 +323,8 @@
                                     </p>
                                     <div class="progress mt-2" style="height: 6px">
                                         <div class="progress-bar progress-bar-striped bg-primary" role="progressbar"
-                                            style="width: 47%" aria-valuenow="47" aria-valuemin="0"
-                                            aria-valuemax="47"></div>
+                                            style="width: 47%" aria-valuenow="47" aria-valuemin="0" aria-valuemax="47">
+                                        </div>
                                     </div>
 
                                     <p class="mt-3 mb-1">
@@ -330,8 +332,8 @@
                                     </p>
                                     <div class="progress mt-2" style="height: 6px">
                                         <div class="progress-bar progress-bar-striped bg-primary" role="progressbar"
-                                            style="width: 82%" aria-valuenow="82" aria-valuemin="0"
-                                            aria-valuemax="82"></div>
+                                            style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="82">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -354,8 +356,7 @@
                                         <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
                                             <span class="fw-semibold text-uppercase fs-12">Sort by: </span><span
-                                                class="text-muted">Today<i
-                                                    class="mdi mdi-chevron-down ms-1"></i></span>
+                                                class="text-muted">Today<i class="mdi mdi-chevron-down ms-1"></i></span>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <a class="dropdown-item" href="#">Today</a>
@@ -875,8 +876,7 @@
 
                             <div class="card-body">
                                 <div class="table-responsive table-card">
-                                    <table
-                                        class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                                    <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
                                         <thead class="text-muted table-light">
                                             <tr>
                                                 <th scope="col">Order ID</th>
@@ -938,8 +938,7 @@
                                                 </td>
                                                 <td>Micro Design</td>
                                                 <td>
-                                                    <span
-                                                        class="badge bg-warning-subtle text-warning">Pending</span>
+                                                    <span class="badge bg-warning-subtle text-warning">Pending</span>
                                                 </td>
                                                 <td>
                                                     <h5 class="fs-14 fw-medium mb-0">
@@ -1095,18 +1094,15 @@
                                             By Nesta Technologies
                                         </p>
                                         <div class="d-inline-flex gap-2 border border-dashed p-2 mb-2">
-                                            <a href="apps-ecommerce-product-details.html"
-                                                class="bg-light rounded p-1">
+                                            <a href="apps-ecommerce-product-details.html" class="bg-light rounded p-1">
                                                 <img src="assets/images/products/img-8.png" alt=""
                                                     class="img-fluid d-block" />
                                             </a>
-                                            <a href="apps-ecommerce-product-details.html"
-                                                class="bg-light rounded p-1">
+                                            <a href="apps-ecommerce-product-details.html" class="bg-light rounded p-1">
                                                 <img src="assets/images/products/img-2.png" alt=""
                                                     class="img-fluid d-block" />
                                             </a>
-                                            <a href="apps-ecommerce-product-details.html"
-                                                class="bg-light rounded p-1">
+                                            <a href="apps-ecommerce-product-details.html" class="bg-light rounded p-1">
                                                 <img src="assets/images/products/img-10.png" alt=""
                                                     class="img-fluid d-block" />
                                             </a>
@@ -1143,8 +1139,8 @@
                                     <div class="flex-grow-1 ms-3">
                                         <h6 class="mb-1 lh-base">
                                             Today offers by
-                                            <a href="apps-ecommerce-seller-details.html"
-                                                class="link-secondary">Digitech Galaxy</a>
+                                            <a href="apps-ecommerce-seller-details.html" class="link-secondary">Digitech
+                                                Galaxy</a>
                                         </h6>
                                         <p class="text-muted mb-2">
                                             Offer is valid on orders of Rs.500 Or above for
@@ -1237,8 +1233,7 @@
                                             class="float-end">(10,294)</span></a>
                                 </li>
                                 <li class="py-1">
-                                    <a href="#" class="text-muted">Desktop <span
-                                            class="float-end">(6,256)</span></a>
+                                    <a href="#" class="text-muted">Desktop <span class="float-end">(6,256)</span></a>
                                 </li>
                                 <li class="py-1">
                                     <a href="#" class="text-muted">Electronics
@@ -1249,12 +1244,10 @@
                                         <span class="float-end">(2,275)</span></a>
                                 </li>
                                 <li class="py-1">
-                                    <a href="#" class="text-muted">Grocery <span
-                                            class="float-end">(1,950)</span></a>
+                                    <a href="#" class="text-muted">Grocery <span class="float-end">(1,950)</span></a>
                                 </li>
                                 <li class="py-1">
-                                    <a href="#" class="text-muted">Fashion <span
-                                            class="float-end">(1,582)</span></a>
+                                    <a href="#" class="text-muted">Fashion <span class="float-end">(1,582)</span></a>
                                 </li>
                                 <li class="py-1">
                                     <a href="#" class="text-muted">Appliances

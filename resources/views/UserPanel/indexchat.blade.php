@@ -1,3 +1,4 @@
+{{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 @extends('layouts.UserPanelLayouts.usermain')
 @push('title')
 <title>Index Chat</title>
@@ -549,7 +550,9 @@
                                                 <div class="hstack flex-wrap gap-2 mb-3 mb-lg-0">
                                                     <button class="btn btn-outline-success btn-border"
                                                         id="resolvebtn">Resolve</button>
-                                                    <button class="btn btn-outline-success btn-border" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Contact
+                                                    <button class="btn btn-outline-success btn-border"
+                                                        data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                                        aria-controls="offcanvasRight">Contact
                                                         Info</button>
                                                 </div>
                                             </li>
@@ -1009,175 +1012,77 @@
 </div>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-        <h5 id="offcanvasRightLabel">Offcanvas Right</h5>
+        <h5 id="offcanvasRightLabel">Contact Details</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <div class="chat-message-list">
+        <div class="card" id="contact-view-detail">
+            <div class="card-body text-center">
+                <div class="position-relative d-inline-block">
+                    <img src="assets/images/users/avatar-10.jpg" alt="" class="avatar-lg rounded-circle img-thumbnail">
+                    <span class="contact-active position-absolute rounded-circle bg-success"><span
+                            class="visually-hidden"></span>
+                </div>
+                <h5 class="mt-4 mb-1">Tonya Noble</h5>
+                <p class="text-muted">Nesta Technologies</p>
 
-            <ul class="list-unstyled chat-list chat-user-list" id="userList">
-
-                <li id="contact-id-1" data-name="direct-message" class="active"> <a
-                        href="javascript: void(0);">
-                        <div class="d-flex align-items-center">
-                            <div
-                                class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                <div class="avatar-xxs"> <img
-                                        src="assets/images/users/avatar-2.jpg"
-                                        class="rounded-circle img-fluid userprofile"
-                                        alt=""><span class="user-status"></span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-truncate mb-0">Lisa Parker</p>
-                            </div>
-                        </div>
-                    </a> </li>
-                <li id="contact-id-2" data-name="direct-message" class=""> <a
-                        href="javascript: void(0);" class="unread-msg-user">
-                        <div class="d-flex align-items-center">
-                            <div
-                                class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                <div class="avatar-xxs"> <img
-                                        src="assets/images/users/avatar-3.jpg"
-                                        class="rounded-circle img-fluid userprofile"
-                                        alt=""><span class="user-status"></span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-truncate mb-0">Frank Thomas</p>
-                            </div>
-                            <div class="ms-auto"><span
-                                    class="badge bg-dark-subtle text-body rounded p-1">8</span>
-                            </div>
-                        </div>
-                    </a> </li>
-                <li id="contact-id-3" data-name="direct-message" class="">
-                    <a href="javascript: void(0);">
-                        <div class="d-flex align-items-center">
-                            <div
-                                class="flex-shrink-0 chat-user-img away align-self-center me-2 ms-0">
-                                <div class="avatar-xxs">
-                                    <div
-                                        class="avatar-title rounded-circle bg-primary text-white fs-10">
-                                        CT</div><span class="user-status"></span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-truncate mb-0">Clifford Taylor</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li id="contact-id-4" data-name="direct-message" class="">
-                    <a href="javascript: void(0);">
-                        <div class="d-flex align-items-center">
-                            <div
-                                class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                <div class="avatar-xxs"> <img
-                                        src="assets/images/users/avatar-4.jpg"
-                                        class="rounded-circle img-fluid userprofile"
-                                        alt=""><span class="user-status"></span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-truncate mb-0">Janette Caster</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li id="contact-id-5" data-name="direct-message" class="">
-                    <a href="javascript: void(0);" class="unread-msg-user">
-                        <div class="d-flex align-items-center">
-                            <div
-                                class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                <div class="avatar-xxs"> <img
-                                        src="assets/images/users/avatar-5.jpg"
-                                        class="rounded-circle img-fluid userprofile"
-                                        alt=""><span class="user-status"></span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-truncate mb-0">Sarah Beattie</p>
-                            </div>
-                            <div class="ms-auto"><span
-                                    class="badge bg-dark-subtle text-body rounded p-1">5</span>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li id="contact-id-6" data-name="direct-message" class="">
-                    <a href="javascript: void(0);" class="unread-msg-user">
-                        <div class="d-flex align-items-center">
-                            <div
-                                class="flex-shrink-0 chat-user-img away align-self-center me-2 ms-0">
-                                <div class="avatar-xxs"> <img
-                                        src="assets/images/users/avatar-6.jpg"
-                                        class="rounded-circle img-fluid userprofile"
-                                        alt=""><span class="user-status"></span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-truncate mb-0">Nellie Cornett</p>
-                            </div>
-                            <div class="ms-auto"><span
-                                    class="badge bg-dark-subtle text-body rounded p-1">2</span>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li id="contact-id-7" data-name="direct-message" class="">
-                    <a href="javascript: void(0);">
-                        <div class="d-flex align-items-center">
-                            <div
-                                class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                <div class="avatar-xxs">
-                                    <div
-                                        class="avatar-title rounded-circle bg-primary text-white fs-10">
-                                        CK</div><span class="user-status"></span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-truncate mb-0">Chris Kiernan</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li id="contact-id-8" data-name="direct-message" class="">
-                    <a href="javascript: void(0);">
-                        <div class="d-flex align-items-center">
-                            <div
-                                class="flex-shrink-0 chat-user-img away align-self-center me-2 ms-0">
-                                <div class="avatar-xxs">
-                                    <div
-                                        class="avatar-title rounded-circle bg-primary text-white fs-10">
-                                        EE</div><span class="user-status"></span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-truncate mb-0">Edith Evans</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li id="contact-id-9" data-name="direct-message" class="">
-                    <a href="javascript: void(0);">
-                        <div class="d-flex align-items-center">
-                            <div
-                                class="flex-shrink-0 chat-user-img away align-self-center me-2 ms-0">
-                                <div class="avatar-xxs"> <img
-                                        src="assets/images/users/avatar-7.jpg"
-                                        class="rounded-circle img-fluid userprofile"
-                                        alt=""><span class="user-status"></span>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-truncate mb-0">Joseph Siegel</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item avatar-xs">
+                        <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">
+                            <i class="ri-phone-line"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item avatar-xs">
+                        <a href="javascript:void(0);" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
+                            <i class="ri-mail-line"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item avatar-xs">
+                        <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
+                            <i class="ri-question-answer-line"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <h6 class="text-muted text-uppercase fw-semibold mb-3">Personal Information</h6>
+                <p class="text-muted mb-4">Hello, I'm Tonya Noble, The most effective objective is one that is tailored
+                    to the job you are applying for. It states what kind of career you are seeking, and what skills and
+                    experiences.</p>
+                <div class="table-responsive table-card">
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                            <tr>
+                                <td class="fw-medium" scope="row">Designation</td>
+                                <td>Lead Designer / Developer</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-medium" scope="row">Email ID</td>
+                                <td>tonyanoble@velzon.com</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-medium" scope="row">Phone No</td>
+                                <td>414-453-5725</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-medium" scope="row">Lead Score</td>
+                                <td>154</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-medium" scope="row">Tags</td>
+                                <td>
+                                    <span class="badge bg-primary-subtle text-primary">Lead</span>
+                                    <span class="badge bg-primary-subtle text-primary">Partner</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-medium" scope="row">Last Contacted</td>
+                                <td>15 Dec, 2021 <small class="text-muted">08:58AM</small></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
