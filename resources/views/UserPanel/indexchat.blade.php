@@ -548,12 +548,14 @@
 
                                             <li class="list-inline-item d-none d-lg-inline-block m-0">
                                                 <div class="hstack flex-wrap gap-2 mb-3 mb-lg-0">
-                                                    <button class="btn btn-outline-success btn-border"
-                                                        id="resolvebtn">Resolve</button>
-                                                    <button class="btn btn-outline-success btn-border"
-                                                        data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                                                        aria-controls="offcanvasRight">Contact
-                                                        Info</button>
+                                                    <a href="#"  id="resolvebtn"
+                                                    class="btn text-white rounded-3 waves-effect waves-light"
+                                                    style="background-color: #116464">Resolve</a>
+                                                    <a href="#"  id="resolvebtn"
+                                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                                    aria-controls="offcanvasRight"
+                                                    class="btn text-white rounded-3 waves-effect waves-light"
+                                                    style="background-color: #116464">Contact Info</a>
                                                 </div>
                                             </li>
                                         </ul>

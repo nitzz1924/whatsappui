@@ -7,20 +7,20 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <div class="card rounded-5">
-                <div class="card-header rounded-5">
+            <div class="card rounded-4">
+                <div class="card-header rounded-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="px-2">
                             <h4 class="mb-sm-0">Add New Campaign</h4>
                         </div>
                         <div class="d-flex justify-content-end ">
-                            <div class="px-2"> <a href="" class="btn text-white rounded-5 waves-effect waves-light"
+                            <div class="px-2"> <a href="" class="btn text-white rounded-4 waves-effect waves-light"
                                     style="background-color: #116464">Cancel</a>
                             </div>
-                            <div class="px-2"> <a href="" class="btn text-white rounded-5 waves-effect waves-light"
+                            <div class="px-2"> <a href="" class="btn text-white rounded-4 waves-effect waves-light"
                                     style="background-color: #116464">Save & Close</a>
                             </div>
-                            <div class="px-2"> <a href="" class="btn text-white rounded-5 waves-effect waves-light"
+                            <div class="px-2"> <a href="" class="btn text-white rounded-4 waves-effect waves-light"
                                     style="background-color: #116464"><i class="bx bx-send me-2"></i>Send & Set Live</a>
                             </div>
                         </div>
@@ -31,29 +31,29 @@
     </div>
     <div class="row">
         <div class="col-lg-8">
-            <div class="card rounded-5" style="border: 1px solid #116464;">
-                <div class="card-body rounded-5 p-4">
+            <div class="card rounded-4" style="border: 1px solid #116464;">
+                <div class="card-body rounded-4 p-4">
                     <form method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="username" class="form-label fs-5">Campaign Name</label>
-                            <input type="text" name="phonenumber" class="form-control rounded-5 py-2" id="username"
+                            <input type="text" name="phonenumber" class="form-control rounded-4 py-2" id="username"
                                 placeholder="Enter Phone Number" required>
                         </div>
                         <div>
                             <label for="autoCompleteFruit" class="form-label fs-5">Choose a Module</label>
-                            <input class="form-control rounded-5 py-2 mb-3" id="autoCompleteFruit" type="text" dir="ltr"
+                            <input class="form-control rounded-4 py-2 mb-3" id="autoCompleteFruit" type="text" dir="ltr"
                                 spellcheck="false" autocomplete="off" autocapitalize="off">
                         </div>
                         <div>
                             <label for="rsegment" class="form-label fs-5">Recipients Segment</label>
-                            <input class="form-control rounded-5 py-2 mb-3" id="rsegment" type="text" dir="ltr"
+                            <input class="form-control rounded-4 py-2 mb-3" id="rsegment" type="text" dir="ltr"
                                 spellcheck="false" autocomplete="off" autocapitalize="off"
                                 placeholder="Recipients Segment">
                         </div>
                         <div>
                             <label for="template" class="form-label fs-5">Choose Template</label>
-                            <input class="form-control rounded-5 py-2 mb-3" id="template" type="text" dir="ltr"
+                            <input class="form-control rounded-4 py-2 mb-3" id="template" type="text" dir="ltr"
                                 spellcheck="false" autocomplete="off" autocapitalize="off"
                                 placeholder="Choose Template">
                         </div>
@@ -130,7 +130,7 @@
                                 <label class="form-check-label" for="inlineRadio2">Schedule Date/Time</label>
                             </div>
                             <div class="d-none" id="datediv">
-                                <input type="datetime-local" name="scheduledatetime" class="form-control rounded-5 py-2"
+                                <input type="datetime-local" name="scheduledatetime" class="form-control rounded-4 py-2"
                                     id="datetimeInput" placeholder="Enter Date and Time" required>
                             </div>
                         </div>

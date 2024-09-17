@@ -43,8 +43,6 @@ Route::controller(AdminStores::class)->group(function() {
 
 
 
-
-
 //User Panel Routes
 Route::controller(UserViews::class)->group(function() {
     Route::get('user/login', 'userloginpage')->name('userloginpage');
@@ -55,6 +53,9 @@ Route::controller(UserViews::class)->group(function() {
     Route::get('addnewcampaign', 'addnewcampaign')->name('addnewcampaign');
     Route::get('automationpage', 'automationpage')->name('automationpage');
     Route::get('addnewautomation', 'addnewautomation')->name('addnewautomation');
+    Route::get('analyticspage', 'analyticspage')->name('analyticspage');
+    Route::get('wahapage', 'wahapage')->name('wahapage');
+    Route::get('templatespage', 'templatespage')->name('templatespage');
 });
 
 

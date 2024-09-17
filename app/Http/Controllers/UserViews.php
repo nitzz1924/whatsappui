@@ -36,4 +36,13 @@ class UserViews extends Controller
     public function addnewautomation(){
         return view('UserPanel.addnewautomation');
     }
+    public function analyticspage(){
+        return view('UserPanel.analytics');
+    }
+    public function wahapage(){
+        return view('UserPanel.whatsappapi');
+    }
+    public function templatespage(){
+        return view('UserPanel.templates');
+    }
 }

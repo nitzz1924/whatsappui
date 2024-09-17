@@ -7,20 +7,20 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <div class="card rounded-5">
-                <div class="card-header rounded-5">
+            <div class="card rounded-4">
+                <div class="card-header rounded-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="px-2">
                             <h4 class="mb-sm-0">Add New Automation</h4>
                         </div>
                         <div class="d-flex justify-content-end ">
-                            <div class="px-2"> <a href="" class="btn text-white rounded-5 waves-effect waves-light"
+                            <div class="px-2"> <a href="" class="btn text-white rounded-4 waves-effect waves-light"
                                     style="background-color: #116464">Cancel</a>
                             </div>
-                            <div class="px-2"> <a href="" class="btn text-white rounded-5 waves-effect waves-light"
+                            <div class="px-2"> <a href="" class="btn text-white rounded-4 waves-effect waves-light"
                                     style="background-color: #116464"><i class=" bx bxs-save me-2"></i>Save & Close</a>
                             </div>
-                            <div class="px-2"> <a href="" class="btn text-white rounded-5 waves-effect waves-light"
+                            <div class="px-2"> <a href="" class="btn text-white rounded-4 waves-effect waves-light"
                                     style="background-color: #116464"><i class="bx bx-play me-2"></i>Save & Start</a>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
     </div>
     <div class="row">
         <div class="col-xl-12">
-            <div class="card rounded-5 py-3" style="border: 1px solid #116464;">
+            <div class="card rounded-4 py-3" style="border: 1px solid #116464;">
                 <div class="card-body form-steps">
                     <form class="vertical-navs-step">
                         <div class="row gy-5">
@@ -112,7 +112,7 @@
                                                         <div>
                                                             <label for="autoCompleteFruit"
                                                                 class="form-label fs-5">Choose a Module</label>
-                                                            <input class="form-control rounded-5 py-2 mb-0"
+                                                            <input class="form-control rounded-4 py-2 mb-0"
                                                                 id="autoCompleteFruit" type="text" dir="ltr"
                                                                 spellcheck="false" autocomplete="off"
                                                                 autocapitalize="off">
@@ -173,7 +173,7 @@
                                                             <td>
                                                                 <a href="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                                                                     aria-controls="offcanvasRight"
-                                                                    class="btn text-white rounded-5 waves-effect waves-light"
+                                                                    class="btn text-white rounded-4 waves-effect waves-light"
                                                                     style="background-color: #116464"><i
                                                                         class="mdi mdi-plus me-2"></i>Create Message</a>
                                                             </td>
@@ -218,7 +218,7 @@
                                             </div>
                                             <div class="d-flex align-items-end mt-4">
                                                     <button style="background-color: #116464"
-                                                        class="btn py-2  fs-5 rounded-5 text-white" type="submit">Submit</button>
+                                                        class="btn py-2  fs-5 rounded-4 text-white" type="submit">Submit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -235,7 +235,7 @@
     <div class="offcanvas-header"  style="background-color: #1164641e">
         <h5 id="offcanvasRightLabel">New Message</h5>
         <divl class="d-flex justify-content-end align-items-center">
-            <a href="#" class="btn btn-sm text-white rounded-5 waves-effect waves-light" style="background-color: #116464">Create Message</a>
+            <a href="#" class="btn btn-sm text-white rounded-4 waves-effect waves-light" style="background-color: #116464">Create Message</a>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </divl>
     </div>
@@ -248,12 +248,12 @@
                             <div>
                                 <label for="placeholderInput" class="form-label fs-5">Message
                                     Name</label>
-                                <input type="password" class="form-control rounded-5 py-2 mb-3"
+                                <input type="password" class="form-control rounded-4 py-2 mb-3"
                                     id="placeholderInput" placeholder="Automation Name">
                             </div>
                             <div class="mb-2 mt-0">
                                     <label for="autoCompleteFruit" class="form-label fs-5">Choose a Module</label>
-                                    <input class="form-control rounded-5 py-2 mb-3" id="autoCompleteFruit" type="text" dir="ltr"
+                                    <input class="form-control rounded-4 py-2 mb-3" id="autoCompleteFruit" type="text" dir="ltr"
                                         spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Choose Module">
                             </div>
                         </div>
