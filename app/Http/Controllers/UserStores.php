@@ -2,9 +2,12 @@
 #{{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\GroupType;
 use App\Models\RegisterUser;
 use Illuminate\Http\Request;
 use Auth;
+use Exception;
 class UserStores extends Controller
 {
     public function signup_user_otp(Request $request)
@@ -31,15 +34,15 @@ class UserStores extends Controller
     public function verifyotp(Request $request)
     {
         //dd($request->all());
-        $reqdata = [$request->otptest1,$request->otptest2,$request->otptest3,$request->otptest4,$request->otptest5,$request->otptest6];
+        $reqdata = [$request->otptest1, $request->otptest2, $request->otptest3, $request->otptest4, $request->otptest5, $request->otptest6];
         $optnumber = implode($reqdata);
         $credentials = [
             'mobilenumber' => $request->phonenumber,
             'password' => $optnumber,
         ];
         $data = RegisterUser::where('mobilenumber', '=', $credentials['mobilenumber'])
-        ->where('password', '=', $credentials['password'])
-        ->first();
+            ->where('password', '=', $credentials['password'])
+            ->first();
 
         if ($data) {
             //dd("Authentication passed");
@@ -49,4 +52,53 @@ class UserStores extends Controller
         return redirect()->route('userloginpage')->with('error', 'Invalid credentials');
     }
 
+    public function insertgroups(Request $req)
+    {
+        try {
+            $req->validate([
+                'type' => 'required',
+                'label' => 'required',
+            ]);
+            $data = GroupType::create([
+                'type' => $req->type,
+                'label' => $req->label,
+            ]);
+            return back()->with('success', 'Group Master Created.!');
+        } catch (Exception $e) {
+            return redirect()->route('groupspage')->with('error', $e->getMessage());
+            //return redirect()->route('groupspage')->with('error', 'Not Added Try Again...!!!!');
+        }
+    }
+
+    public function deletegroup($id)
+    {
+        $data = GroupType::find($id);
+        $data->delete();
+        return back()->with('success', "Deleted....!!!");
+    }
+    public function insertcontacts(Request $req)
+    {
+        try {
+            $req->validate([
+                'type' => 'required',
+                'fullname' => 'required',
+                'phonenumber' => 'required',
+            ]);
+            $data = Contact::create([
+                'type' => $req->type,
+                'fullname' => $req->fullname,
+                'email' => $req->email,
+                'phonenumber' => $req->phonenumber,
+                'city' => $req->city,
+                'state' => $req->state,
+                'country' => $req->country,
+                'language' => $req->language,
+                'address' => $req->address,
+            ]);
+            return back()->with('success', 'Contact Created.!');
+        } catch (Exception $e) {
+            return redirect()->route('contactspage')->with('error', $e->getMessage());
+            //return redirect()->route('contactspage')->with('error', 'Not Added Try Again...!!!!');
+        }
+    }
 }

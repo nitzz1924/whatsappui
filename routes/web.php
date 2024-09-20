@@ -56,12 +56,17 @@ Route::controller(UserViews::class)->group(function() {
     Route::get('analyticspage', 'analyticspage')->name('analyticspage');
     Route::get('wahapage', 'wahapage')->name('wahapage');
     Route::get('templatespage', 'templatespage')->name('templatespage');
+    Route::get('groupspage', 'groupspage')->name('groupspage');
+    Route::get('contactspage', 'contactspage')->name('contactspage');
 });
 
 
 Route::controller(UserStores::class)->group(function() {
     Route::post('/signup_user_otp', 'signup_user_otp')->name('signup_user_otp');
     Route::post('verifyotp', 'verifyotp')->name('verifyotp');
+    Route::post('insertgroups', 'insertgroups')->name('insertgroups');
+    Route::get('deletegroup/{id}', 'deletegroup')->name('deletegroup');
+    Route::post('insertcontacts', 'insertcontacts')->name('insertcontacts');
 });
 
 

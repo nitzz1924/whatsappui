@@ -2,6 +2,7 @@
 #{{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 namespace App\Http\Controllers;
 
+use App\Models\GroupType;
 use App\Models\RegisterUser;
 use Exception;
 use Illuminate\Http\Request;

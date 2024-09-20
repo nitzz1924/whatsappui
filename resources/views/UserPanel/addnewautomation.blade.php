@@ -233,7 +233,7 @@
 </div>
 <div class="offcanvas offcanvas-end mycustomcanvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header"  style="background-color: #1164641e">
-        <h5 id="offcanvasRightLabel">New Message</h5>
+        <h5 id="offcanvasRightLabel">Enter Details</h5>
         <divl class="d-flex justify-content-end align-items-center">
             <a href="#" class="btn btn-sm text-white rounded-4 waves-effect waves-light" style="background-color: #116464">Create Message</a>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

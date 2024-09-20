@@ -2,6 +2,8 @@
 #{{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\GroupType;
 use Illuminate\Http\Request;
 use Session;
 use Auth;
@@ -44,5 +46,14 @@ class UserViews extends Controller
     }
     public function templatespage(){
         return view('UserPanel.templates');
+    }
+    public function groupspage(){
+        $groupsdata = GroupType::orderBy('created_at','DESC')->get();
+        return view('UserPanel.addgroups',compact('groupsdata'));
+    }
+    public function contactspage(){
+        $groupsdata = GroupType::where('type','=','Group')->orderBy('created_at','DESC')->get();
+        $contactsdata = Contact::orderBy('created_at','DESC')->get();
+        return view('UserPanel.contacts',compact('groupsdata','contactsdata'));
     }
 }

@@ -2,7 +2,7 @@
     <!-- LOGO -->
     <div class="navbar-brand-box">
         <!-- Dark Logo-->
-        <a href="index.html" class="logo logo-dark">
+        <a href="{{ route('indexchat') }}" class="logo logo-dark">
             <span class="logo-sm">
                 {{-- <img src="{{asset('assets/images/oldlogo.png')}}" alt="" height="50" /> --}}
                 <h2 class="text-white py-1 fw-bold">YW</h2>
@@ -13,7 +13,7 @@
             </span>
         </a>
         <!-- Light Logo-->
-        <a href="index.html" class="logo logo-light">
+        <a href="{{ route('indexchat') }}" class="logo logo-light">
             <span class="logo-sm">
                 {{-- <img src="{{asset('assets/images/oldlogo.png')}}" alt="" height="50" /> --}}
                 <h2 class="text-white py-1 fw-bold">YW</h2>
@@ -76,8 +76,19 @@
                                   Templates
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('groupspage') }}" class="nav-link" data-key="t-one-page">
+                                  Groups
+                                </a>
+                            </li>
                         </ul>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('contactspage') }}" role="button" aria-expanded="false"
+                        aria-controls="sidebarDashboards">
+                        <i class="ri-contacts-book-2-fill"></i><span>Contacts</span>
+                    </a>
                 </li>
             </ul>
         </div>
