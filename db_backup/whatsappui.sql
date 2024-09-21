@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2024 at 02:54 PM
+-- Generation Time: Sep 21, 2024 at 02:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,6 +53,7 @@ CREATE TABLE `cache_locks` (
 
 CREATE TABLE `contacts` (
   `id` int(11) NOT NULL,
+  `userid` varchar(255) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `fullname` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -71,8 +72,12 @@ CREATE TABLE `contacts` (
 -- Dumping data for table `contacts`
 --
 
-INSERT INTO `contacts` (`id`, `type`, `fullname`, `email`, `phonenumber`, `city`, `state`, `country`, `language`, `address`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Follow Up', 'noisyboy', 'nb@gmail.com', '1234567894', 'Ajmer', 'Rajasthan', 'India', 'hi', 'this is good', 'Active', '2024-09-20 12:32:44', '2024-09-20 12:32:44');
+INSERT INTO `contacts` (`id`, `userid`, `type`, `fullname`, `email`, `phonenumber`, `city`, `state`, `country`, `language`, `address`, `status`, `created_at`, `updated_at`) VALUES
+(2, '17', 'E-Commerce', 'noisyboy', 'ans@gmail.com', '9656895896', 'Ajmer', 'Rajasthan', 'India', 'ru', 'dsfsdfsddddddddd', 'Active', '2024-09-21 11:33:08', '2024-09-21 11:33:08'),
+(24, '17', 'demo', 'Thomos Shelby', 'demo@gmail.com', '8888888888', 'democity', 'demostate', 'democountry', 'demolanguage', 'demoaddress', 'Active', '2024-09-21 12:52:43', '2024-09-21 12:52:43'),
+(25, '17', 'demo', 'demoname', 'demo@gmail.com', '8888888885', 'democity', 'demostate', 'democountry', 'demolanguage', 'demoaddress', 'Active', '2024-09-21 12:52:43', '2024-09-21 12:52:43'),
+(26, '17', 'demo', 'demoname', 'demo@gmail.com', '8888888884', 'democity', 'demostate', 'democountry', 'demolanguage', 'demoaddress', 'Active', '2024-09-21 12:52:43', '2024-09-21 12:52:43'),
+(27, '17', 'demo', 'demoname', 'demo@gmail.com', '8888888886', 'democity', 'demostate', 'democountry', 'demolanguage', 'demoaddress', 'Active', '2024-09-21 12:52:43', '2024-09-21 12:52:43');
 
 -- --------------------------------------------------------
 
@@ -98,6 +103,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `group_types` (
   `id` int(11) NOT NULL,
+  `userid` varchar(255) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `label` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -108,11 +114,8 @@ CREATE TABLE `group_types` (
 -- Dumping data for table `group_types`
 --
 
-INSERT INTO `group_types` (`id`, `type`, `label`, `created_at`, `updated_at`) VALUES
-(3, 'Group', 'Follow Up', '2024-09-20 07:13:15', '2024-09-20 07:13:15'),
-(4, 'Status', 'Unblocked', '2024-09-20 07:13:48', '2024-09-20 07:13:48'),
-(5, 'Status', 'E-Commerce', '2024-09-20 07:51:18', '2024-09-20 07:51:18'),
-(6, 'Group', 'yellow', '2024-09-20 10:01:51', '2024-09-20 10:01:51');
+INSERT INTO `group_types` (`id`, `userid`, `type`, `label`, `created_at`, `updated_at`) VALUES
+(7, '17', 'Group', 'E-Commerce', '2024-09-21 11:31:34', '2024-09-21 11:31:34');
 
 -- --------------------------------------------------------
 
@@ -227,15 +230,16 @@ CREATE TABLE `register_users` (
   `accountstatus` varchar(255) DEFAULT '0',
   `verifystatus` varchar(255) DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `otp` varchar(22) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `register_users`
 --
 
-INSERT INTO `register_users` (`id`, `userid`, `password`, `mobilenumber`, `email`, `expiredate`, `createddate`, `accountstatus`, `verifystatus`, `created_at`, `updated_at`) VALUES
-(17, '1001', '400539', '8209165518', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', '2024-09-05 06:32:20', '2024-09-20 11:19:57');
+INSERT INTO `register_users` (`id`, `userid`, `password`, `mobilenumber`, `email`, `expiredate`, `createddate`, `accountstatus`, `verifystatus`, `created_at`, `updated_at`, `otp`) VALUES
+(17, '1001', '$2y$12$mP4GWkayPte2rL55Va597ePZWPp3dpRgAhM0gQ1SeRXGLarbCiFuW', '8209165518', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', '2024-09-05 06:32:20', '2024-09-21 11:28:12', '804002');
 
 -- --------------------------------------------------------
 
@@ -257,7 +261,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('TdGgiomf9RjYDHnijfpo1wNEh7zTQfYunaMXkQmO', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYk9vQng4V1B6RUQwckV0RldhM2wzNnVuM2J0enpobkRCSFBwalJrViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jb250YWN0c3BhZ2UiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1726836840);
+('vo4pvGSRW5oBfHpIUsmlUxHhuheYB9ye2p64nVbG', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36', 'YTo0OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NvbnRhY3RzcGFnZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NjoiX3Rva2VuIjtzOjQwOiJLTnp5S3J1cXVUeTFuQTVVMnRJWmNHdmJEN2daMDNVV3kyVEozZEN2IjtzOjU1OiJsb2dpbl9jdXN0b21lcl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1726923337);
 
 -- --------------------------------------------------------
 
@@ -385,7 +389,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -397,7 +401,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `group_types`
 --
 ALTER TABLE `group_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `jobs`

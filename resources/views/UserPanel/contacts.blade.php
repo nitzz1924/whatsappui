@@ -1,4 +1,4 @@
-{{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
+{{-- #---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------” --}}
 @extends('layouts.UserPanelLayouts.usermain')
 @push('title')
 <title>All Contacts</title>
@@ -58,11 +58,11 @@
                             <tbody id="table-body">
                                 @foreach ($contactsdata as $index => $data)
                                 <tr class="border-bottom-1">
-                                    <th>{{$index + 1}}</th>
-                                    <td>{{$data->fullname}}</td>
-                                    <td>{{$data->email}}</td>
-                                    <td>{{$data->phonenumber}}</td>
-                                    @if($data->status=='Active')
+                                    <th>{{ $index + 1 }}</th>
+                                    <td>{{ $data->fullname }}</td>
+                                    <td>{{ $data->email }}</td>
+                                    <td>{{ $data->phonenumber }}</td>
+                                    @if ($data->status == 'Active')
                                     <td>
                                         <span class="badge bg-success-subtle text-success badge-border">Active</span>
                                     </td>
@@ -89,43 +89,39 @@
 </div>
 <div class="offcanvas offcanvas-end mycustomcanvascontacts" tabindex="-1" id="offcanvasRight"
     aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header" style="background-color: #1164641e">
+        <h5 id="offcanvasRightLabel">Contact Creation</h5>
+        <div class="d-flex justify-content-end align-items-center">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+    </div>
+    <div class="p-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="text-black text-start fs-5">Bulk upload of Contacts</p>
+                <form action="{{ route('import.excel') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row row-cols-lg-auto g-3 align-items-center">
+                        <div class="col-12">
+                            <div class="input-group">
+                                <input type="file" name="file" id="file" class="form-control" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn text-white rounded-4 waves-effect waves-light"
+                                style="background-color: #116464">Upload</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <form action="{{ route('insertcontacts') }}" method="POST">
         @csrf
-        <div class="offcanvas-header" style="background-color: #1164641e">
-            <h5 id="offcanvasRightLabel">Contact Creation</h5>
-            <divl class="d-flex justify-content-end align-items-center">
-                <button type="submit" class="btn btn-sm text-white rounded-4 waves-effect waves-light"
-                    style="background-color: #116464">Create Contact</>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-            </divl>
-        </div>
         <div class="offcanvas-body">
             <div class="" id="contact-view-detail">
                 <div class="card-body">
-                    <div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <p class="text-black text-start fs-5">Bulk upload of Contacts</p>
-                                <form action="javascript:void(0);">
-                                    <div class="row row-cols-lg-auto g-3 align-items-center">
-                                        <div class="col-12">
-                                            <div class="input-group">
-                                                <input type="file" class="form-control"
-                                                    id="inlineFormInputGroupUsername" placeholder="Username">
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <button type="submit"
-                                                class="btn text-white rounded-4 waves-effect waves-light"
-                                                style="background-color: #116464">Upload</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-3">
+                    <div class="mt-0">
                         <p class="text-black text-start fs-5">Manually fill up details</p>
                         <div class="row">
                             <div class="col-lg-3">
@@ -135,7 +131,7 @@
                                         name="type">
                                         <option selected>--Select Type--</option>
                                         @foreach ($groupsdata as $row)
-                                        <option value="{{$row->label}}">{{$row->label}}</option>
+                                        <option value="{{ $row->label }}">{{ $row->label }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -264,6 +260,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="d-flex justify-content-end align-items-center mt-3">
+                    <button type="submit" class="btn text-white rounded-4 waves-effect waves-light"
+                        style="background-color: #116464">Create Contact</button>
                 </div>
             </div>
         </div>

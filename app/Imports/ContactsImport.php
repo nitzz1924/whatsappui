@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Imports;
+
+use App\Models\AddVariant;
+use App\Models\Contact;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithStartRow;
+use Auth;
+class ContactsImport implements ToCollection, WithStartRow
+{
+    public function startRow(): int
+    {
+        return 2; // Skip the first row and start from the second row
+    }
+    public function collection(Collection $rows)
+    {
+        $loggedinuser = Auth::guard('customer')->user();
+        // dd($rows);
+        foreach ($rows as $row) {
+            // Ensure there are enough columns in the row
+            if (count($row) < 10) {
+                continue;
+            }
+            $type = isset($row[0]) ? trim($row[0]) : null;
+            $fullname = isset($row[1]) ? trim($row[1]) : null;
+            $email = isset($row[2]) ? trim($row[2]) : null;
+            $phonenumber = isset($row[3]) ? trim($row[3]) : null;
+            $city = isset($row[4]) ? trim($row[4]) : null;
+            $state = isset($row[5]) ? trim($row[5]) : null;
+            $country = isset($row[6]) ? trim($row[6]) : null;
+            $language = isset($row[7]) ? trim($row[7]) : null;
+            $address = isset($row[8]) ? trim($row[8]) : null;
+            $status = isset($row[9]) ? trim($row[9]) : null;
+
+            // Save data to the database
+            $data = Contact::updateOrCreate(
+                ['phonenumber' => $phonenumber], // The criteria to search for duplicates in carmodalname
+                [
+                    'type' =>  $type,
+                    'fullname' => $fullname,
+                    'email' => $email,
+                    'city' => $city,
+                    'state' => $state,
+                    'country' => $country,
+                    'language' => $language,
+                    'address' => $address,
+                    'status' => $status,
+                    'userid' => $loggedinuser->id,
+                ]
+        );
+            //dd($data);
+        }
+    }
+
+}

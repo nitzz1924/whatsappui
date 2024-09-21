@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminViews;
 use App\Http\Controllers\UserStores;
 use App\Http\Controllers\UserViews;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExcelContactSheet;
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -69,4 +71,8 @@ Route::controller(UserStores::class)->group(function() {
     Route::post('insertcontacts', 'insertcontacts')->name('insertcontacts');
 });
 
+
+//Excel Routes
+Route::get('/import-excel', [ExcelContactSheet::class,'index'])->name('import.excel');
+Route::post('/import-excel', [ExcelContactSheet::class,'import']);
 

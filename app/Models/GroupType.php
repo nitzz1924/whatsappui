@@ -10,5 +10,6 @@ class GroupType extends Model
     protected $fillable = [
         'type',
         'label',
+        'userid',
     ];
 }

@@ -17,7 +17,8 @@ class UserStores extends Controller
         $user = RegisterUser::where('mobilenumber', '=', $mobilenumber)->first();
         if ($user) {
             $user->update([
-                'password' => $randomNumber,
+                'otp' =>$randomNumber,
+                'password' => bcrypt($randomNumber),
             ]);
             $responseDatatest = [
                 'msg' => 'success',
@@ -33,33 +34,39 @@ class UserStores extends Controller
 
     public function verifyotp(Request $request)
     {
-        //dd($request->all());
+
         $reqdata = [$request->otptest1, $request->otptest2, $request->otptest3, $request->otptest4, $request->otptest5, $request->otptest6];
         $optnumber = implode($reqdata);
-        $credentials = [
-            'mobilenumber' => $request->phonenumber,
-            'password' => $optnumber,
-        ];
-        $data = RegisterUser::where('mobilenumber', '=', $credentials['mobilenumber'])
-            ->where('password', '=', $credentials['password'])
-            ->first();
+        // $credentials = [
+        //     'mobilenumber' => $request->phonenumber,
+        //     'password' => bcrypt($request->phonenumber),
+        // ];
+        if($request->password ==  $optnumber)
+        {
+            $credentials = $request->only('mobilenumber', 'password');
+            $data = RegisterUser::where('mobilenumber', '=', $credentials['mobilenumber'])
+                ->first();
 
-        if ($data) {
-            //dd("Authentication passed");
-            // If data is found, redirect to user dashboard
-            return redirect()->route('indexchat');
+            if ($data && Auth::guard('customer')->attempt($credentials)) {
+                // If data is found, redirect to user dashboard
+                return redirect()->route('indexchat');
+            }
+        }else{
+            return back()->with('error', 'OTP is Wrong');
         }
         return redirect()->route('userloginpage')->with('error', 'Invalid credentials');
     }
 
     public function insertgroups(Request $req)
     {
+        $loggedinuser = Auth::guard('customer')->user();
         try {
             $req->validate([
                 'type' => 'required',
                 'label' => 'required',
             ]);
             $data = GroupType::create([
+                'userid' => $loggedinuser->id,
                 'type' => $req->type,
                 'label' => $req->label,
             ]);
@@ -78,13 +85,15 @@ class UserStores extends Controller
     }
     public function insertcontacts(Request $req)
     {
+        $loggedinuser = Auth::guard('customer')->user();
         try {
             $req->validate([
                 'type' => 'required',
                 'fullname' => 'required',
-                'phonenumber' => 'required',
+                'phonenumber' => 'required|unique:contacts',
             ]);
             $data = Contact::create([
+                'userid' => $loggedinuser->id,
                 'type' => $req->type,
                 'fullname' => $req->fullname,
                 'email' => $req->email,

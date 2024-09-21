@@ -17,6 +17,7 @@ class Contact extends Model
         'country',
         'language',
         'address',
+        'userid',
         'status',
     ];
 }

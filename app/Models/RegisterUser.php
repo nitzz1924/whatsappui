@@ -19,5 +19,6 @@ class RegisterUser  extends Authenticatable
         'createddate',
         'accountstatus',
         'verifystatus',
+        'otp',
     ];
 }
