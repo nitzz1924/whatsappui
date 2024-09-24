@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\GroupType;
 use Illuminate\Http\Request;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Facades\Http;
 use Session;
 use Auth;
 class UserViews extends Controller
@@ -15,7 +17,7 @@ class UserViews extends Controller
     }
     public function userdashboard()
     {
-         return view('UserPanel.userdashboard');
+        return view('UserPanel.userdashboard');
     }
     public function logoutuserpanel()
     {
@@ -23,37 +25,72 @@ class UserViews extends Controller
         Auth::guard('customer')->logout();
         return redirect('/user/login');
     }
-    public function indexchat(){
+    public function indexchat()
+    {
         return view('UserPanel.indexchat');
     }
-    public function campaignspage(){
+    public function campaignspage()
+    {
         return view('UserPanel.campaigns');
     }
-    public function addnewcampaign(){
-        return view('UserPanel.addnewcampaign');
+    public function addnewcampaign()
+    {
+        $alltemplates = $this->getTemplateList();
+        //dd($alltemplates);
+        $groupdata = GroupType::where('type', '=', 'Group')->get();
+        $statusdata = GroupType::where('type', '=', 'Status')->get();
+        return view('UserPanel.addnewcampaign', compact('groupdata', 'statusdata','alltemplates'));
     }
-    public function automationpage(){
+    public function automationpage()
+    {
         return view('UserPanel.automations');
     }
-    public function addnewautomation(){
+    public function addnewautomation()
+    {
         return view('UserPanel.addnewautomation');
     }
-    public function analyticspage(){
+    public function analyticspage()
+    {
         return view('UserPanel.analytics');
     }
-    public function wahapage(){
+    public function wahapage()
+    {
         return view('UserPanel.whatsappapi');
     }
-    public function templatespage(){
-        return view('UserPanel.templates');
+    public function templatespage()
+    {
+        $alltemplates = $this->getTemplateList();
+        return view('UserPanel.templates',compact('alltemplates'));
     }
-    public function groupspage(){
-        $groupsdata = GroupType::orderBy('created_at','DESC')->get();
-        return view('UserPanel.addgroups',compact('groupsdata'));
+    public function groupspage()
+    {
+        $groupsdata = GroupType::orderBy('created_at', 'DESC')->get();
+        return view('UserPanel.addgroups', compact('groupsdata'));
     }
-    public function contactspage(){
-        $groupsdata = GroupType::where('type','=','Group')->orderBy('created_at','DESC')->get();
-        $contactsdata = Contact::orderBy('created_at','DESC')->get();
-        return view('UserPanel.contacts',compact('groupsdata','contactsdata'));
+    public function contactspage()
+    {
+        $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
+        $contactsdata = Contact::orderBy('created_at', 'DESC')->get();
+        return view('UserPanel.contacts', compact('groupsdata', 'contactsdata'));
+    }
+    function getTemplateList()
+    {
+        // Replace with your WhatsApp Business API credentials
+        $accessToken = env('TOKEN');
+        $apiBaseUrl = 'https://graph.facebook.com/';
+
+        $client = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $accessToken,
+        ]);
+
+        $response = $client->get($apiBaseUrl . '/v20.0/309165212288658/message_templates');
+        if ($response->successful()) {
+            $templates = $response->json()['data'];
+            return $templates;
+             //dd($templates); // Replace with your desired handling of the template list
+        } else {
+            dd('Error fetching template list: ' . $response->body());
+        }
+
     }
 }

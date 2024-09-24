@@ -67,35 +67,21 @@
                                         <tr>
                                             <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No</th>
                                             <th style="background-color:#1164642b;">Name</th>
+                                            <th style="background-color:#1164642b;">Category</th>
                                             <th style="background-color:#1164642b;">Status</th>
-                                            <th style="background-color:#1164642b;">Last Updated On</th>
                                         </tr>
                                     </thead>
                                     <tbody id="table-body">
+                                        @foreach ($alltemplates as $index => $row)
                                         <tr class="border-bottom-1">
-                                            <th>1</th>
-                                            <td>A</td>
+                                            <th>{{$index + 1}}</th>
+                                            <td>{{ $row['name'] }}</td>
+                                            <td>{{ $row['category'] }}</td>
                                             <td>
-                                                <span class="badge bg-success-subtle text-success badge-border">Active</span>
+                                                <span class="badge bg-success-subtle text-success badge-border">{{ $row['status'] }}</span>
                                             </td>
-                                            <td>A</td>
                                         </tr>
-                                        <tr class="border-bottom-1">
-                                            <th>1</th>
-                                            <td>A</td>
-                                            <td>
-                                                <span class="badge bg-success-subtle text-success badge-border">Active</span>
-                                            </td>
-                                            <td>A</td>
-                                        </tr>
-                                        <tr class="border-bottom-1">
-                                            <th>1</th>
-                                            <td>A</td>
-                                            <td>
-                                                <span class="badge bg-success-subtle text-success badge-border">Active</span>
-                                            </td>
-                                            <td>A</td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

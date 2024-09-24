@@ -2,10 +2,12 @@
 #{{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 namespace App\Http\Controllers;
 
+use App\Models\Campaign;
 use App\Models\Contact;
 use App\Models\GroupType;
 use App\Models\RegisterUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Auth;
 use Exception;
 class UserStores extends Controller
@@ -17,7 +19,7 @@ class UserStores extends Controller
         $user = RegisterUser::where('mobilenumber', '=', $mobilenumber)->first();
         if ($user) {
             $user->update([
-                'otp' =>$randomNumber,
+                'otp' => $randomNumber,
                 'password' => bcrypt($randomNumber),
             ]);
             $responseDatatest = [
@@ -41,8 +43,7 @@ class UserStores extends Controller
         //     'mobilenumber' => $request->phonenumber,
         //     'password' => bcrypt($request->phonenumber),
         // ];
-        if($request->password ==  $optnumber)
-        {
+        if ($request->password == $optnumber) {
             $credentials = $request->only('mobilenumber', 'password');
             $data = RegisterUser::where('mobilenumber', '=', $credentials['mobilenumber'])
                 ->first();
@@ -51,7 +52,7 @@ class UserStores extends Controller
                 // If data is found, redirect to user dashboard
                 return redirect()->route('indexchat');
             }
-        }else{
+        } else {
             return back()->with('error', 'OTP is Wrong');
         }
         return redirect()->route('userloginpage')->with('error', 'Invalid credentials');
@@ -108,6 +109,83 @@ class UserStores extends Controller
         } catch (Exception $e) {
             return redirect()->route('contactspage')->with('error', $e->getMessage());
             //return redirect()->route('contactspage')->with('error', 'Not Added Try Again...!!!!');
+        }
+    }
+
+    public function sendmessage(Request $req)
+    {
+        // dd($req->all());
+        $loggedinuser = Auth::guard('customer')->user();
+        try {
+            $req->validate([
+                'phonenumber' => 'required',
+                'modulename' => 'required',
+                'template' => 'required',
+                'segmentname' => 'required',
+            ]);
+
+            //Single Image Upload
+            if ($req->hasFile('mediaimage')) {
+                $bannerimage = $req->file('mediaimage');
+                $bannerimageName = time() . '.' . $bannerimage->getClientOriginalExtension();
+                $uploadedPath = '/assets/images';
+                $bannerimage->move(public_path($uploadedPath), $bannerimageName);
+                // Store the full image path (e.g., http://example.com/assets/images/image.jpg)
+                $bannerimagePath = url($uploadedPath . '/' . $bannerimageName);
+            }
+
+            $data = Campaign::create([
+                'phonenumber' => $req->phonenumber,
+                'modulename' => $req->modulename,
+                'template' => $req->template,
+                'segmentname' => $req->segmentname,
+                'userid' => $loggedinuser->id,
+                'sendimmediate' => $req->sendimmediate,
+                'scheduledatetime' => $req->scheduledatetime,
+                'mediaimage' => $bannerimagePath,
+            ]);
+            $finaldata = Campaign::find($data->id);
+            //dd($finaldata);
+            if ($req->sendimmediate == '0') {
+                $this->dropMessage($finaldata->phonenumber, $finaldata->id, $finaldata->mediaimage);
+            } else {
+                dd("Campaign is for Scheduling");
+            }
+            return back()->with('success', 'Campaign Created.!');
+        } catch (Exception $e) {
+            return redirect()->route('addnewcampaign')->with('error', $e->getMessage());
+            //return redirect()->route('addnewcampaign')->with('error', 'Not Added Try Again...!!!!');
+        }
+    }
+
+    function dropMessage($phone, $templateid, $fileurl)
+    {
+        dd($phone, $templateid, $fileurl);
+        // Replace with your actual token
+        $token = env('TOKEN');
+
+        // Prepare data payload
+        $data = [
+            'messaging_product' => 'whatsapp',
+            'to' => $phone,
+            'type' => 'template',
+            'template' => [
+                'name' => $templateid,
+                'language' => ['code' => 'en_US']
+            ]
+        ];
+
+        // Send the request using Laravel's HTTP client
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Content-Type' => 'application/json'
+        ])->post('https://graph.facebook.com/v20.0/282520401622445/messages', $data);
+
+        // Handle response
+        if ($response->successful()) {
+            return back()->with('success', 'Message sent successfully!');
+        } else {
+            return back()->withErrors('Message failed to send: ' . $response->body());
         }
     }
 }

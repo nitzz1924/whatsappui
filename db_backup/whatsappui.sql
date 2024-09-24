@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2024 at 02:56 PM
+-- Generation Time: Sep 24, 2024 at 02:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,6 +44,36 @@ CREATE TABLE `cache_locks` (
   `owner` varchar(255) NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `campaigns`
+--
+
+CREATE TABLE `campaigns` (
+  `id` int(11) NOT NULL,
+  `phonenumber` varchar(255) DEFAULT NULL,
+  `modulename` varchar(255) DEFAULT NULL,
+  `template` varchar(255) DEFAULT NULL,
+  `segmentname` varchar(255) DEFAULT NULL,
+  `userid` varchar(255) DEFAULT NULL,
+  `sendimmediate` varchar(255) DEFAULT NULL,
+  `scheduledatetime` varchar(255) DEFAULT NULL,
+  `mediaimage` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `campaigns`
+--
+
+INSERT INTO `campaigns` (`id`, `phonenumber`, `modulename`, `template`, `segmentname`, `userid`, `sendimmediate`, `scheduledatetime`, `mediaimage`, `created_at`, `updated_at`) VALUES
+(14, '8209165518', 'E-Commerce', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, 'http://127.0.0.1:8000/assets/images/1727181078.jpg', '2024-09-24 12:31:18', '2024-09-24 12:31:18'),
+(15, '8209165518', 'E-Commerce', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, 'http://127.0.0.1:8000/assets/images/1727181098.jpg', '2024-09-24 12:31:38', '2024-09-24 12:31:38'),
+(16, '8209165518', 'E-Commerce', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, 'http://127.0.0.1:8000/assets/images/1727181352.png', '2024-09-24 12:35:52', '2024-09-24 12:35:52'),
+(17, '8209165518', 'E-Commerce', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, 'http://127.0.0.1:8000/assets/images/1727181568.png', '2024-09-24 12:39:28', '2024-09-24 12:39:28');
 
 -- --------------------------------------------------------
 
@@ -115,7 +145,8 @@ CREATE TABLE `group_types` (
 --
 
 INSERT INTO `group_types` (`id`, `userid`, `type`, `label`, `created_at`, `updated_at`) VALUES
-(7, '17', 'Group', 'E-Commerce', '2024-09-21 11:31:34', '2024-09-21 11:31:34');
+(7, '17', 'Group', 'E-Commerce', '2024-09-21 11:31:34', '2024-09-21 11:31:34'),
+(8, '17', 'Status', 'Follow Up', '2024-09-23 10:32:55', '2024-09-23 10:32:55');
 
 -- --------------------------------------------------------
 
@@ -239,7 +270,7 @@ CREATE TABLE `register_users` (
 --
 
 INSERT INTO `register_users` (`id`, `userid`, `password`, `mobilenumber`, `email`, `expiredate`, `createddate`, `accountstatus`, `verifystatus`, `created_at`, `updated_at`, `otp`) VALUES
-(17, '1001', '$2y$12$mP4GWkayPte2rL55Va597ePZWPp3dpRgAhM0gQ1SeRXGLarbCiFuW', '8209165518', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', '2024-09-05 06:32:20', '2024-09-21 11:28:12', '804002');
+(17, '1001', '$2y$12$/Gnf9mtoqokaIVKYTnLmxOqNe5S.S0zMa2PXE.Y2mNPNBWYnq1vwm', '8209165518', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', '2024-09-05 06:32:20', '2024-09-24 04:10:44', '498119');
 
 -- --------------------------------------------------------
 
@@ -261,7 +292,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('vo4pvGSRW5oBfHpIUsmlUxHhuheYB9ye2p64nVbG', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36', 'YTo0OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NvbnRhY3RzcGFnZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NjoiX3Rva2VuIjtzOjQwOiJLTnp5S3J1cXVUeTFuQTVVMnRJWmNHdmJEN2daMDNVV3kyVEozZEN2IjtzOjU1OiJsb2dpbl9jdXN0b21lcl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1726923337);
+('1H24Jo3mUNhzNQgkDvqZu7a5MtaIWosm5zuCkD3m', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiaURkWFpIckxnbWpLbXBDZGg3ZnpVVGQ5ekEzV21NMlAyRllQRlJSWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZGRuZXdjYW1wYWlnbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTU6ImxvZ2luX2N1c3RvbWVyXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTc7fQ==', 1727181339);
 
 -- --------------------------------------------------------
 
@@ -307,6 +338,12 @@ ALTER TABLE `cache`
 --
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `campaigns`
+--
+ALTER TABLE `campaigns`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `contacts`
@@ -386,6 +423,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `campaigns`
+--
+ALTER TABLE `campaigns`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
@@ -401,7 +444,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `group_types`
 --
 ALTER TABLE `group_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `jobs`

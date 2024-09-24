@@ -69,6 +69,7 @@ Route::controller(UserStores::class)->group(function() {
     Route::post('insertgroups', 'insertgroups')->name('insertgroups');
     Route::get('deletegroup/{id}', 'deletegroup')->name('deletegroup');
     Route::post('insertcontacts', 'insertcontacts')->name('insertcontacts');
+    Route::post('send-message', 'sendmessage')->name('send-message');
 });
 
 
