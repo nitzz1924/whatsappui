@@ -18,7 +18,7 @@ class ContactsImport implements ToCollection, WithStartRow
     public function collection(Collection $rows)
     {
         $loggedinuser = Auth::guard('customer')->user();
-        // dd($rows);
+        //dd($rows);
         foreach ($rows as $row) {
             // Ensure there are enough columns in the row
             if (count($row) < 10) {
@@ -37,7 +37,7 @@ class ContactsImport implements ToCollection, WithStartRow
 
             // Save data to the database
             $data = Contact::updateOrCreate(
-                ['phonenumber' => $phonenumber], // The criteria to search for duplicates in carmodalname
+                ['phonenumber' => '+91'.$phonenumber], // The criteria to search for duplicates in carmodalname
                 [
                     'type' =>  $type,
                     'fullname' => $fullname,
@@ -51,7 +51,7 @@ class ContactsImport implements ToCollection, WithStartRow
                     'userid' => $loggedinuser->id,
                 ]
         );
-            //dd($data);
+        //dd($data);
         }
     }
 

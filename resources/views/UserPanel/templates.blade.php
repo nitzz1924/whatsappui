@@ -75,7 +75,8 @@
                                         @foreach ($alltemplates as $index => $row)
                                         <tr class="border-bottom-1">
                                             <th>{{$index + 1}}</th>
-                                            <td>{{ $row['name'] }}</td>
+                                            <td><button class="btn btn-white fs-5" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="{{ $row['name'] }}" data-bs-content="{{$row['components'][1]['text']}}">{{ $row['name'] }}</button></td>
+
                                             <td>{{ $row['category'] }}</td>
                                             <td>
                                                 <span class="badge bg-success-subtle text-success badge-border">{{ $row['status'] }}</span>

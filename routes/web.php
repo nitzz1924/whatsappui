@@ -70,6 +70,10 @@ Route::controller(UserStores::class)->group(function() {
     Route::get('deletegroup/{id}', 'deletegroup')->name('deletegroup');
     Route::post('insertcontacts', 'insertcontacts')->name('insertcontacts');
     Route::post('send-message', 'sendmessage')->name('send-message');
+    Route::get('deletecampaign/{id}', 'deletecampaign')->name('deletecampaign');
+    Route::get('deletecontact/{id}', 'deletecontact')->name('deletecontact');
+    Route::post('updatecontact', 'updatecontact')->name('updatecontact');
+    Route::post('updategroups', 'updategroups')->name('updategroups');
 });
 
 

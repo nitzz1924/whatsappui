@@ -8,13 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Campaign extends Model
 {
     protected $fillable = [
-        'phonenumber',
+        'campaignname',
         'modulename',
         'template',
         'segmentname',
         'userid',
         'sendimmediate',
         'scheduledatetime',
+        'datetime',
         'mediaimage',
+        'mediatype',
+        'languagetype',
     ];
 }

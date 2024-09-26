@@ -33,8 +33,8 @@
                         <div class="card-body rounded-4 p-4">
                             <div class="mb-3">
                                 <label for="username" class="form-label fs-5">Campaign Name</label>
-                                <input type="text" name="phonenumber" class="form-control rounded-4 py-2" id="username"
-                                    placeholder="Enter Phone Number" required>
+                                <input type="text" name="campaignname" class="form-control rounded-4 py-2" id="username"
+                                    placeholder="Enter Campaign Name" required>
                             </div>
                             <div>
                                 <label for="autoCompleteFruit" class="form-label fs-5">Choose a Module</label>
@@ -62,6 +62,7 @@
                                     @foreach ($alltemplates as $data)
                                         <option value="{{ $data['name'] }}"
                                             data-value="{{ htmlspecialchars(json_encode($data['components']), ENT_QUOTES, 'UTF-8') }}"
+                                            data-language="{{ htmlspecialchars(json_encode($data['language']), ENT_QUOTES, 'UTF-8') }}"
                                             {{ old('template') == $data['name'] ? 'selected' : '' }}>
                                             {{ $data['name'] }}
                                         </option>
@@ -69,7 +70,7 @@
                                 </select>
                             </div>
                             <div class="mt-4" id="previewdivtemplate">
-
+                                 {{--Template Div Appends Here--}}
                             </div>
                             <label for="username" class="form-label fs-5">Schedule Your Campaign</label>
                             <div class="mb-0 mt-3">
@@ -80,11 +81,11 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input scheduledatetimebtn" type="radio"
-                                        name="inlineRadioOptions2" id="inlineRadio2" value="1">
+                                        name="scheduledatetime" id="inlineRadio2" value="1">
                                     <label class="form-check-label" for="inlineRadio2">Schedule Date/Time</label>
                                 </div>
                                 <div class="d-none" id="datediv">
-                                    <input type="datetime-local" name="scheduledatetime" class="form-control rounded-4 py-2"
+                                    <input type="datetime-local" name="datetime" class="form-control rounded-4 py-2"
                                         id="datetimeInput" placeholder="Enter Date and Time">
                                 </div>
                             </div>
@@ -93,7 +94,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="whatsapp-container" id="messagediv">
-
+                        {{--Message Div Appends Here--}}
                     </div>
                 </div>
             </div>
@@ -126,9 +127,9 @@
         $('.onchangedrop').on('change', function() {
             const selectedOption = $(this).find('option:selected');
             const data = selectedOption.data('value');
+            const language = selectedOption.data('language').replace(/&quot;/g, '').trim();
             const decodedData = $('<textarea/>').html(data).text();
             const jsonArray = JSON.parse(decodedData);
-            console.log(jsonArray);
             $('#messagediv').empty();
             $('#previewdivtemplate').empty();
             let messageHTML = '';
@@ -140,6 +141,8 @@
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Upload ${element.format == 'IMAGE' ? 'Image' : 'Video'}</label>
                         <input name="mediaimage" class="form-control" accept="image/*, video/*" onchange="readURL(this);" type="file" id="formFile">
+                        <input type="hidden" name="mediatype" class="form-control" value=${element.format == 'IMAGE' ? 'image' : 'video'}>
+                        <input type="hidden" name="languagetype" class="form-control" value=${language}>
                     </div>
                     `;
                     $('#previewdivtemplate').append(input);
@@ -181,6 +184,7 @@
             $('#messagediv').html(messagediv);
         });
 
+        //Showing Image Preview
         function readURL(input) {
             console.log(input);
             if (input.files && input.files[0]) {

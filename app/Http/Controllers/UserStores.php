@@ -98,7 +98,7 @@ class UserStores extends Controller
                 'type' => $req->type,
                 'fullname' => $req->fullname,
                 'email' => $req->email,
-                'phonenumber' => $req->phonenumber,
+                'phonenumber' => '+91' . $req->phonenumber,
                 'city' => $req->city,
                 'state' => $req->state,
                 'country' => $req->country,
@@ -114,78 +114,145 @@ class UserStores extends Controller
 
     public function sendmessage(Request $req)
     {
-        // dd($req->all());
         $loggedinuser = Auth::guard('customer')->user();
+        if (!$loggedinuser) {
+            return redirect()->route('userloginpage')->with('error', 'You must be logged in to perform this action.');
+        }
+
         try {
             $req->validate([
-                'phonenumber' => 'required',
+                'campaignname' => 'required',
                 'modulename' => 'required',
                 'template' => 'required',
                 'segmentname' => 'required',
             ]);
-
-            //Single Image Upload
+            $contacts = Contact::where('type', '=', $req->modulename)->where('status', $req->segmentname)->get();
+            // dd($contacts);
+            $bannerimagePath = '';
+            // Single Image Upload
             if ($req->hasFile('mediaimage')) {
                 $bannerimage = $req->file('mediaimage');
                 $bannerimageName = time() . '.' . $bannerimage->getClientOriginalExtension();
-                $uploadedPath = '/assets/images';
+                $uploadedPath = '/assets/images/templates';
                 $bannerimage->move(public_path($uploadedPath), $bannerimageName);
-                // Store the full image path (e.g., http://example.com/assets/images/image.jpg)
+                // Store the full image path
                 $bannerimagePath = url($uploadedPath . '/' . $bannerimageName);
             }
-
             $data = Campaign::create([
-                'phonenumber' => $req->phonenumber,
+                'campaignname' => $req->campaignname,
                 'modulename' => $req->modulename,
                 'template' => $req->template,
                 'segmentname' => $req->segmentname,
                 'userid' => $loggedinuser->id,
                 'sendimmediate' => $req->sendimmediate,
                 'scheduledatetime' => $req->scheduledatetime,
-                'mediaimage' => $bannerimagePath,
+                'datetime' => $req->datetime,
+                'mediatype' => $req->mediatype,
+                'languagetype' => $req->languagetype,
+                'mediaimage' => $bannerimagePath != null ? $bannerimagePath : null,
             ]);
+
             $finaldata = Campaign::find($data->id);
-            //dd($finaldata);
             if ($req->sendimmediate == '0') {
-                $this->dropMessage($finaldata->phonenumber, $finaldata->id, $finaldata->mediaimage);
+
+                //Sending Messages in Bulk
+                foreach ($contacts as $contact) {
+                    $this->dropMessage($contact->phonenumber, $finaldata->template, $finaldata->mediaimage, $finaldata->mediatype, $finaldata->languagetype);
+                }
             } else {
-                dd("Campaign is for Scheduling");
+                return back()->with('success', 'Campaign is for Scheduling.');
             }
             return back()->with('success', 'Campaign Created.!');
         } catch (Exception $e) {
             return redirect()->route('addnewcampaign')->with('error', $e->getMessage());
-            //return redirect()->route('addnewcampaign')->with('error', 'Not Added Try Again...!!!!');
         }
     }
 
-    function dropMessage($phone, $templateid, $fileurl)
+    function dropMessage($phone, $templateid, $fileurl, $mediatype, $languagetype)
     {
-        dd($phone, $templateid, $fileurl);
-        // Replace with your actual token
         $token = env('TOKEN');
-
-        // Prepare data payload
         $data = [
             'messaging_product' => 'whatsapp',
             'to' => $phone,
             'type' => 'template',
             'template' => [
                 'name' => $templateid,
-                'language' => ['code' => 'en_US']
+                'language' => ['code' => $languagetype],
+                'components' => []
             ]
         ];
-
-        // Send the request using Laravel's HTTP client
+        if ($fileurl) {
+            $data['template']['components'][] = [
+                'type' => 'header',
+                'parameters' => [
+                    [
+                        'type' => $mediatype,
+                        'image' => [
+                            'link' => 'https://www.businessinsider.in/_next/image?url=https%3A%2F%2Fstaticbiassets.in%2Fthumb%2Fmsid-103430412%2Cwidth-700%2Cresizemode-4%2Cimgsize-64934%2Fimg5f57ecd6e6ff30001d4e79d0.jpg&w=640&q=75'
+                        ]
+                    ]
+                ]
+            ];
+        }
+        //dd($data);
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
             'Content-Type' => 'application/json'
         ])->post('https://graph.facebook.com/v20.0/282520401622445/messages', $data);
-
         // Handle response
         if ($response->successful()) {
+            //  dd($response->body());
             return back()->with('success', 'Message sent successfully!');
         } else {
             return back()->withErrors('Message failed to send: ' . $response->body());
         }
     }
+
+    public function deletecampaign($id)
+    {
+        $data = Campaign::find($id);
+        $data->delete();
+        return back()->with('success', "Deleted....!!!");
+    }
+    public function deletecontact($id)
+    {
+        $data = Contact::find($id);
+        $data->delete();
+        return back()->with('success', "Deleted....!!!");
+    }
+
+    public function updatecontact(Request $req)
+    {
+        try {
+            $contact = Contact::where('id', $req->contactid)->update([
+                'type' => $req->type,
+                'fullname' => $req->fullname,
+                'email' => $req->email,
+                'phonenumber' => '+91'.$req->phonenumber,
+                'city' => $req->city,
+                'state' => $req->state,
+                'country' => $req->country,
+                'language' => $req->language,
+                'address' => $req->address,
+            ]);
+            return back()->with('success', "Updated..!!!");
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+            //return back()->with('error', 'Not Updated..Try Again.....');
+        }
+    }
+    public function updategroups(Request $req)
+    {
+        try {
+            $contact = GroupType::where('id', $req->groupid)->update([
+                'type' => $req->type,
+                'label' => $req->label,
+            ]);
+            return back()->with('success', "Updated..!!!");
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+            //return back()->with('error', 'Not Updated..Try Again.....');
+        }
+    }
+
 }

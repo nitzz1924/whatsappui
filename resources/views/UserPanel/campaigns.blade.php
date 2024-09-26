@@ -42,87 +42,38 @@
             <div class="card rounded-4">
                 <div class="card-body rounded-4">
                     <div class="table-responsive">
-                        <table class="table table-borderless table-nowrap">
+                        <table class="table table-hover table-borderless table-nowrap">
                             <thead>
                                 <tr>
                                     <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No</th>
-                                    <th style="background-color:#1164642b;">Campaign</th>
-                                    <th style="background-color:#1164642b;">Scheduled/Send at</th>
-                                    <th style="background-color:#1164642b;">Status</th>
-                                    <th style="background-color:#1164642b;">Analytics</th>
+                                    <th style="background-color:#1164642b;">Campaign Name</th>
+                                    <th style="background-color:#1164642b;">Module Name</th>
+                                    <th style="background-color:#1164642b;">Template Name</th>
+                                    <th style="background-color:#1164642b;">Segment Name</th>
                                     <th style="background-color:#1164642b; border-radius: 0px 10px 10px 0px;">Action
                                     </th>
                                 </tr>
                             </thead>
                             <tbody id="table-body">
+                                @foreach ($campaigns as $index => $row)
                                 <tr class="border-bottom-1">
-                                    <th>1</th>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
+                                    <th>{{$index + 1}}</th>
+                                    <td>{{$row->campaignname}}</td>
+                                    <td>{{$row->modulename}}</td>
+                                    <td>{{$row->template}}</td>
+                                    <td>{{$row->segmentname}}</td>
                                     <td>
                                         <div class="hstack gap-3 flex-wrap">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-record="" class="link-success editbtnmodal fs-15"><i
+                                                data-record="" class="editbtnmodal btn btn-light btn-sm"><i
                                                     class="ri-edit-2-line" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="" class="link-danger fs-15"><i
+                                            <a href="#" onclick="confirmDelete('{{ $row->id }}')" class="btn btn-danger btn-sm"><i
                                                     class="ri-delete-bin-line"></i></a>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="border-bottom-1">
-                                    <th>1</th>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>
-                                        <div class="hstack gap-3 flex-wrap">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-record="" class="link-success editbtnmodal fs-15"><i
-                                                    class="ri-edit-2-line" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="" class="link-danger fs-15"><i
-                                                    class="ri-delete-bin-line"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="border-bottom-1">
-                                    <th>1</th>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>
-                                        <div class="hstack gap-3 flex-wrap">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-record="" class="link-success editbtnmodal fs-15"><i
-                                                    class="ri-edit-2-line" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="" class="link-danger fs-15"><i
-                                                    class="ri-delete-bin-line"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="border-bottom-1">
-                                    <th>1</th>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>
-                                        <div class="hstack gap-3 flex-wrap">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-record="" class="link-success editbtnmodal fs-15"><i
-                                                    class="ri-edit-2-line" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="" class="link-danger fs-15"><i
-                                                    class="ri-delete-bin-line"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -132,3 +83,23 @@
     </div>
 </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to delete this Campaign?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#116464",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "Cancel"
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/deletecampaign/" + id;
+            }
+        });
+    }
+</script>

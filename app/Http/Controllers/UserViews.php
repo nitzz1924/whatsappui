@@ -2,6 +2,7 @@
 #{{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 namespace App\Http\Controllers;
 
+use App\Models\Campaign;
 use App\Models\Contact;
 use App\Models\GroupType;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class UserViews extends Controller
     }
     public function campaignspage()
     {
-        return view('UserPanel.campaigns');
+        $campaigns = Campaign::orderBy('created_at','DESC')->get();
+        return view('UserPanel.campaigns',compact('campaigns'));
     }
     public function addnewcampaign()
     {
@@ -60,6 +62,7 @@ class UserViews extends Controller
     public function templatespage()
     {
         $alltemplates = $this->getTemplateList();
+        // dd($alltemplates);
         return view('UserPanel.templates',compact('alltemplates'));
     }
     public function groupspage()

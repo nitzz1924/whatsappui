@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2024 at 02:45 PM
+-- Generation Time: Sep 26, 2024 at 02:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,14 +53,17 @@ CREATE TABLE `cache_locks` (
 
 CREATE TABLE `campaigns` (
   `id` int(11) NOT NULL,
-  `phonenumber` varchar(255) DEFAULT NULL,
+  `campaignname` varchar(255) DEFAULT NULL,
   `modulename` varchar(255) DEFAULT NULL,
   `template` varchar(255) DEFAULT NULL,
   `segmentname` varchar(255) DEFAULT NULL,
   `userid` varchar(255) DEFAULT NULL,
   `sendimmediate` varchar(255) DEFAULT NULL,
+  `datetime` varchar(255) DEFAULT NULL,
   `scheduledatetime` varchar(255) DEFAULT NULL,
   `mediaimage` varchar(255) DEFAULT NULL,
+  `mediatype` varchar(255) DEFAULT NULL,
+  `languagetype` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -69,11 +72,8 @@ CREATE TABLE `campaigns` (
 -- Dumping data for table `campaigns`
 --
 
-INSERT INTO `campaigns` (`id`, `phonenumber`, `modulename`, `template`, `segmentname`, `userid`, `sendimmediate`, `scheduledatetime`, `mediaimage`, `created_at`, `updated_at`) VALUES
-(14, '8209165518', 'E-Commerce', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, 'http://127.0.0.1:8000/assets/images/1727181078.jpg', '2024-09-24 12:31:18', '2024-09-24 12:31:18'),
-(15, '8209165518', 'E-Commerce', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, 'http://127.0.0.1:8000/assets/images/1727181098.jpg', '2024-09-24 12:31:38', '2024-09-24 12:31:38'),
-(16, '8209165518', 'E-Commerce', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, 'http://127.0.0.1:8000/assets/images/1727181352.png', '2024-09-24 12:35:52', '2024-09-24 12:35:52'),
-(17, '8209165518', 'E-Commerce', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, 'http://127.0.0.1:8000/assets/images/1727181568.png', '2024-09-24 12:39:28', '2024-09-24 12:39:28');
+INSERT INTO `campaigns` (`id`, `campaignname`, `modulename`, `template`, `segmentname`, `userid`, `sendimmediate`, `datetime`, `scheduledatetime`, `mediaimage`, `mediatype`, `languagetype`, `created_at`, `updated_at`) VALUES
+(67, 'Demo Campaign', 'New Customer', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, NULL, 'http://127.0.0.1:8000/assets/images/templates/1727346178.png', 'image', 'en', '2024-09-26 10:22:58', '2024-09-26 10:22:58');
 
 -- --------------------------------------------------------
 
@@ -103,11 +103,12 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`id`, `userid`, `type`, `fullname`, `email`, `phonenumber`, `city`, `state`, `country`, `language`, `address`, `status`, `created_at`, `updated_at`) VALUES
-(2, '17', 'E-Commerce', 'noisyboy', 'ans@gmail.com', '9656895896', 'Ajmer', 'Rajasthan', 'India', 'ru', 'dsfsdfsddddddddd', 'Active', '2024-09-21 11:33:08', '2024-09-21 11:33:08'),
-(24, '17', 'demo', 'Thomos Shelby', 'demo@gmail.com', '8888888888', 'democity', 'demostate', 'democountry', 'demolanguage', 'demoaddress', 'Active', '2024-09-21 12:52:43', '2024-09-21 12:52:43'),
-(25, '17', 'demo', 'demoname', 'demo@gmail.com', '8888888885', 'democity', 'demostate', 'democountry', 'demolanguage', 'demoaddress', 'Active', '2024-09-21 12:52:43', '2024-09-21 12:52:43'),
-(26, '17', 'demo', 'demoname', 'demo@gmail.com', '8888888884', 'democity', 'demostate', 'democountry', 'demolanguage', 'demoaddress', 'Active', '2024-09-21 12:52:43', '2024-09-21 12:52:43'),
-(27, '17', 'demo', 'demoname', 'demo@gmail.com', '8888888886', 'democity', 'demostate', 'democountry', 'demolanguage', 'demoaddress', 'Active', '2024-09-21 12:52:43', '2024-09-21 12:52:43');
+(54, '17', 'New Customer', 'kishan', 'demo@gmail.com', '+916375475956', 'Ajmer', 'Rajasthan', 'India', '--Select Language--', 'Ajmer,Raj,India', 'Follow up', '2024-09-26 11:22:08', '2024-09-26 11:25:37'),
+(55, '17', 'New Customer', 'Anshul', 'demo@gmail.com', '+919429158300', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-09-26 11:22:08', '2024-09-26 11:22:08'),
+(56, '17', 'New Customer', 'Nitesh', 'nitesh@gmail.com', '+918209165518', 'Ajmer', 'Rajasthan', 'India', '--Select Language--', 'Ajmer,Raj,India', 'Follow up', '2024-09-26 11:22:08', '2024-09-26 11:29:28'),
+(57, '17', 'New Customer', 'Shakti', 'demo@gmail.com', '+919588094364', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-09-26 11:22:08', '2024-09-26 11:22:08'),
+(58, '17', 'New Customer', 'Rudraksh', 'demo@gmail.com', '+919462134957', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-09-26 11:22:08', '2024-09-26 11:22:08'),
+(59, '17', 'New Customer', 'Dipanshu', 'demo@gmail.com', '+917014697321', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-09-26 11:22:08', '2024-09-26 11:22:08');
 
 -- --------------------------------------------------------
 
@@ -145,7 +146,7 @@ CREATE TABLE `group_types` (
 --
 
 INSERT INTO `group_types` (`id`, `userid`, `type`, `label`, `created_at`, `updated_at`) VALUES
-(7, '17', 'Group', 'E-Commerce', '2024-09-21 11:31:34', '2024-09-21 11:31:34'),
+(7, '17', 'New Customersssss', 'New Customer', '2024-09-21 11:31:34', '2024-09-26 12:54:04'),
 (8, '17', 'Status', 'Follow Up', '2024-09-23 10:32:55', '2024-09-23 10:32:55');
 
 -- --------------------------------------------------------
@@ -270,7 +271,7 @@ CREATE TABLE `register_users` (
 --
 
 INSERT INTO `register_users` (`id`, `userid`, `password`, `mobilenumber`, `email`, `expiredate`, `createddate`, `accountstatus`, `verifystatus`, `created_at`, `updated_at`, `otp`) VALUES
-(17, '1001', '$2y$12$/Gnf9mtoqokaIVKYTnLmxOqNe5S.S0zMa2PXE.Y2mNPNBWYnq1vwm', '8209165518', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', '2024-09-05 06:32:20', '2024-09-24 04:10:44', '498119');
+(17, '1001', '$2y$12$MLyboy3deho9R0Hcinal0uz3yOSpcQYsktNFPkA74rfwalVXJ3NKe', '8209165518', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', '2024-09-05 06:32:20', '2024-09-26 07:24:57', '564169');
 
 -- --------------------------------------------------------
 
@@ -292,7 +293,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('1H24Jo3mUNhzNQgkDvqZu7a5MtaIWosm5zuCkD3m', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiaURkWFpIckxnbWpLbXBDZGg3ZnpVVGQ5ekEzV21NMlAyRllQRlJSWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZGRuZXdjYW1wYWlnbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTU6ImxvZ2luX2N1c3RvbWVyXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTc7fQ==', 1727181339);
+('oNmutIXk1dDzt5s8TNDvW6DbhQSo3cJnacVCQfpv', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicHNIRFlmRFJab0xnQkEwV2tnYnoyVFZDQk5uUzJKd1RDeTcwSHZuViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jb250YWN0c3BhZ2UiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjU1OiJsb2dpbl9jdXN0b21lcl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1727355264);
 
 -- --------------------------------------------------------
 
@@ -426,13 +427,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `campaigns`
 --
 ALTER TABLE `campaigns`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`

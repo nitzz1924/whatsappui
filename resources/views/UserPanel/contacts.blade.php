@@ -43,14 +43,13 @@
             <div class="card rounded-4">
                 <div class="card-body rounded-4">
                     <div class="table-responsive">
-                        <table class="table table-borderless table-nowrap">
+                        <table class="table table-hover table-borderless table-nowrap">
                             <thead>
                                 <tr>
                                     <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No</th>
                                     <th style="background-color:#1164642b;">Name</th>
                                     <th style="background-color:#1164642b;">Email</th>
                                     <th style="background-color:#1164642b;">Phone Number</th>
-                                    <th style="background-color:#1164642b;">Status</th>
                                     <th style="background-color:#1164642b; border-radius: 0px 10px 10px 0px;">Action
                                     </th>
                                 </tr>
@@ -62,19 +61,15 @@
                                     <td>{{ $data->fullname }}</td>
                                     <td>{{ $data->email }}</td>
                                     <td>{{ $data->phonenumber }}</td>
-                                    @if ($data->status == 'Active')
-                                    <td>
-                                        <span class="badge bg-success-subtle text-success badge-border">Active</span>
-                                    </td>
-                                    @endif
                                     <td>
                                         <div class="hstack gap-3 flex-wrap">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-record="" class="link-success editbtnmodal fs-15"><i
-                                                    class="ri-edit-2-line" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="" class="link-danger fs-15"><i
-                                                    class="ri-delete-bin-line"></i></a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal"
+                                                data-value="{{ json_encode($data) }}"
+                                                class="editbtnmodal btn btn-light btn-sm"><i class="ri-edit-2-line"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    data-bs-title="Edit"></i></a>
+                                            <a href="#" onclick="confirmDelete('{{ $data->id }}')"
+                                                class="btn btn-danger btn-sm"><i class="ri-delete-bin-line"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -151,10 +146,12 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <div>
-                                    <label for="placeholderInput" class="form-label">Mobile Number</label>
-                                    <input type="text" class="form-control rounded-4" id="placeholderInput"
-                                        placeholder="Enter Phone Number" name="phonenumber">
+                                <label for="placeholderInput" class="form-label">Mobile Number</label>
+                                <div class="input-group rounded-4">
+                                    <span class="input-group-text" id="basic-addon1">+91</span>
+                                    <input type="text" name="phonenumber" class="form-control"
+                                        placeholder="Enter Phone Number" aria-label="Enter Phone Number"
+                                        aria-describedby="basic-addon1">
                                 </div>
                             </div>
                         </div>
@@ -269,5 +266,198 @@
         </div>
     </form>
 </div>
+<div id="myModal" class="modal flip" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form action="{{ route('updatecontact') }}" method="POST">
+        @csrf
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content rounded-4" style="border: 0.1rem solid #116464;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel fs-5 fw-bold text-black">Edit Contact</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                </div>
+                <div class="modal-body" id="modalbodyedit">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn  text-white rounded-4 waves-effect waves-light"
+                        style="background-color: #116464">Update</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // Edit Functionality
+        $('#table-body').on('click', '.editbtnmodal', function() {
+            console.log("clicked");
+            const contact = $(this).data('value');
+            const finalnumber = contact.phonenumber.replace(/\+91/g, '').trim();   // removing +91 while editing
+            console.log(finalnumber);
+            $('#modalbodyedit').empty();
+            const modalbody = `
+                 <div class="mt-0">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="">
+                                <label for="autoCompleteFruit" class="form-label">Select Type</label>
+                                <select class="form-select rounded-4" aria-label="Default select example"
+                                    name="type">
+                                    <option selected>--Select Type--</option>
+                                    @foreach ($groupsdata as $row)
+                                    <option value="{{ $row->label }}" ${contact.type === '{{ $row->label }}' ? 'selected' : ''}>{{ $row->label }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <input type="hidden" name="contactid" value="${contact.id}" id="">
+                        </div>
+                        <div class="col-lg-3">
+                            <div>
+                                <label for="placeholderInput" class="form-label">Name</label>
+                                <input type="text" class="form-control rounded-4" id="placeholderInput"
+                                    placeholder="Enter Name" name="fullname" value="${contact.fullname}">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div>
+                                <label for="placeholderInput" class="form-label">Email</label>
+                                <input type="email" class="form-control rounded-4" id="placeholderInput"
+                                    placeholder="Enter Email Address" name="email" value="${contact.email}">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="placeholderInput" class="form-label">Mobile Number</label>
+                            <div class="input-group rounded-4">
+                                <span class="input-group-text" id="basic-addon1">+91</span>
+                                <input type="text" name="phonenumber" class="form-control"
+                                    placeholder="Enter Phone Number" aria-label="Enter Phone Number"
+                                    aria-describedby="basic-addon1"  value="${finalnumber}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-3">
+                            <div>
+                                <label for="placeholderInput" class="form-label">City</label>
+                                <input type="text" class="form-control rounded-4" id="placeholderInput"
+                                    placeholder="Enter City" name="city"  value="${contact.city}">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div>
+                                <label for="placeholderInput" class="form-label">State</label>
+                                <input type="text" class="form-control rounded-4" id="placeholderInput"
+                                    placeholder="Enter State" name="state"  value="${contact.state}">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div>
+                                <label for="placeholderInput" class="form-label">Country</label>
+                                <input type="text" class="form-control rounded-4" id="placeholderInput"
+                                    placeholder="Enter Country" name="country" value="${contact.country}">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="autoCompleteFruit" class="form-label">Select Language</label>
+                            <select class="form-select rounded-4" name="language"
+                                aria-label="Default select example" name="type">
+                                <option selected>--Select Language--</option>
+                                <option value="en-US">English (US)</option>
+                                <option value="es">Spanish</option>
+                                <option value="pt-BR">Portuguese - Brazil</option>
+                                <option value="ru">Russian</option>
+                                <option value="id">Indonesian</option>
+                                <option value="ar">Arabic</option>
+                                <option value="fr">French</option>
+                                <option value="de">German</option>
+                                <option value="tr">Turkish</option>
+                                <option value="it">Italian</option>
+                                <option value="hi">Hindi</option>
+                                <option value="bn">Bengali</option>
+                                <option value="mr">Marathi</option>
+                                <option value="ur">Urdu - Pakistan</option>
+                                <option value="gu">Gujarati</option>
+                                <option value="fa">Persian</option>
+                                <option value="nl">Dutch</option>
+                                <option value="pl">Polish</option>
+                                <option value="ro">Romanian</option>
+                                <option value="zh-TW">Chinese (Traditional) - Taiwan</option>
+                                <option value="zh-HK">Chinese (Traditional) - Hong Kong</option>
+                                <option value="ms">Malay</option>
+                                <option value="he">Hebrew</option>
+                                <option value="cs">Czech</option>
+                                <option value="sw">Swahili</option>
+                                <option value="uk">Ukrainian</option>
+                                <option value="th">Thai</option>
+                                <option value="zh-CN">Chinese (Simplified) - China</option>
+                                <option value="hu">Hungarian</option>
+                                <option value="sk">Slovak</option>
+                                <option value="pt-PT">Portuguese - Portugal</option>
+                                <option value="pa">Punjabi</option>
+                                <option value="ta">Tamil</option>
+                                <option value="te">Telugu</option>
+                                <option value="ml">Malayalam</option>
+                                <option value="kn">Kannada</option>
+                                <option value="af">Afrikaans</option>
+                                <option value="sq">Albanian</option>
+                                <option value="az">Azerbaijani - latn</option>
+                                <option value="bg">Bulgarian</option>
+                                <option value="ca">Catalan</option>
+                                <option value="hr">Croatian</option>
+                                <option value="da">Danish</option>
+                                <option value="et">Estonian</option>
+                                <option value="fil">Filipino</option>
+                                <option value="fi">Finnish</option>
+                                <option value="el">Greek</option>
+                                <option value="ja">Japanese</option>
+                                <option value="kk">Kazakh</option>
+                                <option value="ko">Korean</option>
+                                <option value="lo">Lao</option>
+                                <option value="lv">Latvian</option>
+                                <option value="lt">Lithuanian</option>
+                                <option value="mk">Macedonian</option>
+                                <option value="no">Norwegian</option>
+                                <option value="sr">Serbian - Cyrillic/Latin</option>
+                                <option value="sl">Slovenian</option>
+                                <option value="sv">Swedish</option>
+                                <option value="uz">Uzbek</option>
+                                <option value="vi">Vietnamese</option>
+                                <option value="ga">Irish</option>
+                            </select>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-12">
+                                <div>
+                                    <label for="exampleFormControlTextarea5"
+                                        class="form-label rounded-4">Address</label>
+                                    <textarea class="form-control" name="address" placeholder="Your Full Address"
+                                        id="exampleFormControlTextarea5" rows="3">${contact.address}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            $('#modalbodyedit').append(modalbody);
+        });
+</script>
 @endsection
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+                title: "Are you sure?",
+                text: "You want to delete this Contact?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#116464",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel"
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/deletecontact/" + id;
+                }
+            });
+    }
+</script>

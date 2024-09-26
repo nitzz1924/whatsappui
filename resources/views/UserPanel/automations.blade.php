@@ -66,10 +66,10 @@
                                     <td>
                                         <div class="hstack gap-3 flex-wrap">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                data-record="" class="link-success editbtnmodal fs-15"><i
+                                                data-record="" class="btn btn-light btn-sm editbtnmodal"><i
                                                     class="ri-edit-2-line" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="" class="link-danger fs-15"><i
+                                            <a href="#" onclick="" class="btn btn-danger btn-sm"><i
                                                     class="ri-delete-bin-line"></i></a>
                                         </div>
                                     </td>
