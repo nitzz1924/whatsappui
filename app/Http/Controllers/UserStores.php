@@ -214,6 +214,7 @@ class UserStores extends Controller
         $data->delete();
         return back()->with('success', "Deleted....!!!");
     }
+
     public function deletecontact($id)
     {
         $data = Contact::find($id);
