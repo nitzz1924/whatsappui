@@ -37,7 +37,7 @@
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('indexchat') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
-                        <i class="bx bxs-chat"></i><span>Index</span>
+                        <i class="bx bxs-chat"></i><span>Inbox</span>
                     </a>
                 </li>
                 <li class="nav-item">

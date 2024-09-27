@@ -28,7 +28,10 @@ class UserViews extends Controller
     }
     public function indexchat()
     {
-        return view('UserPanel.indexchat');
+        $contactsdata = Contact::orderBy('created_at', 'DESC')->get();
+        $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
+        $alltemplates = $this->getTemplateList();
+        return view('UserPanel.indexchat',compact( 'contactsdata','groupsdata','alltemplates'));
     }
     public function campaignspage()
     {

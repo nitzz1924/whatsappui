@@ -29,7 +29,8 @@
     <link rel="stylesheet" href="{{asset('assets/libs/glightbox/css/glightbox.min.css')}}">
 
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.2/dist/sweetalert2.min.css" rel="stylesheet">
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/libs/multi.js/multi.min.css')}}" />
+    {{--
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/libs/multi.js/multi.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/libs/%40tarekraafat/autocomplete.js/css/autoComplete.css')}}"> --}}
 </head>
 
@@ -113,7 +114,8 @@
                             <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
-                                    <img class="rounded-circle header-profile-user" src="{{asset('assets/images/defaultuser.png')}}" alt="Header Avatar" />
+                                    <img class="rounded-circle header-profile-user"
+                                        src="{{asset('assets/images/defaultuser.png')}}" alt="Header Avatar" />
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
                                             Guest User
@@ -226,13 +228,18 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- Dashboard init -->
     <script src="{{ asset('assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/plugin/relativeTime.js"></script>
+    <script>
+        dayjs.extend(dayjs_plugin_relativeTime);
+    </script>
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.13.2/dist/sweetalert2.all.min.js"></script>
-        @if (session('success'))
-        <script>
-            // Display SweetAlert for success message
+    @if (session('success'))
+    <script>
+        // Display SweetAlert for success message
             Swal.fire({
                 title: "Success!",
                 text: "{{ session('success') }}",
@@ -242,12 +249,12 @@
                 showCancelButton: true,
                 showCloseButton: true,
             });
-        </script>
-        @endif
+    </script>
+    @endif
 
-        @if (session('error'))
-        <script>
-            // Display SweetAlert for error message
+    @if (session('error'))
+    <script>
+        // Display SweetAlert for error message
             Swal.fire({
                 title: "Error!",
                 text: "{{ session('error') }}",
@@ -256,8 +263,8 @@
                 buttonsStyling: true,
                 showCloseButton: true,
             });
-        </script>
-        @endif
+    </script>
+    @endif
 </body>
 
 </html>

@@ -48,6 +48,7 @@
                                 <tr>
                                     <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No</th>
                                     <th style="background-color:#1164642b;">Name</th>
+                                    <th style="background-color:#1164642b;">Type</th>
                                     <th style="background-color:#1164642b;">Email</th>
                                     <th style="background-color:#1164642b;">Phone Number</th>
                                     <th style="background-color:#1164642b; border-radius: 0px 10px 10px 0px;">Action
@@ -59,6 +60,7 @@
                                 <tr class="border-bottom-1">
                                     <th>{{ $index + 1 }}</th>
                                     <td>{{ $data->fullname }}</td>
+                                    <td>{{ $data->type }}</td>
                                     <td>{{ $data->email }}</td>
                                     <td>{{ $data->phonenumber }}</td>
                                     <td>
