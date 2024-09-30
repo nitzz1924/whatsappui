@@ -74,6 +74,7 @@ Route::controller(UserStores::class)->group(function() {
     Route::get('deletecontact/{id}', 'deletecontact')->name('deletecontact');
     Route::post('updatecontact', 'updatecontact')->name('updatecontact');
     Route::post('updategroups', 'updategroups')->name('updategroups');
+    Route::post('sendsinglemessage', 'sendsinglemessage')->name('sendsinglemessage');
 });
 
 

@@ -14,46 +14,11 @@ class UserStores extends Controller
 {
     public function signup_user_otp(Request $request)
     {
-        $mobilenumber = $request->phonenumber;
-        $randomNumber = rand(100000, 999999);
-        $user = RegisterUser::where('mobilenumber', '=', $mobilenumber)->first();
-        if ($user) {
-            $user->update([
-                'otp' => $randomNumber,
-                'password' => bcrypt($randomNumber),
-            ]);
-            $responseDatatest = [
-                'msg' => 'success',
-                'data' => $user->toArray(),
-            ];
-        } else {
-            $responseDatatest = [
-                'msg' => 'failure',
-            ];
-        }
-        return response()->json($responseDatatest);
-    }
-
-    public function verifyotp(Request $request)
-    {
-
-        $reqdata = [$request->otptest1, $request->otptest2, $request->otptest3, $request->otptest4, $request->otptest5, $request->otptest6];
-        $optnumber = implode($reqdata);
-        // $credentials = [
-        //     'mobilenumber' => $request->phonenumber,
-        //     'password' => bcrypt($request->phonenumber),
-        // ];
-        if ($request->password == $optnumber) {
-            $credentials = $request->only('mobilenumber', 'password');
-            $data = RegisterUser::where('mobilenumber', '=', $credentials['mobilenumber'])
-                ->first();
-
-            if ($data && Auth::guard('customer')->attempt($credentials)) {
-                // If data is found, redirect to user dashboard
-                return redirect()->route('indexchat');
-            }
-        } else {
-            return back()->with('error', 'OTP is Wrong');
+        $credentials = $request->only('mobilenumber', 'password');
+        $data = RegisterUser::where('mobilenumber', '=', $credentials)->first();
+        if ($data && Auth::guard('customer')->attempt($credentials)) {
+            // dd($data);
+            return redirect()->route('indexchat');
         }
         return redirect()->route('userloginpage')->with('error', 'Invalid credentials');
     }
@@ -154,7 +119,6 @@ class UserStores extends Controller
 
             $finaldata = Campaign::find($data->id);
             if ($req->sendimmediate == '0') {
-
                 //Sending Messages in Bulk
                 foreach ($contacts as $contact) {
                     $this->dropMessage($contact->phonenumber, $finaldata->template, $finaldata->mediaimage, $finaldata->mediatype, $finaldata->languagetype);
@@ -170,7 +134,9 @@ class UserStores extends Controller
 
     function dropMessage($phone, $templateid, $fileurl, $mediatype, $languagetype)
     {
-        $token = env('TOKEN');
+        $loggedinuser = Auth::guard('customer')->user();
+        $accessToken = $loggedinuser->apptoken;
+        $phonenumberid = $loggedinuser->phonenumberid;
         $data = [
             'messaging_product' => 'whatsapp',
             'to' => $phone,
@@ -188,7 +154,7 @@ class UserStores extends Controller
                     [
                         'type' => $mediatype,
                         'image' => [
-                            'link' => 'https://www.businessinsider.in/_next/image?url=https%3A%2F%2Fstaticbiassets.in%2Fthumb%2Fmsid-103430412%2Cwidth-700%2Cresizemode-4%2Cimgsize-64934%2Fimg5f57ecd6e6ff30001d4e79d0.jpg&w=640&q=75'
+                            'link' => $fileurl,
                         ]
                     ]
                 ]
@@ -196,9 +162,9 @@ class UserStores extends Controller
         }
         //dd($data);
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer ' . $accessToken,
             'Content-Type' => 'application/json'
-        ])->post('https://graph.facebook.com/v20.0/282520401622445/messages', $data);
+        ])->post('https://graph.facebook.com/v20.0/'.$phonenumberid.'/messages', $data);
         // Handle response
         if ($response->successful()) {
             //  dd($response->body());
@@ -253,6 +219,28 @@ class UserStores extends Controller
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
             //return back()->with('error', 'Not Updated..Try Again.....');
+        }
+    }
+
+    public function sendsinglemessage(Request $req){
+
+        $bannerimagePath = '';
+        try{
+             // Single Image Upload
+            if ($req->hasFile('mediaimage')) {
+                //dd($req->all());
+                $bannerimage = $req->file('mediaimage');
+                $bannerimageName = time() . '.' . $bannerimage->getClientOriginalExtension();
+                $uploadedPath = '/assets/images/templates';
+                $bannerimage->move(public_path($uploadedPath), $bannerimageName);
+                // Store the full image path
+                $bannerimagePath = url($uploadedPath . '/' . $bannerimageName);
+            }
+            //dd($bannerimagePath);
+            $this->dropMessage($req->phonenumber, $req->template, $bannerimagePath, $req->mediatype,$req->languagetype);
+            return back()->with('success', 'Message Sent.!');
+        }catch(Exception $e){
+            return redirect()->route('indexchat')->with('error', $e->getMessage());
         }
     }
 

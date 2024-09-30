@@ -64,10 +64,10 @@
                                     <td>{{$row->segmentname}}</td>
                                     <td>
                                         <div class="hstack gap-3 flex-wrap">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                                 data-record="" class="editbtnmodal btn btn-light btn-sm"><i
                                                     class="ri-edit-2-line" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" data-bs-title="Edit"></i></a>
+                                                    data-bs-placement="top" data-bs-title="Edit"></i></a> --}}
                                             <a href="#" onclick="confirmDelete('{{ $row->id }}')" class="btn btn-danger btn-sm"><i
                                                     class="ri-delete-bin-line"></i></a>
                                         </div>

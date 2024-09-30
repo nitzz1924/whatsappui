@@ -184,9 +184,9 @@
                                 <select class="form-select rounded-4" name="language"
                                     aria-label="Default select example" name="type">
                                     <option selected>--Select Language--</option>
-                                    <option value="en-US">English (US)</option>
+                                    <option value="en-US">English</option>
                                     <option value="es">Spanish</option>
-                                    <option value="pt-BR">Portuguese - Brazil</option>
+                                    <option value="pt-BR">Portuguese</option>
                                     <option value="ru">Russian</option>
                                     <option value="id">Indonesian</option>
                                     <option value="ar">Arabic</option>
@@ -197,24 +197,21 @@
                                     <option value="hi">Hindi</option>
                                     <option value="bn">Bengali</option>
                                     <option value="mr">Marathi</option>
-                                    <option value="ur">Urdu - Pakistan</option>
+                                    <option value="ur">Urdu</option>
                                     <option value="gu">Gujarati</option>
                                     <option value="fa">Persian</option>
                                     <option value="nl">Dutch</option>
                                     <option value="pl">Polish</option>
                                     <option value="ro">Romanian</option>
-                                    <option value="zh-TW">Chinese (Traditional) - Taiwan</option>
-                                    <option value="zh-HK">Chinese (Traditional) - Hong Kong</option>
+                                    <option value="zh-TW">Chinese</option>
                                     <option value="ms">Malay</option>
                                     <option value="he">Hebrew</option>
                                     <option value="cs">Czech</option>
                                     <option value="sw">Swahili</option>
                                     <option value="uk">Ukrainian</option>
                                     <option value="th">Thai</option>
-                                    <option value="zh-CN">Chinese (Simplified) - China</option>
                                     <option value="hu">Hungarian</option>
                                     <option value="sk">Slovak</option>
-                                    <option value="pt-PT">Portuguese - Portugal</option>
                                     <option value="pa">Punjabi</option>
                                     <option value="ta">Tamil</option>
                                     <option value="te">Telugu</option>
@@ -222,7 +219,7 @@
                                     <option value="kn">Kannada</option>
                                     <option value="af">Afrikaans</option>
                                     <option value="sq">Albanian</option>
-                                    <option value="az">Azerbaijani - latn</option>
+                                    <option value="az">Azerbaijani</option>
                                     <option value="bg">Bulgarian</option>
                                     <option value="ca">Catalan</option>
                                     <option value="hr">Croatian</option>
@@ -239,7 +236,7 @@
                                     <option value="lt">Lithuanian</option>
                                     <option value="mk">Macedonian</option>
                                     <option value="no">Norwegian</option>
-                                    <option value="sr">Serbian - Cyrillic/Latin</option>
+                                    <option value="sr">Serbian</option>
                                     <option value="sl">Slovenian</option>
                                     <option value="sv">Swedish</option>
                                     <option value="uz">Uzbek</option>

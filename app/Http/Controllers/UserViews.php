@@ -81,15 +81,16 @@ class UserViews extends Controller
     }
     function getTemplateList()
     {
-        // Replace with your WhatsApp Business API credentials
-        $accessToken = env('TOKEN');
+        $loggedinuser = Auth::guard('customer')->user();
+        $accessToken = $loggedinuser->apptoken;
+        $whatsbusinessid = $loggedinuser->Wabaid;
         $apiBaseUrl = 'https://graph.facebook.com/';
 
         $client = Http::withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
         ]);
 
-        $response = $client->get($apiBaseUrl . '/v20.0/309165212288658/message_templates');
+        $response = $client->get($apiBaseUrl . '/v20.0/'.$whatsbusinessid.'/message_templates');
         if ($response->successful()) {
             $templates = $response->json()['data'];
             return $templates;

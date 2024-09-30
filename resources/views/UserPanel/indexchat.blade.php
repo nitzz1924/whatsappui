@@ -12,16 +12,6 @@
                         <div class="flex-grow-1">
                             <h5 class="mb-4">Chats</h5>
                         </div>
-                        <div class="flex-shrink-0">
-                            <div data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="bottom"
-                                aria-label="Add Contact" data-bs-original-title="Add Contact">
-
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-soft-success btn-sm material-shadow-none">
-                                    <i class="ri-add-line align-bottom"></i>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                     <div class="search-box">
                         <input type="text" class="form-control bg-light border-light" placeholder="Search here...">
@@ -60,18 +50,18 @@
                                                         <h4 class="mb-0 fs-11 text-muted text-uppercase">Direct Messages
                                                         </h4>
                                                     </div>
-                                                    <div class="flex-shrink-0">
-                                                        <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                            data-bs-placement="bottom" aria-label="New Message"
-                                                            data-bs-original-title="New Message">
+                                                    {{-- <div class="flex-shrink-0">
+                                                    <div data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                        data-bs-placement="bottom" aria-label="New Message"
+                                                        data-bs-original-title="New Message">
 
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button"
-                                                                class="btn btn-soft-success btn-sm shadow-none material-shadow">
-                                                                <i class="ri-add-line align-bottom"></i>
-                                                            </button>
-                                                        </div>
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button"
+                                                            class="btn btn-soft-success btn-sm shadow-none material-shadow">
+                                                            <i class="ri-add-line align-bottom"></i>
+                                                        </button>
                                                     </div>
+                                                </div> --}}
                                                 </div>
 
                                                 <div class="chat-message-list">
@@ -127,25 +117,12 @@
                                 <div class="simplebar-mask">
                                     <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
                                         <div class="simplebar-content-wrapper" tabindex="0" role="region"
-                                            aria-label="scrollable content"
-                                            style="height: auto; overflow: hidden scroll;">
+                                            aria-label="scrollable content" style="height: auto; overflow: hidden scroll;">
                                             <div class="simplebar-content" style="padding: 16px 0px 0px;">
                                                 <div class="d-flex align-items-center px-4 mb-2">
                                                     <div class="flex-grow-1">
                                                         <h4 class="mb-0 fs-11 text-muted text-uppercase">All Groups
                                                         </h4>
-                                                    </div>
-                                                    <div class="flex-shrink-0">
-                                                        <div data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                            data-bs-placement="bottom" aria-label="New Message"
-                                                            data-bs-original-title="New Message">
-
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button"
-                                                                class="btn btn-soft-success btn-sm shadow-none material-shadow">
-                                                                <i class="ri-add-line align-bottom"></i>
-                                                            </button>
-                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -201,15 +178,18 @@
                                                     @foreach ($contactsdata->take(1) as $data)
                                                         <div class="d-flex align-items-center">
                                                             <div
-                                                                class="flex-shrink-0 chat-user-img online user-own-img align-self-center me-3 ms-0">
-                                                                <img src="assets/images/users/avatar-2.jpg"
-                                                                    class="rounded-circle avatar-xs" alt="">
-                                                                <span class="user-status"></span>
+                                                                class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
+                                                                <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle bg-success text-white"
+                                                                    style="width: 40px; height: 40px;">
+                                                                    <span class="user-initial fs-5" id="alphabet">{{ strtoupper(substr($data->fullname, 0, 1)) }}</spanclass=>
+                                                                </div>
                                                             </div>
                                                             <div class="flex-grow-1 overflow-hidden">
                                                                 <h5 class="text-truncate mb-0 fs-16"><a
                                                                         class="text-reset username"
                                                                         data-bs-toggle="offcanvas"
+                                                            data-bs-target="#offcanvasRight"
+                                                            aria-controls="offcanvasRight"
                                                                         href="#userProfileCanvasExample"
                                                                         aria-controls="userProfileCanvasExample">{{ $data->fullname }}</a>
                                                                 </h5>
@@ -230,8 +210,8 @@
                                                             class="btn text-white rounded-3 waves-effect waves-light"
                                                             style="background-color: #116464">Resolve</a>
                                                         <a href="#" id="resolvebtn" data-bs-toggle="offcanvas"
-                                                            data-bs-target="#offcanvasRight"
-                                                            aria-controls="offcanvasRight"
+                                                        data-bs-target="#offcanvasRight"
+                                                        aria-controls="offcanvasRight"
                                                             class="btn text-white rounded-3 waves-effect waves-light"
                                                             style="background-color: #116464">Contact Info</a>
                                                     </div>
@@ -248,7 +228,7 @@
                                         <div class="simplebar-height-auto-observer-wrapper">
                                             <div class="simplebar-height-auto-observer"></div>
                                         </div>
-                                        <div class="simplebar-mask">
+                                        {{-- <div class="simplebar-mask">
                                             <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
                                                 <div class="simplebar-content-wrapper" tabindex="0" role="region"
                                                     aria-label="scrollable content"
@@ -496,7 +476,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="simplebar-placeholder" style="width: 573px; height: 700px;"></div>
                                     </div>
                                     <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
@@ -737,111 +717,122 @@
         </div>
         <div class="offcanvas-body" id="contactdetailsoff">
             @foreach ($contactsdata->take(1) as $data)
-            <div class="card" id="contact-view-detail">
-                <div class="card-body text-center">
-                    <div class="position-relative d-inline-block">
-                        <img src="assets/images/users/avatar-10.jpg" alt="" class="avatar-lg rounded-circle img-thumbnail">
-                        <span class="contact-active position-absolute rounded-circle bg-success">
-                            <span class="visually-hidden"></span>
-                        </span>
+                <div class="card" id="contact-view-detail">
+                    <div class="card-body text-center">
+                        <div class="d-inline-block">
+                            <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle bg-success text-white"
+                                style="width: 80px; height: 80px;">
+                                <span class="user-initial fs-3">{{ strtoupper(substr($data->fullname, 0, 1)) }}</span>
+                            </div>
+                        </div>
+                        <h5 class="mt-4 mb-1">{{ $data->fullname }}</h5>
+                        <p class="text-muted">{{ $data->status }}</p>
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item avatar-xs">
+                                <a href="javascript:void(0);"
+                                    class="avatar-title bg-success-subtle text-success fs-15 rounded">
+                                    <i class="ri-phone-line"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item avatar-xs">
+                                <a href="javascript:void(0);"
+                                    class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
+                                    <i class="ri-mail-line"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item avatar-xs">
+                                <a href="javascript:void(0);"
+                                    class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
+                                    <i class="ri-question-answer-line"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <h5 class="mt-4 mb-1">{{$data->fullname}}</h5>
-                    <p class="text-muted">{{$data->status}}</p>
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">
-                                <i class="ri-phone-line"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
-                                <i class="ri-mail-line"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
-                                <i class="ri-question-answer-line"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <h6 class="text-muted text-uppercase fw-semibold mb-3">Personal Information</h6>
-                    <p class="text-muted mb-4">Hello, {{$data->fullname}}, The most effective objective is one that is tailored
-                        to the job you are applying for. It states what kind of career you are seeking, and what skills and
-                        experiences.</p>
-                    <div class="table-responsive table-card">
-                        <table class="table table-borderless mb-0">
-                            <tbody>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Email ID</td>
-                                    <td>{{$data->email}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Phone No</td>
-                                    <td>{{$data->phonenumber}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Address</td>
-                                    <td>{{$data->address}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Contact Created</td>
-                                    <td><small class="text-muted">{{ $data->created_at->format('d/m/y')}}</small></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="card-body">
+                        <h6 class="text-muted text-uppercase fw-semibold mb-3">Personal Information</h6>
+                        <p class="text-muted mb-4">Hello, {{ $data->fullname }}, The most effective objective is one that
+                            is
+                            tailored
+                            to the job you are applying for. It states what kind of career you are seeking, and what skills
+                            and
+                            experiences.</p>
+                        <div class="table-responsive table-card">
+                            <table class="table table-borderless mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-medium" scope="row">Email ID</td>
+                                        <td>{{ $data->email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium" scope="row">Phone No</td>
+                                        <td>{{ $data->phonenumber }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium" scope="row">Address</td>
+                                        <td>{{ $data->address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium" scope="row">Contact Created</td>
+                                        <td><small class="text-muted">{{ $data->created_at->format('d/m/y') }}</small>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>
-    <div class="offcanvas offcanvas-end mycustomcanvascontacts" tabindex="-1" id="offcanvasTop"
-        aria-labelledby="offcanvasRightLabel" style="background-image: url('/assets/images/chat-bg-pattern.png');">
-        <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">Contact Details</h5>
-            <div class="d-flex justify-content-end align-items-center">
-                <a href="#" class="btn btn-sm text-white rounded-4 waves-effect waves-light"
-                    style="background-color: #116464"><i class="bx bx-send me-2"></i>Send Message</a>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
+    <form action="{{ route('sendsinglemessage') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="offcanvas offcanvas-end mycustomcanvascontacts" tabindex="-1" id="offcanvasTop"
+            aria-labelledby="offcanvasRightLabel" style="background-image: url('/assets/images/chat-bg-pattern.png');">
+            <div class="offcanvas-header">
+                <h5 id="offcanvasRightLabel">Contact Details</h5>
+                <div class="d-flex justify-content-end align-items-center">
+                    <button type="submit" class="btn btn-sm text-white rounded-4 waves-effect waves-light"
+                        style="background-color: #116464"><i class="bx bx-send me-2"></i>Send Message</button>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
             </div>
-        </div>
-        <div class="offcanvas-body">
-            <div class="" id="contact-view-detail">
-                <div class="card-body text-center">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div>
-                                <label for="template" class="form-label fs-5">Choose Template</label>
-                                <select class="form-select rounded-pill mb-3 onchangedrop" name="template"
-                                    aria-label="Select template">
-                                    <option disabled selected>--choose template--</option>
-                                    @foreach ($alltemplates as $data)
-                                        <option value="{{ $data['name'] }}"
-                                            data-value="{{ htmlspecialchars(json_encode($data['components']), ENT_QUOTES, 'UTF-8') }}"
-                                            data-language="{{ htmlspecialchars(json_encode($data['language']), ENT_QUOTES, 'UTF-8') }}"
-                                            {{ old('template') == $data['name'] ? 'selected' : '' }}>
-                                            {{ $data['name'] }}
-                                        </option>
-                                    @endforeach
-                                </select>
+            <div class="offcanvas-body">
+                <div class="" id="contact-view-detail">
+                    <div class="card-body text-center">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div>
+                                    <label for="template" class="form-label fs-5">Choose Template</label>
+                                    <select class="form-select rounded-pill mb-3 onchangedrop" name="template"
+                                        aria-label="Select template">
+                                        <option disabled selected>--choose template--</option>
+                                        @foreach ($alltemplates as $data)
+                                            <option value="{{ $data['name'] }}"
+                                                data-value="{{ htmlspecialchars(json_encode($data['components']), ENT_QUOTES, 'UTF-8') }}"
+                                                data-language="{{ htmlspecialchars(json_encode($data['language']), ENT_QUOTES, 'UTF-8') }}"
+                                                {{ old('template') == $data['name'] ? 'selected' : '' }}>
+                                                {{ $data['name'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mt-4" id="previewdivtemplate">
+                                    {{-- Template Div Appends Here --}}
+                                </div>
+                                <input type="hidden" name="phonenumber" value="" id="contactnumberofperson">
                             </div>
-                            <div class="mt-4" id="previewdivtemplate">
-                                {{-- Template Div Appends Here --}}
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="whatsapp-container" id="messagediv">
-                                {{-- Message Div Appends Here --}}
+                            <div class="col-lg-6">
+                                <div class="whatsapp-container" id="messagediv">
+                                    {{-- Message Div Appends Here --}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -880,15 +871,16 @@
                         year: 'numeric'
                     });
                 $('#contactdetailsoff').empty();
+                $('#alphabet').empty();
                 const contactbody = `
                     <div class="card" id="contact-view-detail">
                         <div class="card-body text-center">
-                            <div class="position-relative d-inline-block">
-                                <img src="assets/images/users/avatar-10.jpg" alt="" class="avatar-lg rounded-circle img-thumbnail">
-                                <span class="contact-active position-absolute rounded-circle bg-success">
-                                    <span class="visually-hidden"></span>
-                                </span>
-                            </div>
+                            <div class="d-inline-block">
+                    <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle bg-success text-white"
+                        style="width: 80px; height: 80px;">
+                       <span class="user-initial fs-3">${contacttab.fullname.charAt(0).toUpperCase()}</span>
+                    </div>
+                </div>
                             <h5 class="mt-4 mb-1">${contacttab.fullname}</h5>
                             <p class="text-muted">${contacttab.status}</p>
                             <ul class="list-inline mb-0">
@@ -940,6 +932,8 @@
                     </div>
                     `;
                 $('#contactdetailsoff').append(contactbody);
+                $('#contactnumberofperson').val(contacttab.phonenumber);
+                $('#alphabet').html(contacttab.fullname.charAt(0).toUpperCase());
             });
         });
     </script>

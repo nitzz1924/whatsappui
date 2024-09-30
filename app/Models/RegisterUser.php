@@ -19,6 +19,8 @@ class RegisterUser  extends Authenticatable
         'createddate',
         'accountstatus',
         'verifystatus',
-        'otp',
+        'apptoken',
+        'phonenumberid',
+        'Wabaid',
     ];
 }
