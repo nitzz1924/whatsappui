@@ -75,6 +75,7 @@ Route::controller(UserStores::class)->group(function() {
     Route::post('updatecontact', 'updatecontact')->name('updatecontact');
     Route::post('updategroups', 'updategroups')->name('updategroups');
     Route::post('sendsinglemessage', 'sendsinglemessage')->name('sendsinglemessage');
+    // Route::get('getscheduledcam', 'getscheduledcam')->name('getscheduledcam');
 });
 
 

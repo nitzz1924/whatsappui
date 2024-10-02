@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Auth;
 use Exception;
+use Carbon\Carbon;
+use Log;
 class UserStores extends Controller
 {
     public function signup_user_otp(Request $request)
@@ -241,6 +243,74 @@ class UserStores extends Controller
             return back()->with('success', 'Message Sent.!');
         }catch(Exception $e){
             return redirect()->route('indexchat')->with('error', $e->getMessage());
+        }
+    }
+
+    public function getscheduledcam(Request $req) {
+
+            $currentDateTime = Carbon::now()->format('Y-m-d\TH:i');
+            $oneHourLater = Carbon::now()->addHour()->format('Y-m-d\TH:i');
+
+            // Query campaigns that were scheduled between one hour ago and now
+            $campaigns = Campaign::whereBetween('datetime', [$currentDateTime, $oneHourLater])->get();
+            //dd( $campaigns);
+            foreach ($campaigns as $data) {
+                $contacts = Contact::where('type', '=', $data->modulename)->where('status', $data->segmentname)->get();
+                $user = RegisterUser::where('id',$data->userid)->first();
+                foreach($contacts as $con){
+                    //dd($con);
+                    $this->dropMessageapi($con->phonenumber, $data->template, $data->mediaimage, $data->mediatype, $data->languagetype, $user->apptoken,$user->phonenumberid);
+                }
+            }
+            //Prepare the response
+            $response = [
+                'message' => 'Here is your Campaign List scheduled in the last hour...',
+                'success' => true,
+                'data' => $campaigns,
+            ];
+
+            // Return as JSON response
+            return response()->json($response, 200);
+    }
+
+    function dropMessageapi($phone, $templateid, $fileurl, $mediatype, $languagetype,$accessToken,$phonenumberid)
+    {
+        //dd($phone, $templateid, $fileurl, $mediatype, $languagetype, $accessToken, $phonenumberid);
+        $data = [
+            'messaging_product' => 'whatsapp',
+            'to' => $phone,
+            'type' => 'template',
+            'template' => [
+                'name' => $templateid,
+                'language' => ['code' => $languagetype],
+                'components' => []
+            ]
+        ];
+        if ($fileurl) {
+            $data['template']['components'][] = [
+                'type' => 'header',
+                'parameters' => [
+                    [
+                        'type' => $mediatype,
+                        'image' => [
+                            'link' => $fileurl,
+                        ]
+                    ]
+                ]
+            ];
+        }
+        //dd($data);
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $accessToken,
+            'Content-Type' => 'application/json'
+        ])->post('https://graph.facebook.com/v20.0/'.$phonenumberid.'/messages', $data);
+
+        Log::info('WhatsApp API response: ', [$response->body()]);
+        // Handle response
+        if ($response->successful()) {
+            return back()->with('success', 'Message sent successfully!');
+        } else {
+            return back()->withErrors('Message failed to send: ' . $response->body());
         }
     }
 

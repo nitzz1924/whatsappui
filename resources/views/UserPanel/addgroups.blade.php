@@ -131,7 +131,7 @@
     function confirmDelete(id) {
         Swal.fire({
                 title: "Are you sure?",
-                text: "You want to delete this record?",
+                text: "You want to delete this group?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#116464",
@@ -158,7 +158,7 @@
         let selects = `<option value="">--select groups--</option>`;
         groups.forEach(function(row) {
             selects +=
-                `<option value="${row.label}" ${groupdata.label === row.label ? 'selected' : ''}>${row.label}</option>`;
+                `<option value="${row.type}" ${groupdata.type === row.type ? 'selected' : ''}>${row.type}</option>`;
         });
         const modalbody = `
              <div>

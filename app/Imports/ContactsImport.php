@@ -24,16 +24,16 @@ class ContactsImport implements ToCollection, WithStartRow
             if (count($row) < 10) {
                 continue;
             }
-            $type = isset($row[0]) ? trim($row[0]) : null;
-            $fullname = isset($row[1]) ? trim($row[1]) : null;
-            $email = isset($row[2]) ? trim($row[2]) : null;
-            $phonenumber = isset($row[3]) ? trim($row[3]) : null;
-            $city = isset($row[4]) ? trim($row[4]) : null;
-            $state = isset($row[5]) ? trim($row[5]) : null;
-            $country = isset($row[6]) ? trim($row[6]) : null;
-            $language = isset($row[7]) ? trim($row[7]) : null;
-            $address = isset($row[8]) ? trim($row[8]) : null;
-            $status = isset($row[9]) ? trim($row[9]) : null;
+            $type = isset($row[0]) ? trim($row[0]) : '';
+            $fullname = isset($row[1]) ? trim($row[1]) : '';
+            $email = isset($row[2]) ? trim($row[2]) : '';
+            $phonenumber = isset($row[3]) ? trim($row[3]) : '';
+            $city = isset($row[4]) ? trim($row[4]) : '';
+            $state = isset($row[5]) ? trim($row[5]) : '';
+            $country = isset($row[6]) ? trim($row[6]) : '';
+            $language = isset($row[7]) ? trim($row[7]) : '';
+            $address = isset($row[8]) ? trim($row[8]) : '';
+            $status = isset($row[9]) ? trim($row[9]) : '';
 
             // Save data to the database
             $data = Contact::updateOrCreate(

@@ -31,6 +31,11 @@
                                     class="btn text-white rounded-4 waves-effect waves-light" data-bs-toggle="offcanvas"
                                     data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
                                     style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>New Contact</a>
+
+                                <a href="{{ route('getscheduledcam') }}"
+                                    class="btn text-white rounded-4 waves-effect waves-light"
+                                    style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>Testing
+                                    Schedule</a>
                             </div>
                         </div>
                     </div>
@@ -101,7 +106,8 @@
                     <div class="row row-cols-lg-auto g-3 align-items-center">
                         <div class="col-12">
                             <div class="input-group">
-                                <input type="file" name="file" id="file" class="form-control" placeholder="Username">
+                                <input type="file" name="file" id="file" class="form-control" placeholder="Username"
+                                    required>
                             </div>
                         </div>
                         <div class="col-12">
@@ -119,7 +125,7 @@
             <div class="" id="contact-view-detail">
                 <div class="card-body">
                     <div class="mt-0">
-                        <p class="text-black text-start fs-5">Manually fill up details</p>
+                        <p class="text-black text-start fs-5">Enter details to create Contact</p>
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="">
@@ -291,7 +297,7 @@
         $('#table-body').on('click', '.editbtnmodal', function() {
             console.log("clicked");
             const contact = $(this).data('value');
-            const finalnumber = contact.phonenumber.replace(/\+91/g, '').trim();   // removing +91 while editing
+            const finalnumber = contact.phonenumber.replace(/\+91/g, '').trim(); // removing +91 while editing
             console.log(finalnumber);
             $('#modalbodyedit').empty();
             const modalbody = `
@@ -358,70 +364,67 @@
                         </div>
                         <div class="col-lg-3">
                             <label for="autoCompleteFruit" class="form-label">Select Language</label>
-                            <select class="form-select rounded-4" name="language"
-                                aria-label="Default select example" name="type">
-                                <option selected>--Select Language--</option>
-                                <option value="en-US">English (US)</option>
-                                <option value="es">Spanish</option>
-                                <option value="pt-BR">Portuguese - Brazil</option>
-                                <option value="ru">Russian</option>
-                                <option value="id">Indonesian</option>
-                                <option value="ar">Arabic</option>
-                                <option value="fr">French</option>
-                                <option value="de">German</option>
-                                <option value="tr">Turkish</option>
-                                <option value="it">Italian</option>
-                                <option value="hi">Hindi</option>
-                                <option value="bn">Bengali</option>
-                                <option value="mr">Marathi</option>
-                                <option value="ur">Urdu - Pakistan</option>
-                                <option value="gu">Gujarati</option>
-                                <option value="fa">Persian</option>
-                                <option value="nl">Dutch</option>
-                                <option value="pl">Polish</option>
-                                <option value="ro">Romanian</option>
-                                <option value="zh-TW">Chinese (Traditional) - Taiwan</option>
-                                <option value="zh-HK">Chinese (Traditional) - Hong Kong</option>
-                                <option value="ms">Malay</option>
-                                <option value="he">Hebrew</option>
-                                <option value="cs">Czech</option>
-                                <option value="sw">Swahili</option>
-                                <option value="uk">Ukrainian</option>
-                                <option value="th">Thai</option>
-                                <option value="zh-CN">Chinese (Simplified) - China</option>
-                                <option value="hu">Hungarian</option>
-                                <option value="sk">Slovak</option>
-                                <option value="pt-PT">Portuguese - Portugal</option>
-                                <option value="pa">Punjabi</option>
-                                <option value="ta">Tamil</option>
-                                <option value="te">Telugu</option>
-                                <option value="ml">Malayalam</option>
-                                <option value="kn">Kannada</option>
-                                <option value="af">Afrikaans</option>
-                                <option value="sq">Albanian</option>
-                                <option value="az">Azerbaijani - latn</option>
-                                <option value="bg">Bulgarian</option>
-                                <option value="ca">Catalan</option>
-                                <option value="hr">Croatian</option>
-                                <option value="da">Danish</option>
-                                <option value="et">Estonian</option>
-                                <option value="fil">Filipino</option>
-                                <option value="fi">Finnish</option>
-                                <option value="el">Greek</option>
-                                <option value="ja">Japanese</option>
-                                <option value="kk">Kazakh</option>
-                                <option value="ko">Korean</option>
-                                <option value="lo">Lao</option>
-                                <option value="lv">Latvian</option>
-                                <option value="lt">Lithuanian</option>
-                                <option value="mk">Macedonian</option>
-                                <option value="no">Norwegian</option>
-                                <option value="sr">Serbian - Cyrillic/Latin</option>
-                                <option value="sl">Slovenian</option>
-                                <option value="sv">Swedish</option>
-                                <option value="uz">Uzbek</option>
-                                <option value="vi">Vietnamese</option>
-                                <option value="ga">Irish</option>
+                            <select class="form-select rounded-4" name="language"aria-label="Default select example" name="type">
+                                    <option selected>--Select Language--</option>
+                                    <option value="en-US" ${contact.language == 'English' ? 'selected' : ''}>English</option>
+                                    <option value="es" ${contact.language == 'Spanish' ? 'selected' : ''}>Spanish</option>
+                                    <option value="pt-BR" ${contact.language == 'Portuguese' ? 'selected' : ''}>Portuguese</option>
+                                    <option value="ru" ${contact.language == 'Russian' ? 'selected' : ''}>Russian</option>
+                                    <option value="id" ${contact.language == 'Indonesian' ? 'selected' : ''}>Indonesian</option>
+                                    <option value="ar" ${contact.language == 'Arabic' ? 'selected' : ''}>Arabic</option>
+                                    <option value="fr" ${contact.language == 'French' ? 'selected' : ''}>French</option>
+                                    <option value="de" ${contact.language == 'German' ? 'selected' : ''}>German</option>
+                                    <option value="tr" ${contact.language == 'Turkish' ? 'selected' : ''}>Turkish</option>
+                                    <option value="it" ${contact.language == 'Italian' ? 'selected' : ''}>Italian</option>
+                                    <option value="hi" ${contact.language == 'Hindi' ? 'selected' : ''}>Hindi</option>
+                                    <option value="bn" ${contact.language == 'Bengali' ? 'selected' : ''}>Bengali</option>
+                                    <option value="mr" ${contact.language == 'Marathi' ? 'selected' : ''}>Marathi</option>
+                                    <option value="ur" ${contact.language == 'Urdu' ? 'selected' : ''}>Urdu</option>
+                                    <option value="gu" ${contact.language == 'Gujarati' ? 'selected' : ''}>Gujarati</option>
+                                    <option value="fa" ${contact.language == 'Persian' ? 'selected' : ''}>Persian</option>
+                                    <option value="nl" ${contact.language == 'Dutch' ? 'selected' : ''}>Dutch</option>
+                                    <option value="pl" ${contact.language == 'Polish' ? 'selected' : ''}>Polish</option>
+                                    <option value="ro" ${contact.language == 'Romanian' ? 'selected' : ''}>Romanian</option>
+                                    <option value="zh-TW" ${contact.language == 'Chinese' ? 'selected' : ''}>Chinese</option>
+                                    <option value="ms" ${contact.language == 'Malay' ? 'selected' : ''}>Malay</option>
+                                    <option value="he" ${contact.language == 'Hebrew' ? 'selected' : ''}>Hebrew</option>
+                                    <option value="cs" ${contact.language == 'Czech' ? 'selected' : ''}>Czech</option>
+                                    <option value="sw" ${contact.language == 'Swahili' ? 'selected' : ''}>Swahili</option>
+                                    <option value="uk" ${contact.language == 'Ukrainian' ? 'selected' : ''}>Ukrainian</option>
+                                    <option value="th" ${contact.language == 'Thai' ? 'selected' : ''}>Thai</option>
+                                    <option value="hu" ${contact.language == 'Hungarian' ? 'selected' : ''}>Hungarian</option>
+                                    <option value="sk" ${contact.language == 'Slovak' ? 'selected' : ''}>Slovak</option>
+                                    <option value="pt-PT" ${contact.language == 'Portuguese' ? 'selected' : ''}>Portuguese</option>
+                                    <option value="pa" ${contact.language == 'Punjabi' ? 'selected' : ''}>Punjabi</option>
+                                    <option value="ta" ${contact.language == 'Tamil' ? 'selected' : ''}>Tamil</option>
+                                    <option value="te" ${contact.language == 'Telugu' ? 'selected' : ''}>Telugu</option>
+                                    <option value="ml" ${contact.language == 'Malayalam' ? 'selected' : ''}>Malayalam</option>
+                                    <option value="kn" ${contact.language == 'Kannada' ? 'selected' : ''}>Kannada</option>
+                                    <option value="af" ${contact.language == 'Afrikaans' ? 'selected' : ''}>Afrikaans</option>
+                                    <option value="sq" ${contact.language == 'Albanian' ? 'selected' : ''}>Albanian</option>
+                                    <option value="az" ${contact.language == 'Azerbaijani' ? 'selected' : ''}>Azerbaijani</option>
+                                    <option value="bg" ${contact.language == 'Bulgarian' ? 'selected' : ''}>Bulgarian</option>
+                                    <option value="ca" ${contact.language == 'Catalan' ? 'selected' : ''}>Catalan</option>
+                                    <option value="hr" ${contact.language == 'Croatian' ? 'selected' : ''}>Croatian</option>
+                                    <option value="da" ${contact.language == 'Danish' ? 'selected' : ''}>Danish</option>
+                                    <option value="et" ${contact.language == 'Estonian' ? 'selected' : ''}>Estonian</option>
+                                    <option value="fil" ${contact.language == 'Filipino' ? 'selected' : ''}>Filipino</option>
+                                    <option value="fi" ${contact.language == 'Finnish' ? 'selected' : ''}>Finnish</option>
+                                    <option value="el" ${contact.language == 'Greek' ? 'selected' : ''}>Greek</option>
+                                    <option value="ja" ${contact.language == 'Japanese' ? 'selected' : ''}>Japanese</option>
+                                    <option value="kk" ${contact.language == 'Kazakh' ? 'selected' : ''}>Kazakh</option>
+                                    <option value="ko" ${contact.language == 'Korean' ? 'selected' : ''}>Korean</option>
+                                    <option value="lo" ${contact.language == 'Lao' ? 'selected' : ''}>Lao</option>
+                                    <option value="lv" ${contact.language == 'Latvian' ? 'selected' : ''}>Latvian</option>
+                                    <option value="lt" ${contact.language == 'Lithuanian' ? 'selected' : ''}>Lithuanian</option>
+                                    <option value="mk" ${contact.language == 'Macedonian' ? 'selected' : ''}>Macedonian</option>
+                                    <option value="no" ${contact.language == 'Norwegian' ? 'selected' : ''}>Norwegian</option>
+                                    <option value="sr" ${contact.language == 'Serbian' ? 'selected' : ''}>Serbian</option>
+                                    <option value="sl" ${contact.language == 'Slovenian' ? 'selected' : ''}>Slovenian</option>
+                                    <option value="sv" ${contact.language == 'Swedish' ? 'selected' : ''}>Swedish</option>
+                                    <option value="uz" ${contact.language == 'Uzbek' ? 'selected' : ''}>Uzbek</option>
+                                    <option value="vi" ${contact.language == 'Vietnamese' ? 'selected' : ''}>Vietnamese</option>
+                                    <option value="ga" ${contact.language == 'Irish' ? 'selected' : ''}>Irish</option>
                             </select>
                         </div>
                         <div class="row mt-3">

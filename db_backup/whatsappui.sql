@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2024 at 07:23 AM
+-- Generation Time: Oct 02, 2024 at 06:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,7 +73,9 @@ CREATE TABLE `campaigns` (
 --
 
 INSERT INTO `campaigns` (`id`, `campaignname`, `modulename`, `template`, `segmentname`, `userid`, `sendimmediate`, `datetime`, `scheduledatetime`, `mediaimage`, `mediatype`, `languagetype`, `created_at`, `updated_at`) VALUES
-(67, 'Demo Campaign', 'New Customer', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, NULL, 'http://127.0.0.1:8000/assets/images/templates/1727346178.png', 'image', 'en', '2024-09-26 10:22:58', '2024-09-26 10:22:58');
+(67, 'Demo Campaign', 'New Customer', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, NULL, 'http://127.0.0.1:8000/assets/images/templates/1727346178.png', 'image', 'en', '2024-09-26 10:22:58', '2024-09-26 10:22:58'),
+(76, 'Demo Campaign', 'New Customer', 'yuvtraining_seminar', 'Follow Up', '17', NULL, '2024-10-01T12:22', '1', 'http://127.0.0.1:8000/assets/images/templates/1727764562.jpg', 'image', 'en', '2024-10-01 06:36:02', '2024-10-01 06:36:02'),
+(77, 'Test Campaign', 'New Customer', 'yuvtraining_seminar', 'Follow Up', '17', NULL, '2024-10-01T13:00', '1', 'http://127.0.0.1:8000/assets/images/templates/1727764592.webp', 'image', 'en', '2024-10-01 06:36:32', '2024-10-01 06:36:32');
 
 -- --------------------------------------------------------
 
@@ -103,12 +105,12 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`id`, `userid`, `type`, `fullname`, `email`, `phonenumber`, `city`, `state`, `country`, `language`, `address`, `status`, `created_at`, `updated_at`) VALUES
-(67, '17', 'New Customer', 'Kishan', 'demo@gmail.com', '+916375475956', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-09-30 05:19:22', '2024-09-30 05:19:22'),
-(68, '17', 'New Customer', 'Anshul', 'demo@gmail.com', '+919429158300', 'Ajmer', 'Rajasthan', 'India', 'Portuguese', 'Ajmer,Raj,India', 'Follow up', '2024-09-30 05:19:22', '2024-09-30 05:19:22'),
-(69, '17', 'New Customer', 'Nitesh', 'demo@gmail.com', '+918209165518', 'Ajmer', 'Rajasthan', 'India', 'Chinese', 'Ajmer,Raj,India', 'Follow up', '2024-09-30 05:19:22', '2024-09-30 05:19:22'),
-(70, '17', 'New Customer', 'Shakti', 'demo@gmail.com', '+919588094364', 'Ajmer', 'Rajasthan', 'India', 'Turkish', 'Ajmer,Raj,India', 'Follow up', '2024-09-30 05:19:22', '2024-09-30 05:19:22'),
-(71, '17', 'New Customer', 'Rudraksh', 'demo@gmail.com', '+919462134957', 'Ajmer', 'Rajasthan', 'India', 'Hindi', 'Ajmer,Raj,India', 'Follow up', '2024-09-30 05:19:22', '2024-09-30 05:19:22'),
-(72, '17', 'New Customer', 'Dipanshu', 'demo@gmail.com', '+917014697321', 'Ajmer', 'Rajasthan', 'India', 'Urdu', 'Ajmer,Raj,India', 'Follow up', '2024-09-30 05:19:22', '2024-09-30 05:19:22');
+(79, '17', 'New Customer', 'Kishan', 'demo@gmail.com', '+916375475956', 'Ajmer', 'Rajasthan', 'India', 'en-US', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:21:49'),
+(80, '17', 'New Customer', 'Anshul', 'demo@gmail.com', '+919429158300', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:21:33'),
+(81, '17', 'New Customer', 'Nitesh', 'demo@gmail.com', '+918209165518', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:21:33'),
+(82, '17', 'New Customer', 'Shakti', 'demo@gmail.com', '+919588094364', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:21:33'),
+(83, '17', 'New Customer', 'Rudraksh', 'demo@gmail.com', '+919462134957', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:21:33'),
+(84, '17', 'New Customer', 'Dipanshu', 'demo@gmail.com', '+917014697321', NULL, NULL, 'India', 'ru', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:22:40');
 
 -- --------------------------------------------------------
 
@@ -274,7 +276,7 @@ CREATE TABLE `register_users` (
 --
 
 INSERT INTO `register_users` (`id`, `userid`, `password`, `mobilenumber`, `email`, `expiredate`, `createddate`, `accountstatus`, `verifystatus`, `apptoken`, `phonenumberid`, `Wabaid`, `created_at`, `updated_at`, `otp`) VALUES
-(17, '1001', '$2y$12$l6.03Ub7zM/dwLJXXhDn2.SgsJM804w6Qcj18/t1UiVxoAeMsKFHi', '8209165518', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', 'EAAKGjLrP6ccBO0psyGFUFxbZBEZASqRRhjqm00nZAAIVwH95wrFdSo1pEmOO05pvz9kI0rCXVIZARnjR2DOgi3qEchPQFiR00e9dtjfk9cIECVTOXnxsl9WxONk3HoUUkIna2IeuptbuzXXdZBUZAfMXkVQdy5d1fFJUCO8DuxoFQtutGSFICDW4apXZAqpJHNQDayJWXhRw1IN3Ho8LUGzXORCrLUZD', '282520401622445', '309165212288658', '2024-09-05 06:32:20', '2024-09-30 05:04:57', '841715');
+(17, '1001', '$2y$12$l6.03Ub7zM/dwLJXXhDn2.SgsJM804w6Qcj18/t1UiVxoAeMsKFHi', '8209165518', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', 'EAAKGjLrP6ccBOzb0HZCNjlEZBAi9K2bf1vwD9rH6YtZCGlLhcSIZC0QZBYRQBn5XME4qSSMu4yhWkZAoXc7XLWLttMBQ6OIJHwZAJyNZBnnHJ4TG12SddRJMp9TYF2XyaRfvQRY4vDmCcTuIkTkvQ1ttqVE6ZAa9vILYOlYCltDhYXZAGq4MwK05XoGGP6ZB4YznUhXzbl7KoMZAUkHbhTejkPXZCfOfU0CsZD', '282520401622445', '309165212288658', '2024-09-05 06:32:20', '2024-10-01 06:35:31', '841715');
 
 -- --------------------------------------------------------
 
@@ -296,8 +298,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('3ACJTcdF1wPj4G0MM2o1tBIIhlHRMn9y8pXWilDg', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZlJRZHphaElRTUU1U3lsc1V5VUwwRTdSOVNXUnRnUWdlYVFpS2NBNiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jb250YWN0c3BhZ2UiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjU1OiJsb2dpbl9jdXN0b21lcl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1727673741),
-('dUNrvkhKKed8CsIxRXpIuJN81EeMMVIj0XQcl3br', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NvbnRhY3RzcGFnZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NjoiX3Rva2VuIjtzOjQwOiJtTTJ3ck9idXBySEVldlNMOURpOEowaDNpWDZ4YUlqdDk1NzhvOVZFIjtzOjU1OiJsb2dpbl9jdXN0b21lcl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1727520242);
+('PE2ptoyYXOhPR7y7ELkh38Z0sG26VPaetQrwAWkz', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoid0R4UlRoZFlEWjBFMmI0V0xiSmI0RzBBZ0poZnRoZkdHeUx5MkV4TyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jb250YWN0c3BhZ2UiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjU1OiJsb2dpbl9jdXN0b21lcl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1727768010);
 
 -- --------------------------------------------------------
 
@@ -431,13 +432,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `campaigns`
 --
 ALTER TABLE `campaigns`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
