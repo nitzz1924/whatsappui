@@ -32,10 +32,10 @@
                                     data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
                                     style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>New Contact</a>
 
-                                <a href="{{ route('getscheduledcam') }}"
+                                {{-- <a href="{{ route('getscheduledcam') }}"
                                     class="btn text-white rounded-4 waves-effect waves-light"
                                     style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>Testing
-                                    Schedule</a>
+                                    Schedule</a> --}}
                             </div>
                         </div>
                     </div>

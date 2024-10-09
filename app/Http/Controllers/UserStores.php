@@ -314,4 +314,24 @@ class UserStores extends Controller
         }
     }
 
+    public function verify(Request $request)
+    {
+        $hubVerifyToken = env('WHATSAPP_VERIFY_TOKEN');
+        $hubChallenge = $request->query('hub_challenge');
+        $hubVerifyTokenQuery = $request->query('hub_verify_token');
+
+        // Check if the request is a GET request and if the token matches
+        if ($request->isMethod('get') && $hubVerifyTokenQuery === $hubVerifyToken) {
+            return response($hubChallenge, 200);
+        }
+
+        return response('Forbidden', 403);
+    }
+
+    public function handleWebhook(Request $request)
+    {
+        Log::info($request->all());
+        return response('EVENT_RECEIVED', 200);
+    }
+
 }

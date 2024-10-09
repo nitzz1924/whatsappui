@@ -28,6 +28,12 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'middleware' => [
+        // Other middleware
+        App\Http\Middleware\VerifyCsrfToken::class,
+    ],
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
