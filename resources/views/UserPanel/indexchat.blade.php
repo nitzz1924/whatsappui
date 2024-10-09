@@ -13,7 +13,7 @@
                             <h5 class="mb-4">Chats</h5>
                         </div>
                     </div>
-                    <div class="search-box">
+                    <div class="search-box shadow-sm">
                         <input type="text" class="form-control bg-light border-light" placeholder="Search here...">
                         <i class="ri-search-2-line search-icon"></i>
                     </div>
@@ -72,20 +72,26 @@
                                                                 class="{{ $data->is_active ? 'active' : '' }}">
                                                                 <a href="javascript: void(0);" class="contact-tab"
                                                                     data-value="{{ json_encode($data) }}">
-                                                                    <div class="d-flex align-items-center">
+                                                                    <div class="d-flex align-items-center py-2">
                                                                         <div
                                                                             class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                                                            <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle bg-success text-white"
-                                                                                style="width: 30px; height: 30px;">
-                                                                                <span
-                                                                                    class="user-initial">{{ strtoupper(substr($data->fullname, 0, 1)) }}</span>
+                                                                            <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle text-white"
+                                                                                style="width: 30px; height: 30px; background-color:#1a4848;">
+                                                                                <span class="user-initial">{{ strtoupper(substr($data->fullname, 0, 1)) }}</span>
                                                                             </div>
                                                                         </div>
-
                                                                         <div class="flex-grow-1 overflow-hidden">
                                                                             <p class="text-truncate mb-0">
                                                                                 {{ $data->fullname }}
                                                                             </p>
+                                                                            <small class="text-muted fs-6 fw-normal mb-0">
+                                                                                Yes!.Ok
+                                                                            </small>
+                                                                        </div>
+                                                                        <div class="flex-grow-1 overflow-hidden text-end">
+                                                                            <small class="text-muted fs-6 fw-normal mb-0">
+                                                                                12:05
+                                                                            </small>
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -179,13 +185,13 @@
                                                         <div class="d-flex align-items-center">
                                                             <div
                                                                 class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                                                <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle bg-success text-white"
-                                                                    style="width: 40px; height: 40px;">
-                                                                    <span class="user-initial fs-5" id="alphabet">{{ strtoupper(substr($data->fullname, 0, 1)) }}</spanclass=>
+                                                                <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle  text-white"
+                                                                style="width: 40px; height: 40px; background-color:#1a4848;">
+                                                                    <span class="user-initial fs-5 fw-bold" id="alphabet">{{ strtoupper(substr($data->fullname, 0, 1)) }}</spanclass=>
                                                                 </div>
                                                             </div>
                                                             <div class="flex-grow-1 overflow-hidden">
-                                                                <h5 class="text-truncate mb-0 fs-16"><a
+                                                                <h5 class="text-truncate mb-0 fs-16 fw-bold"><a
                                                                         class="text-reset username"
                                                                         data-bs-toggle="offcanvas"
                                                             data-bs-target="#offcanvasRight"

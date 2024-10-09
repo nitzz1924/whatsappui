@@ -34,35 +34,35 @@
             <div id="two-column-menu"></div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">Menu</span></li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('indexchat') ? 'active' : '' }}">
                     <a class="nav-link menu-link" href="{{ route('indexchat') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
-                        <i class="bx bxs-chat"></i><span>Inbox</span>
+                        <img class="" src="{{asset('assets/images/mail.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Inbox</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('campaignspage') ? 'active' : '' }}">
                     <a class="nav-link menu-link" href="{{ route('campaignspage') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
-                        <i class=" bx bxs-megaphone"></i><span>Campaigns</span>
+                        <img class="" src="{{asset('assets/images/campaign (1).png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Campaigns</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('automationpage') ? 'active' : '' }}">
                     <a class="nav-link menu-link" href="{{ route('automationpage') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
-                        <i class="ri-settings-3-fill"></i><span>Automations</span>
+                        <img class="" src="{{asset('assets/images/automation.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Automations</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('analyticspage') ? 'active' : '' }}">
                     <a class="nav-link menu-link" href="{{ route('analyticspage') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
-                        <i class="bx bx-pie-chart-alt-2"></i><span>Analytics</span>
+                        <img class="" src="{{asset('assets/images/statistics.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Analytics</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button"
+                    <a class="nav-link menu-link " href="#sidebarLanding" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarLanding">
-                        <i class="ri-chat-settings-fill"></i>
-                        <span data-key="t-landing">Whatsapp Settings</span>
+                        <img class="" src="{{asset('assets/images/gear.png')}}" alt="" height="25" />&nbsp;
+                        <span class="fs-5" data-key="t-landing">Whatsapp Settings</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarLanding">
                         <ul class="nav nav-sm flex-column">
@@ -84,10 +84,10 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->routeIs('contactspage') ? 'active' : '' }}">
                     <a class="nav-link menu-link" href="{{ route('contactspage') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
-                        <i class="ri-contacts-book-2-fill"></i><span>Contacts</span>
+                        <img class="" src="{{asset('assets/images/phone-book.png')}}" alt="" height="25" />&nbsp;&nbsp;<span class="fs-5">Contacts</span>
                     </a>
                 </li>
             </ul>
