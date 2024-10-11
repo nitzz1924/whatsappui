@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap);
-@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap);
+/* @import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap); */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @font-face {
   font-family: hkgrotesk;
   src: url(../fonts/hkgrotesk-light.eot);
@@ -93,7 +94,7 @@ body{
 .navbar-header .btn-topbar {
   height: 42px;
   width: 42px;
-  color: var(--vz-header-item-sub-color);
+  color: white;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
@@ -514,7 +515,7 @@ body{
   padding: 0.625rem 1.5rem;
   color: var(--vz-vertical-menu-item-color);
   font-size: 0.925rem;
-  font-family: Rubik, sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .navbar-menu .navbar-nav .nav-item.active a {
   color: var(--vz-vertical-menu-item-active-color);
@@ -598,7 +599,7 @@ body{
   white-space: none;
   position: relative;
   font-size: 0.875rem;
-  font-family: Rubik, sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .navbar-menu .navbar-nav .nav-sm .nav-link:before {
   content: "";
@@ -3183,7 +3184,7 @@ body{
   font-family: var(--vz-font-sans-serif);
 }
 .ff-secondary {
-  font-family: Montserrat, sans-serif;
+    font-family: "Outfit", sans-serif;
 }
 .bg-pattern {
   background: url(../images/modal-bg.png) var(--vz-secondary-bg);
@@ -4608,7 +4609,7 @@ html {
   min-height: 100%;
 }
 :is(.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6) {
-  font-family: Montserrat, sans-serif;
+    font-family: "Outfit", sans-serif;
 }
 label {
   font-weight: 400;
@@ -10470,7 +10471,7 @@ button.gridjs-sort-desc {
 }
 .leaflet-map.leaflet-container {
   z-index: 0;
-  font-family: Rubik, sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 :root {
   --fc-border-color: var(--vz-border-color);
@@ -10614,7 +10615,7 @@ button.gridjs-sort-desc {
   float: none;
   padding: 1px;
   font-weight: 400;
-  font-family: Rubik, sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .fc-state-active,
 .fc-state-disabled,
@@ -14504,7 +14505,7 @@ span.flatpickr-weekday {
   color: var(--vz-body-color);
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
-  font-family: Montserrat, sans-serif;
+  font-family: "Outfit", sans-serif;
     font-weight: 600;
     font-size: 1rem;
     text-transform: capitalize;
@@ -14565,7 +14566,7 @@ span.flatpickr-weekday {
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
   color: var(--vz-body-color);
-  font-family: Montserrat, sans-serif;
+  font-family: "Outfit", sans-serif;
   font-weight: 400;
   font-size: 0.825rem;
 }
@@ -14737,7 +14738,7 @@ span.flatpickr-weekday {
   font-size: 12px;
 }
 .chat-conversation .conversation-list {
-  margin-bottom: 24px;
+  margin-bottom: 3px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -14797,6 +14798,7 @@ span.flatpickr-weekday {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  justify-content: end;
   gap: 8px;
 }
 .chat-conversation .conversation-list .dropdown .dropdown-toggle {
@@ -15559,7 +15561,7 @@ span.flatpickr-weekday {
   font-weight: 400;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
-  font-family: Montserrat, sans-serif;
+  font-family: "Outfit", sans-serif;
   color: var(--vz-body-color);
   padding: 14px;
 }

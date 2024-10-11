@@ -10,7 +10,7 @@
             <div class="h-100">
                 <div class="row">
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #116464;">
+                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #116464;">
+                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #116464;">
+                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #116464;">
+                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #116464;">
+                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #116464;">
+                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
@@ -142,11 +142,11 @@
                         <table class="table table-borderless table-nowrap">
                             <thead>
                                 <tr>
-                                    <th style="background-color:#1164641e; border-radius: 10px 0 0 10px;"> S.No</th>
-                                    <th style="background-color:#1164641e;">Recipient</th>
-                                    <th style="background-color:#1164641e;">Type</th>
-                                    <th style="background-color:#1164641e;">Status</th>
-                                    <th style="background-color:#1164641e;">Message</th>
+                                    <th style="background-color:#054c441e; border-radius: 10px 0 0 10px;"> S.No</th>
+                                    <th style="background-color:#054c441e;">Recipient</th>
+                                    <th style="background-color:#054c441e;">Type</th>
+                                    <th style="background-color:#054c441e;">Status</th>
+                                    <th style="background-color:#054c441e;">Message</th>
                                 </tr>
                             </thead>
                             <tbody id="table-body">

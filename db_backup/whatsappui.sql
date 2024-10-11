@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2024 at 06:56 AM
+-- Generation Time: Oct 11, 2024 at 02:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -189,6 +189,30 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `senderid` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `recievedid` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `senderid`, `type`, `message`, `recievedid`, `created_at`, `updated_at`) VALUES
+(1, '916375475956', 'Recieved', '{\"from\":\"916375475956\",\"id\":\"wamid.HBgMOTE2Mzc1NDc1OTU2FQIAEhggNEIzMTY2RUE4Q0UwRjI5OTY3QTRCQkYzQzY4MjVFRDEA\",\"timestamp\":\"1728558164\",\"text\":{\"body\":\"Are you interested in web development? Do you want to le advanced programming languages, job opportunities, and career paths in this exciting field? Then this seminar\\nDon\'t miss out on this fantastic opportunity to kickstart your web development journey\"},\"type\":\"text\"}', NULL, '2024-10-10 05:32:46', '2024-10-10 11:20:37'),
+(2, '916375475956', 'Recieved', '{\"from\":\"916375475956\",\"id\":\"wamid.HBgMOTE2Mzc1NDc1OTU2FQIAEhggNEIzMTY2RUE4Q0UwRjI5OTY3QTRCQkYzQzY4MjVFRDEA\",\"timestamp\":\"1728558164\",\"text\":{\"body\":\"Are you interested in web development?\"},\"type\":\"text\"}', NULL, '2024-10-10 05:32:46', '2024-10-10 11:20:37');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -276,7 +300,7 @@ CREATE TABLE `register_users` (
 --
 
 INSERT INTO `register_users` (`id`, `userid`, `password`, `mobilenumber`, `email`, `expiredate`, `createddate`, `accountstatus`, `verifystatus`, `apptoken`, `phonenumberid`, `Wabaid`, `created_at`, `updated_at`, `otp`) VALUES
-(17, '1001', '$2y$12$l6.03Ub7zM/dwLJXXhDn2.SgsJM804w6Qcj18/t1UiVxoAeMsKFHi', '8209165518', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', 'EAAKGjLrP6ccBOzb0HZCNjlEZBAi9K2bf1vwD9rH6YtZCGlLhcSIZC0QZBYRQBn5XME4qSSMu4yhWkZAoXc7XLWLttMBQ6OIJHwZAJyNZBnnHJ4TG12SddRJMp9TYF2XyaRfvQRY4vDmCcTuIkTkvQ1ttqVE6ZAa9vILYOlYCltDhYXZAGq4MwK05XoGGP6ZB4YznUhXzbl7KoMZAUkHbhTejkPXZCfOfU0CsZD', '282520401622445', '309165212288658', '2024-09-05 06:32:20', '2024-10-01 06:35:31', '841715');
+(17, '1001', '$2y$12$l6.03Ub7zM/dwLJXXhDn2.SgsJM804w6Qcj18/t1UiVxoAeMsKFHi', '918824269821', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', 'EAAQiZBXP3SakBOZCUVsXFiFprbNNV1Xr2baP6wi5ZBDuKgEz72g7NWRTmbtSFBzXZASMiImCHvSiy0mRNCOtNkf7QdTboiVnJ0wrCCWAHMKw0wZBnvMotNkkp8BnGcIh6JQjpJAUNqL00S6FTOmY1OVtVvnTEZC2uiLiNNzJ7a2ahdvulZCstQHQkkVSoTrJg8AnAZDZD', '282520401622445', '309165212288658', '2024-09-05 06:32:20', '2024-10-11 10:35:21', '841715');
 
 -- --------------------------------------------------------
 
@@ -298,7 +322,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('PE2ptoyYXOhPR7y7ELkh38Z0sG26VPaetQrwAWkz', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoid0R4UlRoZFlEWjBFMmI0V0xiSmI0RzBBZ0poZnRoZkdHeUx5MkV4TyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jb250YWN0c3BhZ2UiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjU1OiJsb2dpbl9jdXN0b21lcl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1727768010);
+('z8w70dmja2vuAy58PEBGBJmqVDG9r7HKBtINfT1P', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiV2RmOTlhOVJxaXI2bUoxZzdtTFFwMVJ0RlVWRmJpTnVKdzZWb3VmViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC90ZW1wbGF0ZXNwYWdlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1NToibG9naW5fY3VzdG9tZXJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxNzt9', 1728643108);
 
 -- --------------------------------------------------------
 
@@ -384,6 +408,12 @@ ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -457,6 +487,12 @@ ALTER TABLE `group_types`
 --
 ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`

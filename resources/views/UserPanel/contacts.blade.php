@@ -30,7 +30,7 @@
                                 <a href="{{ route('addnewautomation') }}"
                                     class="btn text-white rounded-4 waves-effect waves-light" data-bs-toggle="offcanvas"
                                     data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                                    style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>New Contact</a>
+                                    style="background-color: #054c44"><i class="mdi mdi-plus me-2"></i>New Contact</a>
 
                                 {{-- <a href="{{ route('getscheduledcam') }}"
                                     class="btn text-white rounded-4 waves-effect waves-light"
@@ -91,10 +91,10 @@
 </div>
 <div class="offcanvas offcanvas-end mycustomcanvascontacts" tabindex="-1" id="offcanvasRight"
     aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header" style="background-color: #1164641e">
-        <h5 id="offcanvasRightLabel">Contact Creation</h5>
+    <div class="offcanvas-header" style="background-color: #054c44">
+        <h5 id="offcanvasRightLabel" class="text-white">Contact Creation</h5>
         <div class="d-flex justify-content-end align-items-center">
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <a href="#" class="text-light fs-4" data-bs-dismiss="offcanvas" aria-label="Close"><i class=" ri-close-fill"></i></a>
         </div>
     </div>
     <div class="p-3">
@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-12">
                             <button type="submit" class="btn text-white rounded-4 waves-effect waves-light"
-                                style="background-color: #116464">Upload</button>
+                                style="background-color: #054c44">Upload</button>
                         </div>
                     </div>
                 </form>
@@ -263,9 +263,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end align-items-center mt-3">
+                <div class="d-flex justify-content-start align-items-center mt-3">
                     <button type="submit" class="btn text-white rounded-4 waves-effect waves-light"
-                        style="background-color: #116464">Create Contact</button>
+                        style="background-color: #054c44">Create</button>
                 </div>
             </div>
         </div>
@@ -275,7 +275,7 @@
     <form action="{{ route('updatecontact') }}" method="POST">
         @csrf
         <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content rounded-4" style="border: 0.1rem solid #116464;">
+            <div class="modal-content rounded-4" style="border: 0.1rem solid #054c44;">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel fs-5 fw-bold text-black">Edit Contact</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
@@ -285,7 +285,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn  text-white rounded-4 waves-effect waves-light"
-                        style="background-color: #116464">Update</button>
+                        style="background-color: #054c44">Update</button>
                 </div>
             </div>
         </div>

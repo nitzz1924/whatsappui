@@ -169,7 +169,8 @@ class UserStores extends Controller
         ])->post('https://graph.facebook.com/v20.0/'.$phonenumberid.'/messages', $data);
         // Handle response
         if ($response->successful()) {
-            //  dd($response->body());
+
+             dd($response->body());
             return back()->with('success', 'Message sent successfully!');
         } else {
             return back()->withErrors('Message failed to send: ' . $response->body());

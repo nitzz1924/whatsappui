@@ -18,7 +18,7 @@
                                 <div class="d-flex justify-content-end ">
                                     <div class="px-2">
                                         <button type="submit" class="btn text-white rounded-4 waves-effect waves-light"
-                                            style="background-color: #116464"><i class="bx bx-send me-2"></i>Send & Set
+                                            style="background-color: #054c44"><i class="bx bx-send me-2"></i>Send & Set
                                             Live</button>
                                     </div>
                                 </div>
@@ -29,7 +29,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="card rounded-4" style="border: 1px solid #116464;">
+                    <div class="card rounded-4" style="border: 1px solid #054c44;">
                         <div class="card-body rounded-4 p-4">
                             <div class="mb-3">
                                 <label for="username" class="form-label fs-5">Campaign Name</label>

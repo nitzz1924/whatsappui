@@ -29,7 +29,7 @@
                                 </select></div>
                             <div class="px-2"> <a href="{{ route('addnewcampaign') }}"
                                     class="btn text-white rounded-4 waves-effect waves-light"
-                                    style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>New Campaign</a>
+                                    style="background-color: #054c44"><i class="mdi mdi-plus me-2"></i>New Campaign</a>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Campaign;
 use App\Models\Contact;
 use App\Models\GroupType;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
@@ -31,7 +32,8 @@ class UserViews extends Controller
         $contactsdata = Contact::orderBy('created_at', 'DESC')->get();
         $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
         $alltemplates = $this->getTemplateList();
-        return view('UserPanel.indexchat',compact( 'contactsdata','groupsdata','alltemplates'));
+        $chat = Message::get();
+        return view('UserPanel.indexchat',compact( 'contactsdata','groupsdata','alltemplates','chat'));
     }
     public function campaignspage()
     {
@@ -99,5 +101,9 @@ class UserViews extends Controller
             dd('Error fetching template list: ' . $response->body());
         }
 
+    }
+    public function getchatofuser($phonenumber){
+       $chat = Message::where('senderid',$phonenumber)->get();
+       return response()->json($chat);
     }
 }

@@ -61,6 +61,8 @@ Route::controller(UserViews::class)->group(function() {
     Route::get('groupspage', 'groupspage')->name('groupspage');
     Route::get('contactspage', 'contactspage')->name('contactspage');
     Route::get('/webhook/whatsapp', 'verify')->name('verify')->middleware(VerifyCsrfToken::class);
+    Route::get('getchatofuser/{phonenumber}', 'getchatofuser')->name('getchatofuser');
+
 });
 
 

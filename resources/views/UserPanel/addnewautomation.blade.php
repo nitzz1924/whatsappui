@@ -15,13 +15,13 @@
                         </div>
                         <div class="d-flex justify-content-end ">
                             <div class="px-2"> <a href="" class="btn text-white rounded-4 waves-effect waves-light"
-                                    style="background-color: #116464">Cancel</a>
+                                    style="background-color: #054c44">Cancel</a>
                             </div>
                             <div class="px-2"> <a href="" class="btn text-white rounded-4 waves-effect waves-light"
-                                    style="background-color: #116464"><i class=" bx bxs-save me-2"></i>Save & Close</a>
+                                    style="background-color: #054c44"><i class=" bx bxs-save me-2"></i>Save & Close</a>
                             </div>
                             <div class="px-2"> <a href="" class="btn text-white rounded-4 waves-effect waves-light"
-                                    style="background-color: #116464"><i class="bx bx-play me-2"></i>Save & Start</a>
+                                    style="background-color: #054c44"><i class="bx bx-play me-2"></i>Save & Start</a>
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
     </div>
     <div class="row">
         <div class="col-xl-12">
-            <div class="card rounded-4 py-3" style="border: 1px solid #116464;">
+            <div class="card rounded-4 py-3" style="border: 1px solid #054c44;">
                 <div class="card-body form-steps">
                     <form class="vertical-navs-step">
                         <div class="row gy-5">
@@ -217,7 +217,7 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex align-items-end mt-4">
-                                                    <button style="background-color: #116464"
+                                                    <button style="background-color: #054c44"
                                                         class="btn py-2  fs-5 rounded-4 text-white" type="submit">Submit</button>
                                             </div>
                                         </div>
@@ -235,7 +235,7 @@
     <div class="offcanvas-header"  style="background-color: #1164641e">
         <h5 id="offcanvasRightLabel">Enter Details</h5>
         <div class="d-flex justify-content-end align-items-center">
-            <a href="#" class="btn btn-sm text-white rounded-4 waves-effect waves-light" style="background-color: #116464">Create Message</a>
+            <a href="#" class="btn btn-sm text-white rounded-4 waves-effect waves-light" style="background-color: #054c44">Create Message</a>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
     </div>
