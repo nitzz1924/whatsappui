@@ -13,5 +13,7 @@ class Message extends Model
         'email',
         'message',
         'recievedid',
+        'templatename',
+        'imageurl',
     ];
 }

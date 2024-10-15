@@ -30,12 +30,12 @@ Route::middleware([
 
 
 //Admin Panel Routes
-Route::controller(AdminViews::class)->group(function() {
+Route::controller(AdminViews::class)->group(function () {
     Route::get('userregister', 'userregister')->name('userregister');
     Route::get('alluserslist', 'alluserslist')->name('alluserslist');
 });
 
-Route::controller(AdminStores::class)->group(function() {
+Route::controller(AdminStores::class)->group(function () {
     Route::post('insertregisterusers', 'insertregisterusers')->name('insertregisterusers');
     Route::get('deleteregisteruser/{id}', 'deleteregisteruser')->name('deleteregisteruser');
     Route::post('/updateaccountstatus', 'updateaccountstatus')->name('updateaccountstatus');
@@ -46,7 +46,7 @@ Route::controller(AdminStores::class)->group(function() {
 
 
 //User Panel Routes
-Route::controller(UserViews::class)->group(function() {
+Route::controller(UserViews::class)->group(function () {
     Route::get('user/login', 'userloginpage')->name('userloginpage');
     Route::get('userdashboard', 'userdashboard')->name('userdashboard');
     Route::get('logoutuserpanel', 'logoutuserpanel')->name('logoutuserpanel');
@@ -59,6 +59,7 @@ Route::controller(UserViews::class)->group(function() {
     Route::get('wahapage', 'wahapage')->name('wahapage');
     Route::get('templatespage', 'templatespage')->name('templatespage');
     Route::get('groupspage', 'groupspage')->name('groupspage');
+
     Route::get('contactspage', 'contactspage')->name('contactspage');
     Route::get('/webhook/whatsapp', 'verify')->name('verify')->middleware(VerifyCsrfToken::class);
     Route::get('getchatofuser/{phonenumber}', 'getchatofuser')->name('getchatofuser');
@@ -66,7 +67,7 @@ Route::controller(UserViews::class)->group(function() {
 });
 
 
-Route::controller(UserStores::class)->group(function() {
+Route::controller(UserStores::class)->group(function () {
     Route::post('/signup_user_otp', 'signup_user_otp')->name('signup_user_otp');
     Route::post('verifyotp', 'verifyotp')->name('verifyotp');
     Route::post('insertgroups', 'insertgroups')->name('insertgroups');
@@ -79,11 +80,12 @@ Route::controller(UserStores::class)->group(function() {
     Route::post('updategroups', 'updategroups')->name('updategroups');
     Route::post('sendsinglemessage', 'sendsinglemessage')->name('sendsinglemessage');
     Route::post('webhook', 'handleWebhook')->name('handleWebhook');
+    Route::get('refreshtemplates', 'refreshtemplates')->name('refreshtemplates');
 
 });
 
 
 //Excel Routes
-Route::get('/import-excel', [ExcelContactSheet::class,'index'])->name('import.excel');
-Route::post('/import-excel', [ExcelContactSheet::class,'import']);
+Route::get('/import-excel', [ExcelContactSheet::class, 'index'])->name('import.excel');
+Route::post('/import-excel', [ExcelContactSheet::class, 'import']);
 

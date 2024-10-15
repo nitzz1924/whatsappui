@@ -67,7 +67,7 @@ class UserViews extends Controller
     public function templatespage()
     {
         $alltemplates = $this->getTemplateList();
-        // dd($alltemplates);
+        //dd($alltemplates);
         return view('UserPanel.templates',compact('alltemplates'));
     }
     public function groupspage()

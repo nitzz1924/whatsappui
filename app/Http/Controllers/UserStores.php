@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Campaign;
 use App\Models\Contact;
 use App\Models\GroupType;
+use App\Models\Message;
 use App\Models\RegisterUser;
+use App\Models\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Auth;
@@ -166,11 +168,19 @@ class UserStores extends Controller
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
             'Content-Type' => 'application/json'
-        ])->post('https://graph.facebook.com/v20.0/'.$phonenumberid.'/messages', $data);
+        ])->post('https://graph.facebook.com/v20.0/' . $phonenumberid . '/messages', $data);
         // Handle response
         if ($response->successful()) {
 
-             dd($response->body());
+            //Insert Query
+            $data = Message::create([
+                'templatename' => $templateid,
+                'imageurl' => $fileurl,
+                'type' => 'Sent',
+                'senderid' => $loggedinuser->mobilenumber,
+                'recievedid' => $phone,
+            ]);
+            //dd($response->body());
             return back()->with('success', 'Message sent successfully!');
         } else {
             return back()->withErrors('Message failed to send: ' . $response->body());
@@ -198,7 +208,7 @@ class UserStores extends Controller
                 'type' => $req->type,
                 'fullname' => $req->fullname,
                 'email' => $req->email,
-                'phonenumber' => '+91'.$req->phonenumber,
+                'phonenumber' => '+91' . $req->phonenumber,
                 'city' => $req->city,
                 'state' => $req->state,
                 'country' => $req->country,
@@ -225,11 +235,13 @@ class UserStores extends Controller
         }
     }
 
-    public function sendsinglemessage(Request $req){
+    public function sendsinglemessage(Request $req)
+    {
 
+        // dd($req->templatedata);
         $bannerimagePath = '';
-        try{
-             // Single Image Upload
+        try {
+            // Single Image Upload
             if ($req->hasFile('mediaimage')) {
                 //dd($req->all());
                 $bannerimage = $req->file('mediaimage');
@@ -240,41 +252,42 @@ class UserStores extends Controller
                 $bannerimagePath = url($uploadedPath . '/' . $bannerimageName);
             }
             //dd($bannerimagePath);
-            $this->dropMessage($req->phonenumber, $req->template, $bannerimagePath, $req->mediatype,$req->languagetype);
+            $this->dropMessage($req->phonenumber, $req->template, $bannerimagePath, $req->mediatype, $req->languagetype);
             return back()->with('success', 'Message Sent.!');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('indexchat')->with('error', $e->getMessage());
         }
     }
 
-    public function getscheduledcam(Request $req) {
+    public function getscheduledcam(Request $req)
+    {
 
-            $currentDateTime = Carbon::now()->format('Y-m-d\TH:i');
-            $oneHourLater = Carbon::now()->addHour()->format('Y-m-d\TH:i');
+        $currentDateTime = Carbon::now()->format('Y-m-d\TH:i');
+        $oneHourLater = Carbon::now()->addHour()->format('Y-m-d\TH:i');
 
-            // Query campaigns that were scheduled between one hour ago and now
-            $campaigns = Campaign::whereBetween('datetime', [$currentDateTime, $oneHourLater])->get();
-            //dd( $campaigns);
-            foreach ($campaigns as $data) {
-                $contacts = Contact::where('type', '=', $data->modulename)->where('status', $data->segmentname)->get();
-                $user = RegisterUser::where('id',$data->userid)->first();
-                foreach($contacts as $con){
-                    //dd($con);
-                    $this->dropMessageapi($con->phonenumber, $data->template, $data->mediaimage, $data->mediatype, $data->languagetype, $user->apptoken,$user->phonenumberid);
-                }
+        // Query campaigns that were scheduled between one hour ago and now
+        $campaigns = Campaign::whereBetween('datetime', [$currentDateTime, $oneHourLater])->get();
+        //dd( $campaigns);
+        foreach ($campaigns as $data) {
+            $contacts = Contact::where('type', '=', $data->modulename)->where('status', $data->segmentname)->get();
+            $user = RegisterUser::where('id', $data->userid)->first();
+            foreach ($contacts as $con) {
+                //dd($con);
+                $this->dropMessageapi($con->phonenumber, $data->template, $data->mediaimage, $data->mediatype, $data->languagetype, $user->apptoken, $user->phonenumberid);
             }
-            //Prepare the response
-            $response = [
-                'message' => 'Here is your Campaign List scheduled in the last hour...',
-                'success' => true,
-                'data' => $campaigns,
-            ];
+        }
+        //Prepare the response
+        $response = [
+            'message' => 'Here is your Campaign List scheduled in the last hour...',
+            'success' => true,
+            'data' => $campaigns,
+        ];
 
-            // Return as JSON response
-            return response()->json($response, 200);
+        // Return as JSON response
+        return response()->json($response, 200);
     }
 
-    function dropMessageapi($phone, $templateid, $fileurl, $mediatype, $languagetype,$accessToken,$phonenumberid)
+    function dropMessageapi($phone, $templateid, $fileurl, $mediatype, $languagetype, $accessToken, $phonenumberid)
     {
         //dd($phone, $templateid, $fileurl, $mediatype, $languagetype, $accessToken, $phonenumberid);
         $data = [
@@ -304,7 +317,7 @@ class UserStores extends Controller
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
             'Content-Type' => 'application/json'
-        ])->post('https://graph.facebook.com/v20.0/'.$phonenumberid.'/messages', $data);
+        ])->post('https://graph.facebook.com/v20.0/' . $phonenumberid . '/messages', $data);
 
         Log::info('WhatsApp API response: ', [$response->body()]);
         // Handle response
@@ -335,4 +348,51 @@ class UserStores extends Controller
         return response('EVENT_RECEIVED', 200);
     }
 
+    public function refreshtemplates()
+    {
+        $loggedinuser = Auth::guard('customer')->user();
+        $alltemplates = $this->getTemplateList();
+
+        try {
+            foreach ($alltemplates as $data) {
+                Template::firstOrCreate(
+                    ['templateid' => $data['id']], // Search for this templateid
+                    [
+                        'userid' => $loggedinuser->id,
+                        'name' => $data['name'],
+                        'components' => json_encode($data['components']),
+                        'language' => $data['language'],
+                        'status' => $data['status'],
+                        'category' => $data['category'],
+                        'sub_category' => isset($data['sub_category']) ? $data['sub_category'] : null,
+                    ]
+                );
+            }
+            return back()->with('success', 'Templates Refreshed!');
+        } catch (Exception $e) {
+            return redirect()->route('templatespage')->with('error', $e->getMessage());
+        }
+    }
+
+    function getTemplateList()
+    {
+        $loggedinuser = Auth::guard('customer')->user();
+        $accessToken = $loggedinuser->apptoken;
+        $whatsbusinessid = $loggedinuser->Wabaid;
+        $apiBaseUrl = 'https://graph.facebook.com/';
+
+        $client = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $accessToken,
+        ]);
+
+        $response = $client->get($apiBaseUrl . '/v20.0/' . $whatsbusinessid . '/message_templates');
+        if ($response->successful()) {
+            $templates = $response->json()['data'];
+            return $templates;
+            //dd($templates); // Replace with your desired handling of the template list
+        } else {
+            dd('Error fetching template list: ' . $response->body());
+        }
+
+    }
 }

@@ -48,6 +48,9 @@
                                 <a href="https://business.facebook.com/wa/manage/message-templates/"
                                     class="btn text-white rounded-4 waves-effect waves-light" target="_blank"
                                     style="background-color: #116464"><i class="ri-add-circle-fill me-2"></i>Create Template</a>
+                                    <a href="{{ url('refreshtemplates')}}" id="updateTemplatesBtn" class="btn text-white rounded-4 waves-effect waves-light ms-2" style="background-color: #116464">
+                                        <i class="ri-refresh-line me-2"></i>Refresh Templates
+                                    </a>
                             </div>
                         </div>
                     </div>

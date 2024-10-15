@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2024 at 02:09 PM
+-- Generation Time: Oct 15, 2024 at 01:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -197,6 +197,8 @@ CREATE TABLE `messages` (
   `senderid` varchar(255) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `templatename` varchar(255) DEFAULT NULL,
+  `imageurl` varchar(255) DEFAULT NULL,
   `recievedid` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -206,9 +208,10 @@ CREATE TABLE `messages` (
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`id`, `senderid`, `type`, `message`, `recievedid`, `created_at`, `updated_at`) VALUES
-(1, '916375475956', 'Recieved', '{\"from\":\"916375475956\",\"id\":\"wamid.HBgMOTE2Mzc1NDc1OTU2FQIAEhggNEIzMTY2RUE4Q0UwRjI5OTY3QTRCQkYzQzY4MjVFRDEA\",\"timestamp\":\"1728558164\",\"text\":{\"body\":\"Are you interested in web development? Do you want to le advanced programming languages, job opportunities, and career paths in this exciting field? Then this seminar\\nDon\'t miss out on this fantastic opportunity to kickstart your web development journey\"},\"type\":\"text\"}', NULL, '2024-10-10 05:32:46', '2024-10-10 11:20:37'),
-(2, '916375475956', 'Recieved', '{\"from\":\"916375475956\",\"id\":\"wamid.HBgMOTE2Mzc1NDc1OTU2FQIAEhggNEIzMTY2RUE4Q0UwRjI5OTY3QTRCQkYzQzY4MjVFRDEA\",\"timestamp\":\"1728558164\",\"text\":{\"body\":\"Are you interested in web development?\"},\"type\":\"text\"}', NULL, '2024-10-10 05:32:46', '2024-10-10 11:20:37');
+INSERT INTO `messages` (`id`, `senderid`, `type`, `message`, `templatename`, `imageurl`, `recievedid`, `created_at`, `updated_at`) VALUES
+(1, '916375475956', 'Recieved', '{\"from\":\"916375475956\",\"id\":\"wamid.HBgMOTE2Mzc1NDc1OTU2FQIAEhggNEIzMTY2RUE4Q0UwRjI5OTY3QTRCQkYzQzY4MjVFRDEA\",\"timestamp\":\"1728558164\",\"text\":{\"body\":\"Are you interested in web development? Do you want to le advanced programming languages, job opportunities, and career paths in this exciting field? Then this seminar\\nDon\'t miss out on this fantastic opportunity to kickstart your web development journey\"},\"type\":\"text\"}', NULL, NULL, NULL, '2024-10-10 05:32:46', '2024-10-10 11:20:37'),
+(2, '916375475956', 'Recieved', '{\"from\":\"916375475956\",\"id\":\"wamid.HBgMOTE2Mzc1NDc1OTU2FQIAEhggNEIzMTY2RUE4Q0UwRjI5OTY3QTRCQkYzQzY4MjVFRDEA\",\"timestamp\":\"1728558164\",\"text\":{\"body\":\"Are you interested in web development?\"},\"type\":\"text\"}', NULL, NULL, NULL, '2024-10-10 05:32:46', '2024-10-10 11:20:37'),
+(4, '918824269821', 'Sent', NULL, 'yuvtraining_seminar', 'http://127.0.0.1:8000/assets/images/templates/1728986024.png', '+916375475956', '2024-10-15 09:53:45', '2024-10-15 09:53:45');
 
 -- --------------------------------------------------------
 
@@ -322,7 +325,41 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('z8w70dmja2vuAy58PEBGBJmqVDG9r7HKBtINfT1P', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiV2RmOTlhOVJxaXI2bUoxZzdtTFFwMVJ0RlVWRmJpTnVKdzZWb3VmViI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC90ZW1wbGF0ZXNwYWdlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1NToibG9naW5fY3VzdG9tZXJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxNzt9', 1728643108);
+('2pPdZDQ5yVtqovmUklHc5YCepv7EejZWoehAot8z', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibTExa25RdnFoY2pHM25KdkFRNnpjdEhNZTd5YURqZFdDbzQxMUZyQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9pbmRleGNoYXQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjU1OiJsb2dpbl9jdXN0b21lcl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1728993542);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `templates`
+--
+
+CREATE TABLE `templates` (
+  `id` int(11) NOT NULL,
+  `userid` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `components` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`components`)),
+  `language` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `sub_category` varchar(255) DEFAULT NULL,
+  `templateid` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `templates`
+--
+
+INSERT INTO `templates` (`id`, `userid`, `name`, `components`, `language`, `status`, `category`, `sub_category`, `templateid`, `created_at`, `updated_at`) VALUES
+(26, '17', 'hello_world', '[{\"type\":\"HEADER\",\"format\":\"TEXT\",\"text\":\"Hello World\"},{\"type\":\"BODY\",\"text\":\"Welcome and congratulations!! This message demonstrates your ability to send a WhatsApp message notification from the Cloud API, hosted by Meta. Thank you for taking the time to test with us.\"},{\"type\":\"FOOTER\",\"text\":\"WhatsApp Business Platform sample message\"}]', 'en_US', 'APPROVED', 'UTILITY', NULL, '1022671846051045', '2024-10-15 11:56:50', '2024-10-15 11:56:50'),
+(27, '17', '19_sept_bulk_yuvmedia', '[{\"type\":\"HEADER\",\"format\":\"VIDEO\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/454226293_513250244975457_7966794352129396239_n.mp4?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=VnFEu_u59k8Q7kNvgGFH6PH&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=ATD-vKSrQYDxo-Evv9eBLml&oh=01_Q5AaIEX-RpM9_84ij-p5bb-QlPZsmVnNqui5YDSN5XXUQ0m2&oe=6735B548\"]}},{\"type\":\"BODY\",\"text\":\"*Best Digital Marketing Agency at your service - Your business deserves the best. *\\nIt\'s time for YUVMEDIA magic. \\ud83e\\udd14\\n\\nAt YUVMEDIA, we don\'t just market, we create magic! \\n\\nWe provide:\\n\\u2714 Marketplace Expertise.\\n\\u2714 SEO\\n\\u2714 Performance Media.\\n\\u2714 Social Media.\\n\\u2714 Web & App Development.\\n\\u2714 CRM & ERP Solutions.\\n\\u2714 Video Production.\\n\\u2714 Designing Services.\\n\\u2714 GBP Management.\\n\\u2714 Influencer Management.\\n\\nReach out today and let\'s make your brand shine! \\ud83d\\udcac\\n\\nDon\'t just take our word for it- Check out our client success stories.\"},{\"type\":\"FOOTER\",\"text\":\"Click the link below & Start Scrolling\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"URL\",\"text\":\"Visit Our Website\",\"url\":\"https:\\/\\/business.yuvmedia.in\\/\"}]}]', 'en', 'APPROVED', 'MARKETING', 'CUSTOM', '513250241642124', '2024-10-15 11:56:50', '2024-10-15 11:56:50'),
+(28, '17', 'whatsapp_marketing_campaign_3', '[{\"type\":\"HEADER\",\"format\":\"VIDEO\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/417328046_1018593666676900_3709983320261188500_n.mp4?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=-rehRqg-qqcQ7kNvgEOm2CP&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=ATD-vKSrQYDxo-Evv9eBLml&oh=01_Q5AaIOkzslNAK49ui_p8S0KxCUuDN0HJfX9hboJHccaBJW-i&oe=6735CF69\"]}},{\"type\":\"BODY\",\"text\":\"Whether you\'re a travel agent, own a clothing or footwear store, are an astrologer seeking new clients, or an architect looking for new projects.\\n\\nYUVMEDIA is your go-to solution! We\'ve empowered over 600 MSMEs across leading sectors to thrive.\\n\\nWe provide:\\n\\u2705Marketplace Expertise.\\n\\u2705SEO\\n\\u2705Performance Media.\\n\\u2705Social Media.\\n\\u2705Web & App Development.\\n\\u2705CRM & ERP Solutions.\\n\\u2705Video Production.\\n\\u2705Designing Services.\\n\\u2705GBP Management.\\n\\u2705Influencer Management.\\n\\nContact us today for a free consultation.\\n\\nDon\'t just take our word for it\\u2014explore our client success stories. \\n\\nConnect with us to become the next successful brand in the market.\"},{\"type\":\"FOOTER\",\"text\":\"Click the link below and Start Scrolling\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"URL\",\"text\":\"Visit Our Website Now\",\"url\":\"https:\\/\\/business.yuvmedia.in\\/\"}]}]', 'en', 'APPROVED', 'MARKETING', 'CUSTOM', '1018593636676903', '2024-10-15 11:56:50', '2024-10-15 11:56:50'),
+(29, '17', 'yuvmedia_whatsapp_marketing_02', '[{\"type\":\"HEADER\",\"format\":\"VIDEO\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/455108289_1320513185584549_5176204141377461365_n.mp4?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=vdqmrxm5xK4Q7kNvgFWo5sp&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=ATD-vKSrQYDxo-Evv9eBLml&oh=01_Q5AaIJgLM99FgyP4yaMQL8EpqoTIssjjeF-cG19_QnP_H0Z3&oe=6735D365\"]}},{\"type\":\"BODY\",\"text\":\"Whether you\'re a travel agent, own a clothing or footwear store, are an astrologer seeking new clients, or an architect looking for new projects.\\n\\nYUVMEDIA is your go-to solution! We\'ve empowered over *600 MSMEs* across leading sectors to thrive.\\n\\nWe provide:\\n\\u2705Marketplace Expertise.\\n\\u2705SEO\\n\\u2705Performance Media.\\n\\u2705Social Media.\\n\\u2705Web & App Development.\\n\\u2705CRM & ERP Solutions.\\n\\u2705Video Production.\\n\\u2705Designing Services.\\n\\u2705GBP Management.\\n\\u2705Influencer Management.\\n\\n*Contact us today for a free consultation.\\n*\\nDon\'t just take our word for it\\u2014explore our client success stories. \\n\\n*_Connect with us to become the next successful brand._*\"},{\"type\":\"FOOTER\",\"text\":\"Click on the Link Below & Start Scrolling\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"URL\",\"text\":\"Visit Our Website Now\",\"url\":\"https:\\/\\/business.yuvmedia.in\\/\"}]}]', 'en', 'APPROVED', 'MARKETING', 'CUSTOM', '1320513182251216', '2024-10-15 11:56:50', '2024-10-15 11:56:50'),
+(30, '17', 'yuvmedia_whatsapp_marketing_01', '[{\"type\":\"HEADER\",\"format\":\"VIDEO\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/425121419_1892474251238912_5031921930232779657_n.mp4?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=65kZyjr1yKYQ7kNvgE_wxtr&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=ATD-vKSrQYDxo-Evv9eBLml&oh=01_Q5AaIEHVKCSQysWOsHEqawLQ4fqYeqOm1fR0m6XDEuIGxRts&oe=6735B4A0\"]}},{\"type\":\"BODY\",\"text\":\"*Best Digital Marketing Agency at your service - Your business deserves the best. *\\nIt\'s time for YUVMEDIA magic. \\ud83e\\udd14\\n\\nAt YUVMEDIA, we don\'t just market, we create magic! \\n\\nWe provide:\\n\\u2714 Marketplace Expertise.\\n\\u2714 SEO\\n\\u2714 Performance Media.\\n\\u2714 Social Media.\\n\\u2714 Web & App Development.\\n\\u2714 CRM & ERP Solutions.\\n\\u2714 Video Production.\\n\\u2714 Designing Services.\\n\\u2714 GBP Management.\\n\\u2714 Influencer Management.\\n\\nReach out today and let\'s make your brand shine! \\ud83d\\udcac\\n\\nDon\'t just take our word for it- Check out our client success stories.\"},{\"type\":\"FOOTER\",\"text\":\"Click the link below & Start Scrolling\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"URL\",\"text\":\"Visit Our Website Now!\",\"url\":\"https:\\/\\/business.yuvmedia.in\\/\"}]}]', 'en', 'APPROVED', 'MARKETING', NULL, '1892474247905579', '2024-10-15 11:56:50', '2024-10-15 11:56:50'),
+(31, '17', 'whats_app_marketing_for_service', '[{\"type\":\"HEADER\",\"format\":\"IMAGE\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/437068910_1214273443219231_6053277554443404233_n.jpg?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=ysjziEGWVYAQ7kNvgFZOPpW&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=ATD-vKSrQYDxo-Evv9eBLml&oh=01_Q5AaIIaIDUDydyGfZYv3up3xV9ao9y0LG-dY-aBPepKEh23I&oe=6735C579\"]}},{\"type\":\"BODY\",\"text\":\"*Yuvmedia Best Digital Marketing Company in India*\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"URL\",\"text\":\"Visit Our website\",\"url\":\"https:\\/\\/yuvmedia.in\\/\"}]}]', 'en', 'APPROVED', 'MARKETING', 'CUSTOM', '1214273436552565', '2024-10-15 11:56:50', '2024-10-15 11:56:50'),
+(32, '17', 'header', '[{\"type\":\"HEADER\",\"format\":\"TEXT\",\"text\":\"hi\"},{\"type\":\"BODY\",\"text\":\"welcome to yuvmedia\"}]', 'en', 'APPROVED', 'MARKETING', NULL, '446771061401702', '2024-10-15 11:56:50', '2024-10-15 11:56:50'),
+(33, '17', 'yuvtraining_seminar', '[{\"type\":\"HEADER\",\"format\":\"IMAGE\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/421407039_508207501868565_7292007801105227494_n.jpg?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=-JDEdnn15doQ7kNvgGLKw5O&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=A5Yb8QhLkJ7Iqj39gzJIGtc&oh=01_Q5AaIF9bq4yUTXsmzWv8x6uwt7Es4ahe-EohzoiQVKTIBUdZ&oe=6735D94F\"]}},{\"type\":\"BODY\",\"text\":\"\\ud83d\\ude80 *Join Our Free Web Development Seminar!* \\ud83d\\ude80\\n\\n\\ud83d\\uddd3\\ufe0f *Date*: Saturday, 20th July 2024\\n\\ud83d\\udd54 *Time* : 5:00 PM - 6:00 PM\\n\\ud83d\\udccd *Venue*: YUVTRAININGS , B17, 1st Floor, Above Royal Bakers, Glitz Circle, Ramnagar Road, Ajmer, Rajasthan, 305001\\n\\nAre you interested in web development? Do you want to learn about advanced programming languages, job opportunities, and career paths in this exciting field? Then this seminar is perfect for you!\\n\\n\\ud83c\\udf93 *What You\'ll Learn*:\\n\\nIntroduction to Web Development\\nAdvanced Programming Languages\\nCareer Opportunities in Web Development\\nSeats are limited, so make sure to register in advance! \\ud83c\\udf9f\\ufe0f\\n\\n\\ud83d\\udcde For Free Registration: *Call us at 9588977566*\\n\\nAs tomorrow will be a seminar of web development we need a confirmation from your side that you are attending so kindly fill this form .\\n\\nhttps:\\/\\/docs.google.com\\/forms\\/d\\/e\\/1FAIpQLSeHo_HYvZpuLWQGhUgqyaifMjph-wrUBcKj8Tz8KKHC4fcQJw\\/viewform\\n\\nDon\'t miss out on this fantastic opportunity to kickstart your web development journey\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"PHONE_NUMBER\",\"text\":\"Call phone number\",\"phone_number\":\"+919588977566\"}]}]', 'en', 'APPROVED', 'MARKETING', 'CUSTOM', '508207495201899', '2024-10-15 11:57:12', '2024-10-15 11:57:12');
 
 -- --------------------------------------------------------
 
@@ -448,6 +485,12 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
+-- Indexes for table `templates`
+--
+ALTER TABLE `templates`
+  ADD PRIMARY KEY (`id`,`userid`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -492,7 +535,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -511,6 +554,12 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `register_users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `templates`
+--
+ALTER TABLE `templates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users`
