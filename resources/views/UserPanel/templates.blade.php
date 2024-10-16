@@ -32,7 +32,7 @@
                             <h4 class="mb-sm-0">Templates Settings</h4>
                         </div> --}}
                         <div class="d-flex justify-content-end ">
-                            <div class="px-2"> <select class="form-select accountstatus"
+                            {{-- <div class="px-2"> <select class="form-select accountstatus"
                                     aria-label="Default select example">
                                     <option selected>--select-account-status</option>
                                     <option selected>A</option>
@@ -43,7 +43,8 @@
                                     <option selected>--select-account-status</option>
                                     <option selected>A</option>
                                     <option selected>B</option>
-                                </select></div>
+                                </select>
+                            </div> --}}
                             <div class="px-2">
                                 <a href="https://business.facebook.com/wa/manage/message-templates/"
                                     class="btn text-white rounded-4 waves-effect waves-light" target="_blank"
