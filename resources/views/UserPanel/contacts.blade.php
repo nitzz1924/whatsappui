@@ -117,6 +117,14 @@
                     </div>
                 </form>
             </div>
+            <div class="mt-2">
+                <a href="{{asset('assets/images/demos/contactsdemo.xlsx')}}" download="Sample Data of Contacts">
+                    <button class="btn btn-outline-dark btn-sm rounded-4">
+                        <i class="ri-download-2-fill"></i>&nbsp;Download Sample Excel of Contacts
+                    </button>
+                </a>
+            </div>
+
         </div>
     </div>
     <form action="{{ route('insertcontacts') }}" method="POST">

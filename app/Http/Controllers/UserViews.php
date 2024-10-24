@@ -102,8 +102,12 @@ class UserViews extends Controller
         }
 
     }
-    public function getchatofuser($phonenumber){
-       $chat = Message::where('senderid',$phonenumber)->get();
-       return response()->json($chat);
+    public function showsentmessage($phone){
+        $finalphone = str_replace('+', '', $phone);
+        $sentMessage = Message::where('senderid', $finalphone)
+                ->orWhere('recievedid', $phone)
+                ->get();
+        //dd($sentMessage);
+        return response()->json($sentMessage);
     }
 }

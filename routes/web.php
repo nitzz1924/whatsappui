@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExcelContactSheet;
 use App\Http\Middleware\VerifyCsrfToken;
 
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -62,7 +63,7 @@ Route::controller(UserViews::class)->group(function () {
 
     Route::get('contactspage', 'contactspage')->name('contactspage');
     Route::get('/webhook/whatsapp', 'verify')->name('verify')->middleware(VerifyCsrfToken::class);
-    Route::get('getchatofuser/{phonenumber}', 'getchatofuser')->name('getchatofuser');
+    Route::get('showsentmessage/{phone}', 'showsentmessage')->name('showsentmessage');
 
 });
 
@@ -81,6 +82,7 @@ Route::controller(UserStores::class)->group(function () {
     Route::post('sendsinglemessage', 'sendsinglemessage')->name('sendsinglemessage');
     Route::post('webhook', 'handleWebhook')->name('handleWebhook');
     Route::get('refreshtemplates', 'refreshtemplates')->name('refreshtemplates');
+
 
 });
 

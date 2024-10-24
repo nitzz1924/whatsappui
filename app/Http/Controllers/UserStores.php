@@ -172,13 +172,14 @@ class UserStores extends Controller
         // Handle response
         if ($response->successful()) {
 
-            //Insert Query
+            $templatedata = Template::where('name',$templateid)->where('userid', $loggedinuser->id)->first();
             $data = Message::create([
                 'templatename' => $templateid,
                 'imageurl' => $fileurl,
                 'type' => 'Sent',
                 'senderid' => $loggedinuser->mobilenumber,
                 'recievedid' => $phone,
+                'message' =>  $templatedata->components,
             ]);
             //dd($response->body());
             return back()->with('success', 'Message sent successfully!');
@@ -373,7 +374,6 @@ class UserStores extends Controller
             return redirect()->route('templatespage')->with('error', $e->getMessage());
         }
     }
-
     function getTemplateList()
     {
         $loggedinuser = Auth::guard('customer')->user();
