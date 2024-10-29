@@ -6,11 +6,14 @@ use App\Models\Campaign;
 use App\Models\Contact;
 use App\Models\GroupType;
 use App\Models\Message;
+use App\Models\RegisterUser;
+use App\Models\Template;
 use Illuminate\Http\Request;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Session;
 use Auth;
+use Carbon\Carbon;
 class UserViews extends Controller
 {
     public function userloginpage()
@@ -29,16 +32,24 @@ class UserViews extends Controller
     }
     public function indexchat()
     {
-        $contactsdata = Contact::orderBy('created_at', 'DESC')->get();
-        $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
-        $alltemplates = $this->getTemplateList();
-        $chat = Message::get();
-        return view('UserPanel.indexchat',compact( 'contactsdata','groupsdata','alltemplates','chat'));
+        if (Auth::guard('customer')->check()) {
+            $contactsdata = Contact::orderBy('created_at', 'DESC')->get();
+            $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
+            $alltemplates = $this->getTemplateList();
+            $chat = Message::get();
+            return view('UserPanel.indexchat',compact( 'contactsdata','groupsdata','alltemplates','chat'));
+        }else {
+            return view('auth.UserPanel.login');
+        }
     }
     public function campaignspage()
     {
-        $campaigns = Campaign::orderBy('created_at','DESC')->get();
-        return view('UserPanel.campaigns',compact('campaigns'));
+        if (Auth::guard('customer')->check()) {
+            $campaigns = Campaign::orderBy('created_at','DESC')->get();
+            return view('UserPanel.campaigns',compact('campaigns'));
+        }else {
+            return view('auth.UserPanel.login');
+        }
     }
     public function addnewcampaign()
     {
@@ -58,7 +69,19 @@ class UserViews extends Controller
     }
     public function analyticspage()
     {
-        return view('UserPanel.analytics');
+        if (Auth::guard('customer')->check()) {
+            $sentmsgcount = Message::where('type','=','Sent')->get()->count();
+            $recmsgcount = Message::where('type','=','Recieved')->get()->count();
+            $contactscount = Contact::get()->count();
+            $tempcount = Template::get()->count();
+            $campaignscnt = Campaign::get()->count();
+            $regisusers = RegisterUser::get()->count();
+            $messages = Message::where('type','=','Recieved')->whereDate('created_at', Carbon::today())->get();
+            // dd($messages);
+            return view('UserPanel.analytics',compact('sentmsgcount','recmsgcount','messages','contactscount','tempcount','campaignscnt','regisusers'));
+        }else {
+            return view('auth.UserPanel.login');
+        }
     }
     public function wahapage()
     {
@@ -66,9 +89,13 @@ class UserViews extends Controller
     }
     public function templatespage()
     {
-        $alltemplates = $this->getTemplateList();
-        //dd($alltemplates);
-        return view('UserPanel.templates',compact('alltemplates'));
+        if (Auth::guard('customer')->check()) {
+            $alltemplates = $this->getTemplateList();
+            //dd($alltemplates);
+            return view('UserPanel.templates',compact('alltemplates'));
+        }else {
+            return view('auth.UserPanel.login');
+        }
     }
     public function groupspage()
     {
@@ -77,9 +104,13 @@ class UserViews extends Controller
     }
     public function contactspage()
     {
-        $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
-        $contactsdata = Contact::orderBy('created_at', 'DESC')->get();
-        return view('UserPanel.contacts', compact('groupsdata', 'contactsdata'));
+        if (Auth::guard('customer')->check()) {
+            $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
+            $contactsdata = Contact::orderBy('created_at', 'DESC')->get();
+            return view('UserPanel.contacts', compact('groupsdata', 'contactsdata'));
+        }else {
+            return view('auth.UserPanel.login');
+        }
     }
     function getTemplateList()
     {

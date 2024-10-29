@@ -46,6 +46,8 @@ Route::controller(AdminStores::class)->group(function () {
 
 
 
+
+
 //User Panel Routes
 Route::controller(UserViews::class)->group(function () {
     Route::get('user/login', 'userloginpage')->name('userloginpage');

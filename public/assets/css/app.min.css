@@ -11058,9 +11058,10 @@ div.dtr-modal div.dtr-modal-close:hover {
   background-color: var(--vz-light);
 }
 .dt-buttons :is(button.dt-button, div.dt-button, a.dt-button, input.dt-button) {
-  border-color: var(--vz-border-color);
-  background: var(--vz-light);
-  color: var(--vz-body-color);
+    border-color: #054c44;
+    background: #054c44;
+    color: #ffffff;
+    border-radius: 9px;
 }
 :is(button, div, a, input):is(.dt-button:hover:not(.disabled)) {
   border-color: var(--vz-border-color);
@@ -11074,6 +11075,7 @@ div.dtr-modal div.dtr-modal-close:hover {
   color: var(--vz-body-color);
   -webkit-box-shadow: none;
   box-shadow: none;
+
 }
 :is(button, div, a, input):is(.dt-button:focus:not(.disabled)) {
   border-color: var(--vz-border-color);
@@ -14683,6 +14685,9 @@ span.flatpickr-weekday {
 .chat-conversation .chat-conversation-list {
   padding-top: 10px;
   margin-bottom: 0;
+  flex-direction: column;
+    display: flex;
+    align-items: flex-end;
 }
 .chat-conversation .chat-conversation-list > li {
   display: -webkit-box;

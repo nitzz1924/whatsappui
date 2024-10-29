@@ -5,6 +5,20 @@
 @endpush
 @section('content')
 <div class="container-fluid">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css">
+    <style>
+        table.dataTable th.dt-type-numeric,
+        table.dataTable th.dt-type-date,
+        table.dataTable td.dt-type-numeric,
+        table.dataTable td.dt-type-date {
+            text-align: left !important;
+        }
+
+        .color-picker-container {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
     <div class="row">
         <div class="col-lg-12">
             <div class="card rounded-4">
@@ -48,7 +62,7 @@
             <div class="card rounded-4">
                 <div class="card-body rounded-4">
                     <div class="table-responsive">
-                        <table class="table table-hover table-borderless table-nowrap">
+                        <table id="example" class="table table-hover table-borderless table-nowrap">
                             <thead>
                                 <tr>
                                     <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No</th>
@@ -75,7 +89,7 @@
                                                 class="editbtnmodal btn btn-light btn-sm"><i class="ri-edit-2-line"
                                                     data-bs-toggle="tooltip" data-bs-placement="top"
                                                     data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="confirmDelete('{{ $data->id }}')"
+                                            <a href="#" onclick="confirmDelete('{{ $data->id }}', '{{ $data->fullname }}')"
                                                 class="btn btn-danger btn-sm"><i class="ri-delete-bin-line"></i></a>
                                         </div>
                                     </td>
@@ -301,6 +315,18 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            layout: {
+                topStart: {
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                }
+            },
+
+        });
+    });
+</script>
+<script>
     // Edit Functionality
         $('#table-body').on('click', '.editbtnmodal', function() {
             console.log("clicked");
@@ -453,10 +479,10 @@
 </script>
 @endsection
 <script>
-    function confirmDelete(id) {
+    function confirmDelete(id,contactname) {
         Swal.fire({
                 title: "Are you sure?",
-                text: "You want to delete this Contact?",
+                html: "You want to delete <strong style='color: red;'>" + contactname + "'s Contact</strong>?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#116464",

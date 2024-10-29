@@ -1,3 +1,4 @@
+
 {{-- #---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------” --}}
 @extends('layouts.UserPanelLayouts.usermain')
 @push('title')
@@ -10,19 +11,20 @@
             <div class="h-100">
                 <div class="row">
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
+                        <div class="card card-animate rounded-4 py-0" style="border-bottom: 4px solid #054c44;">
                             <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <div class="overflow-hidden">
+                                       <img src="{{asset('assets/images/send.png')}}" alt="" height="30" width="30">
+                                    </div>
+                                    <div class="overflow-hidden">
                                         <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                            Sent
+                                            Sent Messages
                                         </p>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="0">0</span>
+                                    <div class="float-end">
+                                        <h4 class="mt-1">
+                                            <span class="counter-value" data-target="{{$sentmsgcount}}">{{$sentmsgcount}}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -31,19 +33,20 @@
                     </div>
 
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
+                        <div class="card card-animate rounded-4 py-0" style="border-bottom: 4px solid #054c44;">
                             <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <div class="overflow-hidden">
+                                       <img src="{{asset('assets/images/receive.png')}}" alt="" height="30" width="30">
+                                    </div>
+                                    <div class="overflow-hidden">
                                         <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                            Total Earnings
+                                            Received Messages
                                         </p>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="17">17</span>
+                                    <div class="float-end">
+                                        <h4 class="mt-1">
+                                            <span class="counter-value" data-target="{{$recmsgcount}}">{{$recmsgcount}}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -51,19 +54,20 @@
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
+                        <div class="card card-animate rounded-4 py-0"  style="border-bottom: 4px solid #054c44;">
                             <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <div class="overflow-hidden">
+                                       <img src="{{asset('assets/images/id-card.png')}}" alt="" height="30" width="30">
+                                    </div>
+                                    <div class="overflow-hidden">
                                         <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                            Read
+                                            Contacts
                                         </p>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="13">13</span>
+                                    <div class="float-end">
+                                        <h4 class="mt-1">
+                                            <span class="counter-value" data-target="{{$contactscount}}">{{$contactscount}}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -71,19 +75,20 @@
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
+                        <div class="card card-animate rounded-4 py-0" style="border-bottom: 4px solid #054c44;">
                             <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <div class="overflow-hidden">
+                                       <img src="{{asset('assets/images/newsletter.png')}}" alt="" height="30" width="30">
+                                    </div>
+                                    <div class="overflow-hidden">
                                         <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                            Replied
+                                            Templates
                                         </p>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="2">2</span>
+                                    <div class="float-end">
+                                        <h4 class="mt-1">
+                                            <span class="counter-value" data-target="{{$tempcount}}">{{$tempcount}}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -91,19 +96,20 @@
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
+                        <div class="card card-animate rounded-4 py-0" style="border-bottom: 4px solid #054c44;">
                             <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <div class="overflow-hidden">
+                                       <img src="{{asset('assets/images/campaign.png')}}" alt="" height="30" width="30">
+                                    </div>
+                                    <div class="overflow-hidden">
                                         <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                            Un-Deliverable
+                                            Campaigns
                                         </p>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="0">0</span>
+                                    <div class="float-end">
+                                        <h4 class="mt-1">
+                                            <span class="counter-value" data-target="{{$campaignscnt}}">{{$campaignscnt}}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -111,19 +117,20 @@
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-6">
-                        <div class="card card-animate rounded-4 py-0" style="border: 1px solid #054c44;">
+                        <div class="card card-animate rounded-4 py-0" style="border-bottom: 4px solid #054c44;">
                             <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
+                                <div class="d-flex align-items-center justify-content-around">
+                                    <div class="overflow-hidden">
+                                       <img src="{{asset('assets/images/people.png')}}" alt="" height="30" width="30">
+                                    </div>
+                                    <div class="overflow-hidden">
                                         <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                            Failed
+                                            Registered Users
                                         </p>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="0">0</span>
+                                    <div class="float-end">
+                                        <h4 class="mt-1">
+                                            <span class="counter-value" data-target="{{$regisusers}}">{{$regisusers}}</span>
                                         </h4>
                                     </div>
                                 </div>
@@ -143,41 +150,25 @@
                             <thead>
                                 <tr>
                                     <th style="background-color:#054c441e; border-radius: 10px 0 0 10px;"> S.No</th>
-                                    <th style="background-color:#054c441e;">Recipient</th>
+                                    <th style="background-color:#054c441e;">Sender ID</th>
                                     <th style="background-color:#054c441e;">Type</th>
-                                    <th style="background-color:#054c441e;">Status</th>
                                     <th style="background-color:#054c441e;">Message</th>
+                                    <th style="background-color:#054c441e;">Received On</th>
                                 </tr>
                             </thead>
                             <tbody id="table-body">
-                                <tr class="border-bottom-1">
-                                    <th>1</th>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="border-bottom-1">
-                                    <th>1</th>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="border-bottom-1">
-                                    <th>1</th>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="border-bottom-1">
-                                    <th>1</th>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
+                                @foreach($messages->take(10) as $key => $value)
+                                    @php
+                                        $msg = json_decode($value->message);
+                                    @endphp
+                                    <tr class="border-bottom-1">
+                                        <td>{{$key + 1}}</td>
+                                        <td>+{{$value->senderid}}</td>
+                                        <td>{{$value->type}}</td>
+                                        <td><button class="bg-white border-0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="" data-bs-content="{{ trim($msg->text->body) }}">{{ Str::limit(trim($msg->text->body), 20, '...') }}</button></td>  {{--ALTERNATE WAY TO TRIM THE TEXT STR::LIMIT--}}
+                                        <td>{{ $value->created_at->format('d/m/y') }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -187,3 +178,14 @@
     </div>
 </div>
 @endsection
+
+
+
+
+
+
+
+
+
+
+

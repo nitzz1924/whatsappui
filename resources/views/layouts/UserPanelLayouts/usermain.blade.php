@@ -29,6 +29,13 @@
     <link rel="stylesheet" href="{{asset('assets/libs/glightbox/css/glightbox.min.css')}}">
 
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.13.2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/backend-assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/backend-assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link
+        href="{{ asset('assets/backend-assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
     {{--
     <link rel="stylesheet" type="text/css" href="{{asset('assets/libs/multi.js/multi.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/libs/%40tarekraafat/autocomplete.js/css/autoComplete.css')}}"> --}}
@@ -236,6 +243,13 @@
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.13.2/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.0/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.html5.min.js"></script>
     @if (session('success'))
     <script>
         // Display SweetAlert for success message

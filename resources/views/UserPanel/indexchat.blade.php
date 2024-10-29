@@ -251,11 +251,11 @@
                                                     style="height: 100%; overflow: hidden scroll;">
                                                     <div class="simplebar-content" style="padding: 24px;">
                                                         <div id="elmLoader"></div>
-                                                        <ul class="list-unstyled chat-conversation-list"
+                                                        <div class="list-unstyled chat-conversation-list"
                                                             id="users-conversation">
 
 
-                                                        </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -634,6 +634,7 @@
                 const $section = $('#chatinputsection');
                 $('#templatedivsec').hide();
                 if ($section.hasClass('d-none')) {
+
                     $section.removeClass('d-none').css({
                         opacity: 0,
                         maxHeight: '0px'
@@ -736,9 +737,6 @@
                 $('#alphabet').html(contacttab.fullname.charAt(0).toUpperCase());
 
 
-
-
-
                 //Sent Message show Functionality
                 //---------------------------------------------------------------------------------
 
@@ -774,6 +772,16 @@
                                             messageHTML +=
                                                 `<img src='${imageUrl}' alt="Header Image" height="200px" width="100%">`;
                                         }
+                                         else if (part.format === 'VIDEO') {
+                                            const imageUrl = element
+                                            .imageurl;
+                                            console.log("Video URL : " + imageUrl);
+                                            messageHTML +=
+                                                `<video controls width="100%" height="200px">
+                                                    <source id="videomain" src="${imageUrl}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>`;
+                                        }
                                     } else if (part.type === 'BODY') {
                                         // Apply link formatting only to the body text
                                         let bodyText = part.text;
@@ -789,15 +797,20 @@
                                             `<p class="message-body">${bodyText}</p>`;
                                     } else if (part.type === 'BUTTONS') {
                                         part.buttons.forEach(button => {
-                                            messageHTML +=
-                                                `<p class="message-button"><a href="tel:${button.phone_number}">${button.text}</a></p>`;
+                                            if(button.type == 'URL'){
+                                                messageHTML +=
+                                                    `<a class="" href="${button.url}"><button class="message-button w-100 text-white btn btn-success btn-block">${button.text}</button></a>`;
+                                            }else{
+                                                messageHTML +=
+                                                    `<a class="" href="tel:${button.phone_number}"><button class="message-button w-100 text-white btn btn-success btn-block">${button.text}</button></a>`;
+                                            }
                                         });
                                     }
                                 });
 
 
                                 messagediv += `
-                                    <div class="message-preview">
+                                    <div class="message-preview mb-3">
                                         ${messageHTML}
                                     </div>
                                 `;
@@ -866,15 +879,7 @@
                     }
                 });
 
-
-
-
-
-
             });
-
-
-
 
         });
     </script>
@@ -935,9 +940,9 @@
                 '<a href="$1" target="_blank">$1</a>');
 
             const messagediv =
-                `<div class="message-preview">
-                 ${formattedMessage}
-                </div>`;
+                `<li class="message-preview">
+                    ${formattedMessage}
+                </li>`;
             $('#messagediv').html(messagediv);
         });
 

@@ -90,6 +90,12 @@
                         <img class="" src="{{asset('assets/images/phone-book.png')}}" alt="" height="25" />&nbsp;&nbsp;<span class="fs-5">Contacts</span>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->routeIs('logoutuserpanel') ? 'active' : '' }}">
+                    <a class="nav-link menu-link" href="{{ route('logoutuserpanel') }}" role="button" aria-expanded="false"
+                        aria-controls="sidebarDashboards">
+                        <img class="" src="{{asset('assets/images/log-out.png')}}" alt="" height="25" />&nbsp;&nbsp;<span class="fs-5">Log out</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

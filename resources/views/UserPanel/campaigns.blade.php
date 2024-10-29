@@ -70,7 +70,7 @@
                                                 data-record="" class="editbtnmodal btn btn-light btn-sm"><i
                                                     class="ri-edit-2-line" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" data-bs-title="Edit"></i></a> --}}
-                                            <a href="#" onclick="confirmDelete('{{ $row->id }}')" class="btn btn-danger btn-sm"><i
+                                            <a href="#" onclick="confirmDelete('{{ $row->id }}', '{{ $row->campaignname }}')" class="btn btn-danger btn-sm"><i
                                                     class="ri-delete-bin-line"></i></a>
                                         </div>
                                     </td>
@@ -87,10 +87,10 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    function confirmDelete(id) {
+    function confirmDelete(id,campaign_name) {
         Swal.fire({
             title: "Are you sure?",
-            text: "You want to delete this Campaign?",
+            html: "You want to delete <strong style='color: red;'>" + campaign_name + "</strong>?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#116464",

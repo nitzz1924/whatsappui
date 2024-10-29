@@ -139,6 +139,7 @@ class UserStores extends Controller
 
     function dropMessage($phone, $templateid, $fileurl, $mediatype, $languagetype)
     {
+
         $loggedinuser = Auth::guard('customer')->user();
         $accessToken = $loggedinuser->apptoken;
         $phonenumberid = $loggedinuser->phonenumberid;
@@ -158,14 +159,13 @@ class UserStores extends Controller
                 'parameters' => [
                     [
                         'type' => $mediatype,
-                        'image' => [
+                        $mediatype => [
                             'link' => $fileurl,
                         ]
                     ]
                 ]
             ];
         }
-        //dd($data);
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
             'Content-Type' => 'application/json'
@@ -182,7 +182,7 @@ class UserStores extends Controller
                 'recievedid' => $phone,
                 'message' =>  $templatedata->components,
             ]);
-            //dd($response->body());
+
             return back()->with('success', 'Message sent successfully!');
         } else {
             return back()->withErrors('Message failed to send: ' . $response->body());
@@ -240,7 +240,7 @@ class UserStores extends Controller
     public function sendsinglemessage(Request $req)
     {
 
-        // dd($req->templatedata);
+        //dd($req->all());
         $bannerimagePath = '';
         try {
             // Single Image Upload
@@ -253,7 +253,7 @@ class UserStores extends Controller
                 // Store the full image path
                 $bannerimagePath = url($uploadedPath . '/' . $bannerimageName);
             }
-            //dd($bannerimagePath);
+            // dd($bannerimagePath);
             $this->dropMessage($req->phonenumber, $req->template, $bannerimagePath, $req->mediatype, $req->languagetype);
             return back()->with('success', 'Message Sent.!');
         } catch (Exception $e) {
@@ -375,7 +375,7 @@ class UserStores extends Controller
             return redirect()->route('templatespage')->with('error', $e->getMessage());
         }
     }
-    
+
     function getTemplateList()
     {
         $loggedinuser = Auth::guard('customer')->user();

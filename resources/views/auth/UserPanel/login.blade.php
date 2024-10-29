@@ -12,9 +12,7 @@
                                     <div class="p-3 rounded-5 m-3 border-0 card auth-one-bg">
                                         <div class="p-3 mt-3">
                                             <h1 class="text-white fs-1">Simplify WhatsApp Marketing With YUVMEDIA</h1>
-                                            <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                Quos a vel laboriosam explicabo quis, non animi corrupti vitae? Delectus,
-                                                exercitationem.</p>
+                                            <p class="text-white">Reach your audience instantly and effectively with targeted WhatsApp campaigns by YUVMEDIA.</p>
                                         </div>
                                         <hr class="text-white">
                                         <div class="p-3 m-3">
@@ -74,7 +72,7 @@
                                         </form>
                                     </div>
                                     <div class="mt-5 text-center">
-                                        <p class="mb-0">Don't have an account ? <a href="auth-signup-cover.html"
+                                        <p class="mb-0">Don't have an account ? <a href="#"
                                                 class="fw-semibold text-decoration-underline" style="color: #116464">
                                                 Signup</a> </p>
                                     </div>
