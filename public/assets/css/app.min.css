@@ -14685,9 +14685,9 @@ span.flatpickr-weekday {
 .chat-conversation .chat-conversation-list {
   padding-top: 10px;
   margin-bottom: 0;
-  flex-direction: column;
+  /* flex-direction: column;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-end; */
 }
 .chat-conversation .chat-conversation-list > li {
   display: -webkit-box;

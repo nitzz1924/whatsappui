@@ -794,7 +794,7 @@
                                             '<a href="$1" target="_blank">$1</a>'
                                             ); // Link formatting
                                         messageHTML +=
-                                            `<p class="message-body">${bodyText}</p>`;
+                                            `<p class="message-body fs-5">${bodyText}</p>`;
                                     } else if (part.type === 'BUTTONS') {
                                         part.buttons.forEach(button => {
                                             if(button.type == 'URL'){
@@ -810,9 +810,11 @@
 
 
                                 messagediv += `
-                                    <div class="message-preview mb-3">
-                                        ${messageHTML}
-                                    </div>
+                                    <li class="w-100 mb-3 justify-content-end">
+                                        <div class="message-preview">
+                                            ${messageHTML}
+                                        </div>
+                                    </li>
                                 `;
                             }
 
@@ -940,9 +942,9 @@
                 '<a href="$1" target="_blank">$1</a>');
 
             const messagediv =
-                `<li class="message-preview">
+                `<div class="message-preview">
                     ${formattedMessage}
-                </li>`;
+                </div>`;
             $('#messagediv').html(messagediv);
         });
 
