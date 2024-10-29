@@ -53,6 +53,7 @@ class UserStores extends Controller
         $data->delete();
         return back()->with('success', "Deleted....!!!");
     }
+
     public function insertcontacts(Request $req)
     {
         $loggedinuser = Auth::guard('customer')->user();
@@ -374,6 +375,7 @@ class UserStores extends Controller
             return redirect()->route('templatespage')->with('error', $e->getMessage());
         }
     }
+    
     function getTemplateList()
     {
         $loggedinuser = Auth::guard('customer')->user();
