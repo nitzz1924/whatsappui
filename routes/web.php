@@ -9,7 +9,8 @@ use App\Http\Controllers\ExcelContactSheet;
 use App\Http\Middleware\VerifyCsrfToken;
 
 
-Route::get('/', function () {
+
+Route::get('/admin/login', function () {
     return view('auth.login');
 });
 
@@ -50,7 +51,7 @@ Route::controller(AdminStores::class)->group(function () {
 
 //User Panel Routes
 Route::controller(UserViews::class)->group(function () {
-    Route::get('user/login', 'userloginpage')->name('userloginpage');
+    Route::get('/', 'userloginpage')->name('userloginpage');
     Route::get('userdashboard', 'userdashboard')->name('userdashboard');
     Route::get('logoutuserpanel', 'logoutuserpanel')->name('logoutuserpanel');
     Route::get('indexchat', 'indexchat')->name('indexchat');

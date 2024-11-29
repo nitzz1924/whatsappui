@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
+        'userid',
         'senderid',
         'type',
         'email',

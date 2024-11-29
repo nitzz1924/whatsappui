@@ -125,7 +125,11 @@
                                         src="{{asset('assets/images/defaultuser.png')}}" alt="Header Avatar" />
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                                            Guest User
+                                            @if (Auth::guard('customer')->user())
+                                                {{ Auth::guard('customer')->user()->email }}
+                                            @else
+                                                Guest User
+                                            @endif
                                         </span>
                                     </span>
                                 </span>

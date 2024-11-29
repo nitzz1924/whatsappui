@@ -79,7 +79,7 @@
                                         @foreach ($alltemplates as $index => $row)
                                         <tr class="border-bottom-1">
                                             <th>{{$index + 1}}</th>
-                                            <td><button class="btn btn-white fs-5" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="{{ $row['name'] }}" data-bs-content="{{$row['components'][1]['text']}}">{{ $row['name'] }}</button></td>
+                                            <td><button class="btn btn-white fs-5" role="button" title="{{ $row['name'] }}">{{ $row['name'] }}</button></td>
 
                                             <td>{{ $row['category'] }}</td>
                                             <td>

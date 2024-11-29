@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2024 at 01:59 PM
+-- Generation Time: Nov 29, 2024 at 10:10 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -74,7 +74,6 @@ CREATE TABLE `campaigns` (
 
 INSERT INTO `campaigns` (`id`, `campaignname`, `modulename`, `template`, `segmentname`, `userid`, `sendimmediate`, `datetime`, `scheduledatetime`, `mediaimage`, `mediatype`, `languagetype`, `created_at`, `updated_at`) VALUES
 (67, 'Demo Campaign', 'New Customer', 'yuvtraining_seminar', 'Follow Up', '17', '0', NULL, NULL, 'http://127.0.0.1:8000/assets/images/templates/1727346178.png', 'image', 'en', '2024-09-26 10:22:58', '2024-09-26 10:22:58'),
-(76, 'Demo Campaign', 'New Customer', 'yuvtraining_seminar', 'Follow Up', '17', NULL, '2024-10-01T12:22', '1', 'http://127.0.0.1:8000/assets/images/templates/1727764562.jpg', 'image', 'en', '2024-10-01 06:36:02', '2024-10-01 06:36:02'),
 (77, 'Test Campaign', 'New Customer', 'yuvtraining_seminar', 'Follow Up', '17', NULL, '2024-10-01T13:00', '1', 'http://127.0.0.1:8000/assets/images/templates/1727764592.webp', 'image', 'en', '2024-10-01 06:36:32', '2024-10-01 06:36:32');
 
 -- --------------------------------------------------------
@@ -110,7 +109,9 @@ INSERT INTO `contacts` (`id`, `userid`, `type`, `fullname`, `email`, `phonenumbe
 (81, '17', 'New Customer', 'Nitesh', 'demo@gmail.com', '+918209165518', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:21:33'),
 (82, '17', 'New Customer', 'Shakti', 'demo@gmail.com', '+919588094364', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:21:33'),
 (83, '17', 'New Customer', 'Rudraksh', 'demo@gmail.com', '+919462134957', 'Ajmer', 'Rajasthan', 'India', 'English', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:21:33'),
-(84, '17', 'New Customer', 'Dipanshu', 'demo@gmail.com', '+917014697321', NULL, NULL, 'India', 'ru', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:22:40');
+(84, '17', 'New Customer', 'Dipanshu', 'demo@gmail.com', '+917014697321', NULL, NULL, 'India', 'ru', 'Ajmer,Raj,India', 'Follow up', '2024-10-01 05:21:33', '2024-10-01 05:22:40'),
+(85, '20', 'New Customer', 'Puneet', 'info@ncorecreative.in', '+918955499997', 'Ajmer', 'Rajasthan', 'India', 'en-US', 'Vaishali', 'Active', '2024-11-18 11:31:10', '2024-11-18 11:31:10'),
+(87, '20', 'New Customer', 'Anshul Meena', 'ans@gmail.com', '+919429158300', 'Ajmer', 'Rajasthan', 'India', 'en-US', 'BSNL', 'Active', '2024-11-29 06:59:48', '2024-11-29 06:59:48');
 
 -- --------------------------------------------------------
 
@@ -194,6 +195,7 @@ CREATE TABLE `job_batches` (
 
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
+  `userid` varchar(255) DEFAULT NULL,
   `senderid` varchar(255) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
   `message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
@@ -208,10 +210,8 @@ CREATE TABLE `messages` (
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`id`, `senderid`, `type`, `message`, `templatename`, `imageurl`, `recievedid`, `created_at`, `updated_at`) VALUES
-(1, '916375475956', 'Recieved', '{\"from\":\"916375475956\",\"id\":\"wamid.HBgMOTE2Mzc1NDc1OTU2FQIAEhggNEIzMTY2RUE4Q0UwRjI5OTY3QTRCQkYzQzY4MjVFRDEA\",\"timestamp\":\"1728558164\",\"text\":{\"body\":\"Are you interested in web development? Do you want to le advanced programming languages, job opportunities, and career paths in this exciting field? Then this seminar\\nDon\'t miss out on this fantastic opportunity to kickstart your web development journey\"},\"type\":\"text\"}', NULL, NULL, NULL, '2024-10-10 05:32:46', '2024-10-10 11:20:37'),
-(2, '916375475956', 'Recieved', '{\"from\":\"916375475956\",\"id\":\"wamid.HBgMOTE2Mzc1NDc1OTU2FQIAEhggNEIzMTY2RUE4Q0UwRjI5OTY3QTRCQkYzQzY4MjVFRDEA\",\"timestamp\":\"1728558164\",\"text\":{\"body\":\"Are you interested in web development?\"},\"type\":\"text\"}', NULL, NULL, NULL, '2024-10-10 05:32:46', '2024-10-10 11:20:37'),
-(4, '918824269821', 'Sent', NULL, 'yuvtraining_seminar', 'http://127.0.0.1:8000/assets/images/templates/1728986024.png', '+916375475956', '2024-10-15 09:53:45', '2024-10-15 09:53:45');
+INSERT INTO `messages` (`id`, `userid`, `senderid`, `type`, `message`, `templatename`, `imageurl`, `recievedid`, `created_at`, `updated_at`) VALUES
+(10, '17', '5458965848', 'Sent', '[{\"type\":\"HEADER\",\"format\":\"IMAGE\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/421407039_508207501868565_7292007801105227494_n.jpg?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=-JDEdnn15doQ7kNvgGLKw5O&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=A5Yb8QhLkJ7Iqj39gzJIGtc&oh=01_Q5AaIF9bq4yUTXsmzWv8x6uwt7Es4ahe-EohzoiQVKTIBUdZ&oe=6735D94F\"]}},{\"type\":\"BODY\",\"text\":\"\\ud83d\\ude80 *Join Our Free Web Development Seminar!* \\ud83d\\ude80\\n\\n\\ud83d\\uddd3\\ufe0f *Date*: Saturday, 20th July 2024\\n\\ud83d\\udd54 *Time* : 5:00 PM - 6:00 PM\\n\\ud83d\\udccd *Venue*: YUVTRAININGS , B17, 1st Floor, Above Royal Bakers, Glitz Circle, Ramnagar Road, Ajmer, Rajasthan, 305001\\n\\nAre you interested in web development? Do you want to learn about advanced programming languages, job opportunities, and career paths in this exciting field? Then this seminar is perfect for you!\\n\\n\\ud83c\\udf93 *What You\'ll Learn*:\\n\\nIntroduction to Web Development\\nAdvanced Programming Languages\\nCareer Opportunities in Web Development\\nSeats are limited, so make sure to register in advance! \\ud83c\\udf9f\\ufe0f\\n\\n\\ud83d\\udcde For Free Registration: *Call us at 9588977566*\\n\\nAs tomorrow will be a seminar of web development we need a confirmation from your side that you are attending so kindly fill this form .\\n\\nhttps:\\/\\/docs.google.com\\/forms\\/d\\/e\\/1FAIpQLSeHo_HYvZpuLWQGhUgqyaifMjph-wrUBcKj8Tz8KKHC4fcQJw\\/viewform\\n\\nDon\'t miss out on this fantastic opportunity to kickstart your web development journey\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"PHONE_NUMBER\",\"text\":\"Call phone number\",\"phone_number\":\"+919588977566\"}]}]', 'yuvtraining_seminar', 'http://127.0.0.1:8000/assets/images/templates/1732860071.jpg', '+916375475956', '2024-11-29 06:01:12', '2024-11-29 06:02:22');
 
 -- --------------------------------------------------------
 
@@ -303,7 +303,8 @@ CREATE TABLE `register_users` (
 --
 
 INSERT INTO `register_users` (`id`, `userid`, `password`, `mobilenumber`, `email`, `expiredate`, `createddate`, `accountstatus`, `verifystatus`, `apptoken`, `phonenumberid`, `Wabaid`, `created_at`, `updated_at`, `otp`) VALUES
-(17, '1001', '$2y$12$l6.03Ub7zM/dwLJXXhDn2.SgsJM804w6Qcj18/t1UiVxoAeMsKFHi', '918824269821', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', 'EAAQiZBXP3SakBOZCUVsXFiFprbNNV1Xr2baP6wi5ZBDuKgEz72g7NWRTmbtSFBzXZASMiImCHvSiy0mRNCOtNkf7QdTboiVnJ0wrCCWAHMKw0wZBnvMotNkkp8BnGcIh6JQjpJAUNqL00S6FTOmY1OVtVvnTEZC2uiLiNNzJ7a2ahdvulZCstQHQkkVSoTrJg8AnAZDZD', '282520401622445', '309165212288658', '2024-09-05 06:32:20', '2024-10-11 10:35:21', '841715');
+(17, '1001', '$2y$12$l6.03Ub7zM/dwLJXXhDn2.SgsJM804w6Qcj18/t1UiVxoAeMsKFHi', '5458965848', 'ans@gmail.com', '2024-09-10', '2024-09-17', 'Enable', '1', 'EAAQiZBXP3SakBOZCUVsXFiFprbNNV1Xr2baP6wi5ZBDuKgEz72g7NWRTmbtSFBzXZASMiImCHvSiy0mRNCOtNkf7QdTboiVnJ0wrCCWAHMKw0wZBnvMotNkkp8BnGcIh6JQjpJAUNqL00S6FTOmY1OVtVvnTEZC2uiLiNNzJ7a2ahdvulZCstQHQkkVSoTrJg8AnAZDZD', '282520401622445', '309165212288658', '2024-09-05 06:32:20', '2024-11-29 06:00:45', '841715'),
+(20, '1002', '$2y$12$l6.03Ub7zM/dwLJXXhDn2.SgsJM804w6Qcj18/t1UiVxoAeMsKFHi', '8955499997', 'info@ncorecreative.in', '2024-11-18', '2024-11-18', 'Enable', '0', 'EAARShl8wJWABOxBn9WrykKnz62VpzwMfbPA4ZC3EMwPZBp40qfKxZBisb3sJGTvWB60nmv84MF6z74oFm8byaVvHm8u3OZCfybJZAIuFOI7qv0rZB3N0wQFmPFKcY4InlSzQN8USZCDeZCmaUbk779kazYAqZA0VLdZCy0gq7ifP8HHU2ha5TBXMWhBaLBorZB6W6s5gjuN58ZBnOQ6NwsPTw0GQOWT1tHHhMAXwHLKMqvvI', '460736083795219', '479145478615506', '2024-11-18 11:25:36', '2024-11-18 11:28:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -325,7 +326,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('2pPdZDQ5yVtqovmUklHc5YCepv7EejZWoehAot8z', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibTExa25RdnFoY2pHM25KdkFRNnpjdEhNZTd5YURqZFdDbzQxMUZyQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9pbmRleGNoYXQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjU1OiJsb2dpbl9jdXN0b21lcl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE3O30=', 1728993542);
+('0OGz5IVddQqKnv0hcBockYI1eGFacun9p9IaPKFc', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTozOntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo2OiJfdG9rZW4iO3M6NDA6Ik91aG9FcXpmQVhyS2VNcW45M1ZZRlBtNTdRN1F1UklYajJTeW5zejEiO30=', 1732870141);
 
 -- --------------------------------------------------------
 
@@ -359,7 +360,10 @@ INSERT INTO `templates` (`id`, `userid`, `name`, `components`, `language`, `stat
 (30, '17', 'yuvmedia_whatsapp_marketing_01', '[{\"type\":\"HEADER\",\"format\":\"VIDEO\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/425121419_1892474251238912_5031921930232779657_n.mp4?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=65kZyjr1yKYQ7kNvgE_wxtr&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=ATD-vKSrQYDxo-Evv9eBLml&oh=01_Q5AaIEHVKCSQysWOsHEqawLQ4fqYeqOm1fR0m6XDEuIGxRts&oe=6735B4A0\"]}},{\"type\":\"BODY\",\"text\":\"*Best Digital Marketing Agency at your service - Your business deserves the best. *\\nIt\'s time for YUVMEDIA magic. \\ud83e\\udd14\\n\\nAt YUVMEDIA, we don\'t just market, we create magic! \\n\\nWe provide:\\n\\u2714 Marketplace Expertise.\\n\\u2714 SEO\\n\\u2714 Performance Media.\\n\\u2714 Social Media.\\n\\u2714 Web & App Development.\\n\\u2714 CRM & ERP Solutions.\\n\\u2714 Video Production.\\n\\u2714 Designing Services.\\n\\u2714 GBP Management.\\n\\u2714 Influencer Management.\\n\\nReach out today and let\'s make your brand shine! \\ud83d\\udcac\\n\\nDon\'t just take our word for it- Check out our client success stories.\"},{\"type\":\"FOOTER\",\"text\":\"Click the link below & Start Scrolling\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"URL\",\"text\":\"Visit Our Website Now!\",\"url\":\"https:\\/\\/business.yuvmedia.in\\/\"}]}]', 'en', 'APPROVED', 'MARKETING', NULL, '1892474247905579', '2024-10-15 11:56:50', '2024-10-15 11:56:50'),
 (31, '17', 'whats_app_marketing_for_service', '[{\"type\":\"HEADER\",\"format\":\"IMAGE\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/437068910_1214273443219231_6053277554443404233_n.jpg?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=ysjziEGWVYAQ7kNvgFZOPpW&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=ATD-vKSrQYDxo-Evv9eBLml&oh=01_Q5AaIIaIDUDydyGfZYv3up3xV9ao9y0LG-dY-aBPepKEh23I&oe=6735C579\"]}},{\"type\":\"BODY\",\"text\":\"*Yuvmedia Best Digital Marketing Company in India*\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"URL\",\"text\":\"Visit Our website\",\"url\":\"https:\\/\\/yuvmedia.in\\/\"}]}]', 'en', 'APPROVED', 'MARKETING', 'CUSTOM', '1214273436552565', '2024-10-15 11:56:50', '2024-10-15 11:56:50'),
 (32, '17', 'header', '[{\"type\":\"HEADER\",\"format\":\"TEXT\",\"text\":\"hi\"},{\"type\":\"BODY\",\"text\":\"welcome to yuvmedia\"}]', 'en', 'APPROVED', 'MARKETING', NULL, '446771061401702', '2024-10-15 11:56:50', '2024-10-15 11:56:50'),
-(33, '17', 'yuvtraining_seminar', '[{\"type\":\"HEADER\",\"format\":\"IMAGE\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/421407039_508207501868565_7292007801105227494_n.jpg?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=-JDEdnn15doQ7kNvgGLKw5O&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=A5Yb8QhLkJ7Iqj39gzJIGtc&oh=01_Q5AaIF9bq4yUTXsmzWv8x6uwt7Es4ahe-EohzoiQVKTIBUdZ&oe=6735D94F\"]}},{\"type\":\"BODY\",\"text\":\"\\ud83d\\ude80 *Join Our Free Web Development Seminar!* \\ud83d\\ude80\\n\\n\\ud83d\\uddd3\\ufe0f *Date*: Saturday, 20th July 2024\\n\\ud83d\\udd54 *Time* : 5:00 PM - 6:00 PM\\n\\ud83d\\udccd *Venue*: YUVTRAININGS , B17, 1st Floor, Above Royal Bakers, Glitz Circle, Ramnagar Road, Ajmer, Rajasthan, 305001\\n\\nAre you interested in web development? Do you want to learn about advanced programming languages, job opportunities, and career paths in this exciting field? Then this seminar is perfect for you!\\n\\n\\ud83c\\udf93 *What You\'ll Learn*:\\n\\nIntroduction to Web Development\\nAdvanced Programming Languages\\nCareer Opportunities in Web Development\\nSeats are limited, so make sure to register in advance! \\ud83c\\udf9f\\ufe0f\\n\\n\\ud83d\\udcde For Free Registration: *Call us at 9588977566*\\n\\nAs tomorrow will be a seminar of web development we need a confirmation from your side that you are attending so kindly fill this form .\\n\\nhttps:\\/\\/docs.google.com\\/forms\\/d\\/e\\/1FAIpQLSeHo_HYvZpuLWQGhUgqyaifMjph-wrUBcKj8Tz8KKHC4fcQJw\\/viewform\\n\\nDon\'t miss out on this fantastic opportunity to kickstart your web development journey\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"PHONE_NUMBER\",\"text\":\"Call phone number\",\"phone_number\":\"+919588977566\"}]}]', 'en', 'APPROVED', 'MARKETING', 'CUSTOM', '508207495201899', '2024-10-15 11:57:12', '2024-10-15 11:57:12');
+(33, '17', 'yuvtraining_seminar', '[{\"type\":\"HEADER\",\"format\":\"IMAGE\",\"example\":{\"header_handle\":[\"https:\\/\\/scontent.whatsapp.net\\/v\\/t61.29466-34\\/421407039_508207501868565_7292007801105227494_n.jpg?ccb=1-7&_nc_sid=8b1bef&_nc_ohc=-JDEdnn15doQ7kNvgGLKw5O&_nc_ht=scontent.whatsapp.net&edm=AH51TzQEAAAA&_nc_gid=A5Yb8QhLkJ7Iqj39gzJIGtc&oh=01_Q5AaIF9bq4yUTXsmzWv8x6uwt7Es4ahe-EohzoiQVKTIBUdZ&oe=6735D94F\"]}},{\"type\":\"BODY\",\"text\":\"\\ud83d\\ude80 *Join Our Free Web Development Seminar!* \\ud83d\\ude80\\n\\n\\ud83d\\uddd3\\ufe0f *Date*: Saturday, 20th July 2024\\n\\ud83d\\udd54 *Time* : 5:00 PM - 6:00 PM\\n\\ud83d\\udccd *Venue*: YUVTRAININGS , B17, 1st Floor, Above Royal Bakers, Glitz Circle, Ramnagar Road, Ajmer, Rajasthan, 305001\\n\\nAre you interested in web development? Do you want to learn about advanced programming languages, job opportunities, and career paths in this exciting field? Then this seminar is perfect for you!\\n\\n\\ud83c\\udf93 *What You\'ll Learn*:\\n\\nIntroduction to Web Development\\nAdvanced Programming Languages\\nCareer Opportunities in Web Development\\nSeats are limited, so make sure to register in advance! \\ud83c\\udf9f\\ufe0f\\n\\n\\ud83d\\udcde For Free Registration: *Call us at 9588977566*\\n\\nAs tomorrow will be a seminar of web development we need a confirmation from your side that you are attending so kindly fill this form .\\n\\nhttps:\\/\\/docs.google.com\\/forms\\/d\\/e\\/1FAIpQLSeHo_HYvZpuLWQGhUgqyaifMjph-wrUBcKj8Tz8KKHC4fcQJw\\/viewform\\n\\nDon\'t miss out on this fantastic opportunity to kickstart your web development journey\"},{\"type\":\"BUTTONS\",\"buttons\":[{\"type\":\"PHONE_NUMBER\",\"text\":\"Call phone number\",\"phone_number\":\"+919588977566\"}]}]', 'en', 'APPROVED', 'MARKETING', 'CUSTOM', '508207495201899', '2024-10-15 11:57:12', '2024-10-15 11:57:12'),
+(34, '20', 'invoice_bill', '[{\"type\":\"BODY\",\"text\":\"Hi {{1}}, You have paid invoice ({{2}}) of amount {{3}}.\",\"example\":{\"body_text\":[[\"Name\",\"Ncore00011\",\"0.00\"]]}}]', 'en', 'APPROVED', 'UTILITY', 'CUSTOM', '932430668797409', '2024-11-29 06:57:35', '2024-11-29 06:57:35'),
+(35, '20', 'billing_invoice', '[{\"type\":\"HEADER\",\"format\":\"TEXT\",\"text\":\"Billing Invoice\"},{\"type\":\"BODY\",\"text\":\"Bill dated {{1}} for your {{2}} ID {{3}} with due amount of  \\u20b9 {{4}} has been sent via e-mail.\",\"example\":{\"body_text\":[[\"01-11-2024\",\"Ncore\",\"JHUNKUI87898\",\"399\"]]}}]', 'en', 'APPROVED', 'UTILITY', 'CUSTOM', '1518412455527612', '2024-11-29 06:57:35', '2024-11-29 06:57:35'),
+(36, '20', 'hello_world', '[{\"type\":\"HEADER\",\"format\":\"TEXT\",\"text\":\"Hello World\"},{\"type\":\"BODY\",\"text\":\"Welcome and congratulations!! This message demonstrates your ability to send a WhatsApp message notification from the Cloud API, hosted by Meta. Thank you for taking the time to test with us.\"},{\"type\":\"FOOTER\",\"text\":\"WhatsApp Business Platform sample message\"}]', 'en_US', 'APPROVED', 'UTILITY', NULL, '961562292468294', '2024-11-29 06:57:35', '2024-11-29 06:57:35');
 
 -- --------------------------------------------------------
 
@@ -511,7 +515,7 @@ ALTER TABLE `campaigns`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -535,7 +539,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -553,13 +557,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `register_users`
 --
 ALTER TABLE `register_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `templates`
 --
 ALTER TABLE `templates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `users`

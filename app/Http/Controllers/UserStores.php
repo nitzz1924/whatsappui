@@ -139,7 +139,7 @@ class UserStores extends Controller
 
     function dropMessage($phone, $templateid, $fileurl, $mediatype, $languagetype)
     {
-        dd($phone, $templateid, $fileurl, $mediatype, $languagetype);
+        //dd($phone, $templateid, $fileurl, $mediatype, $languagetype);
         $loggedinuser = Auth::guard('customer')->user();
         $accessToken = $loggedinuser->apptoken;
         $phonenumberid = $loggedinuser->phonenumberid;
@@ -172,9 +172,10 @@ class UserStores extends Controller
         ])->post('https://graph.facebook.com/v20.0/' . $phonenumberid . '/messages', $data);
         // Handle response
         if ($response->successful()) {
-
+            dd($response);
             $templatedata = Template::where('name', $templateid)->where('userid', $loggedinuser->id)->first();
             $data = Message::create([
+                'userid' =>  $loggedinuser->id,
                 'templatename' => $templateid,
                 'imageurl' => $fileurl,
                 'type' => 'Sent',

@@ -70,16 +70,16 @@ class UserViews extends Controller
     }
     public function analyticspage()
     {
+        $loggedinuser = Auth::guard('customer')->user();
         if (Auth::guard('customer')->check()) {
-            $sentmsgcount = Message::where('type','=','Sent')->get()->count();
-            $recmsgcount = Message::where('type','=','Recieved')->get()->count();
-            $contactscount = Contact::get()->count();
-            $tempcount = Template::get()->count();
-            $campaignscnt = Campaign::get()->count();
-            $regisusers = RegisterUser::get()->count();
-            $messages = Message::where('type','=','Recieved')->whereDate('created_at', Carbon::today())->get();
+            $sentmsgcount = Message::where('type','=','Sent')->where('userid', $loggedinuser->id)->get()->count();
+            $recmsgcount = Message::where('type','=','Recieved')->where('userid', $loggedinuser->id)->get()->count();
+            $contactscount = Contact::where('userid', $loggedinuser->id)->get()->count();
+            $tempcount = Template::where('userid', $loggedinuser->id)->get()->count();
+            $campaignscnt = Campaign::where('userid', $loggedinuser->id)->get()->count();
+            $messages = Message::where('userid', $loggedinuser->id)->where('type','=','Recieved')->whereDate('created_at', Carbon::today())->get();
             // dd($messages);
-            return view('UserPanel.analytics',compact('sentmsgcount','recmsgcount','messages','contactscount','tempcount','campaignscnt','regisusers'));
+            return view('UserPanel.analytics',compact('sentmsgcount','recmsgcount','messages','contactscount','tempcount','campaignscnt'));
         }else {
             return view('auth.UserPanel.login');
         }
@@ -128,18 +128,20 @@ class UserViews extends Controller
         $response = $client->get($apiBaseUrl . '/v20.0/'.$whatsbusinessid.'/message_templates');
         if ($response->successful()) {
             $templates = $response->json()['data'];
+            //dd($templates); // Replace with your desired handling of the template list
             return $templates;
-             //dd($templates); // Replace with your desired handling of the template list
         } else {
             dd('Error fetching template list: ' . $response->body());
         }
 
     }
     public function showsentmessage($phone){
+        $loggedinuser = Auth::guard('customer')->user();
         $finalphone = str_replace('+', '', $phone);
         $sentMessage = Message::where('senderid', $finalphone)
-                ->orWhere('recievedid', $phone)
-                ->get();
+        ->orWhere('recievedid', $phone)
+        ->where('userid', $loggedinuser->id)
+        ->get();
         //dd($sentMessage);
         return response()->json($sentMessage);
     }
