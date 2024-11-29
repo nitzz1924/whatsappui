@@ -32,8 +32,9 @@ class UserViews extends Controller
     }
     public function indexchat()
     {
+        $loggedinuser =Auth::guard('customer')->user();
         if (Auth::guard('customer')->check()) {
-            $contactsdata = Contact::orderBy('created_at', 'DESC')->get();
+            $contactsdata = Contact::where('userid',$loggedinuser->id)->orderBy('created_at', 'DESC')->get();
             $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
             $alltemplates = $this->getTemplateList();
             $chat = Message::get();
@@ -105,8 +106,9 @@ class UserViews extends Controller
     public function contactspage()
     {
         if (Auth::guard('customer')->check()) {
+            $loggedinuser =Auth::guard('customer')->user();
             $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
-            $contactsdata = Contact::orderBy('created_at', 'DESC')->get();
+            $contactsdata = Contact::where('userid',$loggedinuser->id)->orderBy('created_at', 'DESC')->get();
             return view('UserPanel.contacts', compact('groupsdata', 'contactsdata'));
         }else {
             return view('auth.UserPanel.login');

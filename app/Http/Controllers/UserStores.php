@@ -139,7 +139,7 @@ class UserStores extends Controller
 
     function dropMessage($phone, $templateid, $fileurl, $mediatype, $languagetype)
     {
-
+        dd($phone, $templateid, $fileurl, $mediatype, $languagetype);
         $loggedinuser = Auth::guard('customer')->user();
         $accessToken = $loggedinuser->apptoken;
         $phonenumberid = $loggedinuser->phonenumberid;
@@ -173,14 +173,14 @@ class UserStores extends Controller
         // Handle response
         if ($response->successful()) {
 
-            $templatedata = Template::where('name',$templateid)->where('userid', $loggedinuser->id)->first();
+            $templatedata = Template::where('name', $templateid)->where('userid', $loggedinuser->id)->first();
             $data = Message::create([
                 'templatename' => $templateid,
                 'imageurl' => $fileurl,
                 'type' => 'Sent',
                 'senderid' => $loggedinuser->mobilenumber,
                 'recievedid' => $phone,
-                'message' =>  $templatedata->components,
+                'message' => $templatedata->components,
             ]);
 
             return back()->with('success', 'Message sent successfully!');
