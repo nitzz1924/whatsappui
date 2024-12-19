@@ -21,7 +21,7 @@ class AdminStores extends Controller
             ]);
             $data = new RegisterUser();
             $data->userid = $req->userid;
-            $data->password = $req->password;
+            $data->password = bcrypt($req->password);
             $data->mobilenumber = $req->mobilenumber;
             $data->email = $req->email;
             $data->expiredate = $req->expiredate;

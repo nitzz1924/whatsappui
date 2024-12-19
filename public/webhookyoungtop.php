@@ -1,18 +1,26 @@
 <?php
-require './dbconn.php';
-// Configuration
-$hubVerifyToken = 'yuvmedia_whatsapp_08';
-$accessToken = 'EAAKGjLrP6ccBO0hIdJsj181ycKGCPys6uXU88KPg80seM8Lb7727FTZBtQGqzhnZCccf8x2DwIxFloBZAbQZAxSdZASDOGOoofTCLDUu0ROuuu54D4F8BMkVEiuaF3bNPqfjwOoBNCadgVpZCw2BQkMM3sVFFWQg9NGTdadsKSqgAqXPZChxl1xbMgs0olV0jo06n3iWjKmHXrB09ga1eZAfzCUxRg8ZD';
+$hubVerifyToken = 'young_toppers_164';
+$accessToken = 'EAAGcPLPwmicBO3JeochtkTAnnULmMOSg381NbjNHhHEcxhZA3kokBBBeeoKCqHZBYBwNwfmIF7tZCiVbBrbZB3FwX5LVoGIBX0S2FNhxBr9c6GpVA83fDANAdVuRElZCSj0JVTI12cbGv1hEzykpEZCn4UczhZAK2w6a0niDFnczzZCFf4sEW9OVQnZBrDsf9vHuO';
+
+require './dbconn.php'; // Include your database connection configuration
+
+// Webhook Verification
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['hub_challenge']) && isset($_GET['hub_verify_token']) && $_GET['hub_verify_token'] === $hubVerifyToken) {
+    echo $_GET['hub_challenge'];
+    exit;
+}
 
 // Webhook Event Handling (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = file_get_contents('php://input'); // Retrieve the raw POST body
     $data = json_decode($input, true); // Decode JSON payload
+    logMessage("Incoming Webhook Data: " . json_encode($data), 'info');
 
     // Log incoming webhook data for debugging
     file_put_contents('webhook_log.txt', print_r($data, true), FILE_APPEND);
 
     // Check if the message structure exists
+    
     if (isset($data['entry'][0]['changes'][0]['value']['messages'][0])) {
         $message = $data['entry'][0]['changes'][0]['value']['messages'][0];
         $displayPhoneNumber = $data['entry'][0]['changes'][0]['value']['metadata']['display_phone_number'] ?? '';
@@ -21,12 +29,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $messageText = $message['text']['body'] ?? '';
         $senderPhone = $message['from'] ?? '';
 
-        // **Retrieve User ID from register_users Table**
+        // **Retrieve User ID from `register_users` Table**
         $userid = null;
 
-        // Simplified query to fetch ID
-        $query = "SELECT id FROM register_users WHERE mobilenumber = $displayPhoneNumber";
+        $query = "SELECT id FROM register_users WHERE mobilenumber = ?";
         $stmt = $conn->prepare($query);
+
+        if (!$stmt) {
+            logMessage("SQL Prepare failed: " . $conn->error, 'error');
+            http_response_code(500);
+            echo json_encode(['status' => 'error', 'message' => 'Database error']);
+            exit;
+        }
+
         $stmt->bind_param("s", $displayPhoneNumber);
         $stmt->execute();
         $stmt->bind_result($userid);
@@ -40,9 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        // **Insert Message into messages Table**
-        $stmt = $conn->prepare("INSERT INTO messages (userid, senderid, type, message, recievedid, created_at, updated_at) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?)");
+        // **Insert Message into `messages` Table**
+        $insertQuery = "INSERT INTO messages (userid, senderid, type, message, recievedid, created_at, updated_at) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($insertQuery);
 
         if (!$stmt) {
             logMessage("SQL Prepare failed: " . $conn->error, 'error');
@@ -51,14 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        // Bind values
+        // Prepare data for insertion
         $type = "Received";
         $messagerec = json_encode($message);
         $receivedid = $displayPhoneNumber;
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');
 
-        // Bind parameters
         $stmt->bind_param("sssssss", $userid, $senderPhone, $type, $messagerec, $receivedid, $created_at, $updated_at);
 
         // Execute the query and log results

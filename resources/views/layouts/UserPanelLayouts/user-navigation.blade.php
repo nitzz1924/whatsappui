@@ -78,7 +78,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('groupspage') }}" class="nav-link" data-key="t-one-page">
-                                  Groups
+                                  Types
                                 </a>
                             </li>
                         </ul>

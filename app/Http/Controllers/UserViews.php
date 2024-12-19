@@ -28,37 +28,40 @@ class UserViews extends Controller
     {
         Session::flush();
         Auth::guard('customer')->logout();
-        return redirect('/user/login');
+        return redirect('/');
     }
     public function indexchat()
     {
-        $loggedinuser =Auth::guard('customer')->user();
+        $loggedinuser = Auth::guard('customer')->user();
         if (Auth::guard('customer')->check()) {
-            $contactsdata = Contact::where('userid',$loggedinuser->id)->orderBy('created_at', 'DESC')->get();
-            $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
-            $alltemplates = $this->getTemplateList();
-            $chat = Message::get();
-            return view('UserPanel.indexchat',compact( 'contactsdata','groupsdata','alltemplates','chat'));
-        }else {
+            $contactsdata = Contact::where('userid', $loggedinuser->id)->orderBy('created_at', 'DESC')->get();
+            $groupsdata = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
+            $alltemplates = Template::where('userid', $loggedinuser->id)->get();
+            $chat = Message::where('userid', $loggedinuser->id)->get();
+            return view('UserPanel.indexchat', compact('contactsdata', 'groupsdata', 'alltemplates', 'chat'));
+        } else {
             return view('auth.UserPanel.login');
         }
     }
     public function campaignspage()
     {
+        $loggedinuser = Auth::guard('customer')->user();
         if (Auth::guard('customer')->check()) {
-            $campaigns = Campaign::orderBy('created_at','DESC')->get();
-            return view('UserPanel.campaigns',compact('campaigns'));
-        }else {
+            $campaigns = Campaign::where('userid', '=', $loggedinuser->id)->orderBy('created_at', 'DESC')->get();
+            //dd( $campaigns);
+            return view('UserPanel.campaigns', compact('campaigns'));
+        } else {
             return view('auth.UserPanel.login');
         }
     }
     public function addnewcampaign()
     {
-        $alltemplates = $this->getTemplateList();
+        $loggedinuser = Auth::guard('customer')->user();
+        $alltemplates = Template::where('userid', $loggedinuser->id)->get();
         //dd($alltemplates);
-        $groupdata = GroupType::where('type', '=', 'Group')->get();
-        $statusdata = GroupType::where('type', '=', 'Status')->get();
-        return view('UserPanel.addnewcampaign', compact('groupdata', 'statusdata','alltemplates'));
+        $groupdata = GroupType::where('userid', $loggedinuser)->where('type', '=', 'Group')->get();
+        $statusdata = GroupType::where('userid', $loggedinuser)->where('type', '=', 'Status')->get();
+        return view('UserPanel.addnewcampaign', compact('groupdata', 'statusdata', 'alltemplates'));
     }
     public function automationpage()
     {
@@ -72,15 +75,15 @@ class UserViews extends Controller
     {
         $loggedinuser = Auth::guard('customer')->user();
         if (Auth::guard('customer')->check()) {
-            $sentmsgcount = Message::where('type','=','Sent')->where('userid', $loggedinuser->id)->get()->count();
-            $recmsgcount = Message::where('type','=','Recieved')->where('userid', $loggedinuser->id)->get()->count();
+            $sentmsgcount = Message::where('type', '=', 'Sent')->where('userid', $loggedinuser->id)->get()->count();
+            $recmsgcount = Message::where('type', '=', 'Received')->where('userid', $loggedinuser->id)->get()->count();
             $contactscount = Contact::where('userid', $loggedinuser->id)->get()->count();
             $tempcount = Template::where('userid', $loggedinuser->id)->get()->count();
             $campaignscnt = Campaign::where('userid', $loggedinuser->id)->get()->count();
-            $messages = Message::where('userid', $loggedinuser->id)->where('type','=','Recieved')->whereDate('created_at', Carbon::today())->get();
+            $messages = Message::where('userid', $loggedinuser->id)->where('type', '=', 'Received')->whereDate('created_at', Carbon::today())->get();
             // dd($messages);
-            return view('UserPanel.analytics',compact('sentmsgcount','recmsgcount','messages','contactscount','tempcount','campaignscnt'));
-        }else {
+            return view('UserPanel.analytics', compact('sentmsgcount', 'recmsgcount', 'messages', 'contactscount', 'tempcount', 'campaignscnt'));
+        } else {
             return view('auth.UserPanel.login');
         }
     }
@@ -93,24 +96,25 @@ class UserViews extends Controller
         if (Auth::guard('customer')->check()) {
             $alltemplates = $this->getTemplateList();
             //dd($alltemplates);
-            return view('UserPanel.templates',compact('alltemplates'));
-        }else {
+            return view('UserPanel.templates', compact('alltemplates'));
+        } else {
             return view('auth.UserPanel.login');
         }
     }
     public function groupspage()
     {
-        $groupsdata = GroupType::orderBy('created_at', 'DESC')->get();
+        $loggedinuser = Auth::guard('customer')->user();
+        $groupsdata = GroupType::orderBy('created_at', 'DESC')->where('userid', $loggedinuser->id)->get();
         return view('UserPanel.addgroups', compact('groupsdata'));
     }
     public function contactspage()
     {
         if (Auth::guard('customer')->check()) {
-            $loggedinuser =Auth::guard('customer')->user();
-            $groupsdata = GroupType::where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
-            $contactsdata = Contact::where('userid',$loggedinuser->id)->orderBy('created_at', 'DESC')->get();
+            $loggedinuser = Auth::guard('customer')->user();
+            $groupsdata = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
+            $contactsdata = Contact::where('userid', $loggedinuser->id)->orderBy('created_at', 'DESC')->get();
             return view('UserPanel.contacts', compact('groupsdata', 'contactsdata'));
-        }else {
+        } else {
             return view('auth.UserPanel.login');
         }
     }
@@ -125,7 +129,7 @@ class UserViews extends Controller
             'Authorization' => 'Bearer ' . $accessToken,
         ]);
 
-        $response = $client->get($apiBaseUrl . '/v20.0/'.$whatsbusinessid.'/message_templates');
+        $response = $client->get($apiBaseUrl . '/v20.0/' . $whatsbusinessid . '/message_templates');
         if ($response->successful()) {
             $templates = $response->json()['data'];
             //dd($templates); // Replace with your desired handling of the template list
@@ -135,14 +139,18 @@ class UserViews extends Controller
         }
 
     }
-    public function showsentmessage($phone){
+    public function showsentmessage($phone)
+    {
         $loggedinuser = Auth::guard('customer')->user();
         $finalphone = str_replace('+', '', $phone);
-        $sentMessage = Message::where('senderid', $finalphone)
-        ->orWhere('recievedid', $phone)
-        ->where('userid', $loggedinuser->id)
-        ->get();
-        //dd($sentMessage);
+
+        $sentMessage = Message::where('userid', $loggedinuser->id)
+            ->where(function ($query) use ($finalphone) {
+                $query->where('senderid', $finalphone)
+                    ->orWhere('recievedid', $finalphone);
+            })
+            ->get();
+
         return response()->json($sentMessage);
     }
 }

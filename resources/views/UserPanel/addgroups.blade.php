@@ -35,7 +35,7 @@
                                 <tr>
                                     <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No</th>
                                     <th style="background-color:#1164642b;">Type</th>
-                                    <th style="background-color:#1164642b;">Status</th>
+                                    <th style="background-color:#1164642b;">Name</th>
                                     <th style="background-color:#1164642b;">Action</th>
                                 </tr>
                             </thead>

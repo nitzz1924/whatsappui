@@ -2,7 +2,7 @@
 ЁЯФ▒ЁЯЩП---------------------------тАЭ --}}
 @extends('layouts.UserPanelLayouts.usermain')
 @push('title')
-<title>Index Chat</title>
+    <title>Index Chat</title>
 @endpush
 @section('content')
 <div class="container-fluid">
@@ -68,36 +68,36 @@
                                             <div class="chat-message-list">
                                                 <ul class="list-unstyled chat-list chat-user-list" id="userList">
                                                     @foreach ($contactsdata as $data)
-                                                    <li id="contact-id-{{ $data->id }}" data-name="direct-message"
-                                                        class="{{ $data->is_active ? 'active' : '' }}">
-                                                        <a href="#" class="contact-tab"
-                                                            data-value="{{ json_encode($data) }}">
-                                                            <div class="d-flex align-items-center py-2">
-                                                                <div
-                                                                    class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                                                    <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle text-white"
-                                                                        style="width: 30px; height: 30px; background-color:#1a4848;">
-                                                                        <span class="user-initial">{{
-                                                                            strtoupper(substr($data->fullname, 0, 1))
-                                                                            }}</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="flex-grow-1 overflow-hidden">
-                                                                    <p class="text-truncate mb-0">
-                                                                        {{ $data->fullname }}
-                                                                    </p>
-                                                                    <small class="text-muted fs-6 fw-normal mb-0">
-                                                                        Yes!.Ok
-                                                                    </small>
-                                                                </div>
-                                                                <div class="flex-grow-1 overflow-hidden text-end">
-                                                                    <small class="text-muted fs-6 fw-normal mb-0">
-                                                                        12:05
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
+                                                                                                    <li id="contact-id-{{ $data->id }}" data-name="direct-message"
+                                                                                                        class="{{ $data->is_active ? 'active' : '' }}">
+                                                                                                        <a href="#" class="contact-tab"
+                                                                                                            data-value="{{ json_encode($data) }}">
+                                                                                                            <div class="d-flex align-items-center py-2">
+                                                                                                                <div
+                                                                                                                    class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
+                                                                                                                    <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle text-white"
+                                                                                                                        style="width: 30px; height: 30px; background-color:#1a4848;">
+                                                                                                                        <span class="user-initial">{{
+                                                        strtoupper(substr($data->fullname, 0, 1))
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }}</span>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="flex-grow-1 overflow-hidden">
+                                                                                                                    <p class="text-truncate mb-0">
+                                                                                                                        {{ $data->fullname }}
+                                                                                                                    </p>
+                                                                                                                    <small class="text-muted fs-6 fw-normal mb-0">
+                                                                                                                        Yes!.Ok
+                                                                                                                    </small>
+                                                                                                                </div>
+                                                                                                                <div class="flex-grow-1 overflow-hidden text-end">
+                                                                                                                    <small class="text-muted fs-6 fw-normal mb-0">
+                                                                                                                        12:05
+                                                                                                                    </small>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </a>
+                                                                                                    </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -137,16 +137,17 @@
                                             <div class="chat-message-list">
                                                 <ul class="list-unstyled chat-list chat-user-list" id="userList">
                                                     @foreach ($groupsdata as $row)
-                                                    <li data-name="direct-message">
-                                                        <a href="javascript: void(0);">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="flex-grow-1 overflow-hidden">
-                                                                    <p class="text-truncate mb-0">
-                                                                        {{ $row->label }}</p>
+                                                        <li data-name="direct-message">
+                                                            <a href="javascript: void(0);">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="flex-grow-1 overflow-hidden">
+                                                                        <p class="text-truncate mb-0">
+                                                                            {{ $row->label }}
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
+                                                            </a>
+                                                        </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -190,30 +191,30 @@
                                             <div class="flex-grow-1 overflow-hidden">
 
                                                 @foreach ($contactsdata->take(1) as $data)
-                                                <div class="d-flex align-items-center">
-                                                    <div
-                                                        class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                                        <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle  text-white"
-                                                            style="width: 40px; height: 40px; background-color:#1a4848;">
-                                                            <span class="user-initial fs-5 fw-bold" id="alphabet">{{
-                                                                strtoupper(substr($data->fullname, 0, 1)) }}
-                                                                </spanclass=>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1 overflow-hidden">
-                                                        <h5 class="text-truncate mb-0 fs-16 fw-bold"><a
-                                                                class="text-reset username" data-bs-toggle="offcanvas"
-                                                                data-bs-target="#offcanvasRight"
-                                                                aria-controls="offcanvasRight"
-                                                                href="#userProfileCanvasExample"
-                                                                aria-controls="userProfileCanvasExample">{{
-                                                                $data->fullname }}</a>
-                                                        </h5>
-                                                        <p class="text-truncate text-muted fs-14 mb-0 userStatus">
-                                                            <small>Online</small>
-                                                        </p>
-                                                    </div>
-                                                </div>
+                                                                                            <div class="d-flex align-items-center">
+                                                                                                <div
+                                                                                                    class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
+                                                                                                    <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle  text-white"
+                                                                                                        style="width: 40px; height: 40px; background-color:#1a4848;">
+                                                                                                        <span class="user-initial fs-5 fw-bold" id="alphabet">{{
+                                                    strtoupper(substr($data->fullname, 0, 1)) }}
+                                                                                                            </spanclass=>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="flex-grow-1 overflow-hidden">
+                                                                                                    <h5 class="text-truncate mb-0 fs-16 fw-bold"><a
+                                                                                                            class="text-reset username" data-bs-toggle="offcanvas"
+                                                                                                            data-bs-target="#offcanvasRight"
+                                                                                                            aria-controls="offcanvasRight"
+                                                                                                            href="#userProfileCanvasExample"
+                                                                                                            aria-controls="userProfileCanvasExample">{{
+                                                    $data->fullname }}</a>
+                                                                                                    </h5>
+                                                                                                    <p class="text-truncate text-muted fs-14 mb-0 userStatus">
+                                                                                                        <small>Online</small>
+                                                                                                    </p>
+                                                                                                </div>
+                                                                                            </div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -494,76 +495,88 @@
     </div>
     <div class="offcanvas-body" id="contactdetailsoff">
         @foreach ($contactsdata->take(1) as $data)
-        <div class="card" id="contact-view-detail">
-            <div class="card-body text-center">
-                <div class="d-inline-block">
-                    <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle bg-success text-white"
-                        style="width: 80px; height: 80px;">
-                        <span class="user-initial fs-3">{{ strtoupper(substr($data->fullname, 0, 1)) }}</span>
+            <div class="card" id="contact-view-detail">
+                <div class="card-body text-center">
+                    <div class="d-inline-block">
+                        <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle bg-success text-white"
+                            style="width: 80px; height: 80px;">
+                            <span class="user-initial fs-3">{{ strtoupper(substr($data->fullname, 0, 1)) }}</span>
+                        </div>
+                    </div>
+                    <h5 class="mt-4 mb-1">{{ $data->fullname }}</h5>
+                    <p class="text-muted">{{ $data->status }}</p>
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item avatar-xs">
+                            <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">
+                                <i class="ri-phone-line"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item avatar-xs">
+                            <a href="javascript:void(0);" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
+                                <i class="ri-mail-line"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item avatar-xs">
+                            <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
+                                <i class="ri-question-answer-line"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <h6 class="text-muted text-uppercase fw-semibold mb-3">Personal Information</h6>
+                    <p class="text-muted mb-4">Hello, {{ $data->fullname }}, The most effective objective is one that
+                        is
+                        tailored
+                        to the job you are applying for. It states what kind of career you are seeking, and what skills
+                        and
+                        experiences.</p>
+                    <div class="table-responsive table-card">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="fw-medium" scope="row">Email ID</td>
+                                    <td>{{ $data->email }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium" scope="row">Phone No</td>
+                                    <td>{{ $data->phonenumber }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium" scope="row">Address</td>
+                                    <td>{{ $data->address }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium" scope="row">Contact Created</td>
+                                    <td><small class="text-muted">{{ $data->created_at->format('d/m/y') }}</small>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <h5 class="mt-4 mb-1">{{ $data->fullname }}</h5>
-                <p class="text-muted">{{ $data->status }}</p>
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item avatar-xs">
-                        <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">
-                            <i class="ri-phone-line"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item avatar-xs">
-                        <a href="javascript:void(0);" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
-                            <i class="ri-mail-line"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item avatar-xs">
-                        <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
-                            <i class="ri-question-answer-line"></i>
-                        </a>
-                    </li>
-                </ul>
             </div>
-            <div class="card-body">
-                <h6 class="text-muted text-uppercase fw-semibold mb-3">Personal Information</h6>
-                <p class="text-muted mb-4">Hello, {{ $data->fullname }}, The most effective objective is one that
-                    is
-                    tailored
-                    to the job you are applying for. It states what kind of career you are seeking, and what skills
-                    and
-                    experiences.</p>
-                <div class="table-responsive table-card">
-                    <table class="table table-borderless mb-0">
-                        <tbody>
-                            <tr>
-                                <td class="fw-medium" scope="row">Email ID</td>
-                                <td>{{ $data->email }}</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-medium" scope="row">Phone No</td>
-                                <td>{{ $data->phonenumber }}</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-medium" scope="row">Address</td>
-                                <td>{{ $data->address }}</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-medium" scope="row">Contact Created</td>
-                                <td><small class="text-muted">{{ $data->created_at->format('d/m/y') }}</small>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
         @endforeach
     </div>
 </div>
-<form action="{{ route('sendsinglemessage') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="offcanvas offcanvas-end mycustomcanvascontacts" tabindex="-1" id="offcanvasTop"
-        aria-labelledby="offcanvasRightLabel" style="background-image: url('/assets/images/chat-bg-pattern.png');">
+
+
+<div class="offcanvas offcanvas-end mycustomcanvascontacts" tabindex="-1" id="offcanvasTop"
+    aria-labelledby="offcanvasRightLabel" style="background-image: url('/assets/images/chat-bg-pattern.png');">
+    <!-- Danger Alert -->
+    <div class="alert alert-danger alert-dismissible alert-label-icon rounded-label fade show" role="alert">
+        <i class="ri-error-warning-line label-icon"></i><strong>Warning</strong> - If no
+        templates are displayed, <i class="ri-refresh-line me-2"></i>
+        <a href="{{ route('refreshtemplates')}}">
+            <button type="button" class="btn  btn-sm text-white rounded-4" style="background-color: #116464;">
+                Refresh Templates
+            </button>
+        </a>
+    </div>
+    <form action="{{ route('sendsinglemessage') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">Contact Details</h5>
+            <h5 id="offcanvasRightLabel">Send Message</h5>
             <div class="d-flex justify-content-end align-items-center">
                 <button type="submit" class="btn btn-sm text-white rounded-4 waves-effect waves-light"
                     style="background-color: #116464"><i class="bx bx-send me-2"></i>Send Message</button>
@@ -571,100 +584,105 @@
                     aria-label="Close"></button>
             </div>
         </div>
-        <div class="offcanvas-body">
-            <div class="" id="contact-view-detail">
-                <div class="card-body text-center">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div>
-                                <label for="template" class="form-label fs-5">Choose Template</label>
-                                <select class="form-select rounded-pill mb-3 onchangedrop" name="template"
-                                    aria-label="Select template">
-                                    <option disabled selected>--choose template--</option>
-                                    @foreach ($alltemplates as $data)
-                                    <option value="{{ $data['name'] }}"
-                                        data-value="{{ htmlspecialchars(json_encode($data['components']), ENT_QUOTES, 'UTF-8') }}"
-                                        data-language="{{ htmlspecialchars(json_encode($data['language']), ENT_QUOTES, 'UTF-8') }}"
-                                        {{ old('template')==$data['name'] ? 'selected' : '' }}>
-                                        {{ $data['name'] }}
+    </form>
+    <div class="offcanvas-body">
+        <div class="" id="contact-view-detail">
+            <div class="card-body text-center">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div>
+                            <label for="template" class="form-label text-start fs-5">Choose Template</label>
+                            <select class="form-select rounded-pill mb-3 onchangedrop" name="template"
+                                aria-label="Select template">
+                                <option disabled selected>--choose template--</option>
+                                @foreach ($alltemplates as $data)
+                                    <option value="{{ $data->name }}" data-value="{{ json_encode($data->components) }}"
+                                        data-language="{{ json_encode($data->language) }}">
+                                        {{ $data->name }}
                                     </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mt-4" id="previewdivtemplate">
-                                {{-- Template Div Appends Here --}}
-                            </div>
-                            <input type="hidden" name="phonenumber" value="" id="contactnumberofperson">
-                            <input type="hidden" name="wholeme" value="" id="contactnumberofperson">
+                                @endforeach
+                                <!-- @foreach ($alltemplates as $data)
+                                        <option value="{{ $data['name'] }}"
+                                            data-value="{{ htmlspecialchars(json_encode($data['components']), ENT_QUOTES, 'UTF-8') }}"
+                                            data-language="{{ htmlspecialchars(json_encode($data['language']), ENT_QUOTES, 'UTF-8') }}"
+                                            {{ old('template') == $data['name'] ? 'selected' : '' }}>
+                                            {{ $data['name'] }}
+                                        </option>
+                                    @endforeach -->
+                            </select>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="whatsapp-container" id="messagediv">
-                                {{-- Message Div Appends Here --}}
-                            </div>
+                        <div class="mt-4" id="previewdivtemplate">
+                            {{-- Template Div Appends Here --}}
                         </div>
-
+                        <input type="hidden" name="phonenumber" value="" id="contactnumberofperson">
+                        <input type="hidden" name="wholeme" value="" id="contactnumberofperson">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="whatsapp-container" id="messagediv">
+                            {{-- Message Div Appends Here --}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</form>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     //Hiding Default on keypress of Escape Key
-        $(document).keyup(function(e) {
-            if (e.key === "Escape") {
-                $('#defaultimage').show();
-                $('#chatrow').hide();
+    $(document).keyup(function (e) {
+        if (e.key === "Escape") {
+            $('#defaultimage').show();
+            $('#chatrow').hide();
+        }
+    });
+
+
+    $(document).ready(function () {
+        $('#resolvebtn').on('click', function () {
+            const $section = $('#chatinputsection');
+            $('#templatedivsec').hide();
+            if ($section.hasClass('d-none')) {
+
+                $section.removeClass('d-none').css({
+                    opacity: 0,
+                    maxHeight: '0px'
+                }).animate({
+                    opacity: 1,
+                    maxHeight: '100px'
+                }, 300);
+            } else {
+                $section.animate({
+                    opacity: 0,
+                    maxHeight: '0px'
+                }, 300, function () {
+                    $section.addClass('d-none');
+                    $('#templatedivsec').show();
+                });
             }
         });
+    });
 
 
-        $(document).ready(function() {
-            $('#resolvebtn').on('click', function() {
-                const $section = $('#chatinputsection');
-                $('#templatedivsec').hide();
-                if ($section.hasClass('d-none')) {
-
-                    $section.removeClass('d-none').css({
-                        opacity: 0,
-                        maxHeight: '0px'
-                    }).animate({
-                        opacity: 1,
-                        maxHeight: '100px'
-                    }, 300);
-                } else {
-                    $section.animate({
-                        opacity: 0,
-                        maxHeight: '0px'
-                    }, 300, function() {
-                        $section.addClass('d-none');
-                        $('#templatedivsec').show();
-                    });
-                }
-            });
-        });
+    $(document).ready(function () {
+        $('.contact-tab').on('click', function () {
+            $('#users-conversation').empty();
+            $('#chatrow').show();
+            $('#defaultimage').hide();
+            const contacttab = $(this).data('value');
+            console.log(contacttab);
+            var formattedDate = new Date(contacttab.created_at)
+                .toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
+            $('#contactdetailsoff').empty();
+            $('#alphabet').empty();
 
 
-        $(document).ready(function() {
-            $('.contact-tab').on('click', function() {
-                $('#users-conversation').empty();
-                $('#chatrow').show();
-                $('#defaultimage').hide();
-                const contacttab = $(this).data('value');
-                console.log(contacttab);
-                var formattedDate = new Date(contacttab.created_at)
-                    .toLocaleDateString('en-GB', {
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric'
-                    });
-                $('#contactdetailsoff').empty();
-                $('#alphabet').empty();
-
-
-                //Contact Details Functionality
-                const contactbody = `
+            //Contact Details Functionality
+            const contactbody = `
                             <div class="card" id="contact-view-detail">
                                 <div class="card-body text-center">
                                     <div class="d-inline-block">
@@ -723,124 +741,122 @@
                         </div>
                     </div>
                     `;
-                $('#contactdetailsoff').append(contactbody);
-                $('#contactnumberofperson').val(contacttab.phonenumber);
-                $('#alphabet').html(contacttab.fullname.charAt(0).toUpperCase());
+            $('#contactdetailsoff').append(contactbody);
+            $('#contactnumberofperson').val(contacttab.phonenumber);
+            $('#alphabet').html(contacttab.fullname.charAt(0).toUpperCase());
 
 
-                //Sent Message show Functionality
-                //---------------------------------------------------------------------------------
+            //Sent Message show Functionality
+            //---------------------------------------------------------------------------------
 
-                $.ajax({
-                    url: "/showsentmessage/" + contacttab.phonenumber,
-                    method: "GET",
-                    success: function(data) {
-                        console.log(data);
-                        const messageArray = data;
-                        console.log("Converted Array : " + messageArray);
+            $.ajax({
+                url: "/showsentmessage/" + contacttab.phonenumber,
+                method: "GET",
+                success: function (data) {
+                    const messageArray = data;
+                    console.log("Converted Array : " + messageArray);
 
-                        let messagediv = '';
+                    let messagediv = '';
 
 
-                        messageArray.forEach((element) => {
-                            if (element.type === 'Sent') {
-                                const messageContent = JSON.parse(element.message);
-                                console.log("Msg Content : " +
-                                messageContent);
-                                let messageHTML = '';
+                    messageArray.forEach((element) => {
+                        if (element.type === 'Sent') {
+                            const messageContent = JSON.parse(element.message);
+                            console.log("Msg Content : " + messageContent);
+                            let messageHTML = '';
 
-                                // Iterate over each part of the message
-                                messageContent.forEach(part => {
-                                    if (part.type === 'HEADER') {
-                                        if (part.format === 'TEXT') {
-                                            messageHTML +=
-                                                `<p class="message-header">${part.text}</p>`;
-                                        } else if (part.format === 'IMAGE') {
-                                            const imageUrl = element
+                            // Iterate over each part of the message
+                            messageContent.forEach(part => {
+                                if (part.type === 'HEADER') {
+                                    if (part.format === 'TEXT') {
+                                        messageHTML +=
+                                            `<p class="message-header">${part.text}</p>`;
+                                    } else if (part.format === 'IMAGE') {
+                                        const imageUrl = element
                                             .imageurl;
-                                            console.log("Image URL : " +
-                                                imageUrl);
-                                            messageHTML +=
-                                                `<img src='${imageUrl}' alt="Header Image" height="200px" width="100%">`;
-                                        }
-                                         else if (part.format === 'VIDEO') {
-                                            const imageUrl = element
+                                        console.log("Image URL : " +
+                                            imageUrl);
+                                        messageHTML +=
+                                            `<img src='${imageUrl}' alt="Header Image" height="200px" width="100%">`;
+                                    }
+                                    else if (part.format === 'VIDEO') {
+                                        const imageUrl = element
                                             .imageurl;
-                                            console.log("Video URL : " + imageUrl);
-                                            messageHTML +=
-                                                `<video controls width="100%" height="200px">
+                                        console.log("Video URL : " + imageUrl);
+                                        messageHTML +=
+                                            `<video controls width="100%" height="200px">
                                                     <source id="videomain" src="${imageUrl}" type="video/mp4">
                                                     Your browser does not support the video tag.
                                                 </video>`;
-                                        }
-                                    } else if (part.type === 'BODY') {
-                                        // Apply link formatting only to the body text
-                                        let bodyText = part.text;
-                                        bodyText = bodyText.replace(
-                                            /\*(.*?)\*/g,
-                                            '<strong>$1</strong>'
-                                            ); // Bold formatting
-                                        bodyText = bodyText.replace(
-                                            /(https?:\/\/[^\s]+)/g,
-                                            '<a href="$1" target="_blank">$1</a>'
-                                            ); // Link formatting
-                                        messageHTML +=
-                                            `<p class="message-body fs-5">${bodyText}</p>`;
-                                    } else if (part.type === 'BUTTONS') {
-                                        part.buttons.forEach(button => {
-                                            if(button.type == 'URL'){
-                                                messageHTML +=
-                                                    `<a class="" href="${button.url}"><button class="message-button w-100 text-white btn btn-success btn-block">${button.text}</button></a>`;
-                                            }else{
-                                                messageHTML +=
-                                                    `<a class="" href="tel:${button.phone_number}"><button class="message-button w-100 text-white btn btn-success btn-block">${button.text}</button></a>`;
-                                            }
-                                        });
                                     }
-                                });
+                                } else if (part.type === 'BODY') {
+                                    // Apply link formatting only to the body text
+                                    let bodyText = part.text;
+                                    bodyText = bodyText.replace(
+                                        /\*(.*?)\*/g,
+                                        '<strong>$1</strong>'
+                                    ); // Bold formatting
+                                    bodyText = bodyText.replace(
+                                        /(https?:\/\/[^\s]+)/g,
+                                        '<a href="$1" target="_blank">$1</a>'
+                                    ); // Link formatting
+                                    messageHTML +=
+                                        `<p class="message-body fs-5">${bodyText}</p>`;
+                                } else if (part.type === 'BUTTONS') {
+                                    part.buttons.forEach(button => {
+                                        if (button.type == 'URL') {
+                                            messageHTML +=
+                                                `<a class="" href="${button.url}"><button class="message-button w-100 text-white btn btn-success btn-block">${button.text}</button></a>`;
+                                        } else {
+                                            messageHTML +=
+                                                `<a class="" href="tel:${button.phone_number}"><button class="message-button w-100 text-white btn btn-success btn-block">${button.text}</button></a>`;
+                                        }
+                                    });
+                                }
+                            });
 
 
-                                messagediv += `
+                            messagediv += `
                                     <li class="w-100 mb-3 justify-content-end">
                                         <div class="message-preview">
                                             ${messageHTML}
                                         </div>
                                     </li>
                                 `;
-                            }
+                        }
 
-                            if (element.type === 'Recieved') {
-                                // Parse the message
-                                let messageData = JSON.parse(element.message);
+                        if (element.type === 'Received') {
+                            // Parse the message
+                            let messageData = JSON.parse(element.message);
 
-                                // Extract timestamp and format it
-                                let msgtime = messageData.timestamp;
-                                let date = new Date(msgtime *
+                            // Extract timestamp and format it
+                            let msgtime = messageData.timestamp;
+                            let date = new Date(msgtime *
                                 1000); // Convert to milliseconds
 
-                                // Add IST offset (5 hours and 30 minutes)
-                                let istOffset = 5.5 * 60 * 60 *
+                            // Add IST offset (5 hours and 30 minutes)
+                            let istOffset = 5.5 * 60 * 60 *
                                 1000; // IST is UTC +5:30
-                                let istDate = new Date(date.getTime() + istOffset);
+                            let istDate = new Date(date.getTime() + istOffset);
 
-                                // Get hours, minutes, and determine AM/PM in IST
-                                let hours = istDate.getUTCHours();
-                                let minutes = istDate.getUTCMinutes().toString()
-                                    .padStart(2, '0');
-                                let ampm = hours >= 12 ? 'PM' : 'AM';
+                            // Get hours, minutes, and determine AM/PM in IST
+                            let hours = istDate.getUTCHours();
+                            let minutes = istDate.getUTCMinutes().toString()
+                                .padStart(2, '0');
+                            let ampm = hours >= 12 ? 'PM' : 'AM';
 
-                                // Convert hours to 12-hour format
-                                hours = hours % 12;
-                                hours = hours ? hours : 12; // Adjust 0 to 12
+                            // Convert hours to 12-hour format
+                            hours = hours % 12;
+                            hours = hours ? hours : 12; // Adjust 0 to 12
 
-                                let formattedTime = `${hours}:${minutes} ${ampm}`;
+                            let formattedTime = `${hours}:${minutes} ${ampm}`;
 
-                                // Extract the message text (assuming it's in 'text.body')
-                                let reply = messageData.text ? messageData.text.body :
-                                    'No message content';
+                            // Extract the message text (assuming it's in 'text.body')
+                            let reply = messageData.text ? messageData.text.body :
+                                'No message content';
 
-                                // Create the message HTML structure and append to messagediv
-                                messagediv += `
+                            // Create the message HTML structure and append to messagediv
+                            messagediv += `
                                     <li class="chat-list left" style="width:50%;">
                                         <div class="conversation-list">
                                             <div class="user-chat-content">
@@ -864,93 +880,113 @@
                                             </div>
                                         </div>
                                     </li>`;
-                            }
-                        });
+                        }
+                    });
 
-                        // Append all the generated message HTML after the loop finishes
-                        $('#users-conversation').html(messagediv);
-                    }
-                });
-
+                    // Append all the generated message HTML after the loop finishes
+                    $('#users-conversation').html(messagediv);
+                }
             });
 
         });
+
+    });
 </script>
 <script>
-    //Showing Message Dynamically
-        $('.onchangedrop').on('change', function() {
-            const selectedOption = $(this).find('option:selected');
-            const data = selectedOption.data('value');
-            const language = selectedOption.data('language').replace(/&quot;/g, '').trim();
-            console.log(language);
-            const decodedData = $('<textarea/>').html(data).text();
-            const jsonArray = JSON.parse(decodedData);
-            console.log(jsonArray);
-            $('#messagediv').empty();
-            $('#previewdivtemplate').empty();
-            let messageHTML = '';
+    // Showing Message Dynamically
+    $('.onchangedrop').on('change', function () {
+        const selectedOption = $(this).find(':selected'); // Get the selected option element
 
-            jsonArray.forEach((element) => {
-                //Dyamic Upload Input
-                if (element.format == 'IMAGE' || element.format == 'VIDEO') {
-                    const input = `
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Upload ${element.format == 'IMAGE' ? 'Image' : 'Video'}</label>
-                        <input name="mediaimage" class="form-control" accept="image/*, video/*" onchange="readURL(this);" type="file" id="formFile">
-                        <input type="hidden" name="mediatype" class="form-control" value=${element.format == 'IMAGE' ? 'image' : 'video'}>
-                        <input type="hidden" name="languagetype" class="form-control" value=${language}>
-                    </div>
-                    `;
-                    $('#previewdivtemplate').append(input);
-                }
-                if (element.type === 'HEADER') {
-                    if (element.format == 'TEXT') {
-                        messageHTML += `<p class="message-title">${element.text}</p>`;
-                    } else if (element.format === 'VIDEO') {
-                        messageHTML += `
+        // Retrieve the raw data-value and data-language
+        const rawDataValue = selectedOption.attr('data-value');
+        const rawLanguage = selectedOption.attr('data-language');
+
+        let dataValue, language;
+
+        try {
+            // Parse the rawDataValue and rawLanguage safely
+            dataValue = JSON.parse(JSON.parse(rawDataValue)); // Double parse to handle stringified JSON
+            language = JSON.parse(rawLanguage);
+        } catch (error) {
+            console.error("Error parsing data-value or data-language:", error);
+            return;
+        }
+
+        // Validate that dataValue is an array
+        if (!Array.isArray(dataValue)) {
+            console.error("dataValue is not a valid array:", dataValue);
+            return;
+        }
+
+        console.log("Parsed dataValue:", dataValue); // Debugging logs
+        console.log("Parsed language:", language);
+
+        // Clear previous content
+        $('#messagediv').empty();
+        $('#previewdivtemplate').empty();
+
+        let messageHTML = '';
+
+        // Iterate through the parsed JSON array
+        dataValue.forEach((element) => {
+            // Dynamic upload input for IMAGE or VIDEO
+            if (element.format === 'IMAGE' || element.format === 'VIDEO') {
+                const input = `
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Upload ${element.format === 'IMAGE' ? 'Image' : 'Video'}</label>
+                    <input name="mediaimage" class="form-control" accept="image/*, video/*" onchange="readURL(this);" type="file" id="formFile">
+                    <input type="hidden" name="mediatype" class="form-control" value="${element.format === 'IMAGE' ? 'image' : 'video'}">
+                    <input type="hidden" name="languagetype" class="form-control" value="${language}">
+                </div>
+            `;
+                $('#previewdivtemplate').append(input);
+            }
+
+            // Handle different types of content (HEADER, BODY, FOOTER)
+            if (element.type === 'HEADER') {
+                if (element.format === 'TEXT') {
+                    messageHTML += `<p class="message-title">${element.text}</p>`;
+                } else if (element.format === 'VIDEO') {
+                    messageHTML += `
                         <video controls width="100%" height="200px">
                             <source id="videomain" src="${element.videoUrl}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>`;
-                    } else if (element.format === 'IMAGE') {
-                        messageHTML +=
-                            `
+                } else if (element.format === 'IMAGE') {
+                    messageHTML +=
+                        `
                         <img id="imagemain" src="${element.imageUrl}" height="200px" alt="${element.text}" width="100%">`;
-                    }
-                } else if (element.type === 'BODY') {
-                    messageHTML += `<p class="message-body">${element.text}</p>`;
-                } else if (element.type === 'FOOTER') {
-                    messageHTML += `<p class="message-footer">${element.text}</p>`;
-                } else if (element.type === 'BUTTONS') {
-                    element.buttons.forEach(button => {
-                        console.log(button);
-                        messageHTML += `<p class="message-footer">${button.text}</p>`;
-                    });
                 }
-            });
-            const messageWithStrongTags = messageHTML.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
-            const linkRegex = /(https?:\/\/[^\s]+)/g;
-            const formattedMessage = messageWithStrongTags.replace(linkRegex,
-                '<a href="$1" target="_blank">$1</a>');
-
-            const messagediv =
-                `<div class="message-preview">
-                    ${formattedMessage}
-                </div>`;
-            $('#messagediv').html(messagediv);
+            } else if (element.type === 'BODY') {
+                messageHTML += `<p class="message-body">${element.text}</p>`;
+            } else if (element.type === 'FOOTER') {
+                messageHTML += `<p class="message-footer">${element.text}</p>`;
+            }
         });
 
-        //Showing Image Preview
-        function readURL(input) {
-            console.log(input);
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#imagemain').attr('src', e.target.result);
-                };
+        // Format message with strong tags and links
+        const messageWithStrongTags = messageHTML.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
+        const linkRegex = /(https?:\/\/[^\s]+)/g;
+        const formattedMessage = messageWithStrongTags.replace(linkRegex, '<a href="$1" target="_blank">$1</a>');
 
-                reader.readAsDataURL(input.files[0]);
-            }
+        // Append the final message preview
+        const messagediv = `
+        <div class="message-preview">
+            ${formattedMessage}
+        </div>`;
+        $('#messagediv').html(messagediv);
+    });
+
+    // Show image preview for uploaded file
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagemain').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
         }
+    }
 </script>
+
 @endsection

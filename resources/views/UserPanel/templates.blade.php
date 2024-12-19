@@ -1,7 +1,7 @@
 {{--#---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------”--}}
 @extends('layouts.UserPanelLayouts.usermain')
 @push('title')
-<title>Templates Settings</title>
+    <title>Templates Settings</title>
 @endpush
 @section('content')
 <div class="container-fluid">
@@ -48,10 +48,13 @@
                             <div class="px-2">
                                 <a href="https://business.facebook.com/wa/manage/message-templates/"
                                     class="btn text-white rounded-4 waves-effect waves-light" target="_blank"
-                                    style="background-color: #116464"><i class="ri-add-circle-fill me-2"></i>Create Template</a>
-                                    <a href="{{ url('refreshtemplates')}}" id="updateTemplatesBtn" class="btn text-white rounded-4 waves-effect waves-light ms-2" style="background-color: #116464">
-                                        <i class="ri-refresh-line me-2"></i>Refresh Templates
-                                    </a>
+                                    style="background-color: #116464"><i class="ri-add-circle-fill me-2"></i>Create
+                                    Template</a>
+                                <a href="{{ url('refreshtemplates')}}" id="updateTemplatesBtn"
+                                    class="btn text-white rounded-4 waves-effect waves-light ms-2"
+                                    style="background-color: #116464"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Import Templates">
+                                    <i class="ri-refresh-line me-2"></i>Refresh Templates
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -69,7 +72,8 @@
                                 <table class="table table-borderless table-nowrap">
                                     <thead>
                                         <tr>
-                                            <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No</th>
+                                            <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No
+                                            </th>
                                             <th style="background-color:#1164642b;">Name</th>
                                             <th style="background-color:#1164642b;">Category</th>
                                             <th style="background-color:#1164642b;">Status</th>
@@ -77,15 +81,17 @@
                                     </thead>
                                     <tbody id="table-body">
                                         @foreach ($alltemplates as $index => $row)
-                                        <tr class="border-bottom-1">
-                                            <th>{{$index + 1}}</th>
-                                            <td><button class="btn btn-white fs-5" role="button" title="{{ $row['name'] }}">{{ $row['name'] }}</button></td>
+                                            <tr class="border-bottom-1">
+                                                <th>{{$index + 1}}</th>
+                                                <td><button class="btn btn-white fs-5" role="button"
+                                                        title="{{ $row['name'] }}">{{ $row['name'] }}</button></td>
 
-                                            <td>{{ $row['category'] }}</td>
-                                            <td>
-                                                <span class="badge bg-success-subtle text-success badge-border">{{ $row['status'] }}</span>
-                                            </td>
-                                        </tr>
+                                                <td>{{ $row['category'] }}</td>
+                                                <td>
+                                                    <span
+                                                        class="badge bg-success-subtle text-success badge-border">{{ $row['status'] }}</span>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -100,7 +106,8 @@
                                 <table class="table table-borderless table-nowrap">
                                     <thead>
                                         <tr>
-                                            <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No</th>
+                                            <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No
+                                            </th>
                                             <th style="background-color:#1164642b;">Name</th>
                                             <th style="background-color:#1164642b;">Status</th>
                                             <th style="background-color:#1164642b;">Last Updated On</th>
@@ -111,7 +118,8 @@
                                             <th>1</th>
                                             <td>A</td>
                                             <td>
-                                                <span class="badge bg-success-subtle text-success badge-border">Active</span>
+                                                <span
+                                                    class="badge bg-success-subtle text-success badge-border">Active</span>
                                             </td>
                                             <td>A</td>
                                         </tr>
@@ -119,7 +127,8 @@
                                             <th>1</th>
                                             <td>A</td>
                                             <td>
-                                                <span class="badge bg-success-subtle text-success badge-border">Active</span>
+                                                <span
+                                                    class="badge bg-success-subtle text-success badge-border">Active</span>
                                             </td>
                                             <td>A</td>
                                         </tr>
@@ -127,7 +136,8 @@
                                             <th>1</th>
                                             <td>A</td>
                                             <td>
-                                                <span class="badge bg-success-subtle text-success badge-border">Active</span>
+                                                <span
+                                                    class="badge bg-success-subtle text-success badge-border">Active</span>
                                             </td>
                                             <td>A</td>
                                         </tr>

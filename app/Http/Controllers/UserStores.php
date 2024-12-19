@@ -140,8 +140,10 @@ class UserStores extends Controller
     function dropMessage($phone, $templateid, $fileurl, $mediatype, $languagetype)
     {
         //dd($phone, $templateid, $fileurl, $mediatype, $languagetype);
+
         $loggedinuser = Auth::guard('customer')->user();
         $accessToken = $loggedinuser->apptoken;
+
         $phonenumberid = $loggedinuser->phonenumberid;
         $data = [
             'messaging_product' => 'whatsapp',
@@ -149,19 +151,19 @@ class UserStores extends Controller
             'type' => 'template',
             'template' => [
                 'name' => $templateid,
-                'language' => ['code' => $languagetype],
+                'language' => [
+                    'code' => $languagetype ?? 'en_US', // Ensure a fallback value    // This is required value at any case otherwise API will not work
+                ],
                 'components' => []
             ]
         ];
-        if ($fileurl) {
+        if ($fileurl && $mediatype) {
             $data['template']['components'][] = [
                 'type' => 'header',
                 'parameters' => [
                     [
                         'type' => $mediatype,
-                        $mediatype => [
-                            'link' => $fileurl,
-                        ]
+                        $mediatype => ['link' => $fileurl]
                     ]
                 ]
             ];
@@ -170,21 +172,26 @@ class UserStores extends Controller
             'Authorization' => 'Bearer ' . $accessToken,
             'Content-Type' => 'application/json'
         ])->post('https://graph.facebook.com/v20.0/' . $phonenumberid . '/messages', $data);
+        // dd([
+        //     'status' => $response->status(),
+        //     'body' => $response->body(),
+        //     'error' => $response->json()
+        // ]);
         // Handle response
         if ($response->successful()) {
-            dd($response);
+            //dd($response->body());
             $templatedata = Template::where('name', $templateid)->where('userid', $loggedinuser->id)->first();
             $data = Message::create([
-                'userid' =>  $loggedinuser->id,
+                'userid' => $loggedinuser->id,
                 'templatename' => $templateid,
                 'imageurl' => $fileurl,
                 'type' => 'Sent',
                 'senderid' => $loggedinuser->mobilenumber,
-                'recievedid' => $phone,
+                'recievedid' => str_replace('+', '', $phone),
                 'message' => $templatedata->components,
             ]);
-
             return back()->with('success', 'Message sent successfully!');
+
         } else {
             return back()->withErrors('Message failed to send: ' . $response->body());
         }
@@ -299,11 +306,13 @@ class UserStores extends Controller
             'type' => 'template',
             'template' => [
                 'name' => $templateid,
-                'language' => ['code' => $languagetype],
+                'language' => [
+                        'code' => $languagetype ?? 'en_US', // Ensure a fallback value    // This is required value at any case otherwise API will not work
+                    ],
                 'components' => []
             ]
         ];
-        if ($fileurl) {
+        if ($fileurl && $mediatype) {
             $data['template']['components'][] = [
                 'type' => 'header',
                 'parameters' => [
