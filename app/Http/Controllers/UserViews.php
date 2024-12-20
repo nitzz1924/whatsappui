@@ -58,9 +58,9 @@ class UserViews extends Controller
     {
         $loggedinuser = Auth::guard('customer')->user();
         $alltemplates = Template::where('userid', $loggedinuser->id)->get();
-        //dd($alltemplates);
-        $groupdata = GroupType::where('userid', $loggedinuser)->where('type', '=', 'Group')->get();
-        $statusdata = GroupType::where('userid', $loggedinuser)->where('type', '=', 'Status')->get();
+        $groupdata = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Group')->get();
+        // dd($groupdata);
+        $statusdata = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Status')->get();
         return view('UserPanel.addnewcampaign', compact('groupdata', 'statusdata', 'alltemplates'));
     }
     public function automationpage()

@@ -149,6 +149,7 @@
 <script>
     // Edit Functionality
     const groups = @json($groupsdata);
+    console.log(groups);
     $('#table-body').on('click', '.editbtnmodal', function() {
         console.log("clicked");
         const groupdata = $(this).data('value');
