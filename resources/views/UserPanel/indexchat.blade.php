@@ -26,12 +26,12 @@
                         Chats
                     </a>
                 </li>
-                <li class="nav-item" role="presentation">
+                <!-- <li class="nav-item" role="presentation">
                     <a class="nav-link" data-bs-toggle="tab" href="#contacts" role="tab" aria-selected="false"
                         tabindex="-1">
                         Groups
                     </a>
-                </li>
+                </li> -->
             </ul>
 
             <div class="tab-content text-muted">
