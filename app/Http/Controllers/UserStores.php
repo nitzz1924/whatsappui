@@ -152,7 +152,7 @@ class UserStores extends Controller
             'template' => [
                 'name' => $templateid,
                 'language' => [
-                    'code' => $languagetype ?? 'en_US', // Ensure a fallback value    // This is required value at any case otherwise API will not work
+                    'code' => $languagetype ? $languagetype : 'en', // Ensure a fallback value    // This is required value at any case otherwise API will not work
                 ],
                 'components' => []
             ]

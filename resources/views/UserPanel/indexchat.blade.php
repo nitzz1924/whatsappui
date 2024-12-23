@@ -79,7 +79,7 @@
                                                                                                                         style="width: 30px; height: 30px; background-color:#1a4848;">
                                                                                                                         <span class="user-initial">{{
                                                         strtoupper(substr($data->fullname, 0, 1))
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }}</span>
                                                                                                                     </div>
                                                                                                                 </div>
                                                                                                                 <div class="flex-grow-1 overflow-hidden">
@@ -584,24 +584,23 @@
                     aria-label="Close"></button>
             </div>
         </div>
-    </form>
-    <div class="offcanvas-body">
-        <div class="" id="contact-view-detail">
-            <div class="card-body text-center">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div>
-                            <label for="template" class="form-label text-start fs-5">Choose Template</label>
-                            <select class="form-select rounded-pill mb-3 onchangedrop" name="template"
-                                aria-label="Select template">
-                                <option disabled selected>--choose template--</option>
-                                @foreach ($alltemplates as $data)
-                                    <option value="{{ $data->name }}" data-value="{{ json_encode($data->components) }}"
-                                        data-language="{{ json_encode($data->language) }}">
-                                        {{ $data->name }}
-                                    </option>
-                                @endforeach
-                                <!-- @foreach ($alltemplates as $data)
+        <div class="offcanvas-body">
+            <div class="" id="contact-view-detail">
+                <div class="card-body text-center">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div>
+                                <label for="template" class="form-label text-start fs-5">Choose Template</label>
+                                <select class="form-select rounded-pill mb-3 onchangedrop" name="template"
+                                    aria-label="Select template">
+                                    <option disabled selected>--choose template--</option>
+                                    @foreach ($alltemplates as $data)
+                                        <option value="{{ $data->name }}" data-value="{{ json_encode($data->components) }}"
+                                            data-language="{{ json_encode($data->language) }}">
+                                            {{ $data->name }}
+                                        </option>
+                                    @endforeach
+                                    <!-- @foreach ($alltemplates as $data)
                                         <option value="{{ $data['name'] }}"
                                             data-value="{{ htmlspecialchars(json_encode($data['components']), ENT_QUOTES, 'UTF-8') }}"
                                             data-language="{{ htmlspecialchars(json_encode($data['language']), ENT_QUOTES, 'UTF-8') }}"
@@ -609,23 +608,25 @@
                                             {{ $data['name'] }}
                                         </option>
                                     @endforeach -->
-                            </select>
+                                </select>
+                            </div>
+                            <div class="mt-4" id="previewdivtemplate">
+                                {{-- Template Div Appends Here --}}
+                            </div>
+                            <input type="hidden" name="phonenumber" value="" id="contactnumberofperson">
+                            <input type="hidden" name="wholeme" value="" id="contactnumberofperson">
+                            <input type="hidden" name="languagetype" value="" id="languagetype">
                         </div>
-                        <div class="mt-4" id="previewdivtemplate">
-                            {{-- Template Div Appends Here --}}
-                        </div>
-                        <input type="hidden" name="phonenumber" value="" id="contactnumberofperson">
-                        <input type="hidden" name="wholeme" value="" id="contactnumberofperson">
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="whatsapp-container" id="messagediv">
-                            {{-- Message Div Appends Here --}}
+                        <div class="col-lg-6">
+                            <div class="whatsapp-container" id="messagediv">
+                                {{-- Message Div Appends Here --}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
@@ -975,6 +976,7 @@
             ${formattedMessage}
         </div>`;
         $('#messagediv').html(messagediv);
+        $('#languagetype').val(language);
     });
 
     // Show image preview for uploaded file
