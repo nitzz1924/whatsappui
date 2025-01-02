@@ -81,7 +81,7 @@ class UserViews extends Controller
             $tempcount = Template::where('userid', $loggedinuser->id)->get()->count();
             $campaignscnt = Campaign::where('userid', $loggedinuser->id)->get()->count();
             $messages = Message::where('userid', $loggedinuser->id)->where('type', '=', 'Received')->whereDate('created_at', Carbon::today())->get();
-            // dd($messages);
+            //dd($messages);
             return view('UserPanel.analytics', compact('sentmsgcount', 'recmsgcount', 'messages', 'contactscount', 'tempcount', 'campaignscnt'));
         } else {
             return view('auth.UserPanel.login');

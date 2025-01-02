@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     file_put_contents('webhook_log.txt', print_r($data, true), FILE_APPEND);
 
     // Check if the message structure exists
-    
+
     if (isset($data['entry'][0]['changes'][0]['value']['messages'][0])) {
         $message = $data['entry'][0]['changes'][0]['value']['messages'][0];
         $displayPhoneNumber = $data['entry'][0]['changes'][0]['value']['metadata']['display_phone_number'] ?? '';
@@ -28,6 +28,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Extract message details
         $messageText = $message['text']['body'] ?? '';
         $senderPhone = $message['from'] ?? '';
+
+
+        //--------------------Image Functionality Starts--------------------
+
+        function getMediaUrl($mediaId, $accessToken)
+        {
+            $url = "https://graph.facebook.com/v17.0/{$mediaId}";
+            $headers = [
+                "Authorization: Bearer {$accessToken}"
+            ];
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            return json_decode($response, true);
+        }
+
+        $comingmediaid = $data['entry'][0]['changes'][0]['value']['messages'][0]['image']['id'];
+        logMessage("Coming Image ID :  $comingmediaid", 'error');
+        $accessTokenmedia = $accessToken; // Your Page Access Token
+
+        $mediaData = getMediaUrl($comingmediaid, $accessTokenmedia);
+        $imageUrl = $mediaData['url'];
+
+        function downloadMedia($url, $accessToken, $saveDirectory)
+        {
+            $headers = [
+                "Authorization: Bearer {$accessToken}"
+            ];
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+            $imageData = curl_exec($ch);
+            curl_close($ch);
+
+            if ($imageData) {
+                // Generate a unique filename for the image
+                $uniqueFilename = uniqid('image_', true) . '.jpg'; // Assuming the file is a JPEG image
+                $savePath = $saveDirectory . $uniqueFilename;
+
+                // Save the image to the directory
+                file_put_contents($savePath, $imageData);
+
+                return $savePath; // Return the saved image's path
+            }
+
+            return null; // Return null if the image couldn't be downloaded
+        }
+        $saveDirectory = 'public/assets/images/receivedimgs/';
+        $imagePath = downloadMedia($imageUrl, $accessTokenmedia, $saveDirectory);
+        if ($imagePath) {
+            $relativePath = str_replace('public/', '', $imagePath);
+            $imageUrl = $relativePath;
+        } else {
+            logMessage("Error: Failed to download image from URL: $imageUrl", 'error');
+            $imageUrl = null; 
+        }
+
+        //--------------------Image Functionality Ends--------------------
+
 
         // **Retrieve User ID from `register_users` Table**
         $userid = null;
@@ -56,8 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // **Insert Message into `messages` Table**
-        $insertQuery = "INSERT INTO messages (userid, senderid, type, message, recievedid, created_at, updated_at) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $insertQuery = "INSERT INTO messages (userid, senderid, type, message, imageurl, recievedid, created_at, updated_at) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertQuery);
 
         if (!$stmt) {
@@ -74,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');
 
-        $stmt->bind_param("sssssss", $userid, $senderPhone, $type, $messagerec, $receivedid, $created_at, $updated_at);
+        $stmt->bind_param("ssssssss", $userid, $senderPhone, $type, $messagerec, $imageUrl ,$receivedid, $created_at, $updated_at);
 
         // Execute the query and log results
         if ($stmt->execute()) {
@@ -103,7 +171,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  * @param string $message The message to log.
  * @param string $type The type of log ('success' or 'error').
  */
-function logMessage($message, $type = 'success') {
+function logMessage($message, $type = 'success')
+{
     $logFile = __DIR__ . '/messagelog.txt';
     $timestamp = date('Y-m-d H:i:s');
     $logType = strtoupper($type);
