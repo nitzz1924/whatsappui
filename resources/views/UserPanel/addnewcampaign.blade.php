@@ -1,7 +1,7 @@
 {{-- #---------------------------------------------------🙏🔱देवा श्री गणेशा 🔱🙏---------------------------” --}}
 @extends('layouts.UserPanelLayouts.usermain')
 @push('title')
-    <title>Add New Campaign</title>
+<title>Add New Campaign</title>
 @endpush
 @section('content')
 <div class="container-fluid">
@@ -14,7 +14,14 @@
             </button>
         </a>
     </div>
-    <form method="POST" action="{{ route('send-message') }}" enctype="multipart/form-data">
+    <div id="preloader" style="display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: 9999; text-align: center; justify-content: center; align-items: center;">
+        <div>
+            <p>Processing, please wait...</p>
+            <img src="{{asset('assets/images/demos/loader.gif')}}" alt="Loading...">
+        </div>
+    </div>
+
+    <form method="POST" action="{{ route('webhooknew') }}" enctype="multipart/form-data" id="campaignform">
         @csrf
         <div class="row">
             <div class="col-lg-12">
@@ -26,8 +33,7 @@
                             </div>
                             <div class="d-flex justify-content-end ">
                                 <div class="px-2">
-                                    <button type="submit" class="btn text-white rounded-4 waves-effect waves-light"
-                                        style="background-color: #054c44"><i class="bx bx-send me-2"></i>Send & Set
+                                    <button type="submit" class="btn text-white rounded-4 waves-effect waves-light" style="background-color: #054c44"><i class="bx bx-send me-2"></i>Send & Set
                                         Live</button>
                                 </div>
                             </div>
@@ -42,39 +48,34 @@
                     <div class="card-body rounded-4 p-4">
                         <div class="mb-3">
                             <label for="username" class="form-label fs-5">Campaign Name</label>
-                            <input type="text" name="campaignname" class="form-control rounded-4 py-2" id="username"
-                                placeholder="Enter Campaign Name" required>
+                            <input type="text" name="campaignname" class="form-control rounded-4 py-2" id="username" placeholder="Enter Campaign Name" required>
                         </div>
                         <div>
                             <label for="autoCompleteFruit" class="form-label fs-5">Choose a Group</label>
-                            <select name="modulename" class="form-select rounded-4 py-2 mb-3"
-                                aria-label="Default select example">
+                            <select name="modulename" class="form-select rounded-4 py-2 mb-3" aria-label="Default select example">
                                 <option selected>--select module--</option>
                                 @foreach ($groupdata as $data)
-                                    <option value="{{ $data->label }}">{{ $data->label }}</option>
+                                <option value="{{ $data->label }}">{{ $data->label }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div>
                             <label for="rsegment" class="form-label fs-5">Choose Status</label>
-                            <select name="segmentname" class="form-select rounded-4 py-2 mb-3"
-                                aria-label="Default select example">
+                            <select name="segmentname" class="form-select rounded-4 py-2 mb-3" aria-label="Default select example">
                                 <option selected>--select segment--</option>
                                 @foreach ($statusdata as $data)
-                                    <option value="{{ $data->label }}">{{ $data->label }}</option>
+                                <option value="{{ $data->label }}">{{ $data->label }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div>
                             <label for="template" class="form-label fs-5">Choose Template</label>
-                            <select class="form-select rounded-pill mb-3 onchangedrop" name="template"
-                                aria-label="Select template">
+                            <select class="form-select rounded-pill mb-3 onchangedrop" name="template" aria-label="Select template">
                                 <option disabled selected>--choose template--</option>
                                 @foreach ($alltemplates as $data)
-                                    <option value="{{ $data->name }}" data-value="{{ json_encode($data->components) }}"
-                                        data-language="{{ json_encode($data->language) }}">
-                                        {{ $data->name }}
-                                    </option>
+                                <option value="{{ $data->name }}" data-value="{{ json_encode($data->components) }}" data-language="{{ json_encode($data->language) }}">
+                                    {{ $data->name }}
+                                </option>
                                 @endforeach
                                 <!-- @foreach ($alltemplates as $data)
                                         <option value="{{ $data['name'] }}"
@@ -92,18 +93,15 @@
                         <label for="username" class="form-label fs-5">Schedule Your Campaign</label>
                         <div class="mb-0 mt-3">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input immeditate" type="radio" name="sendimmediate"
-                                    id="inlineRadio1" value="0">
+                                <input class="form-check-input immeditate" type="radio" name="sendimmediate" id="inlineRadio1" value="0">
                                 <label class="form-check-label" for="inlineRadio1">Send Immediately</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input scheduledatetimebtn" type="radio" name="scheduledatetime"
-                                    id="inlineRadio2" value="1">
+                                <input class="form-check-input scheduledatetimebtn" type="radio" name="scheduledatetime" id="inlineRadio2" value="1">
                                 <label class="form-check-label" for="inlineRadio2">Schedule Date/Time</label>
                             </div>
                             <div class="d-none" id="datediv">
-                                <input type="datetime-local" name="datetime" class="form-control rounded-4 py-2"
-                                    id="datetimeInput" placeholder="Enter Date and Time">
+                                <input type="datetime-local" name="datetime" class="form-control rounded-4 py-2" id="datetimeInput" placeholder="Enter Date and Time">
                             </div>
                         </div>
                     </div>
@@ -119,8 +117,21 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('.scheduledatetimebtn').on('click', function () {
+    const form = document.querySelector('#campaignform');
+    const preloader = document.querySelector('#preloader');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        preloader.style.display = 'flex';
+
+        setTimeout(() => {
+            form.submit();
+        }, 1000);
+    });
+
+</script>
+<script>
+    $(document).ready(function() {
+        $('.scheduledatetimebtn').on('click', function() {
             const $datediv = $('#datediv');
             if ($datediv.hasClass('d-none')) {
                 $datediv.removeClass('d-none');
@@ -130,7 +141,7 @@
         });
 
 
-        $('.immeditate').on('click', function () {
+        $('.immeditate').on('click', function() {
             const $datediv = $('#datediv');
             if ($datediv.hasClass('d-none')) {
                 $datediv.addClass('d-none');
@@ -141,7 +152,7 @@
     });
 
     //Showing Message Dynamically
-    $('.onchangedrop').on('change', function () {
+    $('.onchangedrop').on('change', function() {
         const selectedOption = $(this).find(':selected'); // Get the selected option element
 
         // Retrieve the raw data-value and data-language
@@ -228,11 +239,12 @@
     function readURL(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 $('#imagemain').attr('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
+
 </script>
 @endsection

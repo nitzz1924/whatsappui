@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminStores;
 use App\Http\Controllers\AdminViews;
 use App\Http\Controllers\UserStores;
 use App\Http\Controllers\UserViews;
+use App\Http\Controllers\WhatsAppController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExcelContactSheet;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -86,9 +87,8 @@ Route::controller(UserStores::class)->group(function () {
     Route::post('webhook', 'handleWebhook')->name('handleWebhook');
     Route::get('refreshtemplates', 'refreshtemplates')->name('refreshtemplates');
 
-
 });
-
+Route::post('/webhooknew', [WhatsAppController::class, 'handleWebhooknew'])->name('webhooknew');
 
 //Excel Routes
 Route::get('/import-excel', [ExcelContactSheet::class, 'index'])->name('import.excel');
