@@ -74,6 +74,7 @@ class UserStores extends Controller
                 'country' => $req->country,
                 'language' => $req->language,
                 'address' => $req->address,
+                'status' => $req->status,
             ]);
             return back()->with('success', 'Contact Created.!');
         } catch (Exception $e) {
@@ -224,6 +225,7 @@ class UserStores extends Controller
                 'country' => $req->country,
                 'language' => $req->language,
                 'address' => $req->address,
+                'status' => $req->status,
             ]);
             return back()->with('success', "Updated..!!!");
         } catch (Exception $e) {
@@ -307,8 +309,8 @@ class UserStores extends Controller
             'template' => [
                 'name' => $templateid,
                 'language' => [
-                        'code' => $languagetype ?? 'en_US', // Ensure a fallback value    // This is required value at any case otherwise API will not work
-                    ],
+                    'code' => $languagetype ?? 'en_US', // Ensure a fallback value    // This is required value at any case otherwise API will not work
+                ],
                 'components' => []
             ]
         ];
@@ -406,5 +408,47 @@ class UserStores extends Controller
             dd('Error fetching template list: ' . $response->body());
         }
 
+    }
+
+    public function replyamessage(Request $request)
+    {
+        // dd($request->all());
+        $loggedinuser = Auth::guard('customer')->user();
+        $phonenumberid = $loggedinuser->phonenumberid;
+        $apiUrl = "https://graph.facebook.com/v20.0/{$phonenumberid}/messages";
+        $accessToken = $loggedinuser->apptoken;
+
+        // Prepare the data for the request
+        $data = [
+            'messaging_product' => 'whatsapp',
+            'to' => $request->mobilenumber,
+            'text' => [
+                'body' => $request->resolvemessagetext,
+            ]
+        ];
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $accessToken,
+                'Content-Type' => 'application/json',
+            ])->post($apiUrl, $data);
+
+            // Check the response status
+            if ($response->successful()) {
+                Log::info('Message sent successfully', ['phone' => $request->mobilenumber, 'message' => $request->resolvemessagetext]);
+                $data = Message::create([
+                    'userid' => $loggedinuser->id,
+                    'type' => 'Sent',
+                    'senderid' => $loggedinuser->mobilenumber,
+                    'message' =>  $request->resolvemessagetext,
+                    'recievedid' =>  $request->mobilenumber,
+                ]);
+                return back()->with('success', 'Message sent successfully!');
+            } else {
+                Log::error('Error sending message', ['status' => $response->status(), 'body' => $response->body()]);
+                return back()->withErrors('Message failed to send: ' . $response->body());
+            }
+        } catch (Exception $e) {
+            Log::error('Exception sending message', ['message' => $e->getMessage()]);
+        }
     }
 }

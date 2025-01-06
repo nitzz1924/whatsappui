@@ -112,8 +112,9 @@ class UserViews extends Controller
         if (Auth::guard('customer')->check()) {
             $loggedinuser = Auth::guard('customer')->user();
             $groupsdata = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
+            $status = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Status')->orderBy('created_at', 'DESC')->get();
             $contactsdata = Contact::where('userid', $loggedinuser->id)->orderBy('created_at', 'DESC')->get();
-            return view('UserPanel.contacts', compact('groupsdata', 'contactsdata'));
+            return view('UserPanel.contacts', compact('groupsdata', 'contactsdata','status'));
         } else {
             return view('auth.UserPanel.login');
         }

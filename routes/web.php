@@ -86,6 +86,8 @@ Route::controller(UserStores::class)->group(function () {
     Route::post('sendsinglemessage', 'sendsinglemessage')->name('sendsinglemessage');
     Route::post('webhook', 'handleWebhook')->name('handleWebhook');
     Route::get('refreshtemplates', 'refreshtemplates')->name('refreshtemplates');
+    Route::post('replyamessage', 'replyamessage')->name('replyamessage');
+
 
 });
 Route::post('/webhooknew', [WhatsAppController::class, 'handleWebhooknew'])->name('webhooknew');

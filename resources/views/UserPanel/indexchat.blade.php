@@ -2,7 +2,7 @@
 ЁЯФ▒ЁЯЩП---------------------------тАЭ --}}
 @extends('layouts.UserPanelLayouts.usermain')
 @push('title')
-    <title>Index Chat</title>
+<title>Index Chat</title>
 @endpush
 @section('content')
 <div class="container-fluid">
@@ -43,8 +43,7 @@
                             </div>
                             <div class="simplebar-mask">
                                 <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-                                    <div class="simplebar-content-wrapper" tabindex="0" role="region"
-                                        aria-label="scrollable content" style="height: auto; overflow: hidden scroll;">
+                                    <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow: hidden scroll;">
                                         <div class="simplebar-content" style="padding: 16px 0px 0px;">
                                             <div class="d-flex align-items-center px-4 mb-2">
                                                 <div class="flex-grow-1">
@@ -68,36 +67,32 @@
                                             <div class="chat-message-list">
                                                 <ul class="list-unstyled chat-list chat-user-list" id="userList">
                                                     @foreach ($contactsdata as $data)
-                                                                                                    <li id="contact-id-{{ $data->id }}" data-name="direct-message"
-                                                                                                        class="{{ $data->is_active ? 'active' : '' }}">
-                                                                                                        <a href="#" class="contact-tab"
-                                                                                                            data-value="{{ json_encode($data) }}">
-                                                                                                            <div class="d-flex align-items-center py-2">
-                                                                                                                <div
-                                                                                                                    class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                                                                                                    <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle text-white"
-                                                                                                                        style="width: 30px; height: 30px; background-color:#1a4848;">
-                                                                                                                        <span class="user-initial">{{
+                                                    <li id="contact-id-{{ $data->id }}" data-name="direct-message" class="{{ $data->is_active ? 'active' : '' }}">
+                                                        <a href="#" class="contact-tab" data-value="{{ json_encode($data) }}">
+                                                            <div class="d-flex align-items-center py-2">
+                                                                <div class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
+                                                                    <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle text-white" style="width: 30px; height: 30px; background-color:#1a4848;">
+                                                                        <span class="user-initial">{{
                                                         strtoupper(substr($data->fullname, 0, 1))
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             }}</span>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div class="flex-grow-1 overflow-hidden">
-                                                                                                                    <p class="text-truncate mb-0">
-                                                                                                                        {{ $data->fullname }}
-                                                                                                                    </p>
-                                                                                                                    <small class="text-muted fs-6 fw-normal mb-0">
-                                                                                                                        Yes!.Ok
-                                                                                                                    </small>
-                                                                                                                </div>
-                                                                                                                <div class="flex-grow-1 overflow-hidden text-end">
-                                                                                                                    <small class="text-muted fs-6 fw-normal mb-0">
-                                                                                                                        12:05
-                                                                                                                    </small>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </a>
-                                                                                                    </li>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-grow-1 overflow-hidden">
+                                                                    <p class="text-truncate mb-0">
+                                                                        {{ $data->fullname }}
+                                                                    </p>
+                                                                    <small class="text-muted fs-6 fw-normal mb-0">
+                                                                        Yes!.Ok
+                                                                    </small>
+                                                                </div>
+                                                                <div class="flex-grow-1 overflow-hidden text-end">
+                                                                    <small class="text-muted fs-6 fw-normal mb-0">
+                                                                        12:05
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -111,8 +106,7 @@
                             <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
                         </div>
                         <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
-                            <div class="simplebar-scrollbar"
-                                style="height: 581px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+                            <div class="simplebar-scrollbar" style="height: 581px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
                         </div>
                     </div>
                 </div>
@@ -124,8 +118,7 @@
                             </div>
                             <div class="simplebar-mask">
                                 <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-                                    <div class="simplebar-content-wrapper" tabindex="0" role="region"
-                                        aria-label="scrollable content" style="height: auto; overflow: hidden scroll;">
+                                    <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow: hidden scroll;">
                                         <div class="simplebar-content" style="padding: 16px 0px 0px;">
                                             <div class="d-flex align-items-center px-4 mb-2">
                                                 <div class="flex-grow-1">
@@ -137,17 +130,17 @@
                                             <div class="chat-message-list">
                                                 <ul class="list-unstyled chat-list chat-user-list" id="userList">
                                                     @foreach ($groupsdata as $row)
-                                                        <li data-name="direct-message">
-                                                            <a href="javascript: void(0);">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="flex-grow-1 overflow-hidden">
-                                                                        <p class="text-truncate mb-0">
-                                                                            {{ $row->label }}
-                                                                        </p>
-                                                                    </div>
+                                                    <li data-name="direct-message">
+                                                        <a href="javascript: void(0);">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="flex-grow-1 overflow-hidden">
+                                                                    <p class="text-truncate mb-0">
+                                                                        {{ $row->label }}
+                                                                    </p>
                                                                 </div>
-                                                            </a>
-                                                        </li>
+                                                            </div>
+                                                        </a>
+                                                    </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -161,8 +154,7 @@
                             <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
                         </div>
                         <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
-                            <div class="simplebar-scrollbar"
-                                style="height: 581px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+                            <div class="simplebar-scrollbar" style="height: 581px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
                         </div>
                     </div>
                 </div>
@@ -174,8 +166,7 @@
                 <div class="w-100 overflow-hidden position-relative" style="height:87vh;">
                     <div id="defaultimage">
                         <div class="bg-white d-flex justify-content-center align-items-center" style="height:100%;">
-                            <img class="img-fluid" src="{{ asset('assets/images/svgviewer-png-output (1).png') }}"
-                                alt="" />
+                            <img class="img-fluid" src="{{ asset('assets/images/svgviewer-png-output (1).png') }}" alt="" />
                         </div>
                     </div>
                     <div class="position-relative" id="chatrow" style="display: none;">
@@ -185,36 +176,28 @@
                                     <div class="col-sm-4 col-8">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0 d-block d-lg-none me-3">
-                                                <a href="javascript: void(0);" class="user-chat-remove fs-18 p-1"><i
-                                                        class="ri-arrow-left-s-line align-bottom"></i></a>
+                                                <a href="javascript: void(0);" class="user-chat-remove fs-18 p-1"><i class="ri-arrow-left-s-line align-bottom"></i></a>
                                             </div>
                                             <div class="flex-grow-1 overflow-hidden">
 
                                                 @foreach ($contactsdata->take(1) as $data)
-                                                                                            <div class="d-flex align-items-center">
-                                                                                                <div
-                                                                                                    class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
-                                                                                                    <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle  text-white"
-                                                                                                        style="width: 40px; height: 40px; background-color:#1a4848;">
-                                                                                                        <span class="user-initial fs-5 fw-bold" id="alphabet">{{
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
+                                                        <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle  text-white" style="width: 40px; height: 40px; background-color:#1a4848;">
+                                                            <span class="user-initial fs-5 fw-bold" id="alphabet">{{
                                                     strtoupper(substr($data->fullname, 0, 1)) }}
-                                                                                                            </spanclass=>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="flex-grow-1 overflow-hidden">
-                                                                                                    <h5 class="text-truncate mb-0 fs-16 fw-bold"><a
-                                                                                                            class="text-reset username" data-bs-toggle="offcanvas"
-                                                                                                            data-bs-target="#offcanvasRight"
-                                                                                                            aria-controls="offcanvasRight"
-                                                                                                            href="#userProfileCanvasExample"
-                                                                                                            aria-controls="userProfileCanvasExample">{{
+                                                                </spanclass=>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <h5 class="text-truncate mb-0 fs-16 fw-bold"><a class="text-reset username" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" href="#userProfileCanvasExample" aria-controls="userProfileCanvasExample">{{
                                                     $data->fullname }}</a>
-                                                                                                    </h5>
-                                                                                                    <p class="text-truncate text-muted fs-14 mb-0 userStatus">
-                                                                                                        <small>Online</small>
-                                                                                                    </p>
-                                                                                                </div>
-                                                                                            </div>
+                                                        </h5>
+                                                        <p class="text-truncate text-muted fs-14 mb-0 userStatus">
+                                                            <small>Online</small>
+                                                        </p>
+                                                    </div>
+                                                </div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -223,13 +206,8 @@
                                         <ul class="list-inline user-chat-nav text-end mb-0">
                                             <li class="list-inline-item d-none d-lg-inline-block m-0">
                                                 <div class="hstack flex-wrap gap-2 mb-3 mb-lg-0">
-                                                    <a href="#" id="resolvebtn"
-                                                        class="btn text-white rounded-3 waves-effect waves-light"
-                                                        style="background-color: #054c44">Resolve</a>
-                                                    <a href="#" id="resolvebtn" data-bs-toggle="offcanvas"
-                                                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                                                        class="btn text-white rounded-3 waves-effect waves-light"
-                                                        style="background-color: #054c44">Contact Info</a>
+                                                    <a href="#" id="resolvebtn" class="btn text-white rounded-3 waves-effect waves-light" style="background-color: #054c44">Resolve</a>
+                                                    <a href="#" id="resolvebtn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" class="btn text-white rounded-3 waves-effect waves-light" style="background-color: #054c44">Contact Info</a>
                                                 </div>
                                             </li>
                                         </ul>
@@ -238,21 +216,17 @@
 
                             </div>
                             <!-- end chat user head -->
-                            <div class="chat-conversation p-3 p-lg-4 simplebar-scrollable-y" id="chat-conversation"
-                                data-simplebar="init">
+                            <div class="chat-conversation p-3 p-lg-4 simplebar-scrollable-y" id="chat-conversation" data-simplebar="init">
                                 <div class="simplebar-wrapper" style="margin: -24px;">
                                     <div class="simplebar-height-auto-observer-wrapper">
                                         <div class="simplebar-height-auto-observer"></div>
                                     </div>
                                     <div class="simplebar-mask">
                                         <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-                                            <div class="simplebar-content-wrapper" tabindex="0" role="region"
-                                                aria-label="scrollable content"
-                                                style="height: 100%; overflow: hidden scroll;">
+                                            <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
                                                 <div class="simplebar-content" style="padding: 24px;">
                                                     <div id="elmLoader"></div>
-                                                    <div class="list-unstyled chat-conversation-list"
-                                                        id="users-conversation">
+                                                    <div class="list-unstyled chat-conversation-list" id="users-conversation">
 
 
                                                     </div>
@@ -266,13 +240,11 @@
                                     <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
                                 </div>
                                 <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
-                                    <div class="simplebar-scrollbar"
-                                        style="height: 535px; display: block; transform: translate3d(0px, 0px, 0px);">
+                                    <div class="simplebar-scrollbar" style="height: 535px; display: block; transform: translate3d(0px, 0px, 0px);">
                                     </div>
                                 </div>
                             </div>
-                            <div class="alert alert-warning alert-dismissible copyclipboard-alert px-4 fade show "
-                                id="copyClipBoard" role="alert">
+                            <div class="alert alert-warning alert-dismissible copyclipboard-alert px-4 fade show " id="copyClipBoard" role="alert">
                                 Message copied
                             </div>
                         </div>
@@ -282,21 +254,15 @@
                                     <div class="col-sm-4 col-8">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0 d-block d-lg-none me-3">
-                                                <a href="javascript: void(0);" class="user-chat-remove fs-18 p-1"><i
-                                                        class="ri-arrow-left-s-line align-bottom"></i></a>
+                                                <a href="javascript: void(0);" class="user-chat-remove fs-18 p-1"><i class="ri-arrow-left-s-line align-bottom"></i></a>
                                             </div>
                                             <div class="flex-grow-1 overflow-hidden">
                                                 <div class="d-flex align-items-center">
-                                                    <div
-                                                        class="flex-shrink-0 chat-user-img online user-own-img align-self-center me-3 ms-0">
-                                                        <img src="assets/images/users/avatar-2.jpg"
-                                                            class="rounded-circle avatar-xs" alt="">
+                                                    <div class="flex-shrink-0 chat-user-img online user-own-img align-self-center me-3 ms-0">
+                                                        <img src="assets/images/users/avatar-2.jpg" class="rounded-circle avatar-xs" alt="">
                                                     </div>
                                                     <div class="flex-grow-1 overflow-hidden">
-                                                        <h5 class="text-truncate mb-0 fs-16"><a
-                                                                class="text-reset username" data-bs-toggle="offcanvas"
-                                                                href="#userProfileCanvasExample"
-                                                                aria-controls="userProfileCanvasExample">Lisa
+                                                        <h5 class="text-truncate mb-0 fs-16"><a class="text-reset username" data-bs-toggle="offcanvas" href="#userProfileCanvasExample" aria-controls="userProfileCanvasExample">Lisa
                                                                 Parker</a>
                                                         </h5>
                                                         <p class="text-truncate text-muted fs-14 mb-0 userStatus">
@@ -311,14 +277,8 @@
                                         <ul class="list-inline user-chat-nav text-end mb-0">
                                             <li class="list-inline-item m-0">
                                                 <div class="dropdown">
-                                                    <button class="btn btn-ghost-secondary btn-icon" type="button"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-search icon-sm">
+                                                    <button class="btn btn-ghost-secondary btn-icon" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search icon-sm">
                                                             <circle cx="11" cy="11" r="8"></circle>
                                                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                                                         </svg>
@@ -326,10 +286,7 @@
                                                     <div class="dropdown-menu p-0 dropdown-menu-end dropdown-menu-lg">
                                                         <div class="p-2">
                                                             <div class="search-box">
-                                                                <input type="text"
-                                                                    class="form-control bg-light border-light"
-                                                                    placeholder="Search here..."
-                                                                    onkeyup="searchMessages()" id="searchMessage">
+                                                                <input type="text" class="form-control bg-light border-light" placeholder="Search here..." onkeyup="searchMessages()" id="searchMessage">
                                                                 <i class="ri-search-2-line search-icon"></i>
                                                             </div>
                                                         </div>
@@ -338,14 +295,8 @@
                                             </li>
 
                                             <li class="list-inline-item d-none d-lg-inline-block m-0">
-                                                <button type="button" class="btn btn-ghost-secondary btn-icon"
-                                                    data-bs-toggle="offcanvas"
-                                                    data-bs-target="#userProfileCanvasExample"
-                                                    aria-controls="userProfileCanvasExample">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-info icon-sm">
+                                                <button type="button" class="btn btn-ghost-secondary btn-icon" data-bs-toggle="offcanvas" data-bs-target="#userProfileCanvasExample" aria-controls="userProfileCanvasExample">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info icon-sm">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="12" y1="16" x2="12" y2="12"></line>
                                                         <line x1="12" y1="8" x2="12.01" y2="8"></line>
@@ -355,32 +306,21 @@
 
                                             <li class="list-inline-item m-0">
                                                 <div class="dropdown">
-                                                    <button class="btn btn-ghost-secondary btn-icon" type="button"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-more-vertical icon-sm">
+                                                    <button class="btn btn-ghost-secondary btn-icon" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-sm">
                                                             <circle cx="12" cy="12" r="1"></circle>
                                                             <circle cx="12" cy="5" r="1"></circle>
                                                             <circle cx="12" cy="19" r="1"></circle>
                                                         </svg>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item d-block d-lg-none user-profile-show"
-                                                            href="#"><i
-                                                                class="ri-user-2-fill align-bottom text-muted me-2"></i>
+                                                        <a class="dropdown-item d-block d-lg-none user-profile-show" href="#"><i class="ri-user-2-fill align-bottom text-muted me-2"></i>
                                                             View Profile</a>
-                                                        <a class="dropdown-item" href="#"><i
-                                                                class="ri-inbox-archive-line align-bottom text-muted me-2"></i>
+                                                        <a class="dropdown-item" href="#"><i class="ri-inbox-archive-line align-bottom text-muted me-2"></i>
                                                             Archive</a>
-                                                        <a class="dropdown-item" href="#"><i
-                                                                class="ri-mic-off-line align-bottom text-muted me-2"></i>
+                                                        <a class="dropdown-item" href="#"><i class="ri-mic-off-line align-bottom text-muted me-2"></i>
                                                             Muted</a>
-                                                        <a class="dropdown-item" href="#"><i
-                                                                class="ri-delete-bin-5-line align-bottom text-muted me-2"></i>
+                                                        <a class="dropdown-item" href="#"><i class="ri-delete-bin-5-line align-bottom text-muted me-2"></i>
                                                             Delete</a>
                                                     </div>
                                                 </div>
@@ -398,11 +338,9 @@
                                     </div>
                                     <div class="simplebar-mask">
                                         <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-                                            <div class="simplebar-content-wrapper" tabindex="0" role="region"
-                                                aria-label="scrollable content" style="height: auto; overflow: hidden;">
+                                            <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow: hidden;">
                                                 <div class="simplebar-content" style="padding: 24px;">
-                                                    <ul class="list-unstyled chat-conversation-list"
-                                                        id="channel-conversation">
+                                                    <ul class="list-unstyled chat-conversation-list" id="channel-conversation">
 
                                                     </ul>
                                                 </div>
@@ -418,8 +356,7 @@
                                     <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
                                 </div>
                             </div>
-                            <div class="alert alert-warning alert-dismissible copyclipboard-alert px-4 fade show "
-                                id="copyClipBoardChannel" role="alert">
+                            <div class="alert alert-warning alert-dismissible copyclipboard-alert px-4 fade show " id="copyClipBoardChannel" role="alert">
                                 Message copied
                             </div>
                         </div>
@@ -432,35 +369,31 @@
                                             wait till the user initiates a message.</p>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <a href="" class="text-decoration-underline" style="color: #1a4848"
-                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
-                                            aria-controls="offcanvasTop">Choose a template</a>
+                                        <a href="" class="text-decoration-underline" style="color: #1a4848" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Choose a template</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="chat-input-section p-3 p-lg-4 d-none" id="chatinputsection">
-                            <form id="chatinput-form" enctype="multipart/form-data">
+                            <form action="{{ route('replyamessage')}}" method="POST">
+                                @csrf
                                 <div class="row g-0 align-items-center">
-
                                     <div class="col">
                                         <div class="chat-input-feedback">
                                             Please Enter a Message
                                         </div>
-                                        <input type="text" class="form-control chat-input bg-light border-light shadow"
-                                            id="chat-input" placeholder="Type your message..." autocomplete="off">
+                                        <input type="text" name="resolvemessagetext" class="form-control chat-input bg-light border-light shadow" id="chat-input" placeholder="Type your message..." autocomplete="off">
+                                        <input type="hidden" name="mobilenumber" value="" id="mobilenumberreply">
                                     </div>
                                     <div class="col-auto">
                                         <div class="chat-input-links ms-2">
                                             <div class="links-list-item">
-                                                <button type="submit" class="btn chat-send waves-effect waves-light"
-                                                    style="background-color: #1a4848">
+                                                <button type="submit" class="btn chat-send waves-effect waves-light" style="background-color: #1a4848">
                                                     <i class="ri-send-plane-2-fill align-bottom text-white"></i>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </form>
                         </div>
@@ -473,8 +406,7 @@
                                             <p class="mb-0"></p>
                                         </div>
                                         <div class="flex-shrink-0">
-                                            <button type="button" id="close_toggle"
-                                                class="btn btn-sm btn-link mt-n2 me-n3 fs-18">
+                                            <button type="button" id="close_toggle" class="btn btn-sm btn-link mt-n2 me-n3 fs-18">
                                                 <i class="bx bx-x align-middle"></i>
                                             </button>
                                         </div>
@@ -495,74 +427,72 @@
     </div>
     <div class="offcanvas-body" id="contactdetailsoff">
         @foreach ($contactsdata->take(1) as $data)
-            <div class="card" id="contact-view-detail">
-                <div class="card-body text-center">
-                    <div class="d-inline-block">
-                        <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle bg-success text-white"
-                            style="width: 80px; height: 80px;">
-                            <span class="user-initial fs-3">{{ strtoupper(substr($data->fullname, 0, 1)) }}</span>
-                        </div>
+        <div class="card" id="contact-view-detail">
+            <div class="card-body text-center">
+                <div class="d-inline-block">
+                    <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle bg-success text-white" style="width: 80px; height: 80px;">
+                        <span class="user-initial fs-3">{{ strtoupper(substr($data->fullname, 0, 1)) }}</span>
                     </div>
-                    <h5 class="mt-4 mb-1">{{ $data->fullname }}</h5>
-                    <p class="text-muted">{{ $data->status }}</p>
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">
-                                <i class="ri-phone-line"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
-                                <i class="ri-mail-line"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
-                                <i class="ri-question-answer-line"></i>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
-                <div class="card-body">
-                    <h6 class="text-muted text-uppercase fw-semibold mb-3">Personal Information</h6>
-                    <p class="text-muted mb-4">Hello, {{ $data->fullname }}, The most effective objective is one that
-                        is
-                        tailored
-                        to the job you are applying for. It states what kind of career you are seeking, and what skills
-                        and
-                        experiences.</p>
-                    <div class="table-responsive table-card">
-                        <table class="table table-borderless mb-0">
-                            <tbody>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Email ID</td>
-                                    <td>{{ $data->email }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Phone No</td>
-                                    <td>{{ $data->phonenumber }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Address</td>
-                                    <td>{{ $data->address }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Contact Created</td>
-                                    <td><small class="text-muted">{{ $data->created_at->format('d/m/y') }}</small>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <h5 class="mt-4 mb-1">{{ $data->fullname }}</h5>
+                <p class="text-muted">{{ $data->status }}</p>
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item avatar-xs">
+                        <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">
+                            <i class="ri-phone-line"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item avatar-xs">
+                        <a href="javascript:void(0);" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
+                            <i class="ri-mail-line"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item avatar-xs">
+                        <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
+                            <i class="ri-question-answer-line"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <h6 class="text-muted text-uppercase fw-semibold mb-3">Personal Information</h6>
+                <p class="text-muted mb-4">Hello, {{ $data->fullname }}, The most effective objective is one that
+                    is
+                    tailored
+                    to the job you are applying for. It states what kind of career you are seeking, and what skills
+                    and
+                    experiences.</p>
+                <div class="table-responsive table-card">
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                            <tr>
+                                <td class="fw-medium" scope="row">Email ID</td>
+                                <td>{{ $data->email }}</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-medium" scope="row">Phone No</td>
+                                <td>{{ $data->phonenumber }}</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-medium" scope="row">Address</td>
+                                <td>{{ $data->address }}</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-medium" scope="row">Contact Created</td>
+                                <td><small class="text-muted">{{ $data->created_at->format('d/m/y') }}</small>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
         @endforeach
     </div>
 </div>
 
 
-<div class="offcanvas offcanvas-end mycustomcanvascontacts" tabindex="-1" id="offcanvasTop"
-    aria-labelledby="offcanvasRightLabel" style="background-image: url('/assets/images/chat-bg-pattern.png');">
+<div class="offcanvas offcanvas-end mycustomcanvascontacts" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasRightLabel" style="background-image: url('/assets/images/chat-bg-pattern.png');">
     <!-- Danger Alert -->
     <div class="alert alert-danger alert-dismissible alert-label-icon rounded-label fade show" role="alert">
         <i class="ri-error-warning-line label-icon"></i><strong>Warning</strong> - If no
@@ -578,10 +508,8 @@
         <div class="offcanvas-header">
             <h5 id="offcanvasRightLabel">Send Message</h5>
             <div class="d-flex justify-content-end align-items-center">
-                <button type="submit" class="btn btn-sm text-white rounded-4 waves-effect waves-light"
-                    style="background-color: #116464"><i class="bx bx-send me-2"></i>Send Message</button>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
+                <button type="submit" class="btn btn-sm text-white rounded-4 waves-effect waves-light" style="background-color: #116464"><i class="bx bx-send me-2"></i>Send Message</button>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
         </div>
         <div class="offcanvas-body">
@@ -591,14 +519,12 @@
                         <div class="col-lg-6">
                             <div>
                                 <label for="template" class="form-label text-start fs-5">Choose Template</label>
-                                <select class="form-select rounded-pill mb-3 onchangedrop" name="template"
-                                    aria-label="Select template">
+                                <select class="form-select rounded-pill mb-3 onchangedrop" name="template" aria-label="Select template">
                                     <option disabled selected>--choose template--</option>
                                     @foreach ($alltemplates as $data)
-                                        <option value="{{ $data->name }}" data-value="{{ json_encode($data->components) }}"
-                                            data-language="{{ json_encode($data->language) }}">
-                                            {{ $data->name }}
-                                        </option>
+                                    <option value="{{ $data->name }}" data-value="{{ json_encode($data->components) }}" data-language="{{ json_encode($data->language) }}">
+                                        {{ $data->name }}
+                                    </option>
                                     @endforeach
                                     <!-- @foreach ($alltemplates as $data)
                                         <option value="{{ $data['name'] }}"
@@ -631,7 +557,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     //Hiding Default on keypress of Escape Key
-    $(document).keyup(function (e) {
+    $(document).keyup(function(e) {
         if (e.key === "Escape") {
             $('#defaultimage').show();
             $('#chatrow').hide();
@@ -639,24 +565,24 @@
     });
 
 
-    $(document).ready(function () {
-        $('#resolvebtn').on('click', function () {
+    $(document).ready(function() {
+        $('#resolvebtn').on('click', function() {
             const $section = $('#chatinputsection');
             $('#templatedivsec').hide();
             if ($section.hasClass('d-none')) {
 
                 $section.removeClass('d-none').css({
-                    opacity: 0,
-                    maxHeight: '0px'
+                    opacity: 0
+                    , maxHeight: '0px'
                 }).animate({
-                    opacity: 1,
-                    maxHeight: '100px'
+                    opacity: 1
+                    , maxHeight: '100px'
                 }, 300);
             } else {
                 $section.animate({
-                    opacity: 0,
-                    maxHeight: '0px'
-                }, 300, function () {
+                    opacity: 0
+                    , maxHeight: '0px'
+                }, 300, function() {
                     $section.addClass('d-none');
                     $('#templatedivsec').show();
                 });
@@ -665,8 +591,8 @@
     });
 
 
-    $(document).ready(function () {
-        $('.contact-tab').on('click', function () {
+    $(document).ready(function() {
+        $('.contact-tab').on('click', function() {
             $('#users-conversation').empty();
             $('#chatrow').show();
             $('#defaultimage').hide();
@@ -674,9 +600,9 @@
             console.log(contacttab);
             var formattedDate = new Date(contacttab.created_at)
                 .toLocaleDateString('en-GB', {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric'
+                    day: 'numeric'
+                    , month: 'short'
+                    , year: 'numeric'
                 });
             $('#contactdetailsoff').empty();
             $('#alphabet').empty();
@@ -744,6 +670,7 @@
                     `;
             $('#contactdetailsoff').append(contactbody);
             $('#contactnumberofperson').val(contacttab.phonenumber);
+            $('#mobilenumberreply').val(contacttab.phonenumber);
             $('#alphabet').html(contacttab.fullname.charAt(0).toUpperCase());
 
 
@@ -751,22 +678,23 @@
             //---------------------------------------------------------------------------------
 
             $.ajax({
-                url: "/showsentmessage/" + contacttab.phonenumber,
-                method: "GET",
-                success: function (data) {
+                url: "/showsentmessage/" + contacttab.phonenumber
+                , method: "GET"
+                , success: function(data) {
                     const messageArray = data;
                     console.log("Converted Array : " + messageArray);
 
                     let messagediv = '';
-
+                     let messageHTML = '';
 
                     messageArray.forEach((element) => {
                         if (element.type === 'Sent') {
-                            const messageContent = JSON.parse(element.message);
-                            console.log("Msg Content : " + messageContent);
-                            let messageHTML = '';
-
-                            // Iterate over each part of the message
+                            
+                            let messageContent;
+                              
+                            try {
+                                messageContent = JSON.parse(element.message);
+                                 // Iterate over each part of the message
                             messageContent.forEach(part => {
                                 if (part.type === 'HEADER') {
                                     if (part.format === 'TEXT') {
@@ -779,8 +707,7 @@
                                             imageUrl);
                                         messageHTML +=
                                             `<img src='${imageUrl}' alt="Header Image" height="200px" width="100%">`;
-                                    }
-                                    else if (part.format === 'VIDEO') {
+                                    } else if (part.format === 'VIDEO') {
                                         const imageUrl = element
                                             .imageurl;
                                         console.log("Video URL : " + imageUrl);
@@ -794,12 +721,12 @@
                                     // Apply link formatting only to the body text
                                     let bodyText = part.text;
                                     bodyText = bodyText.replace(
-                                        /\*(.*?)\*/g,
-                                        '<strong>$1</strong>'
+                                        /\*(.*?)\*/g
+                                        , '<strong>$1</strong>'
                                     ); // Bold formatting
                                     bodyText = bodyText.replace(
-                                        /(https?:\/\/[^\s]+)/g,
-                                        '<a href="$1" target="_blank">$1</a>'
+                                        /(https?:\/\/[^\s]+)/g
+                                        , '<a href="$1" target="_blank">$1</a>'
                                     ); // Link formatting
                                     messageHTML +=
                                         `<p class="message-body fs-5">${bodyText}</p>`;
@@ -816,6 +743,11 @@
                                 }
                             });
 
+                            } catch (e) {
+                                messageHTML =  element.message;
+                                return;
+                            }
+                            console.log("Msg Content : " + messageContent);
 
                             messagediv += `
                                     <li class="w-100 mb-3 justify-content-end">
@@ -892,10 +824,11 @@
         });
 
     });
+
 </script>
 <script>
     // Showing Message Dynamically
-    $('.onchangedrop').on('change', function () {
+    $('.onchangedrop').on('change', function() {
         const selectedOption = $(this).find(':selected'); // Get the selected option element
 
         // Retrieve the raw data-value and data-language
@@ -983,12 +916,13 @@
     function readURL(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 $('#imagemain').attr('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
+
 </script>
 
 @endsection

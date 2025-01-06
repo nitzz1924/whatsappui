@@ -18,6 +18,7 @@
             display: flex;
             gap: 10px;
         }
+
     </style>
     <div class="row">
         <div class="col-lg-12">
@@ -41,15 +42,12 @@
                                     <option>B</option>
                                 </select></div> --}}
                             <div class="px-2">
-                                <a href="{{ route('addnewautomation') }}"
-                                    class="btn text-white rounded-4 waves-effect waves-light" data-bs-toggle="offcanvas"
-                                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                                    style="background-color: #054c44"><i class="mdi mdi-plus me-2"></i>New Contact</a>
+                                <a href="{{ route('addnewautomation') }}" class="btn text-white rounded-4 waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="background-color: #054c44"><i class="mdi mdi-plus me-2"></i>New Contact</a>
 
                                 {{-- <a href="{{ route('getscheduledcam') }}"
-                                    class="btn text-white rounded-4 waves-effect waves-light"
-                                    style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>Testing
-                                    Schedule</a> --}}
+                                class="btn text-white rounded-4 waves-effect waves-light"
+                                style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>Testing
+                                Schedule</a> --}}
                             </div>
                         </div>
                     </div>
@@ -67,7 +65,8 @@
                                 <tr>
                                     <th style="background-color:#1164642b; border-radius: 10px 0 0 10px;">S.No</th>
                                     <th style="background-color:#1164642b;">Name</th>
-                                    <th style="background-color:#1164642b;">Type</th>
+                                    <th style="background-color:#1164642b;">Group</th>
+                                    <th style="background-color:#1164642b;">Status</th>
                                     <th style="background-color:#1164642b;">Email</th>
                                     <th style="background-color:#1164642b;">Phone Number</th>
                                     <th style="background-color:#1164642b; border-radius: 0px 10px 10px 0px;">Action
@@ -80,17 +79,13 @@
                                     <th>{{ $index + 1 }}</th>
                                     <td>{{ $data->fullname }}</td>
                                     <td>{{ $data->type }}</td>
+                                    <td>{{ $data->status }}</td>
                                     <td>{{ $data->email }}</td>
                                     <td>{{ $data->phonenumber }}</td>
                                     <td>
                                         <div class="hstack gap-3 flex-wrap">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal"
-                                                data-value="{{ json_encode($data) }}"
-                                                class="editbtnmodal btn btn-light btn-sm"><i class="ri-edit-2-line"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-title="Edit"></i></a>
-                                            <a href="#" onclick="confirmDelete('{{ $data->id }}', '{{ $data->fullname }}')"
-                                                class="btn btn-danger btn-sm"><i class="ri-delete-bin-line"></i></a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal" data-value="{{ json_encode($data) }}" class="editbtnmodal btn btn-light btn-sm"><i class="ri-edit-2-line" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"></i></a>
+                                            <a href="#" onclick="confirmDelete('{{ $data->id }}', '{{ $data->fullname }}')" class="btn btn-danger btn-sm"><i class="ri-delete-bin-line"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -103,8 +98,7 @@
         </div>
     </div>
 </div>
-<div class="offcanvas offcanvas-end mycustomcanvascontacts" tabindex="-1" id="offcanvasRight"
-    aria-labelledby="offcanvasRightLabel">
+<div class="offcanvas offcanvas-end mycustomcanvascontacts" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header" style="background-color: #054c44">
         <h5 id="offcanvasRightLabel" class="text-white">Contact Creation</h5>
         <div class="d-flex justify-content-end align-items-center">
@@ -120,13 +114,11 @@
                     <div class="row row-cols-lg-auto g-3 align-items-center">
                         <div class="col-12">
                             <div class="input-group">
-                                <input type="file" name="file" id="file" class="form-control" placeholder="Username"
-                                    required>
+                                <input type="file" name="file" id="file" class="form-control" placeholder="Username" required>
                             </div>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn text-white rounded-4 waves-effect waves-light"
-                                style="background-color: #054c44">Upload</button>
+                            <button type="submit" class="btn text-white rounded-4 waves-effect waves-light" style="background-color: #054c44">Upload</button>
                         </div>
                     </div>
                 </form>
@@ -149,11 +141,10 @@
                     <div class="mt-0">
                         <p class="text-black text-start fs-5">Enter details to create Contact</p>
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div class="">
-                                    <label for="autoCompleteFruit" class="form-label">Select Type</label>
-                                    <select class="form-select rounded-4" aria-label="Default select example"
-                                        name="type">
+                                    <label for="autoCompleteFruit" class="form-label">Select Group</label>
+                                    <select class="form-select rounded-4" id="typedrop" aria-label="Default select example" name="type">
                                         <option selected>--Select Type--</option>
                                         @foreach ($groupsdata as $row)
                                         <option value="{{ $row->label }}">{{ $row->label }}</option>
@@ -161,27 +152,40 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
+                                <div class="">
+                                    <label for="autoCompleteFruit" class="form-label">Select Status</label>
+                                    <select class="form-select rounded-4" id="typedrop" aria-label="Default select example" name="status">
+                                        <option selected>--Select Status--</option>
+                                         @foreach ($status as $rows)
+                                            <option value="{{ $rows->label }}">{{ $rows->label }}</option>
+                                            @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
                                 <div>
                                     <label for="placeholderInput" class="form-label">Name</label>
-                                    <input type="text" class="form-control rounded-4" id="placeholderInput"
-                                        placeholder="Enter Name" name="fullname">
+                                    <input type="text" class="form-control rounded-4" id="placeholderInput" placeholder="Enter Name" name="fullname">
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4 mt-3">
                                 <div>
                                     <label for="placeholderInput" class="form-label">Email</label>
-                                    <input type="email" class="form-control rounded-4" id="placeholderInput"
-                                        placeholder="Enter Email Address" name="email">
+                                    <input type="email" class="form-control rounded-4" id="placeholderInput" placeholder="Enter Email Address" name="email">
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4 mt-3">
                                 <label for="placeholderInput" class="form-label">Mobile Number</label>
                                 <div class="input-group rounded-4">
                                     <span class="input-group-text" id="basic-addon1">+91</span>
-                                    <input type="text" name="phonenumber" class="form-control"
-                                        placeholder="Enter Phone Number" aria-label="Enter Phone Number"
-                                        aria-describedby="basic-addon1">
+                                    <input type="text" name="phonenumber" class="form-control" placeholder="Enter Phone Number" aria-label="Enter Phone Number" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mt-3">
+                                <div>
+                                    <label for="placeholderInput" class="form-label">City</label>
+                                    <input type="text" class="form-control rounded-4" id="placeholderInput" placeholder="Enter City" name="city">
                                 </div>
                             </div>
                         </div>
@@ -189,28 +193,24 @@
                             <div class="col-lg-3">
                                 <div>
                                     <label for="placeholderInput" class="form-label">City</label>
-                                    <input type="text" class="form-control rounded-4" id="placeholderInput"
-                                        placeholder="Enter City" name="city">
+                                    <input type="text" class="form-control rounded-4" id="placeholderInput" placeholder="Enter City" name="city">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div>
                                     <label for="placeholderInput" class="form-label">State</label>
-                                    <input type="text" class="form-control rounded-4" id="placeholderInput"
-                                        placeholder="Enter State" name="state">
+                                    <input type="text" class="form-control rounded-4" id="placeholderInput" placeholder="Enter State" name="state">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div>
                                     <label for="placeholderInput" class="form-label">Country</label>
-                                    <input type="text" class="form-control rounded-4" id="placeholderInput"
-                                        placeholder="Enter Country" name="country">
+                                    <input type="text" class="form-control rounded-4" id="placeholderInput" placeholder="Enter Country" name="country">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <label for="autoCompleteFruit" class="form-label">Select Language</label>
-                                <select class="form-select rounded-4" name="language"
-                                    aria-label="Default select example" name="type">
+                                <select class="form-select rounded-4" name="language" aria-label="Default select example" name="type">
                                     <option selected>--Select Language--</option>
                                     <option value="en-US">English</option>
                                     <option value="es">Spanish</option>
@@ -275,10 +275,8 @@
                             <div class="row mt-3">
                                 <div class="col-lg-12">
                                     <div>
-                                        <label for="exampleFormControlTextarea5"
-                                            class="form-label rounded-4">Address</label>
-                                        <textarea class="form-control" name="address" placeholder="Your Full Address"
-                                            id="exampleFormControlTextarea5" rows="3"></textarea>
+                                        <label for="exampleFormControlTextarea5" class="form-label rounded-4">Address</label>
+                                        <textarea class="form-control" name="address" placeholder="Your Full Address" id="exampleFormControlTextarea5" rows="3"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -286,8 +284,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-start align-items-center mt-3">
-                    <button type="submit" class="btn text-white rounded-4 waves-effect waves-light"
-                        style="background-color: #054c44">Create</button>
+                    <button type="submit" class="btn text-white rounded-4 waves-effect waves-light" style="background-color: #054c44">Create</button>
                 </div>
             </div>
         </div>
@@ -306,8 +303,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn  text-white rounded-4 waves-effect waves-light"
-                        style="background-color: #054c44">Update</button>
+                    <button type="submit" class="btn  text-white rounded-4 waves-effect waves-light" style="background-color: #054c44">Update</button>
                 </div>
             </div>
         </div>
@@ -325,46 +321,80 @@
 
         });
     });
+
+    //Dynamic Types Names are coming..........
+    /*$('#typedrop').on('change', function() {
+        var selectedtype = $(this).val();
+        console.log(selectedtype);
+        $.ajax({
+            url: '/filterstatusdrop/' + selectedtype,
+            type: 'GET',
+            success: function(response) {
+                console.log("this working", response);
+                var dropdown1 = $('#statusdrop');
+                dropdown1.empty();
+                dropdown1.append($('<option selected>Choose...</option>'));
+                response.forEach(function(item) {
+                    dropdown1.append($('<option value="' + item.label + '" data-id="' + item
+                        .id + '">' + item.label + '</option>'));
+                });
+            }
+        });
+    });
+    */
+
 </script>
 <script>
     // Edit Functionality
-        $('#table-body').on('click', '.editbtnmodal', function() {
-            console.log("clicked");
-            const contact = $(this).data('value');
-            const finalnumber = contact.phonenumber.replace(/\+91/g, '').trim(); // removing +91 while editing
-            console.log(finalnumber);
-            $('#modalbodyedit').empty();
-            const modalbody = `
+    $('#table-body').on('click', '.editbtnmodal', function() {
+        console.log("clicked");
+        const contact = $(this).data('value');
+         console.log(contact);
+        const finalnumber = contact.phonenumber.replace(/\+91/g, '').trim(); // removing +91 while editing
+        $('#modalbodyedit').empty();
+        const modalbody = `
                  <div class="mt-0">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="">
                                 <label for="autoCompleteFruit" class="form-label">Select Type</label>
                                 <select class="form-select rounded-4" aria-label="Default select example"
                                     name="type">
                                     <option selected>--Select Type--</option>
                                     @foreach ($groupsdata as $row)
-                                    <option value="{{ $row->label }}" ${contact.type === '{{ $row->label }}' ? 'selected' : ''}>{{ $row->label }}</option>
+                                    <option value="{{ $row->label }}" ${contact.type == '{{ $row->label }}' ? 'selected' : ''}>{{ $row->label }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <input type="hidden" name="contactid" value="${contact.id}" id="">
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
+                            <div class="">
+                                <label for="autoCompleteFruit" class="form-label">Select Group</label>
+                                <select class="form-select rounded-4" aria-label="Default select example"
+                                    name="status">
+                                    <option>--Select Group--</option>
+                                    @foreach ($status as $rows)
+                                    <option value="{{ $rows->label }}" ${contact.status == '{{ $rows->label }}' ? 'selected' : ''}>{{ $rows->label }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
                             <div>
                                 <label for="placeholderInput" class="form-label">Name</label>
                                 <input type="text" class="form-control rounded-4" id="placeholderInput"
                                     placeholder="Enter Name" name="fullname" value="${contact.fullname}">
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4 mt-3">
                             <div>
                                 <label for="placeholderInput" class="form-label">Email</label>
                                 <input type="email" class="form-control rounded-4" id="placeholderInput"
                                     placeholder="Enter Email Address" name="email" value="${contact.email}">
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4 mt-3">
                             <label for="placeholderInput" class="form-label">Mobile Number</label>
                             <div class="input-group rounded-4">
                                 <span class="input-group-text" id="basic-addon1">+91</span>
@@ -373,30 +403,30 @@
                                     aria-describedby="basic-addon1"  value="${finalnumber}">
                             </div>
                         </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-lg-3">
+                        <div class="col-lg-4 mt-3">
                             <div>
                                 <label for="placeholderInput" class="form-label">City</label>
                                 <input type="text" class="form-control rounded-4" id="placeholderInput"
                                     placeholder="Enter City" name="city"  value="${contact.city}">
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-4">
                             <div>
                                 <label for="placeholderInput" class="form-label">State</label>
                                 <input type="text" class="form-control rounded-4" id="placeholderInput"
                                     placeholder="Enter State" name="state"  value="${contact.state}">
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div>
                                 <label for="placeholderInput" class="form-label">Country</label>
                                 <input type="text" class="form-control rounded-4" id="placeholderInput"
                                     placeholder="Enter Country" name="country" value="${contact.country}">
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <label for="autoCompleteFruit" class="form-label">Select Language</label>
                             <select class="form-select rounded-4" name="language"aria-label="Default select example" name="type">
                                     <option selected>--Select Language--</option>
@@ -474,21 +504,22 @@
                     </div>
                 </div>
                 `;
-            $('#modalbodyedit').append(modalbody);
-        });
+        $('#modalbodyedit').append(modalbody);
+    });
+
 </script>
 @endsection
 <script>
-    function confirmDelete(id,contactname) {
+    function confirmDelete(id, contactname) {
         Swal.fire({
-                title: "Are you sure?",
-                html: "You want to delete <strong style='color: red;'>" + contactname + "'s Contact</strong>?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#116464",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "Cancel"
+                title: "Are you sure?"
+                , html: "You want to delete <strong style='color: red;'>" + contactname + "'s Contact</strong>?"
+                , icon: "warning"
+                , showCancelButton: true
+                , confirmButtonColor: "#116464"
+                , cancelButtonColor: "#d33"
+                , confirmButtonText: "Yes, delete it!"
+                , cancelButtonText: "Cancel"
             })
             .then((result) => {
                 if (result.isConfirmed) {
@@ -496,4 +527,5 @@
                 }
             });
     }
+
 </script>
