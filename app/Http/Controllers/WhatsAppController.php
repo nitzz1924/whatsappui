@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use GuzzleHttp\Promise\Utils;
+use App\Models\Template;
 use Auth;
+use App\Models\Campaign;
+use App\Models\Message;
 use Log;
 use App\Models\Contact;
 use Exception;
@@ -29,12 +32,12 @@ class WhatsAppController extends Controller
 
     public function handleWebhooknew(Request $request)
     {
-       
+
         $loggedinuser = Auth::guard('customer')->user();
         if (!$loggedinuser) {
             return redirect()->route('userloginpage')->with('error', 'You must be logged in to perform this action.');
         }
-        $contacts = Contact::where('userid',$loggedinuser->id)->where('type', '=', $request->modulename)->where('status', $request->segmentname)->get();
+        $contacts = Contact::where('userid', $loggedinuser->id)->where('type', '=', $request->modulename)->where('status', $request->segmentname)->get();
         $mediaimage = '';
         if ($request->hasFile('mediaimage') && $request->file('mediaimage')->isValid()) {
             $bannerimage = $request->file('mediaimage');
@@ -45,6 +48,8 @@ class WhatsAppController extends Controller
             // Store the full image path
             $mediaimage = url("{$uploadedPath}/{$uniqueFileName}");
         }
+        $templatedata = Template::where('name', $request->template)->where('userid', $loggedinuser->id)->first();
+
         $promises = [];
         foreach ($contacts as $contact) {
             try {
@@ -53,7 +58,8 @@ class WhatsAppController extends Controller
                     $request->template,
                     $mediaimage,
                     $request->mediatype,
-                    $request->languagetype
+                    $request->languagetype,
+                    $templatedata->components,
                 );
             } catch (Exception $e) {
                 Log::error('Error sending message for contact: ' . $contact->id, [
@@ -67,17 +73,35 @@ class WhatsAppController extends Controller
 
         foreach ($results as $result) {
             if ($result['state'] === 'rejected') {
+
                 Log::error('Promise rejected', ['reason' => $result['reason']]);
             } else {
                 Log::info('Message sent successfully', ['response' => $result['value']]);
             }
         }
 
+        $data = Campaign::create([
+            'campaignname' => $request->campaignname,
+            'modulename' => $request->modulename,
+            'template' => $request->template,
+            'segmentname' => $request->segmentname,
+            'userid' => $loggedinuser->id,
+            'sendimmediate' => $request->sendimmediate,
+            'scheduledatetime' => $request->scheduledatetime,
+            'datetime' => $request->datetime,
+            'mediatype' => $request->mediatype,
+            'languagetype' => $request->languagetype,
+            'mediaimage' => $mediaimage != null ? $mediaimage : null,
+        ]);
         return back()->with('success', 'Message sent successfully!');
     }
 
-    protected function sendMessage($phone, $templateid, $mediaimage, $mediatype, $languagetype)
+    protected function sendMessage($phone, $templateid, $mediaimage, $mediatype, $languagetype, $components)
     {
+        $loggedinuser = Auth::guard('customer')->user();
+        if (!$loggedinuser) {
+            return redirect()->route('userloginpage')->with('error', 'You must be logged in to perform this action.');
+        }
         try {
             $data = [
                 'messaging_product' => 'whatsapp',
@@ -127,8 +151,17 @@ class WhatsAppController extends Controller
                     'status' => $response->getStatusCode(),
                     'body' => $response->getBody()->getContents(),
                 ]);
+                $data = Message::create([
+                    'userid' => $loggedinuser->id,
+                    'templatename' => $templateid,
+                    'imageurl' => $mediaimage,
+                    'type' => 'Sent',
+                    'senderid' => $loggedinuser->mobilenumber,
+                    'recievedid' => str_replace('+', '', $phone),
+                    'message' => $components,
+                ]);
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Log the exception details
             Log::error('Exception occurred while sending message', [
                 'error' => $e->getMessage(),

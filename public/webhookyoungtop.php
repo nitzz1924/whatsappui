@@ -57,42 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mediaData = getMediaUrl($comingmediaid, $accessTokenmedia);
         $imageUrl = $mediaData['url'];
 
-        function downloadMedia($url, $accessToken, $saveDirectory)
-        {
-            $headers = [
-                "Authorization: Bearer {$accessToken}"
-            ];
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-            $imageData = curl_exec($ch);
-            curl_close($ch);
-
-            if ($imageData) {
-                // Generate a unique filename for the image
-                $uniqueFilename = uniqid('image_', true) . '.jpg'; // Assuming the file is a JPEG image
-                $savePath = $saveDirectory . $uniqueFilename;
-
-                // Save the image to the directory
-                file_put_contents($savePath, $imageData);
-
-                return $savePath; // Return the saved image's path
-            }
-
-            return null; // Return null if the image couldn't be downloaded
-        }
-        $saveDirectory = 'public/assets/images/receivedimgs/';
-        $imagePath = downloadMedia($imageUrl, $accessTokenmedia, $saveDirectory);
-        if ($imagePath) {
-            $relativePath = str_replace('public/', '', $imagePath);
-            $imageUrl = $relativePath;
-        } else {
-            logMessage("Error: Failed to download image from URL: $imageUrl", 'error');
-            $imageUrl = null; 
-        }
 
         //--------------------Image Functionality Ends--------------------
 
@@ -122,9 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['status' => 'error', 'message' => 'User not found']);
             exit;
         }
-
         // **Insert Message into `messages` Table**
-        $insertQuery = "INSERT INTO messages (userid, senderid, type, message, imageurl, recievedid, created_at, updated_at) 
+        $insertQuery = "INSERT INTO messages (userid, senderid, type, message,  imageurl, recievedid, created_at, updated_at) 
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertQuery);
 

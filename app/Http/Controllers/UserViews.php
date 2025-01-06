@@ -151,7 +151,6 @@ class UserViews extends Controller
                     ->orWhere('recievedid', $finalphone);
             })
             ->get();
-
         return response()->json($sentMessage);
     }
 }

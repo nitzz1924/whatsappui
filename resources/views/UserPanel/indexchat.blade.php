@@ -228,7 +228,6 @@
                                                     <div id="elmLoader"></div>
                                                     <div class="list-unstyled chat-conversation-list" id="users-conversation">
 
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -383,6 +382,9 @@
                                             Please Enter a Message
                                         </div>
                                         <input type="text" name="resolvemessagetext" class="form-control chat-input bg-light border-light shadow" id="chat-input" placeholder="Type your message..." autocomplete="off">
+                                        <div class="alert alert-danger alert-dismissible alert-label-icon rounded-label fade show" role="alert">
+                                            <i class="ri-error-warning-line label-icon"></i><strong>NOTE</strong> - You can only be able to reply to a message in First 48 hours.
+                                        </div>
                                         <input type="hidden" name="mobilenumber" value="" id="mobilenumberreply">
                                     </div>
                                     <div class="col-auto">
@@ -682,70 +684,76 @@
                 , method: "GET"
                 , success: function(data) {
                     const messageArray = data;
-                    console.log("Converted Array : " + messageArray);
+                    console.log("Converted Array : ", JSON.stringify(messageArray, null, 2));
 
                     let messagediv = '';
-                     let messageHTML = '';
+                    let messageHTML = '';
 
                     messageArray.forEach((element) => {
+                        let sentTime = new Date(element.created_at);
+                        let sentTimeFormatted = sentTime.toLocaleString('en-IN', {
+                            hour: 'numeric'
+                            , minute: 'numeric'
+                            , hour12: true
+                        });
+                        let messageHTML = ''; // Reset messageHTML for each message
                         if (element.type === 'Sent') {
-                            
+
                             let messageContent;
-                              
+
                             try {
                                 messageContent = JSON.parse(element.message);
-                                 // Iterate over each part of the message
-                            messageContent.forEach(part => {
-                                if (part.type === 'HEADER') {
-                                    if (part.format === 'TEXT') {
-                                        messageHTML +=
-                                            `<p class="message-header">${part.text}</p>`;
-                                    } else if (part.format === 'IMAGE') {
-                                        const imageUrl = element
-                                            .imageurl;
-                                        console.log("Image URL : " +
-                                            imageUrl);
-                                        messageHTML +=
-                                            `<img src='${imageUrl}' alt="Header Image" height="200px" width="100%">`;
-                                    } else if (part.format === 'VIDEO') {
-                                        const imageUrl = element
-                                            .imageurl;
-                                        console.log("Video URL : " + imageUrl);
-                                        messageHTML +=
-                                            `<video controls width="100%" height="200px">
+                                // Iterate over each part of the message
+                                messageContent.forEach(part => {
+                                    if (part.type === 'HEADER') {
+                                        if (part.format === 'TEXT') {
+                                            messageHTML +=
+                                                `<p class="message-header">${part.text}</p>`;
+                                        } else if (part.format === 'IMAGE') {
+                                            const imageUrl = element
+                                                .imageurl;
+                                            console.log("Image URL : " +
+                                                imageUrl);
+                                            messageHTML +=
+                                                `<img src='${imageUrl}' alt="Header Image" height="200px" width="100%">`;
+                                        } else if (part.format === 'VIDEO') {
+                                            const imageUrl = element
+                                                .imageurl;
+                                            console.log("Video URL : " + imageUrl);
+                                            messageHTML +=
+                                                `<video controls width="100%" height="200px">
                                                     <source id="videomain" src="${imageUrl}" type="video/mp4">
                                                     Your browser does not support the video tag.
                                                 </video>`;
-                                    }
-                                } else if (part.type === 'BODY') {
-                                    // Apply link formatting only to the body text
-                                    let bodyText = part.text;
-                                    bodyText = bodyText.replace(
-                                        /\*(.*?)\*/g
-                                        , '<strong>$1</strong>'
-                                    ); // Bold formatting
-                                    bodyText = bodyText.replace(
-                                        /(https?:\/\/[^\s]+)/g
-                                        , '<a href="$1" target="_blank">$1</a>'
-                                    ); // Link formatting
-                                    messageHTML +=
-                                        `<p class="message-body fs-5">${bodyText}</p>`;
-                                } else if (part.type === 'BUTTONS') {
-                                    part.buttons.forEach(button => {
-                                        if (button.type == 'URL') {
-                                            messageHTML +=
-                                                `<a class="" href="${button.url}"><button class="message-button w-100 text-white btn btn-success btn-block">${button.text}</button></a>`;
-                                        } else {
-                                            messageHTML +=
-                                                `<a class="" href="tel:${button.phone_number}"><button class="message-button w-100 text-white btn btn-success btn-block">${button.text}</button></a>`;
                                         }
-                                    });
-                                }
-                            });
+                                    } else if (part.type === 'BODY') {
+                                        // Apply link formatting only to the body text
+                                        let bodyText = part.text;
+                                        bodyText = bodyText.replace(
+                                            /\*(.*?)\*/g
+                                            , '<strong>$1</strong>'
+                                        ); // Bold formatting
+                                        bodyText = bodyText.replace(
+                                            /(https?:\/\/[^\s]+)/g
+                                            , '<a href="$1" target="_blank">$1</a>'
+                                        ); // Link formatting
+                                        messageHTML +=
+                                            `<p class="message-body fs-5">${bodyText}</p>`;
+                                    } else if (part.type === 'BUTTONS') {
+                                        part.buttons.forEach(button => {
+                                            if (button.type == 'URL') {
+                                                messageHTML +=
+                                                    `<a class="" href="${button.url}"><button class="message-button  my-2 w-100 text-white btn btn-success btn-block">${button.text}</button></a>`;
+                                            } else {
+                                                messageHTML +=
+                                                    `<a class="" href="tel:${button.phone_number}"><button class="message-button  my-2 w-100 text-white btn btn-success btn-block">${button.text}</button></a>`;
+                                            }
+                                        });
+                                    }
+                                });
 
                             } catch (e) {
-                                messageHTML =  element.message;
-                                return;
+                                messageHTML = `<p class="message-body fs-5">${element.message}</p>`;
                             }
                             console.log("Msg Content : " + messageContent);
 
@@ -753,6 +761,7 @@
                                     <li class="w-100 mb-3 justify-content-end">
                                         <div class="message-preview">
                                             ${messageHTML}
+                                         <small class="text-muted mt-2 float-end time">${sentTimeFormatted}</small>
                                         </div>
                                     </li>
                                 `;

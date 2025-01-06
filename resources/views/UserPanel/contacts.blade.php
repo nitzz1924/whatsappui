@@ -190,25 +190,19 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-lg-3">
-                                <div>
-                                    <label for="placeholderInput" class="form-label">City</label>
-                                    <input type="text" class="form-control rounded-4" id="placeholderInput" placeholder="Enter City" name="city">
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div>
                                     <label for="placeholderInput" class="form-label">State</label>
                                     <input type="text" class="form-control rounded-4" id="placeholderInput" placeholder="Enter State" name="state">
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <div>
                                     <label for="placeholderInput" class="form-label">Country</label>
                                     <input type="text" class="form-control rounded-4" id="placeholderInput" placeholder="Enter Country" name="country">
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="autoCompleteFruit" class="form-label">Select Language</label>
                                 <select class="form-select rounded-4" name="language" aria-label="Default select example" name="type">
                                     <option selected>--Select Language--</option>

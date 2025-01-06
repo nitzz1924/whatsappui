@@ -440,7 +440,7 @@ class UserStores extends Controller
                     'type' => 'Sent',
                     'senderid' => $loggedinuser->mobilenumber,
                     'message' =>  $request->resolvemessagetext,
-                    'recievedid' =>  $request->mobilenumber,
+                    'recievedid' =>  str_replace('+', '',$request->mobilenumber),
                 ]);
                 return back()->with('success', 'Message sent successfully!');
             } else {

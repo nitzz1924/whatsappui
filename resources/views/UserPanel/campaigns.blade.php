@@ -41,6 +41,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
+          {{-- <img src="https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=1737247403726138&ext=1736151458&hash=ATswUHPzXPrRM-LEDRizGWYfkBCtMzfgPyzjpmXd8J3Weg" alt="WhatsApp Image" width="300" height="auto"> --}}
             <div class="card rounded-4">
                 <div class="card-body rounded-4">
                     <div class="table-responsive">
