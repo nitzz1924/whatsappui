@@ -451,4 +451,24 @@ class UserStores extends Controller
             Log::error('Exception sending message', ['message' => $e->getMessage()]);
         }
     }
+
+    public function filtercontacts(Request $req)
+    {
+        $loggedinuser = Auth::guard('customer')->user();
+        $contacts = Contact::where('userid', $loggedinuser->id)->where('type', $req->type)->where('status', $req->status)->get();
+       return response()->json($contacts);
+    }
+
+    public function filtercontactsbycampaign(Request $req)
+    {
+        $loggedinuser = Auth::guard('customer')->user();
+        $data = Campaign::where('userid', $loggedinuser->id)
+        ->where('campaignname', $req->campaign)
+        ->first();
+        $contacts = Contact::where('userid', $loggedinuser->id)
+        ->where('type', $data->modulename)
+        ->where('status', $data->segmentname)->get();
+        // dd($contacts);
+        return response()->json($contacts);
+    }
 }

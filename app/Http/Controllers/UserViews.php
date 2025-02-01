@@ -38,7 +38,9 @@ class UserViews extends Controller
             $groupsdata = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
             $alltemplates = Template::where('userid', $loggedinuser->id)->get();
             $chat = Message::where('userid', $loggedinuser->id)->get();
-            return view('UserPanel.indexchat', compact('contactsdata', 'groupsdata', 'alltemplates', 'chat'));
+            $allcampaigns = Campaign::where('userid', $loggedinuser->id)->get();
+            $status = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Status')->orderBy('created_at', 'DESC')->get();
+            return view('UserPanel.indexchat', compact('contactsdata', 'groupsdata', 'alltemplates', 'chat', 'allcampaigns', 'groupsdata','status'));
         } else {
             return view('auth.UserPanel.login');
         }
@@ -114,7 +116,8 @@ class UserViews extends Controller
             $groupsdata = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Group')->orderBy('created_at', 'DESC')->get();
             $status = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Status')->orderBy('created_at', 'DESC')->get();
             $contactsdata = Contact::where('userid', $loggedinuser->id)->orderBy('created_at', 'DESC')->get();
-            return view('UserPanel.contacts', compact('groupsdata', 'contactsdata','status'));
+            $contactscnt = Contact::where('userid', $loggedinuser->id)->get()->count();
+            return view('UserPanel.contacts', compact('groupsdata', 'contactsdata','status','contactscnt'));
         } else {
             return view('auth.UserPanel.login');
         }

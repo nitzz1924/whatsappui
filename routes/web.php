@@ -64,7 +64,6 @@ Route::controller(UserViews::class)->group(function () {
     Route::get('wahapage', 'wahapage')->name('wahapage');
     Route::get('templatespage', 'templatespage')->name('templatespage');
     Route::get('groupspage', 'groupspage')->name('groupspage');
-
     Route::get('contactspage', 'contactspage')->name('contactspage');
     Route::get('/webhook/whatsapp', 'verify')->name('verify')->middleware(VerifyCsrfToken::class);
     Route::get('showsentmessage/{phone}', 'showsentmessage')->name('showsentmessage');
@@ -87,9 +86,13 @@ Route::controller(UserStores::class)->group(function () {
     Route::post('webhook', 'handleWebhook')->name('handleWebhook');
     Route::get('refreshtemplates', 'refreshtemplates')->name('refreshtemplates');
     Route::post('replyamessage', 'replyamessage')->name('replyamessage');
+    Route::get('filtercontacts', 'filtercontacts')->name('filtercontacts');
+    Route::get('filtercontactsbycampaign', 'filtercontactsbycampaign')->name('filtercontactsbycampaign');
 
 
 });
+
+
 Route::post('/webhooknew', [WhatsAppController::class, 'handleWebhooknew'])->name('webhooknew');
 
 //Excel Routes

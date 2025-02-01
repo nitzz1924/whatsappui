@@ -24,31 +24,38 @@
         <div class="col-lg-12">
             <div class="card rounded-4">
                 <div class="card-header rounded-4">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between  align-items-center">
                         <div class="px-2">
-                            <h4 class="mb-sm-0">Contacts</h4>
+                            <h4 class="mb-sm-0">Contacts-({{$contactscnt}})</h4>
                         </div>
-                        <div class="d-flex justify-content-end ">
-                            {{-- <div class="px-2"> <select class="form-select accountstatus"
-                                    aria-label="Default select example">
-                                    <option selected>--Filter by Groups--</option>
-                                    <option>A</option>
-                                    <option>B</option>
-                                </select></div>
-                            <div class="px-2"> <select class="form-select accountstatus"
-                                    aria-label="Default select example">
-                                    <option selected>--Filter by Status--</option>
-                                    <option>A</option>
-                                    <option>B</option>
-                                </select></div> --}}
+                        <div class="d-flex justify-content-center align-items-center">
                             <div class="px-2">
-                                <a href="{{ route('addnewautomation') }}" class="btn text-white rounded-4 waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="background-color: #054c44"><i class="mdi mdi-plus me-2"></i>New Contact</a>
-
-                                {{-- <a href="{{ route('getscheduledcam') }}"
-                                class="btn text-white rounded-4 waves-effect waves-light"
-                                style="background-color: #116464"><i class="mdi mdi-plus me-2"></i>Testing
-                                Schedule</a> --}}
+                                <span class="fw-bold text-black">Filter :</span>
                             </div>
+                            <div class="px-2">
+                                <select class="form-select accountstatus" id="groupdrop" aria-label="Default select example">
+                                    <option value="">--Select Group--</option>
+                                    @foreach($groupsdata as $key => $value)
+                                    <option value="{{$value->label}}">{{$value->label}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="px-2">
+                                <select class="form-select accountstatus" id="statusdrop" aria-label="Default select example">
+                                    <option value="">--Select Status--</option>
+                                    @foreach($status as $key => $stat)
+                                    <option value="{{$stat->label}}">{{$stat->label}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="px-2">
+                                <div class="px-2">
+                                    <a href="#" class="btn text-white rounded-4 waves-effect waves-light filterbtn"  style="background-color: #054c44"><i class="mdi mdi-filter me-2"></i>Filter</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-2">
+                            <a href="#" class="btn text-white rounded-4 waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="background-color: #054c44"><i class="mdi mdi-plus me-2"></i>New Contact</a>
                         </div>
                     </div>
                 </div>
@@ -144,7 +151,7 @@
                             <div class="col-lg-4">
                                 <div class="">
                                     <label for="autoCompleteFruit" class="form-label">Select Group</label>
-                                    <select class="form-select rounded-4" id="typedrop" aria-label="Default select example" name="type">
+                                    <select class="form-select rounded-4" aria-label="Default select example" name="type">
                                         <option selected>--Select Type--</option>
                                         @foreach ($groupsdata as $row)
                                         <option value="{{ $row->label }}">{{ $row->label }}</option>
@@ -155,11 +162,11 @@
                             <div class="col-lg-4">
                                 <div class="">
                                     <label for="autoCompleteFruit" class="form-label">Select Status</label>
-                                    <select class="form-select rounded-4" id="typedrop" aria-label="Default select example" name="status">
+                                    <select class="form-select rounded-4" aria-label="Default select example" name="status">
                                         <option selected>--Select Status--</option>
-                                         @foreach ($status as $rows)
-                                            <option value="{{ $rows->label }}">{{ $rows->label }}</option>
-                                            @endforeach
+                                        @foreach ($status as $rows)
+                                        <option value="{{ $rows->label }}">{{ $rows->label }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -317,25 +324,56 @@
     });
 
     //Dynamic Types Names are coming..........
-    /*$('#typedrop').on('change', function() {
-        var selectedtype = $(this).val();
-        console.log(selectedtype);
+    $('.filterbtn').on('click', function() {
+        var selectedType = $('#groupdrop').val();
+        var selectedStatus = $('#statusdrop').val();
+        if (!selectedType && !selectedStatus) {
+            Toastify({
+                text: "Please select a group or status to filter.",
+                duration: 3000,
+                position: "center",
+                style: {
+                    background: "white",  
+                    color: "#000000",
+                    borderRadius: "10px",
+                }
+            }).showToast();
+            return;
+        }
+
         $.ajax({
-            url: '/filterstatusdrop/' + selectedtype,
-            type: 'GET',
-            success: function(response) {
-                console.log("this working", response);
-                var dropdown1 = $('#statusdrop');
-                dropdown1.empty();
-                dropdown1.append($('<option selected>Choose...</option>'));
-                response.forEach(function(item) {
-                    dropdown1.append($('<option value="' + item.label + '" data-id="' + item
-                        .id + '">' + item.label + '</option>'));
+            url: "{{ route('filtercontacts') }}"
+            , type: "GET"
+            , data: {
+                type: selectedType
+                , status: selectedStatus
+            }
+            , success: function(data) {
+                console.log(data);
+                $('#table-body').empty();
+                $.each(data, function(index, value) {
+                    var finalnumber = value.phonenumber.replace(/\+91/g, '').trim();
+                    var html = `
+                    <tr class="border-bottom-1">
+                        <th>${index + 1}</th>
+                        <td>${value.fullname}</td>
+                        <td>${value.type}</td>
+                        <td>${value.status}</td>
+                        <td>${value.email}</td>
+                        <td>${finalnumber}</td>
+                        <td>
+                            <div class="hstack gap-3 flex-wrap">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#myModal" data-value='${JSON.stringify(value)}' class="editbtnmodal btn btn-light btn-sm"><i class="ri-edit-2-line" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"></i></a>
+                                <a href="#" onclick="confirmDelete('${value.id}', '${value.fullname}')" class="btn btn-danger btn-sm"><i class="ri-delete-bin-line"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    `;
+                    $('#table-body').append(html);
                 });
             }
         });
     });
-    */
 
 </script>
 <script>
@@ -343,7 +381,7 @@
     $('#table-body').on('click', '.editbtnmodal', function() {
         console.log("clicked");
         const contact = $(this).data('value');
-         console.log(contact);
+        console.log(contact);
         const finalnumber = contact.phonenumber.replace(/\+91/g, '').trim(); // removing +91 while editing
         $('#modalbodyedit').empty();
         const modalbody = `
@@ -502,7 +540,6 @@
     });
 
 </script>
-@endsection
 <script>
     function confirmDelete(id, contactname) {
         Swal.fire({
@@ -523,3 +560,4 @@
     }
 
 </script>
+@endsection
