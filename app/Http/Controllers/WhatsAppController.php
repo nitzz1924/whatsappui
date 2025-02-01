@@ -102,6 +102,8 @@ class WhatsAppController extends Controller
         if (!$loggedinuser) {
             return redirect()->route('userloginpage')->with('error', 'You must be logged in to perform this action.');
         }
+        $successfulRecipients = [];
+        $failedRecipients = [];
         try {
             $data = [
                 'messaging_product' => 'whatsapp',
@@ -159,7 +161,10 @@ class WhatsAppController extends Controller
                     'senderid' => $loggedinuser->mobilenumber,
                     'recievedid' => str_replace('+', '', $phone),
                     'message' => $components,
-                ]);
+                ]); 
+                $successfulRecipients[] = [// Replace with actual variable for recipient name
+                    'mobile' => $phone,
+                ];
             }
         } catch (Exception $e) {
             // Log the exception details
@@ -167,7 +172,13 @@ class WhatsAppController extends Controller
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
+            $failedRecipients[] = [
+                'mobile' => $phone,
+            ];
         }
+        Log::info('Successful Recipients:', $successfulRecipients);
+        Log::error('Failed Recipients:', $failedRecipients);
+
     }
 
 }
