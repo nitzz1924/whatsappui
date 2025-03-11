@@ -13,6 +13,7 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Session;
 use Auth;
+use DB;
 use Carbon\Carbon;
 class UserViews extends Controller
 {
@@ -40,7 +41,18 @@ class UserViews extends Controller
             $chat = Message::where('userid', $loggedinuser->id)->get();
             $allcampaigns = Campaign::where('userid', $loggedinuser->id)->get();
             $status = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Status')->orderBy('created_at', 'DESC')->get();
-            return view('UserPanel.indexchat', compact('contactsdata', 'groupsdata', 'alltemplates', 'chat', 'allcampaigns', 'groupsdata','status'));
+
+
+             $recmessages = Message::join(DB::raw("(SELECT *, REPLACE(phonenumber, '+', '') as phone_no FROM contacts) as contacts"), function($join) {
+                    $join->on('messages.senderid', '=', 'contacts.phone_no');
+                })
+                ->select('messages.*', 'contacts.fullname as contactname')
+                ->where('messages.userid', $loggedinuser->id)
+                ->where('messages.type', '=', 'Received')
+                ->whereDate('messages.created_at', Carbon::today())
+                ->get();
+
+            return view('UserPanel.indexchat', compact('contactsdata', 'groupsdata', 'alltemplates', 'chat', 'allcampaigns', 'groupsdata','status','recmessages'));
         } else {
             return view('auth.UserPanel.login');
         }

@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Auth;
+use Session;
 class ContactsImport implements ToCollection, WithStartRow
 {
     public function startRow(): int
@@ -19,7 +20,7 @@ class ContactsImport implements ToCollection, WithStartRow
     {
         //dd($rows);
         $loggedinuser = Auth::guard('customer')->user();
-        foreach ($rows as $row) {
+        foreach ($rows as $index => $row) {
             // Ensure there are enough columns in the row
             if (count($row) < 10) {
                 continue;
@@ -34,6 +35,18 @@ class ContactsImport implements ToCollection, WithStartRow
             $language = isset($row[7]) ? trim($row[7]) : '';
             $address = isset($row[8]) ? trim($row[8]) : '';
             $status = isset($row[9]) ? trim($row[9]) : '';
+            
+            $missingFields = [];
+            if (empty($type)) $missingFields[] = 'Type';
+            if (empty($fullname)) $missingFields[] = 'Full Name';
+            if (empty($phonenumber)) $missingFields[] = 'Phone Number';
+            if (empty($status)) $missingFields[] = 'Status';
+            
+             // Validation checks
+             if (!empty($missingFields)) {
+                $errors[] = "Row " . ($index + 2) . " is missing: " . implode(', ', $missingFields) . " field";
+                continue;
+            }
 
             // Save data to the database
             $data = Contact::updateOrCreate(
@@ -52,6 +65,11 @@ class ContactsImport implements ToCollection, WithStartRow
                 ]
         );
         //dd($data);
+        }
+         // If there are errors, return them to the session and stop the import
+         if (!empty($errors)) {
+            Session::flash('error', implode('<br>', $errors));
+            return redirect()->back();
         }
     }
 

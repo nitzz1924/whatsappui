@@ -12,7 +12,7 @@
                     <div class="flex-grow-1">
                         <h5 class="">Filter by Campaign :</h5>
                     </div>
-                   <div class="px-2">
+                    <div class="px-2">
                         <select class="form-select accountstatus" id="campaigndrop" aria-label="Default select example">
                             <option value="">--Select Campaign--</option>
                             @foreach($allcampaigns as $key => $cam)
@@ -73,26 +73,33 @@
 
                                             <div class="chat-message-list">
                                                 <ul class="list-unstyled chat-list chat-user-list" id="contactlist">
-                                                    @foreach ($contactsdata->take(20) as $data)
-                                                    <li id="contact-id-{{ $data->id }}" data-name="{{ strtolower($data->fullname) }}"  class="{{ $data->is_active ? 'active' : '' }}">
+                                                    @foreach ($recmessages->take(20) as $data)
+                                                    <li id="contact-id-{{ $data->id }}" data-name="{{ strtolower($data->contactname) }}" class="{{ $data->is_active ? 'active' : '' }}">
+                                                        @php
+                                                        $msg = json_decode($data->message);
+                                                        @endphp
                                                         <a href="#" onclick="contactInfo();" class="contact-tab" data-value="{{ json_encode($data) }}">
                                                             <div class="d-flex align-items-center py-2">
                                                                 <div class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
                                                                     <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle text-white" style="width: 30px; height: 30px; background-color:#1a4848;">
-                                                                        <span class="user-initial">{{strtoupper(substr($data->fullname, 0, 1))}}</span>
+                                                                        <span class="user-initial">{{strtoupper(substr($data->contactname, 0, 1))}}</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="flex-grow-1 overflow-hidden">
                                                                     <p class="text-truncate mb-0">
-                                                                        {{ $data->fullname }}
+                                                                        {{ Str::limit($data->contactname,15) }}
                                                                     </p>
                                                                     <small class="text-muted fs-6 fw-normal mb-0">
-                                                                        Yes!.Ok
+                                                                        @if(isset($msg->text->body))
+                                                                        <button class="bg-transparent border-0" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="" data-bs-content="{{ trim($msg->text->body) }}">{{ Str::limit(trim($msg->text->body), 20, '...') }}</button>
+                                                                        @else
+                                                                        N/A
+                                                                        @endif
                                                                     </small>
                                                                 </div>
                                                                 <div class="flex-grow-1 overflow-hidden text-end">
                                                                     <small class="text-muted fs-6 fw-normal mb-0">
-                                                                        12:05
+                                                                      {{ date("d/m/y", $msg->timestamp)}}
                                                                     </small>
                                                                 </div>
                                                             </div>
@@ -100,6 +107,34 @@
                                                     </li>
                                                     @endforeach
                                                 </ul>
+                                                {{-- <ul class="list-unstyled chat-list chat-user-list" id="contactlist">
+                                                    @foreach ($contactsdata->take(20) as $data)
+                                                    <li id="contact-id-{{ $data->id }}" data-name="{{ strtolower($data->fullname) }}" class="{{ $data->is_active ? 'active' : '' }}">
+                                                <a href="#" onclick="contactInfo();" class="contact-tab" data-value="{{ json_encode($data) }}">
+                                                    <div class="d-flex align-items-center py-2">
+                                                        <div class="flex-shrink-0 chat-user-img online align-self-center me-2 ms-0">
+                                                            <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle text-white" style="width: 30px; height: 30px; background-color:#1a4848;">
+                                                                <span class="user-initial">{{strtoupper(substr($data->fullname, 0, 1))}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-grow-1 overflow-hidden">
+                                                            <p class="text-truncate mb-0">
+                                                                {{ $data->fullname }}
+                                                            </p>
+                                                            <small class="text-muted fs-6 fw-normal mb-0">
+                                                                Yes!.Ok
+                                                            </small>
+                                                        </div>
+                                                        <div class="flex-grow-1 overflow-hidden text-end">
+                                                            <small class="text-muted fs-6 fw-normal mb-0">
+                                                                12:05
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                </li>
+                                                @endforeach
+                                                </ul> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -191,7 +226,7 @@
                                                         <div class="avatar-xxs d-flex justify-content-center align-items-center rounded-circle  text-white" style="width: 40px; height: 40px; background-color:#1a4848;">
                                                             <span class="user-initial fs-5 fw-bold" id="alphabet">{{
                                                     strtoupper(substr($data->fullname, 0, 1)) }}
-                                                                </span>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1 overflow-hidden">
@@ -599,8 +634,8 @@
     });
 
 
-   function contactInfo(){
-    $('.contact-tab').on('click', function() {
+    function contactInfo() {
+        $('.contact-tab').on('click', function() {
             $('#users-conversation').empty();
             $('#chatrow').show();
             $('#defaultimage').hide();
@@ -838,8 +873,7 @@
             });
 
         });
-   }
-  
+    }
 
 </script>
 <script>
@@ -944,40 +978,42 @@
 <!--Filter contacts-->
 <script>
     $('#campaigndrop').on('change', function() {
-    var selectedCampaign = $('#campaigndrop').val();
+        var selectedCampaign = $('#campaigndrop').val();
 
-    if (!selectedCampaign) {
-        Toastify({
-            text: "Please select a Campaign to filter.",
-            duration: 3000,
-            position: "center",
-            style: {
-                background: "white",
-                color: "#000000",
-                borderRadius: "10px",
+        if (!selectedCampaign) {
+            Toastify({
+                text: "Please select a Campaign to filter."
+                , duration: 3000
+                , position: "center"
+                , style: {
+                    background: "white"
+                    , color: "#000000"
+                    , borderRadius: "10px"
+                , }
+            }).showToast();
+            return;
+        }
+
+        $.ajax({
+            url: "{{ route('filtercontactsbycampaign') }}"
+            , type: "GET"
+            , data: {
+                campaign: selectedCampaign
             }
-        }).showToast();
-        return;
-    }
+            , success: function(response) {
+                console.log(response);
+                $('#contactlist').empty(); // Clear the existing listalphabet
 
-    $.ajax({
-        url: "{{ route('filtercontactsbycampaign') }}",
-        type: "GET",
-        data: { campaign: selectedCampaign },
-        success: function(response) {
-            console.log(response);
-            $('#contactlist').empty(); // Clear the existing listalphabet
+                if (response.length === 0) {
+                    $('#contactlist').append(`<li class="text-center text-muted">No contacts found.</li>`);
+                    return;
+                }
 
-            if (response.length === 0) {
-                $('#contactlist').append(`<li class="text-center text-muted">No contacts found.</li>`);
-                return;
-            }
+                $.each(response, function(index, data) {
+                    var userInitial = data.fullname ? data.fullname.charAt(0).toUpperCase() : "?";
+                    var isActiveClass = data.is_active ? "active" : "";
 
-            $.each(response, function(index, data) {
-                var userInitial = data.fullname ? data.fullname.charAt(0).toUpperCase() : "?";
-                var isActiveClass = data.is_active ? "active" : "";
-
-                var listItem = `
+                    var listItem = `
                     <li id="contact-id-${data.id}" data-name="${data.fullname.toLowerCase()}" class="${isActiveClass}">
                         <a href="#" onclick="contactInfo();" class="contact-tab" data-value='${JSON.stringify(data)}'>
                             <div class="d-flex align-items-center py-2">
@@ -998,49 +1034,50 @@
                         </a>
                     </li>
                 `;
-                $('#contactlist').append(listItem);
-                contactInfo();
-                SortContacts();
-            });
-        }
+                    $('#contactlist').append(listItem);
+                    contactInfo();
+                    SortContacts();
+                });
+            }
+        });
     });
-});
+
 </script>
 
 <!--Sorting Contacts on Input-->
 <script>
+    function SortContacts() {
+        let contacts = [];
 
- function SortContacts(){
-    let contacts = [];
-
-    // Store the initial list of contacts
-    $("#contactlist li").each(function () {
-        contacts.push({
-            id: $(this).attr("id"),
-            name: $(this).data("name"), // Lowercase name for case-insensitive search
-            html: $(this).prop("outerHTML"),
+        // Store the initial list of contacts
+        $("#contactlist li").each(function() {
+            contacts.push({
+                id: $(this).attr("id")
+                , name: $(this).data("name"), // Lowercase name for case-insensitive search
+                html: $(this).prop("outerHTML")
+            , });
         });
-    });
 
-    // Search input event listener
-    $("#searchInput").on("input", function () {
-        let searchTerm = $(this).val().trim().toLowerCase();
-        filterAndSortContacts(searchTerm);
-    });
-
-    // Function to filter and sort contacts
-    function filterAndSortContacts(searchTerm) {
-        let filteredContacts = contacts.filter(contact => contact.name.includes(searchTerm));
-
-        // Sort contacts alphabetically
-        filteredContacts.sort((a, b) => a.name.localeCompare(b.name));
-
-        // Render updated contact list
-        $("#contactlist").empty();
-        filteredContacts.forEach(contact => {
-            $("#contactlist").append(contact.html);
+        // Search input event listener
+        $("#searchInput").on("input", function() {
+            let searchTerm = $(this).val().trim().toLowerCase();
+            filterAndSortContacts(searchTerm);
         });
+
+        // Function to filter and sort contacts
+        function filterAndSortContacts(searchTerm) {
+            let filteredContacts = contacts.filter(contact => contact.name.includes(searchTerm));
+
+            // Sort contacts alphabetically
+            filteredContacts.sort((a, b) => a.name.localeCompare(b.name));
+
+            // Render updated contact list
+            $("#contactlist").empty();
+            filteredContacts.forEach(contact => {
+                $("#contactlist").append(contact.html);
+            });
+        }
     }
- }
+
 </script>
 @endsection

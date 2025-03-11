@@ -15,6 +15,7 @@ class Message extends Model
         'message',
         'recievedid',
         'templatename',
+        'campaignname',
         'imageurl',
     ];
 }

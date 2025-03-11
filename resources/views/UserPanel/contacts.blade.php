@@ -50,7 +50,7 @@
                             </div>
                             <div class="px-2">
                                 <div class="px-2">
-                                    <a href="#" class="btn text-white rounded-4 waves-effect waves-light filterbtn"  style="background-color: #054c44"><i class="mdi mdi-filter me-2"></i>Filter</a>
+                                    <a href="#" class="btn text-white rounded-4 waves-effect waves-light filterbtn" style="background-color: #054c44"><i class="mdi mdi-filter me-2"></i>Filter</a>
                                 </div>
                             </div>
                         </div>
@@ -64,6 +64,11 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
+                @if(session('error'))
+                <div class="alert alert-danger rounded  fs-5" style="height: 120px; overflow-y: auto;">
+                    {!! session('error') !!}
+                </div>
+                @endif
             <div class="card rounded-4">
                 <div class="card-body rounded-4">
                     <div class="table-responsive">
@@ -84,7 +89,7 @@
                                 @foreach ($contactsdata as $index => $data)
                                 <tr class="border-bottom-1">
                                     <th>{{ $index + 1 }}</th>
-                                    <td>{{ $data->fullname }}</td>
+                                    <td>{{ Str::limit($data->fullname,15) }}</td>
                                     <td>{{ $data->type }}</td>
                                     <td>{{ $data->status }}</td>
                                     <td>{{ $data->email }}</td>
@@ -111,6 +116,9 @@
         <div class="d-flex justify-content-end align-items-center">
             <a href="#" class="text-light fs-4" data-bs-dismiss="offcanvas" aria-label="Close"><i class=" ri-close-fill"></i></a>
         </div>
+    </div>
+     <div class="alert alert-danger alert-dismissible alert-label-icon rounded-label fade show" role="alert">
+        <i class="ri-error-warning-line label-icon"></i><strong>NOTE</strong> - <span class="fw-bold"> All Fields Must be Filled in the Sheet Before Uploading.</span>
     </div>
     <div class="p-3">
         <div class="row">
@@ -329,14 +337,14 @@
         var selectedStatus = $('#statusdrop').val();
         if (!selectedType && !selectedStatus) {
             Toastify({
-                text: "Please select a group or status to filter.",
-                duration: 3000,
-                position: "center",
-                style: {
-                    background: "white",  
-                    color: "#000000",
-                    borderRadius: "10px",
-                }
+                text: "Please select a group or status to filter."
+                , duration: 3000
+                , position: "center"
+                , style: {
+                    background: "white"
+                    , color: "#000000"
+                    , borderRadius: "10px"
+                , }
             }).showToast();
             return;
         }
@@ -356,7 +364,7 @@
                     var html = `
                     <tr class="border-bottom-1">
                         <th>${index + 1}</th>
-                        <td>${value.fullname}</td>
+                        <td>${value.fullname.substr(0,15)}.....</td>
                         <td>${value.type}</td>
                         <td>${value.status}</td>
                         <td>${value.email}</td>

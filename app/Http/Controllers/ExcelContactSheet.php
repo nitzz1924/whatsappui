@@ -9,18 +9,16 @@ class ExcelContactSheet extends Controller
 {
     public function import(Request $request)
     {
-        //dd($request->all());
-        // Validate the uploaded file
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls',
-        ]);
-
-        // Get the uploaded file
-        $file = $request->file('file');
-
-        // Process the Excel file
-        Excel::import(new ContactsImport, $file);
-
-        return redirect()->back()->with('success', 'Contacts Uploaded.');
+        try {
+            Excel::import(new ContactsImport, $request->file('file'));
+    
+            if (session()->has('error')) {
+                return redirect()->back()->with('error', session('error'));
+            }
+    
+            return redirect()->back()->with('success', 'Contacts imported successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 }
