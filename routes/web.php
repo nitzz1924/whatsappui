@@ -92,10 +92,6 @@ Route::controller(UserStores::class)->group(function () {
     Route::get('filtercontactsbycampaign', 'filtercontactsbycampaign')->name('filtercontactsbycampaign');
     Route::post('/insertMedia', 'insertMedia')->name('insertMedia');
     Route::get('/removegalleryitem', 'removegalleryitem')->name('removegalleryitem');
-
-
-
-
 });
 
 

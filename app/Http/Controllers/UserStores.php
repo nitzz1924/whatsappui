@@ -159,6 +159,7 @@ class UserStores extends Controller
                 'components' => []
             ]
         ];
+       
         if ($fileurl && $mediatype) {
             $data['template']['components'][] = [
                 'type' => 'header',
@@ -170,6 +171,7 @@ class UserStores extends Controller
                 ]
             ];
         }
+        // dd($data);
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
             'Content-Type' => 'application/json'
@@ -251,20 +253,9 @@ class UserStores extends Controller
     public function sendsinglemessage(Request $req)
     {
 
-        //dd($req->all());
-        $bannerimagePath = '';
+        $bannerimagePath = asset("assets/images/Media/{$req->mediaimage}");
+        // dd($req->mediatype);
         try {
-            // Single Image Upload
-            if ($req->hasFile('mediaimage')) {
-                //dd($req->all());
-                $bannerimage = $req->file('mediaimage');
-                $bannerimageName = time() . '.' . $bannerimage->getClientOriginalExtension();
-                $uploadedPath = '/assets/images/templates';
-                $bannerimage->move(public_path($uploadedPath), $bannerimageName);
-                // Store the full image path
-                $bannerimagePath = url($uploadedPath . '/' . $bannerimageName);
-            }
-            // dd($bannerimagePath);
             $this->dropMessage($req->phonenumber, $req->template, $bannerimagePath, $req->mediatype, $req->languagetype);
             return back()->with('success', 'Message Sent.!');
         } catch (Exception $e) {

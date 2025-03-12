@@ -38,16 +38,8 @@ class WhatsAppController extends Controller
             return redirect()->route('userloginpage')->with('error', 'You must be logged in to perform this action.');
         }
         $contacts = Contact::where('userid', $loggedinuser->id)->where('type', '=', $request->modulename)->where('status', $request->segmentname)->get();
-        $mediaimage = '';
-        if ($request->hasFile('mediaimage') && $request->file('mediaimage')->isValid()) {
-            $bannerimage = $request->file('mediaimage');
-            $uniqueFileName = uniqid() . '_' . time() . '.' . $bannerimage->getClientOriginalExtension();
-            $uploadedPath = 'assets/images/templates';
-            // Move the uploaded image to the public directory
-            $bannerimage->move(public_path($uploadedPath), $uniqueFileName);
-            // Store the full image path
-            $mediaimage = url("{$uploadedPath}/{$uniqueFileName}");
-        }
+        $mediaimage =asset("assets/images/Media/{$request->mediaimage}");
+        // dd($mediaimage);
         $templatedata = Template::where('name', $request->template)->where('userid', $loggedinuser->id)->first();
 
         $promises = [];
@@ -68,7 +60,6 @@ class WhatsAppController extends Controller
                 ]);
             }
         }
-        // dd($promises);
         $results = Utils::settle($promises)->wait();
         // dd($results);
 
@@ -131,8 +122,8 @@ class WhatsAppController extends Controller
                         ]
                     ]
                 ];
-            }
-            // Log the data being sent
+            }   
+        //    dd(  $data);
             Log::info('Sending WhatsApp message', ['data' => $data]);
             // Send the message using an async request
             $response = $this->client->postAsync($this->apiUrl, [

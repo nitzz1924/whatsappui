@@ -116,6 +116,19 @@
         </div>
     </form>
 </div>
+<div id="mediamodal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="">
+                {{-- THIS IS MEDIA COMPONENET --}}
+                <x-media-component />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     const form = document.querySelector('#campaignform');
@@ -192,11 +205,14 @@
             if (element.format === 'IMAGE' || element.format === 'VIDEO') {
                 const input = `
                 <div class="mb-3">
-                    <label for="formFile" class="form-label">Upload ${element.format === 'IMAGE' ? 'Image' : 'Video'}</label>
-                    <input name="mediaimage" class="form-control" accept="image/*, video/*" onchange="readURL(this);" type="file" id="formFile">
+                    <label for="formFile" class="form-label">Upload ${element.format === 'IMAGE' ? 'Image Link' : 'Video Link'}</label>
+                     <input name="mediaimage" placeholder="http://......" class="form-control" accept="image/*, video/*" onchange="readURL(this)" type="text" id="formFile">
                     <input type="hidden" name="mediatype" class="form-control" value="${element.format === 'IMAGE' ? 'image' : 'video'}">
                     <input type="hidden" name="languagetype" class="form-control" value="${language}">
                 </div>
+                 <button type="button" data-bs-toggle="modal" data-bs-target="#mediamodal" class="btn  btn-sm text-white rounded-4 mt-1 mb-2"       style="background-color: #116464;">
+                        Choose Media
+                    </button>
             `;
                 $('#previewdivtemplate').append(input);
             }
@@ -237,13 +253,13 @@
     });
 
     // Show image preview for uploaded file
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                $('#imagemain').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
+    function readURL() {
+        const onchangurl = "{{ asset('assets/images/Media/') }}" + '/' + $('#formFile').val();
+        console.log(onchangurl);
+        if (onchangurl.match(/\.(jpeg|jpg|gif|png)$/) != null){
+             $('#imagemain').attr('src', onchangurl);
+        }else if (onchangurl.match(/\.(mp4|avi|mov)$/) != null){
+            $('#videomain').attr('src', onchangurl);
         }
     }
 

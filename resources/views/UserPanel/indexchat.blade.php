@@ -931,7 +931,7 @@
             if (element.format === 'IMAGE' || element.format === 'VIDEO') {
                 const input = `
                 <div class="mb-3">
-                    <label for="formFile" class="form-label">Upload ${element.format === 'IMAGE' ? 'Image' : 'Video'}</label>
+                    <label for="formFile" class="form-label">Upload ${element.format === 'IMAGE' ? 'Image Link' : 'Video Link'}</label>
                     <input name="mediaimage" placeholder="http://......" class="form-control" accept="image/*, video/*" onchange="readURL(this)" type="text" id="formFile">
                     <input type="hidden" name="mediatype" class="form-control" value="${element.format === 'IMAGE' ? 'image' : 'video'}">
                     <input type="hidden" name="languagetype" class="form-control" value="${language}">
