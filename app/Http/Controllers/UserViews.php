@@ -174,14 +174,15 @@ class UserViews extends Controller
     }
     public function showMediaGallery()
     {
-        $directory = public_path('assets/images/Media');
+         $authuser = Auth::guard('customer')->user();
+        $directory = public_path("assets/images/Media/{$authuser->id}");
         $storedImages = [];
         $Imagesnames = [];
 
         if (File::exists($directory)) {
             $files = File::files($directory);
             foreach ($files as $file) {
-                $storedImages[] = asset('assets/images/Media/' . $file->getFilename());
+                $storedImages[] = asset("assets/images/Media/{$authuser->id}/" . $file->getFilename());
                 $Imagesnames[] =$file->getFilename();
             }
         }

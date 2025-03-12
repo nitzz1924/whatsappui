@@ -195,16 +195,16 @@
 
     //Getting path of Image url and show it in div
     function GetPath(event) {
-        var imgUrl = event.target.getAttribute('data-url').split('/').pop();
+        var imgUrl = event.target.getAttribute('data-url');
         document.querySelector('input[name="imageUrl"]').value = imgUrl;
         const imagePreview = document.getElementById('imagePreview');
         if (imgUrl.match(/\.(jpeg|jpg|gif|png)$/) != null) {
-            imagePreview.innerHTML = `<img class="img-fluid" src="{{ asset('assets/images/Media') }}/` + imgUrl + `" alt="">`;
+            imagePreview.innerHTML = `<img class="img-fluid" src="${imgUrl}" alt="">`;
         }
         else if (imgUrl.match(/\.(mp4|avi|mov)$/) != null) {
             imagePreview.innerHTML = `
                 <video class="img-fluid" controls>
-                    <source src="{{ asset('assets/images/Media') }}/` + imgUrl + `" type="video/mp4">
+                    <source src="${imgUrl}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>`;
         }

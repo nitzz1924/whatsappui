@@ -981,7 +981,7 @@
 
     // Show image preview for uploaded file
     function readURL() {
-        const onchangurl = "{{ asset('assets/images/Media/') }}" + '/' + $('#formFile').val();
+        const onchangurl = $('#formFile').val();
         console.log(onchangurl);
         if (onchangurl.match(/\.(jpeg|jpg|gif|png)$/) != null){
              $('#imagemain').attr('src', onchangurl);

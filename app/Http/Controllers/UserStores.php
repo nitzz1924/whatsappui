@@ -465,6 +465,7 @@ class UserStores extends Controller
     }
     public function insertMedia(Request $request)
     {
+        $authuser = Auth::guard('customer')->user();
         try {
             $mediaImages = [];
             if ($request->hasFile('mediaImages')) {
@@ -475,9 +476,9 @@ class UserStores extends Controller
                 $files = $request->file('mediaImages');
                 foreach ($files as $file) {
                     $imageFullName = time() . '_' . $file->getClientOriginalName();
-                    $uploadedPath = public_path('assets/images/Media');
+                    $uploadedPath = public_path("assets/images/Media/{$authuser->id}");
                     $file->move($uploadedPath, $imageFullName);
-                    $mediaImages[] = asset('assets/images/Media/' . $imageFullName);
+                    $mediaImages[] = asset("assets/images/Media/{$authuser->id}" . $imageFullName);
                     $Imagenames[] =  $imageFullName;
                 }
             }
@@ -491,7 +492,8 @@ class UserStores extends Controller
         }
     }
     public function removegalleryitem(Request $request){
-        $filename = public_path('assets/images/Media/' . basename($request->url));
+        $authuser = Auth::guard('customer')->user();
+        $filename = public_path("assets/images/Media/{$authuser->id}" . basename($request->url));
         if (File::exists($filename)) {
             File::delete($filename);
             return response()->json(['success' => true]);
