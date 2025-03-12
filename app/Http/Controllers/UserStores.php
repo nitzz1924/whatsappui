@@ -253,7 +253,7 @@ class UserStores extends Controller
     public function sendsinglemessage(Request $req)
     {
 
-        $bannerimagePath = asset("assets/images/Media/{$req->mediaimage}");
+        $bannerimagePath = $req->mediaimage;
         // dd($req->mediatype);
         try {
             $this->dropMessage($req->phonenumber, $req->template, $bannerimagePath, $req->mediatype, $req->languagetype);
