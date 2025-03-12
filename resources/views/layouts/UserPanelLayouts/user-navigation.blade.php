@@ -40,18 +40,24 @@
                         <img class="" src="{{asset('assets/images/mail.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Inbox</span>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->routeIs('mediaPage') ? 'active' : '' }}">
+                    <a class="nav-link menu-link" href="{{ route('mediaPage') }}" role="button" aria-expanded="false"
+                        aria-controls="sidebarDashboards">
+                        <img class="" src="{{asset('assets/images/photo-gallery.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Media</span>
+                    </a>
+                </li>
                 <li class="nav-item {{ request()->routeIs('campaignspage') ? 'active' : '' }}">
                     <a class="nav-link menu-link" href="{{ route('campaignspage') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
                         <img class="" src="{{asset('assets/images/campaign (1).png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Campaigns</span>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('automationpage') ? 'active' : '' }}">
+                {{-- <li class="nav-item {{ request()->routeIs('automationpage') ? 'active' : '' }}">
                     <a class="nav-link menu-link" href="{{ route('automationpage') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
                         <img class="" src="{{asset('assets/images/automation.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Automations</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item {{ request()->routeIs('analyticspage') ? 'active' : '' }}">
                     <a class="nav-link menu-link" href="{{ route('analyticspage') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
@@ -66,11 +72,11 @@
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarLanding">
                         <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('wahapage') }}" class="nav-link" data-key="t-one-page">
                                     WABA Business
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a href="{{ route('templatespage') }}" class="nav-link" data-key="t-one-page">
                                   Templates

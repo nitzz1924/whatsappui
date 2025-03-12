@@ -14,11 +14,11 @@
                             Message Templates
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#profile1" role="tab">
                             Quick Reply
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

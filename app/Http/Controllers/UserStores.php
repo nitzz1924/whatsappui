@@ -14,6 +14,7 @@ use Auth;
 use Exception;
 use Carbon\Carbon;
 use Log;
+use Illuminate\Support\Facades\File;
 class UserStores extends Controller
 {
     public function signup_user_otp(Request $request)
@@ -470,5 +471,40 @@ class UserStores extends Controller
         ->where('status', $data->segmentname)->get();
         // dd($contacts);
         return response()->json($contacts);
+    }
+    public function insertMedia(Request $request)
+    {
+        try {
+            $mediaImages = [];
+            if ($request->hasFile('mediaImages')) {
+                $request->validate([
+                    'mediaImages.*' => 'required|mimes:jpeg,png,jpg,mp4,mov,avi',
+                ]);
+
+                $files = $request->file('mediaImages');
+                foreach ($files as $file) {
+                    $imageFullName = time() . '_' . $file->getClientOriginalName();
+                    $uploadedPath = public_path('assets/images/Media');
+                    $file->move($uploadedPath, $imageFullName);
+                    $mediaImages[] = asset('assets/images/Media/' . $imageFullName);
+                    $Imagenames[] =  $imageFullName;
+                }
+            }
+
+            return response()->json([
+                'message' => 'Media inserted successfully!',
+                'images' => $mediaImages, // Return images list to AJAX
+            ]);
+        } catch (Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
+    }
+    public function removegalleryitem(Request $request){
+        $filename = public_path('assets/images/Media/' . basename($request->url));
+        if (File::exists($filename)) {
+            File::delete($filename);
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false], 404);
     }
 }

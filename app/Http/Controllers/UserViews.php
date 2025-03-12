@@ -15,6 +15,7 @@ use Session;
 use Auth;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 class UserViews extends Controller
 {
     public function userloginpage()
@@ -167,5 +168,23 @@ class UserViews extends Controller
             })
             ->get();
         return response()->json($sentMessage);
+    }
+    public function mediaPage(){
+        return view('UserPanel.media');
+    }
+    public function showMediaGallery()
+    {
+        $directory = public_path('assets/images/Media');
+        $storedImages = [];
+        $Imagesnames = [];
+
+        if (File::exists($directory)) {
+            $files = File::files($directory);
+            foreach ($files as $file) {
+                $storedImages[] = asset('assets/images/Media/' . $file->getFilename());
+                $Imagesnames[] =$file->getFilename();
+            }
+        }
+        return response()->json(['storedImages' => $storedImages,'Imagesnames' => $Imagesnames]);
     }
 }

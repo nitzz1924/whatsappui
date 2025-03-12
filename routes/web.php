@@ -21,7 +21,7 @@ Route::post('/logoutuser', function () {
 })->name('logoutuser');
 
 Route::middleware([
-    'auth:sanctum',
+    'auth:sanctum', 
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
@@ -67,6 +67,8 @@ Route::controller(UserViews::class)->group(function () {
     Route::get('contactspage', 'contactspage')->name('contactspage');
     Route::get('/webhook/whatsapp', 'verify')->name('verify')->middleware(VerifyCsrfToken::class);
     Route::get('showsentmessage/{phone}', 'showsentmessage')->name('showsentmessage');
+    Route::get('/mediaPage', 'mediaPage')->name('mediaPage');
+    Route::get('/showMediaGallery', 'showMediaGallery')->name('showMediaGallery');
 
 });
 
@@ -88,6 +90,10 @@ Route::controller(UserStores::class)->group(function () {
     Route::post('replyamessage', 'replyamessage')->name('replyamessage');
     Route::get('filtercontacts', 'filtercontacts')->name('filtercontacts');
     Route::get('filtercontactsbycampaign', 'filtercontactsbycampaign')->name('filtercontactsbycampaign');
+    Route::post('/insertMedia', 'insertMedia')->name('insertMedia');
+    Route::get('/removegalleryitem', 'removegalleryitem')->name('removegalleryitem');
+
+
 
 
 });
