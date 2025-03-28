@@ -228,7 +228,8 @@
     <script src="{{asset('assets/js/pages/form-advanced.init.js')}}"></script>
     <script src="{{asset('assets/js/pages/flag-input.init.js')}}"></script>
     <!-- apexcharts -->
-    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script> --}}
+    {{-- <script src="{{asset('assets/js/pages/apexcharts-bar.init.js')}}"></script> --}}
 
     <!-- Vector map-->
     <script src="{{ asset('assets/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>

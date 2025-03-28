@@ -40,12 +40,6 @@
                         <img class="" src="{{asset('assets/images/mail.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Inbox</span>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('mediaPage') ? 'active' : '' }}">
-                    <a class="nav-link menu-link" href="{{ route('mediaPage') }}" role="button" aria-expanded="false"
-                        aria-controls="sidebarDashboards">
-                        <img class="" src="{{asset('assets/images/photo-gallery.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Media</span>
-                    </a>
-                </li>
                 <li class="nav-item {{ request()->routeIs('campaignspage') ? 'active' : '' }}">
                     <a class="nav-link menu-link" href="{{ route('campaignspage') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
@@ -61,7 +55,7 @@
                 <li class="nav-item {{ request()->routeIs('analyticspage') ? 'active' : '' }}">
                     <a class="nav-link menu-link" href="{{ route('analyticspage') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
-                        <img class="" src="{{asset('assets/images/statistics.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Analytics</span>
+                        <img class="" src="{{asset('assets/images/chat.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Today's Messages</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -94,6 +88,12 @@
                     <a class="nav-link menu-link" href="{{ route('contactspage') }}" role="button" aria-expanded="false"
                         aria-controls="sidebarDashboards">
                         <img class="" src="{{asset('assets/images/phone-book.png')}}" alt="" height="25" />&nbsp;&nbsp;<span class="fs-5">Contacts</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->routeIs('mediaPage') ? 'active' : '' }}">
+                    <a class="nav-link menu-link" href="{{ route('mediaPage') }}" role="button" aria-expanded="false"
+                        aria-controls="sidebarDashboards">
+                        <img class="" src="{{asset('assets/images/photo-gallery.png')}}" alt="" height="25" />&nbsp;<span class="fs-5">Media</span>
                     </a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('logoutuserpanel') ? 'active' : '' }}">

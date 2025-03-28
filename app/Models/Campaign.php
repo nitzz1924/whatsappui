@@ -20,4 +20,9 @@ class Campaign extends Model
         'mediatype',
         'languagetype',
     ];
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'campaignname', 'campaignname');
+    }
+
 }

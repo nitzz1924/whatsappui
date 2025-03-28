@@ -44,9 +44,9 @@ class UserViews extends Controller
             $status = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Status')->orderBy('created_at', 'DESC')->get();
 
 
-             $recmessages = Message::join(DB::raw("(SELECT *, REPLACE(phonenumber, '+', '') as phone_no FROM contacts) as contacts"), function($join) {
-                    $join->on('messages.senderid', '=', 'contacts.phone_no');
-                })
+            $recmessages = Message::join(DB::raw("(SELECT *, REPLACE(phonenumber, '+', '') as phone_no FROM contacts) as contacts"), function ($join) {
+                $join->on('messages.senderid', '=', 'contacts.phone_no');
+            })
                 ->select('messages.*', 'contacts.fullname as contactname')
                 ->where('messages.userid', $loggedinuser->id)
                 ->where('messages.type', '=', 'Received')
@@ -54,7 +54,7 @@ class UserViews extends Controller
                 ->whereDate('messages.created_at', Carbon::today())
                 ->get();
 
-            return view('UserPanel.indexchat', compact('contactsdata', 'groupsdata', 'alltemplates', 'chat', 'allcampaigns', 'groupsdata','status','recmessages'));
+            return view('UserPanel.indexchat', compact('contactsdata', 'groupsdata', 'alltemplates', 'chat', 'allcampaigns', 'groupsdata', 'status', 'recmessages'));
         } else {
             return view('auth.UserPanel.login');
         }
@@ -63,9 +63,36 @@ class UserViews extends Controller
     {
         $loggedinuser = Auth::guard('customer')->user();
         if (Auth::guard('customer')->check()) {
-            $campaigns = Campaign::where('userid', '=', $loggedinuser->id)->orderBy('created_at', 'DESC')->get();
-            //dd( $campaigns);
-            return view('UserPanel.campaigns', compact('campaigns'));
+
+            $campaigns = Campaign::where('userid', '=', $loggedinuser->id)
+                ->orderBy('created_at', 'DESC')
+                ->withCount([
+                    'messages as sent_count' => function ($query) {
+                        $query->where('messagestatus', 'Sent');
+                    },
+                    'messages as not_sent_count' => function ($query) {
+                        $query->where('messagestatus', 'Not Sent');
+                    }
+                ])
+                ->get();
+            
+            //Sending Data for charts.
+            $campaignsArray = $campaigns->map(function ($campaign) {
+                return [
+                    'campaign_name' => $campaign->campaignname,
+                    'sent_count' => $campaign->sent_count,
+                    'not_sent_count' => $campaign->not_sent_count,
+                ];
+            })->toArray();
+
+            $sentmsgcount = Message::where('type', '=', 'Sent')->where('userid', $loggedinuser->id)->where('messagestatus', '=', 'Sent')->get()->count();
+            $recmsgcount = Message::where('type', '=', 'Received')->where('userid', $loggedinuser->id)->get()->count();
+            $contactscount = Contact::where('userid', $loggedinuser->id)->get()->count();
+            $tempcount = Template::where('userid', $loggedinuser->id)->get()->count();
+            $campaignscnt = Campaign::where('userid', $loggedinuser->id)->get()->count();
+            // dd($campaigns);
+
+            return view('UserPanel.campaigns', compact('campaigns','sentmsgcount', 'recmsgcount','contactscount', 'tempcount', 'campaignscnt','campaignsArray'));
         } else {
             return view('auth.UserPanel.login');
         }
@@ -91,7 +118,7 @@ class UserViews extends Controller
     {
         $loggedinuser = Auth::guard('customer')->user();
         if (Auth::guard('customer')->check()) {
-            $sentmsgcount = Message::where('type', '=', 'Sent')->where('userid', $loggedinuser->id)->where('messagestatus','=', 'Sent')->get()->count();
+            $sentmsgcount = Message::where('type', '=', 'Sent')->where('userid', $loggedinuser->id)->where('messagestatus', '=', 'Sent')->get()->count();
             $recmsgcount = Message::where('type', '=', 'Received')->where('userid', $loggedinuser->id)->get()->count();
             $contactscount = Contact::where('userid', $loggedinuser->id)->get()->count();
             $tempcount = Template::where('userid', $loggedinuser->id)->get()->count();
@@ -131,7 +158,7 @@ class UserViews extends Controller
             $status = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Status')->orderBy('created_at', 'DESC')->get();
             $contactsdata = Contact::where('userid', $loggedinuser->id)->orderBy('created_at', 'DESC')->get();
             $contactscnt = Contact::where('userid', $loggedinuser->id)->get()->count();
-            return view('UserPanel.contacts', compact('groupsdata', 'contactsdata','status','contactscnt'));
+            return view('UserPanel.contacts', compact('groupsdata', 'contactsdata', 'status', 'contactscnt'));
         } else {
             return view('auth.UserPanel.login');
         }
@@ -170,12 +197,13 @@ class UserViews extends Controller
             ->get();
         return response()->json($sentMessage);
     }
-    public function mediaPage(){
+    public function mediaPage()
+    {
         return view('UserPanel.media');
     }
     public function showMediaGallery()
     {
-         $authuser = Auth::guard('customer')->user();
+        $authuser = Auth::guard('customer')->user();
         $directory = public_path("assets/images/Media/{$authuser->id}");
         $storedImages = [];
         $Imagesnames = [];
@@ -184,9 +212,9 @@ class UserViews extends Controller
             $files = File::files($directory);
             foreach ($files as $file) {
                 $storedImages[] = asset("assets/images/Media/{$authuser->id}/" . $file->getFilename());
-                $Imagesnames[] =$file->getFilename();
+                $Imagesnames[] = $file->getFilename();
             }
         }
-        return response()->json(['storedImages' => $storedImages,'Imagesnames' => $Imagesnames]);
+        return response()->json(['storedImages' => $storedImages, 'Imagesnames' => $Imagesnames]);
     }
 }
