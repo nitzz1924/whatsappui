@@ -50,6 +50,7 @@ class UserViews extends Controller
                 ->select('messages.*', 'contacts.fullname as contactname')
                 ->where('messages.userid', $loggedinuser->id)
                 ->where('messages.type', '=', 'Received')
+                ->where('messages.messagestatus', '=', 'Sent')
                 ->whereDate('messages.created_at', Carbon::today())
                 ->get();
 
@@ -90,7 +91,7 @@ class UserViews extends Controller
     {
         $loggedinuser = Auth::guard('customer')->user();
         if (Auth::guard('customer')->check()) {
-            $sentmsgcount = Message::where('type', '=', 'Sent')->where('userid', $loggedinuser->id)->get()->count();
+            $sentmsgcount = Message::where('type', '=', 'Sent')->where('userid', $loggedinuser->id)->where('messagestatus','=', 'Sent')->get()->count();
             $recmsgcount = Message::where('type', '=', 'Received')->where('userid', $loggedinuser->id)->get()->count();
             $contactscount = Contact::where('userid', $loggedinuser->id)->get()->count();
             $tempcount = Template::where('userid', $loggedinuser->id)->get()->count();

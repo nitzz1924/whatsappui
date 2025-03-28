@@ -17,5 +17,6 @@ class Message extends Model
         'templatename',
         'campaignname',
         'imageurl',
+        'messagestatus',
     ];
 }

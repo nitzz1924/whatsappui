@@ -154,6 +154,7 @@ class WhatsAppController extends Controller
                     'senderid' => $loggedinuser->mobilenumber,
                     'recievedid' => str_replace('+', '', $phone),
                     'message' => $components,
+                    'messagestatus' =>'Sent',
                 ]); 
                 $successfulRecipients[] = [// Replace with actual variable for recipient name
                     'mobile' => $phone,
@@ -164,6 +165,17 @@ class WhatsAppController extends Controller
             Log::error('Exception occurred while sending message', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
+            ]);
+            $data = Message::create([
+                'userid' => $loggedinuser->id,
+                'templatename' => $templateid,
+                'campaignname' => $campaign_name,
+                'imageurl' => $mediaimage,
+                'type' => 'Sent',
+                'senderid' => $loggedinuser->mobilenumber,
+                'recievedid' => str_replace('+', '', $phone),
+                'message' => $components,
+                'messagestatus' =>'Not Sent',
             ]);
             $failedRecipients[] = [
                 'mobile' => $phone,
