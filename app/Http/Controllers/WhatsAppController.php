@@ -37,8 +37,23 @@ class WhatsAppController extends Controller
         if (!$loggedinuser) {
             return redirect()->route('userloginpage')->with('error', 'You must be logged in to perform this action.');
         }
+        
         $contacts = Contact::where('userid', $loggedinuser->id)->where('type', '=', $request->modulename)->where('status', $request->segmentname)->get();
         $mediaimage =$request->mediaimage;
+
+        $data = Campaign::create([
+            'campaignname' => $request->campaignname,
+            'modulename' => $request->modulename,
+            'template' => $request->template,
+            'segmentname' => $request->segmentname,
+            'userid' => $loggedinuser->id,
+            'sendimmediate' => $request->sendimmediate,
+            'scheduledatetime' => $request->scheduledatetime,
+            'datetime' => $request->datetime,
+            'mediatype' => $request->mediatype,
+            'languagetype' => $request->languagetype,
+            'mediaimage' => $mediaimage != null ? $mediaimage : null,
+        ]);
        
         $templatedata = Template::where('name', $request->template)->where('userid', $loggedinuser->id)->first();
 
@@ -65,27 +80,17 @@ class WhatsAppController extends Controller
 
         foreach ($results as $result) {
             if ($result['state'] === 'rejected') {
-
+                $data->update([
+                    'status' => 'Failed'
+                ]);
                 Log::error('Promise rejected', ['reason' => $result['reason']]);
             } else {
+                $data->update([
+                    'status' => 'Completed'
+                ]);
                 Log::info('Message sent successfully', ['response' => $result['value']]);
             }
         }
-
-        $data = Campaign::create([
-            'campaignname' => $request->campaignname,
-            'modulename' => $request->modulename,
-            'template' => $request->template,
-            'segmentname' => $request->segmentname,
-            'userid' => $loggedinuser->id,
-            'sendimmediate' => $request->sendimmediate,
-            'scheduledatetime' => $request->scheduledatetime,
-            'datetime' => $request->datetime,
-            'mediatype' => $request->mediatype,
-            'languagetype' => $request->languagetype,
-            'mediaimage' => $mediaimage != null ? $mediaimage : null,
-        ]);
-        return back()->with('success', 'Message sent successfully!');
     }
 
     protected function sendMessage($phone, $templateid, $mediaimage, $mediatype, $languagetype, $components,$campaign_name)
