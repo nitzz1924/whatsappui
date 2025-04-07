@@ -14,6 +14,7 @@ use Auth;
 use Exception;
 use Carbon\Carbon;
 use Log;
+use DB;
 use Illuminate\Support\Facades\File;
 class UserStores extends Controller
 {

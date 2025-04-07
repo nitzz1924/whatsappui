@@ -19,4 +19,11 @@ class Message extends Model
         'imageurl',
         'messagestatus',
     ];
+    // App\Models\Message.php
+
+    public function contact()
+    {
+        return $this->hasOne(\App\Models\Contact::class, 'phonenumber', 'recievedid');
+    }
+
 }

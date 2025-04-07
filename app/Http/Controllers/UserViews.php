@@ -44,16 +44,14 @@ class UserViews extends Controller
             $status = GroupType::where('userid', $loggedinuser->id)->where('type', '=', 'Status')->orderBy('created_at', 'DESC')->get();
 
 
-            $recmessages = Message::join(DB::raw("(SELECT *, REPLACE(phonenumber, '+', '') as phone_no FROM contacts) as contacts"), function ($join) {
-                $join->on('messages.senderid', '=', 'contacts.phone_no');
+            $recmessages = Contact::join(DB::raw("(SELECT * FROM messages) as messages"), function ($join) {
+                $join->on(DB::raw("REPLACE(contacts.phonenumber, '+91', '')"), '=', 'messages.senderid');
             })
-                ->select('messages.*', 'contacts.fullname as contactname')
+                ->select('contacts.*', 'messages.message','messages.created_at as timestamp')
                 ->where('messages.userid', $loggedinuser->id)
                 ->where('messages.type', '=', 'Received')
                 ->where('messages.messagestatus', '=', 'Sent')
-                ->whereDate('messages.created_at', Carbon::today())
                 ->get();
-
             return view('UserPanel.indexchat', compact('contactsdata', 'groupsdata', 'alltemplates', 'chat', 'allcampaigns', 'groupsdata', 'status', 'recmessages'));
         } else {
             return view('auth.UserPanel.login');
@@ -64,7 +62,7 @@ class UserViews extends Controller
         $loggedinuser = Auth::guard('customer')->user();
         if (Auth::guard('customer')->check()) {
 
-            $campaigns = Campaign::where('userid', '=', $loggedinuser->id)
+            $campaigns = Campaign::where('userid', $loggedinuser->id)
                 ->orderBy('created_at', 'DESC')
                 ->withCount([
                     'messages as sent_count' => function ($query) {
@@ -74,8 +72,17 @@ class UserViews extends Controller
                         $query->where('messagestatus', 'Not Sent');
                     }
                 ])
+                ->with([
+                    'sentMessages:id,campaignname,recievedid,messagestatus',
+                    'sentMessages.contact:id,phonenumber,fullname',
+                    'notSentMessages:id,campaignname,recievedid,messagestatus',
+                    'notSentMessages.contact:id,phonenumber,fullname',
+                ])
                 ->get();
-            
+
+                // dd($campaigns->toArray());
+
+
             //Sending Data for charts.
             $campaignsArray = $campaigns->map(function ($campaign) {
                 return [
@@ -92,7 +99,7 @@ class UserViews extends Controller
             $campaignscnt = Campaign::where('userid', $loggedinuser->id)->get()->count();
             // dd($campaigns);
 
-            return view('UserPanel.campaigns', compact('campaigns','sentmsgcount', 'recmsgcount','contactscount', 'tempcount', 'campaignscnt','campaignsArray'));
+            return view('UserPanel.campaigns', compact('campaigns', 'sentmsgcount', 'recmsgcount', 'contactscount', 'tempcount', 'campaignscnt', 'campaignsArray'));
         } else {
             return view('auth.UserPanel.login');
         }
