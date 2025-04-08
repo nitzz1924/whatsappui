@@ -91,9 +91,10 @@ class UserViews extends Controller
                     'not_sent_count' => $campaign->not_sent_count,
                 ];
             })->toArray();
-
             $sentmsgcount = Message::where('type', '=', 'Sent')->where('userid', $loggedinuser->id)->where('messagestatus', '=', 'Sent')->get()->count();
             $recmsgcount = Message::where('type', '=', 'Received')->where('userid', $loggedinuser->id)->get()->count();
+
+
             $contactscount = Contact::where('userid', $loggedinuser->id)->get()->count();
             $tempcount = Template::where('userid', $loggedinuser->id)->get()->count();
             $campaignscnt = Campaign::where('userid', $loggedinuser->id)->get()->count();

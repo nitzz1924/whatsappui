@@ -221,6 +221,7 @@
 <script>
     
     var campaignarray = @json($campaignsArray);
+    console.log(campaignarray);
     var options = {
         series: [{
                 name: 'Sent'

@@ -40,9 +40,9 @@ class WhatsAppController extends Controller
         
         $contacts = Contact::where('userid', $loggedinuser->id)->where('type', '=', $request->modulename)->where('status', $request->segmentname)->get();
         $mediaimage =$request->mediaimage;
-
+        $campaignname =  $request->campaignname . '-' . rand(1000, 9999);
         $data = Campaign::create([
-            'campaignname' => $request->campaignname,
+            'campaignname' => $campaignname,
             'modulename' => $request->modulename,
             'template' => $request->template,
             'segmentname' => $request->segmentname,
@@ -67,7 +67,7 @@ class WhatsAppController extends Controller
                     $request->mediatype,
                     $request->languagetype,
                     $templatedata->components,
-                    $request->campaignname,
+                    $campaignname
                 );
             } catch (Exception $e) {
                 Log::error('Error sending message for contact: ' . $contact->id, [
@@ -91,6 +91,7 @@ class WhatsAppController extends Controller
                 Log::info('Message sent successfully', ['response' => $result['value']]);
             }
         }
+        return back()->with('success', 'Message sent successfully!');
     }
 
     protected function sendMessage($phone, $templateid, $mediaimage, $mediatype, $languagetype, $components,$campaign_name)

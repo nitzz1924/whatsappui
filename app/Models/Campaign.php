@@ -35,6 +35,4 @@ class Campaign extends Model
         return $this->hasMany(Message::class, 'campaignname', 'campaignname')
             ->where('messagestatus', 'Not Sent');
     }
-
-
 }
